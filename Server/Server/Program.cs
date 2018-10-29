@@ -12,6 +12,7 @@ namespace Server
         {
             Console.WriteLine("Hello Git");
             Console.WriteLine("Hello form piotrek");
+            Console.WriteLine("Hello this is Matei");
             Console.ReadKey();
         }
     }
