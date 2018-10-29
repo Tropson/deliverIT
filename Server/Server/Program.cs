@@ -11,7 +11,7 @@ namespace Server
         static void Main(string[] args)
         {
             Console.WriteLine("Hello Git");
-            Console.WriteLine("Hello form piotrek");
+            Console.WriteLine("Hello form Piotrek fuckers!");
             Console.WriteLine("Hello this is Matei");
             Console.ReadKey();
         }
