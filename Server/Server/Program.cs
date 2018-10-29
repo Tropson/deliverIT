@@ -14,6 +14,10 @@ namespace Server
             Console.WriteLine("Hello fuckers!");
             Console.WriteLine("Hello this is Matei");
             Console.WriteLine("Hello from David");
+            for (int i = 0; i < 10000; i++)
+            {
+                Console.WriteLine("Fuck you");
+            }
             Console.ReadKey();
         }
     }
