@@ -18,6 +18,7 @@ namespace Server
             {
                 Console.WriteLine("Fuck you");
             }
+            Console.WriteLine("Fetch check");
             Console.ReadKey();
         }
     }
