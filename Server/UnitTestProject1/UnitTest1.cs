@@ -15,7 +15,9 @@ namespace UnitTestProject1
             var proxy = new ServiceReference1.SenderServiceClient();
 
             //assert
+            proxy.Close();
             Assert.IsNotNull(proxy);
+            proxy.Close();
         }
         [DataRow("2611982375", "David", "Szoke", "91933260", "tropson90@gmail.com", "Fredensgade 7, 2st", "9000", "Aalborg")]
         [TestMethod]
@@ -29,9 +31,10 @@ namespace UnitTestProject1
             var result = proxy.AddSender(person.Cpr, person.FirstName,person.LastName,person.PhoneNumber,person.Email,person.Address,person.ZipCode, person.City);
             Console.WriteLine(result);
             //assert
-            Assert.Equals(result, 1);
+            Assert.AreEqual(result, 1);
             //after
-            //proxy.ClearDB();
+            proxy.ClearDB();
+            proxy.Close();
         }
     }
 }
