@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dmaj0917_1067643" Class="DataClasses1DataContext" Serialization="Unidirectional" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=kraka.ucn.dk;Initial Catalog=dmaj0917_1067643;Persist Security Info=True;User ID=dmaj0917_1067643" SettingsObjectName="DeliveryService.Properties.Settings" SettingsPropertyName="dmaj0917_1067643ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.AccountType" Member="AccountTypes">
+    <Type Name="AccountType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="AccountType_User" Member="Users" ThisKey="ID" OtherKey="AccountTypeID" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Delivery" Member="Deliveries">
+    <Type Name="Delivery">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PackageID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Distance" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Price" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Package_Delivery" Member="Package" ThisKey="PackageID" OtherKey="ID" Type="Package" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Package" Member="Packages">
+    <Type Name="Package">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SenderID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CourierID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ToAddress" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="FromAddress" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Width" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Height" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Weight" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Package_Delivery" Member="Deliveries" ThisKey="ID" OtherKey="PackageID" Type="Delivery" />
+      <Association Name="Status_Package" Member="Status" ThisKey="StatusID" OtherKey="ID" Type="Status" IsForeignKey="true" />
+      <Association Name="User_Package" Member="User" ThisKey="CourierID" OtherKey="ID" Type="User" IsForeignKey="true" />
+      <Association Name="User_Package1" Member="User1" ThisKey="SenderID" OtherKey="ID" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Person" Member="Persons">
+    <Type Name="Person">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Cpr" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="PhoneNumber" Type="System.String" DbType="VarChar(16)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="ZipCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="Person_User" Member="Users" ThisKey="ID" OtherKey="PersonID" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Status" Member="Status">
+    <Type Name="Status">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StatusString" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Status_Package" Member="Packages" ThisKey="ID" OtherKey="StatusID" Type="Package" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[User]" Member="Users">
+    <Type Name="User">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PersonID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AccountTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Points" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="User_Package" Member="Packages" ThisKey="ID" OtherKey="CourierID" Type="Package" />
+      <Association Name="User_Package1" Member="Packages1" ThisKey="ID" OtherKey="SenderID" Type="Package" />
+      <Association Name="AccountType_User" Member="AccountType" ThisKey="AccountTypeID" OtherKey="ID" Type="AccountType" IsForeignKey="true" />
+      <Association Name="Person_User" Member="Person" ThisKey="PersonID" OtherKey="ID" Type="Person" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
