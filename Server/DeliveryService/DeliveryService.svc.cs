@@ -31,6 +31,7 @@ namespace DeliveryService
         public void ClearDB()
         {
             db.ExecuteCommand("Delete FROM Person");
+            db.ExecuteCommand("DBCC CHECKIDENT ('Person', RESEED, 1);");
         }
     }
 }
