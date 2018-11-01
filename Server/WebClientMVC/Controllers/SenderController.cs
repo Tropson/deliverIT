@@ -4,11 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebClientMVC.Models;
+using WebClientMVC.ServiceReference;
 
 namespace WebClientMVC.Controllers
 {
     public class SenderController : Controller
     {
+
+        SenderServiceClient _proxy = new SenderServiceClient();
         // GET: Sender
         public ActionResult Index()
         {
@@ -33,7 +36,10 @@ namespace WebClientMVC.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                if (!ModelState.IsValid)
+                    return View("Index");
+
+                _proxy.AddSender(sender);
 
                 return RedirectToAction("Index");
             }

@@ -5,6 +5,8 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using DeliveryService.Models;
+
 
 namespace DeliveryService
 {
@@ -13,7 +15,7 @@ namespace DeliveryService
     public interface ISenderService
     {
         [OperationContract]
-        int AddSender(string cpr, string firstName, string lastName, string phoneNumber,string email, string address, string zipCode, string city);
+        int AddSender(SenderModel sender);
         [OperationContract]
         void ClearDB();
     }

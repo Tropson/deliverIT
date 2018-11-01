@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeliveryService", "DeliveryService\DeliveryService.csproj", "{2A52FBEC-48FF-4FC5-9A1A-9F65F038CA22}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClientMVC", "WebClientMVC\WebClientMVC.csproj", "{671FE8E0-DA4D-4482-992A-4D06B2D5BAAC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A52FBEC-48FF-4FC5-9A1A-9F65F038CA22} = {2A52FBEC-48FF-4FC5-9A1A-9F65F038CA22}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClientMVC.Tests", "WebClientMVC.Tests\WebClientMVC.Tests.csproj", "{3CB7DB84-C000-4C56-BD81-BC45B652363F}"
 	ProjectSection(ProjectDependencies) = postProject
