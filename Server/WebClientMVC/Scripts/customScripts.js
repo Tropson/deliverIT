@@ -12,7 +12,7 @@ function navScroll() {
     yScroll = window.scrollY;
     console.log(yScroll);
     console.log(cont.offsetHeight);
-    if (yScroll >= cont.offsetHeight) {
+    if (yScroll >= cont.offsetHeight/3) {
         nav.style.backgroundColor = "black";
     }
     else {

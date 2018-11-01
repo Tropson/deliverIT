@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebClientMVC.ServiceReference {
+namespace WebClientMVC.ServiceReference1 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.ISenderService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ISenderService")]
     public interface ISenderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
@@ -29,12 +29,12 @@ namespace WebClientMVC.ServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISenderServiceChannel : WebClientMVC.ServiceReference.ISenderService, System.ServiceModel.IClientChannel {
+    public interface ISenderServiceChannel : WebClientMVC.ServiceReference1.ISenderService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SenderServiceClient : System.ServiceModel.ClientBase<WebClientMVC.ServiceReference.ISenderService>, WebClientMVC.ServiceReference.ISenderService {
+    public partial class SenderServiceClient : System.ServiceModel.ClientBase<WebClientMVC.ServiceReference1.ISenderService>, WebClientMVC.ServiceReference1.ISenderService {
         
         public SenderServiceClient() {
         }

@@ -5,14 +5,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebClientMVC.Models;
-using WebClientMVC.ServiceReference;
+using WebClientMVC.ServiceReference1;
 
 namespace WebClientMVC.Controllers
 {
     public class SenderController : Controller
     {
 
-        SenderServiceClient _proxy = new SenderServiceClient();
+        SenderServiceClient _proxy = new SenderServiceClient("BasicHttpBinding_ISenderService");
         // GET: Sender
         public ActionResult Index()
         {
@@ -28,7 +28,7 @@ namespace WebClientMVC.Controllers
         // GET: Sender/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: Sender/Create
@@ -38,7 +38,7 @@ namespace WebClientMVC.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                    return View("Index");
+                    return View("Create");
 
                 _proxy.AddSender(sender);
 
@@ -47,6 +47,10 @@ namespace WebClientMVC.Controllers
             catch
             {
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+            finally
+            {
+                _proxy.Close();
             }
         }
 
