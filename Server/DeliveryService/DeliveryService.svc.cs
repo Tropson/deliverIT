@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeliveryService.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -13,10 +14,13 @@ namespace DeliveryService
     public class SenderService : ISenderService
     {
         DataClasses1DataContext db = new DataClasses1DataContext();
-        public int AddSender(string cpr, string firstName, string lastName, string phoneNumber, string email, string address, string zipCode, string city)
+        public int AddSender(SenderModel sender)
         {
-            Person person = new Person { Cpr = cpr, FirstName = firstName, LastName = lastName, PhoneNumber=phoneNumber, Email = email, Address = address, ZipCode = zipCode, City = city };
+
+            Person person = new Person { Cpr = sender.Person.cpr, FirstName = firstName, LastName = lastName, PhoneNumber=phoneNumber, Email = email, Address = address, ZipCode = zipCode, City = city };
             var senders = db.Persons;
+            var users = db.Users;
+            users.InsertOnSubmit(sender);
             senders.InsertOnSubmit(person);
             try
             {
