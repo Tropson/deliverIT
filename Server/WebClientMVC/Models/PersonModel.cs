@@ -7,8 +7,6 @@ namespace WebClientMVC.Models
 {
     public class PersonModel
     {
-        class PersonModel
-        {
             private int ID { get; set; }
 
             public string Cpr { get; set; }
@@ -26,6 +24,5 @@ namespace WebClientMVC.Models
             public string ZipCode { get; set; }
 
             public string City { get; set; }
-        }
     }
 }
