@@ -1,6 +1,5 @@
 ﻿using System;
-using UnitTestProject1.ServiceReference1;
-using Moq;
+using WebClientMVC.Tests.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebClientMVC.Models;
 
@@ -13,7 +12,7 @@ namespace WebClientMVC.Tests.Controllers
         public void ServiceConnectionTest()
         {
             //setup
-            var proxy = new ServiceReference1.SenderServiceClient();
+            var proxy = new SenderServiceReference.SenderServiceClient();
 
             //assert
             proxy.Close();
@@ -25,9 +24,8 @@ namespace WebClientMVC.Tests.Controllers
         public void AddSenderTest(string cpr, string firstName, string lastName, string phone, string email, string address, string zipCode, string city)
         {
             //setup
-            var proxy = new ServiceReference1.SenderServiceClient();
-            var mock = new Mock<Person>();
-            PersonModel person = new Person { Cpr = cpr, FirstName = firstName, LastName = lastName, PhoneNumber=phone, Email = email, Address = address, ZipCode = zipCode, City = city };
+            var proxy = new SenderServiceReference.SenderServiceClient();
+            PersonModel person = new PersonModel { Cpr = cpr, FirstName = firstName, LastName = lastName, PhoneNumber=phone, Email = email, Address = address, ZipCode = zipCode, City = city };
             //addToDB
             var result = proxy.AddSender(person.Cpr, person.FirstName,person.LastName,person.PhoneNumber,person.Email,person.Address,person.ZipCode, person.City);
             Console.WriteLine(result);
