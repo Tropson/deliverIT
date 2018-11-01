@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTes
 		{2A52FBEC-48FF-4FC5-9A1A-9F65F038CA22} = {2A52FBEC-48FF-4FC5-9A1A-9F65F038CA22}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugConsole", "DebugConsole\DebugConsole.csproj", "{15EAD3F9-140B-4F42-ACE8-C6493262C175}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{D484C364-42F2-495A-A420-13AED1DD573B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D484C364-42F2-495A-A420-13AED1DD573B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D484C364-42F2-495A-A420-13AED1DD573B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15EAD3F9-140B-4F42-ACE8-C6493262C175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15EAD3F9-140B-4F42-ACE8-C6493262C175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15EAD3F9-140B-4F42-ACE8-C6493262C175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15EAD3F9-140B-4F42-ACE8-C6493262C175}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

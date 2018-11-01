@@ -23,7 +23,6 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="DeliveryService.disco" MetadataType="Disco" ID="ed26d24a-138f-430e-986d-faf9faca3f8b" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?disco" />
-    <MetadataFile FileName="DeliveryService.xsd" MetadataType="Schema" ID="89620c59-6850-4442-8dc6-f7fdf3e6ff5b" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd2" />
     <MetadataFile FileName="DeliveryService1.xsd" MetadataType="Schema" ID="3e841073-395a-4fc4-9a4d-2f14136b0033" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd1" />
     <MetadataFile FileName="DeliveryService2.xsd" MetadataType="Schema" ID="645ef146-4b6b-4e98-81a8-c09cff804382" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd0" />
     <MetadataFile FileName="DeliveryService.wsdl" MetadataType="Wsdl" ID="eca8a010-4169-459a-90c7-66669f5cf8ec" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?wsdl" />

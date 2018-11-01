@@ -9,129 +9,66 @@
 //------------------------------------------------------------------------------
 
 namespace UnitTestProject1.ServiceReference1 {
-    using System.Runtime.Serialization;
-    using System;
     
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/DeliveryService")]
-    [System.SerializableAttribute()]
-    public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ISenderService")]
+    public interface ISenderService {
         
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
+        int AddSender(string cpr, string firstName, string lastName, string phoneNumber, string email, string address, string zipCode, string city);
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool BoolValueField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
+        System.Threading.Tasks.Task<int> AddSenderAsync(string cpr, string firstName, string lastName, string phoneNumber, string email, string address, string zipCode, string city);
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StringValueField;
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ClearDB", ReplyAction="http://tempuri.org/ISenderService/ClearDBResponse")]
+        void ClearDB();
         
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BoolValue {
-            get {
-                return this.BoolValueField;
-            }
-            set {
-                if ((this.BoolValueField.Equals(value) != true)) {
-                    this.BoolValueField = value;
-                    this.RaisePropertyChanged("BoolValue");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StringValue {
-            get {
-                return this.StringValueField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StringValueField, value) != true)) {
-                    this.StringValueField = value;
-                    this.RaisePropertyChanged("StringValue");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ClearDB", ReplyAction="http://tempuri.org/ISenderService/ClearDBResponse")]
+        System.Threading.Tasks.Task ClearDBAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IDeliveryService")]
-    public interface IDeliveryService {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDeliveryService/GetData", ReplyAction="http://tempuri.org/IDeliveryService/GetDataResponse")]
-        string GetData(int value);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDeliveryService/GetData", ReplyAction="http://tempuri.org/IDeliveryService/GetDataResponse")]
-        System.Threading.Tasks.Task<string> GetDataAsync(int value);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDeliveryService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IDeliveryService/GetDataUsingDataContractResponse")]
-        UnitTestProject1.ServiceReference1.CompositeType GetDataUsingDataContract(UnitTestProject1.ServiceReference1.CompositeType composite);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDeliveryService/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IDeliveryService/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<UnitTestProject1.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(UnitTestProject1.ServiceReference1.CompositeType composite);
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDeliveryServiceChannel : UnitTestProject1.ServiceReference1.IDeliveryService, System.ServiceModel.IClientChannel {
+    public interface ISenderServiceChannel : UnitTestProject1.ServiceReference1.ISenderService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DeliveryServiceClient : System.ServiceModel.ClientBase<UnitTestProject1.ServiceReference1.IDeliveryService>, UnitTestProject1.ServiceReference1.IDeliveryService {
+    public partial class SenderServiceClient : System.ServiceModel.ClientBase<UnitTestProject1.ServiceReference1.ISenderService>, UnitTestProject1.ServiceReference1.ISenderService {
         
-        public DeliveryServiceClient() {
+        public SenderServiceClient() {
         }
         
-        public DeliveryServiceClient(string endpointConfigurationName) : 
+        public SenderServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public DeliveryServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public SenderServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public DeliveryServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public SenderServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public DeliveryServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public SenderServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public string GetData(int value) {
-            return base.Channel.GetData(value);
+        public int AddSender(string cpr, string firstName, string lastName, string phoneNumber, string email, string address, string zipCode, string city) {
+            return base.Channel.AddSender(cpr, firstName, lastName, phoneNumber, email, address, zipCode, city);
         }
         
-        public System.Threading.Tasks.Task<string> GetDataAsync(int value) {
-            return base.Channel.GetDataAsync(value);
+        public System.Threading.Tasks.Task<int> AddSenderAsync(string cpr, string firstName, string lastName, string phoneNumber, string email, string address, string zipCode, string city) {
+            return base.Channel.AddSenderAsync(cpr, firstName, lastName, phoneNumber, email, address, zipCode, city);
         }
         
-        public UnitTestProject1.ServiceReference1.CompositeType GetDataUsingDataContract(UnitTestProject1.ServiceReference1.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContract(composite);
+        public void ClearDB() {
+            base.Channel.ClearDB();
         }
         
-        public System.Threading.Tasks.Task<UnitTestProject1.ServiceReference1.CompositeType> GetDataUsingDataContractAsync(UnitTestProject1.ServiceReference1.CompositeType composite) {
-            return base.Channel.GetDataUsingDataContractAsync(composite);
+        public System.Threading.Tasks.Task ClearDBAsync() {
+            return base.Channel.ClearDBAsync();
         }
     }
 }
