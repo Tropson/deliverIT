@@ -1,24 +1,289 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿* {
+    margin: 0;
+    font-family: Hind Madurai, sans-serif;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+#blur {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    opacity: 1;
+    background-color: #EEEEEE;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+#content {
+    height: 100vh;
+    z-index: 3;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+a {
+    cursor: default;
+    text-transform: uppercase;
+    transition: padding-bottom 0.2s;
+    font-weight: 600;
+    color:white;
+    text-decoration:none;
 }
+
+    a:hover {
+        color: #EEEEEE;
+        padding-bottom: 2px;
+        text-decoration: none;
+    }
+
+#title {
+    text-transform: capitalize;
+    text-shadow: 1.5px 0px 2px black;
+}
+
+    #title:hover {
+        border-bottom: none;
+    }
+
+ul li {
+    list-style-type: none;
+    display: inline;
+    position: relative;
+    top: -0.8vh;
+    cursor: default;
+    text-shadow: 1.5px 0px 2px black;
+}
+
+ul {
+    display: inline;
+}
+
+#right {
+    position: relative;
+    float: right;
+    right: 1vw;
+    top: 3vh;
+}
+
+#left ul li {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#joinbutton {
+    padding-left: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: solid white 1.5px;
+    border-radius: 3px;
+    color: white;
+    transition: color 0.6s, background-color 0.6s;
+    text-shadow: none;
+}
+
+    #joinbutton:hover {
+        background-color: rgba(0,0,0,0.1);
+        color: #EEEEEE;
+    }
+
+#sendbutton {
+    background-color: #82d737;
+    padding-left: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: solid #82a737 1.5px;
+    border-radius: 3px;
+    transition: background-color 0.6s, color 0.6s;
+    color: white;
+    text-shadow: none;
+}
+
+    #sendbutton:hover {
+        color: #EEEEEE;
+        background-color: rgba(130,199,55,0.9);
+    }
+
+#left {
+    position: relative;
+    float: left;
+    top: 3vh;
+}
+
+#nav {
+    display: block;
+    position: fixed;
+    min-height: 8vh;
+    color: white;
+    width: 100%;
+    background-color: rgba(0,0,0,0.1);
+    box-shadow: 1px 0.5px 3px black;
+    z-index: 4;
+    transition: background-color 0.4s;
+}
+
+#mobilenav {
+    position: fixed;
+    display: none;
+    height: 8vh;
+    min-height: 50px;
+    width: 100%;
+    padding-top: 10px;
+    box-shadow: 1px .5px 3px black;
+    background-color: #0278da;
+    z-index: 41;
+}
+
+    #mobilenav ul li {
+        text-shadow: none;
+    }
+
+    #mobilenav #title {
+        transition: color 0.2s;
+        position: relative;
+        text-align: center;
+        top: 1vh;
+        left: 3vw;
+    }
+
+    #mobilenav #sendbutton {
+        float: right;
+    }
+
+    #mobilenav #joinbutton {
+        float: right;
+    }
+
+#hidden {
+    display: none;
+    width: 100%;
+    z-index: 7;
+    transition: 0.1s;
+}
+
+    #hidden ul {
+        display: inline;
+        color: white;
+    }
+
+        #hidden ul li {
+            padding-top: 3%;
+            padding-bottom: 3%;
+            background-color: rgba(93,155,230,0.7);
+            display: block;
+            text-align: center;
+            transition: background-color .4s;
+        }
+
+            #hidden ul li:hover {
+                background-color: rgba(93,155,230,1);
+                border-bottom: none;
+            }
+
+            #hidden ul li a:hover {
+                border-bottom: none;
+            }
+
+    #hidden #placeHolder {
+        height: 10px;
+        background-color: #0278da;
+    }
+
+#pic {
+    position: relative;
+    min-height: 40px;
+    min-width: 40px;
+    background-image: url(../Resources/mobile_menu.png);
+    background-size: cover;
+    top: -0.5vh;
+    left: 1vw;
+    float: left;
+}
+
+#title {
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+#menuButton {
+    transition: .2s;
+}
+
+    #menuButton:hover {
+        opacity: 0.8;
+    }
+
+.emptyBox {
+    font-size: 10vh;
+    text-align: center;
+    color: black;
+}
+
+.textBox {
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    min-height: 10vh;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 90%;
+    background-color: white;
+    opacity: .7;
+    text-align: center;
+    box-shadow: 1px 1px 3px black, 1px -1px 3px black;
+    z-index: 5;
+}
+
+@media only screen and (max-width: 800px) {
+    .emptyBox {
+        font-size: 6vh;
+    }
+
+    #fixednav {
+        display: none;
+    }
+
+    #nav {
+        display: none;
+    }
+
+    #mobilenav {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .emptyBox {
+        font-size: 5vh;
+    }
+
+    #fixednav {
+        display: none;
+    }
+
+    #nav {
+        display: none;
+    }
+
+    #mobilenav {
+        display: block;
+    }
+}
+
+#topCont {
+    height: 100vh;
+    background-image: url(../Resources/bg.png);
+    background-attachment: scroll;
+    background-size: cover;
+    transform: scale(1.0);
+    margin: 0 auto;
+    text-align: center;
+}
+
+    #topCont p {
+        position: absolute;
+        top: 40%;
+        left: 20%;
+    }

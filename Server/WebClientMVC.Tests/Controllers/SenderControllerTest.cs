@@ -2,6 +2,7 @@
 using WebClientMVC.Tests.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebClientMVC.Models;
+using WebClientMVC.Tests.SenderServiceReference;
 
 namespace WebClientMVC.Tests.Controllers
 {
@@ -12,7 +13,7 @@ namespace WebClientMVC.Tests.Controllers
         public void ServiceConnectionTest()
         {
             //setup
-            var proxy = new SenderServiceReference.SenderServiceClient();
+            var proxy = new SenderServiceClient();
 
             //assert
             proxy.Close();
