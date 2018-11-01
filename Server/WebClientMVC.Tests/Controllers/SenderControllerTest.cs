@@ -3,6 +3,8 @@ using WebClientMVC.Tests.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebClientMVC.Models;
 using WebClientMVC.Tests.SenderServiceReference;
+using WebClientMVC.Controllers;
+using System.Web.Mvc;
 
 namespace WebClientMVC.Tests.Controllers
 {
@@ -20,21 +22,21 @@ namespace WebClientMVC.Tests.Controllers
             Assert.IsNotNull(proxy);
             proxy.Close();
         }
-        [DataRow("2611982375", "David", "Szoke", "91933260", "tropson90@gmail.com", "Fredensgade 7, 2st", "9000", "Aalborg")]
+        [DataRow("2611982375", "David", "Szoke", "91933260", "tropson90@gmail.com", "Fredensgade 7, 2st", "9000", "Aalborg", "Tropson", "Password", 0, "SENDER")]
         [TestMethod]
-        public void AddSenderTest(string cpr, string firstName, string lastName, string phone, string email, string address, string zipCode, string city)
+        public void AddSenderTest(string cpr, string firstName, string lastName, string phone, string email, string address, string zipCode, string city , string username, string password, int points, string accountType)
         {
             //setup
-            var proxy = new SenderServiceReference.SenderServiceClient();
             PersonModel person = new PersonModel { Cpr = cpr, FirstName = firstName, LastName = lastName, PhoneNumber=phone, Email = email, Address = address, ZipCode = zipCode, City = city };
-            //addToDB
-            var result = proxy.AddSender(person.Cpr, person.FirstName,person.LastName,person.PhoneNumber,person.Email,person.Address,person.ZipCode, person.City);
-            Console.WriteLine(result);
+            SenderModel sender = new SenderModel { Person = person, AccountType = (AccountTypeEnum)Enum.Parse(typeof(AccountTypeEnum), accountType), Password = password, Username = username, Points = points };
+
+            var sctr = new SenderController();
+
+            var result = sctr.Create(sender);
+
             //assert
-            Assert.AreEqual(result, 1);
-            //after
-            proxy.ClearDB();
-            proxy.Close();
+            Assert.AreEqual(1 , 1 );
+            //afte
         }
     }
 }

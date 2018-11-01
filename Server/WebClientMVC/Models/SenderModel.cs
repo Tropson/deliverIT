@@ -11,6 +11,6 @@ namespace WebClientMVC.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public int Points { get; set; }
-        public Enum AccountType { get; set; }
+        public AccountTypeEnum AccountType { get; set; }
     }
 }

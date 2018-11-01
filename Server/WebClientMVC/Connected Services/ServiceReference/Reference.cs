@@ -16,10 +16,10 @@ namespace WebClientMVC.ServiceReference {
     public interface ISenderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        int AddSender(string cpr, string firstName, string lastName, string phoneNumber, string email, string address, string zipCode, string city);
+        int AddSender(object sender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        System.Threading.Tasks.Task<int> AddSenderAsync(string cpr, string firstName, string lastName, string phoneNumber, string email, string address, string zipCode, string city);
+        System.Threading.Tasks.Task<int> AddSenderAsync(object sender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ClearDB", ReplyAction="http://tempuri.org/ISenderService/ClearDBResponse")]
         void ClearDB();
@@ -55,12 +55,12 @@ namespace WebClientMVC.ServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public int AddSender(string cpr, string firstName, string lastName, string phoneNumber, string email, string address, string zipCode, string city) {
-            return base.Channel.AddSender(cpr, firstName, lastName, phoneNumber, email, address, zipCode, city);
+        public int AddSender(object sender) {
+            return base.Channel.AddSender(sender);
         }
         
-        public System.Threading.Tasks.Task<int> AddSenderAsync(string cpr, string firstName, string lastName, string phoneNumber, string email, string address, string zipCode, string city) {
-            return base.Channel.AddSenderAsync(cpr, firstName, lastName, phoneNumber, email, address, zipCode, city);
+        public System.Threading.Tasks.Task<int> AddSenderAsync(object sender) {
+            return base.Channel.AddSenderAsync(sender);
         }
         
         public void ClearDB() {

@@ -15,7 +15,7 @@ namespace DeliveryService
     public interface ISenderService
     {
         [OperationContract]
-        int AddSender(SenderModel sender);
+        int AddSender(Object sender);
         [OperationContract]
         void ClearDB();
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebClientMVC.Models;
@@ -32,7 +33,7 @@ namespace WebClientMVC.Controllers
 
         // POST: Sender/Create
         [HttpPost]
-        public ActionResult Create(SenderModel sender)
+        public ActionResult Create(Models.SenderModel sender)
         {
             try
             {
@@ -45,7 +46,7 @@ namespace WebClientMVC.Controllers
             }
             catch
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
 

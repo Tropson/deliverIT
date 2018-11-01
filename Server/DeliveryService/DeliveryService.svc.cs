@@ -14,8 +14,10 @@ namespace DeliveryService
     public class SenderService : ISenderService
     {
         DataClasses1DataContext db = new DataClasses1DataContext();
-        public int AddSender(SenderModel sender)
+        public int AddSender(Object senderObj)
         {
+            SenderModel sender = senderObj as SenderModel;
+
             int nextPersonId = (int)db.Persons.Last().ID + 1;
             Person person = new Person { Cpr = sender.Person.Cpr,
                 FirstName = sender.Person.FirstName,
