@@ -16,11 +16,26 @@ namespace DeliveryService
         DataClasses1DataContext db = new DataClasses1DataContext();
         public int AddSender(SenderModel sender)
         {
-
-            Person person = new Person { Cpr = sender.Person.cpr, FirstName = firstName, LastName = lastName, PhoneNumber=phoneNumber, Email = email, Address = address, ZipCode = zipCode, City = city };
+            int nextPersonId = (int)db.Persons.Last().ID + 1;
+            Person person = new Person { Cpr = sender.Person.Cpr,
+                FirstName = sender.Person.FirstName,
+                LastName = sender.Person.LastName,
+                PhoneNumber =sender.Person.PhoneNumber,
+                Email = sender.Person.Email,
+                Address = sender.Person.Address,
+                ZipCode = sender.Person.ZipCode,
+                City = sender.Person.City };
+            User user = new User
+            {
+                Username = sender.Username,
+                Password = sender.Password,
+                Points = sender.Points,
+                AccountTypeID = (int)sender.AccountType,
+                PersonID = nextPersonId
+            };
             var senders = db.Persons;
             var users = db.Users;
-            users.InsertOnSubmit(sender);
+            users.InsertOnSubmit(user);
             senders.InsertOnSubmit(person);
             try
             {
@@ -36,6 +51,30 @@ namespace DeliveryService
         {
             db.ExecuteCommand("Delete FROM Person");
             db.ExecuteCommand("DBCC CHECKIDENT ('Person', RESEED, 1);");
+        }
+        public SenderModel getSenderByCpr(string cpr)
+        {
+            var sender = db.Users.Single(x => x.Person.Cpr == cpr);
+            SenderModel mySender = new SenderModel
+            {
+                AccountType = (AccountTypeEnum)sender.AccountTypeID,
+                Password = sender.Password,
+                Username = sender.Username,
+                Points = (int)sender.Points,
+                Person = new PersonModel
+                {
+                    Cpr = sender.Person.Cpr,
+                    Address = sender.Person.Address,
+                    City = sender.Person.City,
+                    Email = sender.Person.Email,
+                    FirstName = sender.Person.FirstName,
+                    LastName = sender.Person.LastName,
+                    PhoneNumber = sender.Person.PhoneNumber,
+                    ZipCode = sender.Person.ZipCode
+                }
+            };
+            return mySender;
+
         }
     }
 }

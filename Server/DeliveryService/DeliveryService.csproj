@@ -75,6 +75,7 @@
       <DependentUpon>DeliveryService.svc</DependentUpon>
     </Compile>
     <Compile Include="IDeliveryService.cs" />
+    <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\SenderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
