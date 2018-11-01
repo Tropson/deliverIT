@@ -1,9 +1,7 @@
 ﻿using System;
-using UnitTestProject1.ServiceReference1;
 using Moq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebClientMVC.Models;
-
 namespace WebClientMVC.Tests.Controllers
 {
     [TestClass]
