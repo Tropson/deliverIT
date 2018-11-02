@@ -7,10 +7,10 @@ namespace WebClientMVC.Models
 {
     public class SenderModel
     {
-        public PersonModel Person { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public int Points { get; set; }
-        public AccountTypeEnum AccountType { get; set; }
+        public virtual PersonModel Person { get; set; }
+        public virtual string Username { get; set; }
+        public virtual string Password { get; set; }
+        public virtual int Points { get; set; }
+        public virtual AccountTypeEnum AccountType { get; set; }
     }
 }

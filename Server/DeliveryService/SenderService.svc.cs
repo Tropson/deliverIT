@@ -37,16 +37,8 @@ namespace DeliveryService
             };
             var senders = db.Persons;
             var users = db.Users;
-            senders.InsertOnSubmit(person);
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                return 0;
-            }
             users.InsertOnSubmit(user);
+            senders.InsertOnSubmit(person);
             try
             {
                 db.SubmitChanges();

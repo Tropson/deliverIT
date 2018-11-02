@@ -12,7 +12,14 @@ namespace WebClientMVC.Controllers
     public class SenderController : Controller
     {
 
-        SenderServiceClient _proxy = new SenderServiceClient();
+       
+        public readonly ISenderService _proxy;
+
+        public SenderController(ISenderService proxy)
+        {
+            this._proxy = proxy;
+        }
+
         // GET: Sender
         public ActionResult Index()
         {
