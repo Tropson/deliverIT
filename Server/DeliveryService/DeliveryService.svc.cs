@@ -22,7 +22,7 @@ namespace DeliveryService
             SenderModel sender = senderObj;
             int nextPersonId = 0;
             try {
-                nextPersonId = db.Persons.OrderByDescending(x => x.ID).ToList().Last().ID + 1;
+                nextPersonId = db.Persons.OrderBy(x => x.ID).ToList().Last().ID + 1;
             }
             catch (Exception e)
             {
