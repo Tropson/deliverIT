@@ -6,9 +6,10 @@ using System.Web;
 
 namespace DeliveryService.Models
 {
-    [DataContract]
+    [DataContract(Name ="PersonResource")]
     public class PersonModel
     {
+        [DataMember]
         public int ID { get; set; }
         [DataMember]
         public string Cpr { get; set; }

@@ -32,7 +32,7 @@ namespace DeliveryService
                 Username = sender.Username,
                 Password = sender.Password,
                 Points = sender.Points,
-                AccountTypeID = (int)sender.AccountType,
+                AccountTypeID = sender.AccountType,
                 PersonID = nextPersonId
             };
             var senders = db.Persons;
@@ -77,7 +77,7 @@ namespace DeliveryService
                 Email = person.Email,
                 PhoneNumber = person.PhoneNumber,
                 ZipCode = person.ZipCode,
-                AccountType = (AccountTypeEnum)sender.AccountTypeID,
+                AccountType = (int)sender.AccountTypeID,
                 Password = sender.Password,
                 Username = sender.Username,
                 Points = (int)sender.Points,

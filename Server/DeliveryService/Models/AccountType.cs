@@ -6,7 +6,7 @@ using System.Web;
 
 namespace DeliveryService.Models
 {
-    [DataContract(Name = "AccountType")]
+    [DataContract(Name = "AccountTypeResource")]
     public enum AccountTypeEnum
     {
         [EnumMember]

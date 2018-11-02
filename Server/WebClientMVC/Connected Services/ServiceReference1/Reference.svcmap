@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bde4d063-32f1-4d84-a9e7-04ced1f6fd2d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0f89d9c2-678c-4270-b13e-0a1cce8d17fa" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://localhost:50512/DeliveryService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="DeliveryService.disco" MetadataType="Disco" ID="d27ed679-9483-44ec-b0ba-ad8da349ab84" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?disco" />
-    <MetadataFile FileName="DeliveryService2.xsd" MetadataType="Schema" ID="3cc82a3b-d5f3-49eb-b708-26653ac024ac" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd1" />
-    <MetadataFile FileName="DeliveryService1.xsd" MetadataType="Schema" ID="b0f0f15c-cee8-4eb3-940a-db43f14dc585" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd0" />
-    <MetadataFile FileName="SenderService.wsdl" MetadataType="Wsdl" ID="ef50ce79-b4cd-48f8-aa74-33e21fc03a4f" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?wsdl" />
+    <MetadataFile FileName="DeliveryService.disco" MetadataType="Disco" ID="9f21c783-bc94-4183-91ef-0f6f003d948e" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?disco" />
+    <MetadataFile FileName="DeliveryService.xsd" MetadataType="Schema" ID="cbf40091-a883-44e6-9cc0-581ad703c7b0" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DeliveryService1.xsd" MetadataType="Schema" ID="bd1199f6-eb3f-4d48-bb64-22f8328c83d0" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SenderService.wsdl" MetadataType="Wsdl" ID="2bfcc92d-f8f7-4cf6-b68a-0d63b3b99217" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

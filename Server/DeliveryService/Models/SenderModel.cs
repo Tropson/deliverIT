@@ -6,9 +6,8 @@ using System.Runtime.Serialization;
 
 namespace DeliveryService.Models
 {
-    [DataContract]
     [KnownType(typeof(PersonModel))]
-    [KnownType(typeof(AccountTypeEnum))]
+    [DataContract(Name ="SenderResource")]
     public class SenderModel:PersonModel
     {
         [DataMember]
@@ -18,6 +17,6 @@ namespace DeliveryService.Models
         [DataMember]
         public int Points { get; set; }
         [DataMember]
-        public AccountTypeEnum AccountType { get; set; }
+        public int AccountType { get; set; }
     }
 }

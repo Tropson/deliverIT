@@ -44,7 +44,7 @@ namespace WebClientMVC.Controllers
             {
                 if (!ModelState.IsValid)
                     return View("Index");
-                Models.SenderModel sender = new Models.SenderModel(reg.Cpr, reg.Address,reg.City,reg.Email,reg.FirstName,reg.LastName,reg.PhoneNumber,reg.ZipCode) { AccountType = AccountTypeEnum.SENDER, Password = reg.Password, Username = reg.Username,Points = 0 };
+                SenderModel sender = new SenderModel(reg.Cpr,reg.FirstName,reg.LastName,reg.PhoneNumber,reg.Email,reg.Address,reg.ZipCode,reg.City) { AccountType = (int)AccountTypeEnum.SENDER, Password = reg.Password, Username = reg.Username,Points = 0 };
                 _proxy.AddSender(sender);
 
                 return RedirectToAction("Index");

@@ -6,9 +6,8 @@ using System.Web;
 
 namespace WebClientMVC.Models
 {
-    [DataContract]
     [KnownType(typeof(PersonModel))]
-    [KnownType(typeof(AccountTypeEnum))]
+    [DataContract(Name ="SenderModelResource")]
     public class SenderModel:PersonModel
     {
         public SenderModel(string cpr, string firstName, string lastName, string phone, string email, string address, string zipCode, string city) : base(cpr,firstName,lastName,phone,email,address,zipCode,city)
@@ -21,6 +20,6 @@ namespace WebClientMVC.Models
         [DataMember]
         public virtual int Points { get; set; }
         [DataMember]
-        public virtual AccountTypeEnum AccountType { get; set; }
+        public virtual int AccountType { get; set; }
     }
 }
