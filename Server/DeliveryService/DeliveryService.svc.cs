@@ -46,6 +46,7 @@ namespace DeliveryService
             {
                 return 0;
             }
+            db.Connection.Close();
             users.InsertOnSubmit(user);
             try
             {

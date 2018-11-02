@@ -12,9 +12,12 @@ namespace WebClientMVC.Controllers
     public class SenderController : Controller
     {
 
-       
         public readonly ISenderService _proxy;
-
+        public readonly SenderServiceClient proxy=new SenderServiceClient();
+        public SenderController()
+        {
+            
+        }
         public SenderController(ISenderService proxy)
         {
             this._proxy = proxy;
@@ -47,7 +50,7 @@ namespace WebClientMVC.Controllers
                 if (!ModelState.IsValid)
                     return View("Index");
 
-                _proxy.AddSender(sender);
+                proxy.AddSender(sender);
 
                 return RedirectToAction("Index");
             }
