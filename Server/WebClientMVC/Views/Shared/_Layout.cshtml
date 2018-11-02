@@ -6,16 +6,16 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/custom")
+    <script src="~/Scripts/customScripts.js"></script>
 </head>
-<body>
+<body onScroll="navScroll()" onload="loading()">
     <div id="blur">
     </div>
     <div id="container">
         <div id="nav">
             <div id="left">
                 <ul>
-                    <li><a id="title">DeliverIT</a></li>
+                    <li><a href="@Url.Action("Index","Home")" id="title">DeliverIT</a></li>
                     <li><a>About us</a></li>
                     <li><a>Help</a></li>
                     <li><a>Contact us</a></li>
@@ -24,7 +24,7 @@
             <div id="right">
                 <ul>
                     <li><a id="joinbutton">Join us</a></li>
-                    <li><a id="sendbutton">Send</a></li>
+                    <li><a href="@Url.Action("Create","Sender")"id="sendbutton">Send</a></li>
                 </ul>
             </div>
         </div>
@@ -47,11 +47,11 @@
             <div class="emptyBox" id="topCont">
                 <p>Delivery made easy and fast</p>
             </div>
-            <div class="container body-content">
+            <div class="textBox">
                 @RenderBody()
                 <hr />
                 <footer>
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                    <p align="center">&copy; @DateTime.Now.Year - DeliverIT</p>
                 </footer>
             </div>
 

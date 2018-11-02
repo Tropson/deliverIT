@@ -228,14 +228,19 @@ ul {
     min-height: 10vh;
     padding-left: 5%;
     padding-right: 5%;
-    width: 90%;
+    width: 100%;
     background-color: white;
-    opacity: .7;
-    text-align: center;
-    box-shadow: 1px 1px 3px black, 1px -1px 3px black;
+    opacity: .8;
+    box-shadow: 1px 10px 3px black, 1px -1px 1px black;
     z-index: 5;
 }
-
+    .textBox a {
+        color:black;
+        transition:.4s;
+    }
+        .textBox a:hover {
+            opacity:0.8;
+        }
 @media only screen and (max-width: 800px) {
     .emptyBox {
         font-size: 6vh;
