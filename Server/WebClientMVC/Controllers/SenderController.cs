@@ -5,7 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebClientMVC.Models;
-using WebClientMVC.ServiceReference;
+using WebClientMVC.ServiceReference1;
 
 namespace WebClientMVC.Controllers
 {
