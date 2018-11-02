@@ -234,7 +234,13 @@ ul {
     box-shadow: 1px 10px 3px black, 1px -1px 1px black;
     z-index: 5;
 }
-
+    .textBox a {
+        color:black;
+        transition:.4s;
+    }
+        .textBox a:hover {
+            opacity:0.8;
+        }
 @media only screen and (max-width: 800px) {
     .emptyBox {
         font-size: 6vh;
