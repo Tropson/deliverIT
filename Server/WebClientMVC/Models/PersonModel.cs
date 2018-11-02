@@ -6,7 +6,6 @@ using System.Web;
 
 namespace WebClientMVC.Models
 {
-    [DataContract(Name ="PersonModelResource")]
     public class PersonModel
     {
         public PersonModel(string cpr, string firstName, string lastName, string phone, string email, string address, string zipCode, string city)
@@ -20,23 +19,23 @@ namespace WebClientMVC.Models
             this.ZipCode = zipCode;
             this.City = city;
         }
-        [DataMember]
+        
         private int ID { get; set; }
-        [DataMember]
+        
         public virtual string Cpr { get; set; }
-        [DataMember]
+        
         public virtual string FirstName { get; set; }
-        [DataMember]
+        
         public virtual string LastName { get; set; }
-        [DataMember]
+        
         public virtual string PhoneNumber { get; set; }
-        [DataMember]
+        
         public virtual string Email { get; set; }
-        [DataMember]
+        
         public virtual string Address { get; set; }
-        [DataMember]
+        
         public virtual string ZipCode { get; set; }
-        [DataMember]
+        
         public virtual string City { get; set; }
     }
 }

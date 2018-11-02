@@ -177,7 +177,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="Connected Services\ServiceReference1\Reference.cs">
+    <Compile Include="Connected Services\SenderServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -195,10 +195,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
-    <None Include="Connected Services\ServiceReference1\DeliveryService.disco" />
-    <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
-    <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
-    <None Include="Connected Services\ServiceReference1\Reference.svcmap">
+    <None Include="Connected Services\SenderServiceReference\DeliveryService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SenderServiceReference\DeliveryService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SenderServiceReference\DeliveryService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SenderServiceReference\SenderService.wsdl" />
+    <None Include="Connected Services\SenderServiceReference\DeliveryService.disco" />
+    <None Include="Connected Services\SenderServiceReference\configuration91.svcinfo" />
+    <None Include="Connected Services\SenderServiceReference\configuration.svcinfo" />
+    <None Include="Connected Services\SenderServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -215,13 +225,6 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Connected Services\ServiceReference1\DeliveryService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference1\DeliveryService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\ServiceReference1\SenderService.wsdl" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\customScripts.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -272,7 +275,13 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />
+    <ProjectReference Include="..\DeliveryService\DeliveryService.csproj">
+      <Project>{2a52fbec-48ff-4fc5-9a1a-9f65f038ca22}</Project>
+      <Name>DeliveryService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\SenderServiceReference\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

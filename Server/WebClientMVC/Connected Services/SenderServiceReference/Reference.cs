@@ -8,18 +8,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebClientMVC.ServiceReference1 {
+namespace WebClientMVC.SenderServiceReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ISenderService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SenderServiceReference.ISenderService")]
     public interface ISenderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        int AddSender(object sender);
+        int AddSender(DeliveryService.SenderModel sender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        System.Threading.Tasks.Task<int> AddSenderAsync(object sender);
+        System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.SenderModel sender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ClearDB", ReplyAction="http://tempuri.org/ISenderService/ClearDBResponse")]
         void ClearDB();
@@ -29,12 +29,12 @@ namespace WebClientMVC.ServiceReference1 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISenderServiceChannel : WebClientMVC.ServiceReference1.ISenderService, System.ServiceModel.IClientChannel {
+    public interface ISenderServiceChannel : WebClientMVC.SenderServiceReference.ISenderService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SenderServiceClient : System.ServiceModel.ClientBase<WebClientMVC.ServiceReference1.ISenderService>, WebClientMVC.ServiceReference1.ISenderService {
+    public partial class SenderServiceClient : System.ServiceModel.ClientBase<WebClientMVC.SenderServiceReference.ISenderService>, WebClientMVC.SenderServiceReference.ISenderService {
         
         public SenderServiceClient() {
         }
@@ -55,11 +55,11 @@ namespace WebClientMVC.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public int AddSender(object sender) {
+        public int AddSender(DeliveryService.SenderModel sender) {
             return base.Channel.AddSender(sender);
         }
         
-        public System.Threading.Tasks.Task<int> AddSenderAsync(object sender) {
+        public System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.SenderModel sender) {
             return base.Channel.AddSenderAsync(sender);
         }
         

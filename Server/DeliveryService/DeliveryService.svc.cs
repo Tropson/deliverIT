@@ -1,24 +1,33 @@
-﻿using DeliveryService.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DeliveryService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
+    [ServiceBehavior(
+        Name = "SenderService",
+        InstanceContextMode = InstanceContextMode.Single)]
     public class SenderService : ISenderService
     {
         DataClasses1DataContext db = new DataClasses1DataContext();
-        public int AddSender(Object senderObj)
+        public int AddSender(SenderModel senderObj)
         {
-            SenderModel sender = senderObj as SenderModel;
-
-            int nextPersonId = (int)db.Persons.Last().ID + 1;
+            SenderModel sender = senderObj;
+            int nextPersonId = 0;
+            try {
+                nextPersonId = db.Persons.OrderByDescending(x => x.ID).ToList().Last().ID + 1;
+            }
+            catch (Exception e)
+            {
+                nextPersonId = 1;
+            }
             Person person = new Person { Cpr = sender.Cpr,
                 FirstName = sender.FirstName,
                 LastName = sender.LastName,
@@ -46,15 +55,21 @@ namespace DeliveryService
             {
                 return 0;
             }
+            Task.Delay(1000);
             db.Connection.Close();
             users.InsertOnSubmit(user);
             try
             {
+                db.Connection.Open();
                 db.SubmitChanges();
             }
             catch (Exception e)
             {
                 return 0;
+            }
+            finally
+            {
+                db.Connection.Close();
             }
             return 1;
         }
