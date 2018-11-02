@@ -19,14 +19,14 @@ namespace DeliveryService
             SenderModel sender = senderObj as SenderModel;
 
             int nextPersonId = (int)db.Persons.Last().ID + 1;
-            Person person = new Person { Cpr = sender.Person.Cpr,
-                FirstName = sender.Person.FirstName,
-                LastName = sender.Person.LastName,
-                PhoneNumber =sender.Person.PhoneNumber,
-                Email = sender.Person.Email,
-                Address = sender.Person.Address,
-                ZipCode = sender.Person.ZipCode,
-                City = sender.Person.City };
+            Person person = new Person { Cpr = sender.Cpr,
+                FirstName = sender.FirstName,
+                LastName = sender.LastName,
+                PhoneNumber =sender.PhoneNumber,
+                Email = sender.Email,
+                Address = sender.Address,
+                ZipCode = sender.ZipCode,
+                City = sender.City };
             User user = new User
             {
                 Username = sender.Username,
@@ -66,23 +66,21 @@ namespace DeliveryService
         public SenderModel getSenderByCpr(string cpr)
         {
             var sender = db.Users.Single(x => x.Person.Cpr == cpr);
+            var person = db.Persons.Single(x => x.Cpr == cpr);
             SenderModel mySender = new SenderModel
             {
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                Cpr = person.Cpr,
+                Address = person.Address,
+                City = person.City,
+                Email = person.Email,
+                PhoneNumber = person.PhoneNumber,
+                ZipCode = person.ZipCode,
                 AccountType = (AccountTypeEnum)sender.AccountTypeID,
                 Password = sender.Password,
                 Username = sender.Username,
                 Points = (int)sender.Points,
-                Person = new PersonModel
-                {
-                    Cpr = sender.Person.Cpr,
-                    Address = sender.Person.Address,
-                    City = sender.Person.City,
-                    Email = sender.Person.Email,
-                    FirstName = sender.Person.FirstName,
-                    LastName = sender.Person.LastName,
-                    PhoneNumber = sender.Person.PhoneNumber,
-                    ZipCode = sender.Person.ZipCode
-                }
             };
             return mySender;
 

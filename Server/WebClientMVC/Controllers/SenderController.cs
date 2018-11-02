@@ -11,18 +11,13 @@ namespace WebClientMVC.Controllers
 {
     public class SenderController : Controller
     {
-
         public readonly ISenderService _proxy;
-        public readonly SenderServiceClient proxy=new SenderServiceClient();
-        public SenderController()
-        {
-            
-        }
+        
         public SenderController(ISenderService proxy)
         {
             this._proxy = proxy;
         }
-
+        
         // GET: Sender
         public ActionResult Index()
         {
@@ -43,14 +38,14 @@ namespace WebClientMVC.Controllers
 
         // POST: Sender/Create
         [HttpPost]
-        public ActionResult Create(Models.SenderModel sender)
+        public ActionResult Create(Models.RegisterModel reg)
         {
             try
             {
                 if (!ModelState.IsValid)
                     return View("Index");
-
-                proxy.AddSender(sender);
+                Models.SenderModel sender = new Models.SenderModel(reg.Cpr, reg.Address,reg.City,reg.Email,reg.FirstName,reg.LastName,reg.PhoneNumber,reg.ZipCode) { AccountType = AccountTypeEnum.SENDER, Password = reg.Password, Username = reg.Username,Points = 0 };
+                _proxy.AddSender(sender);
 
                 return RedirectToAction("Index");
             }

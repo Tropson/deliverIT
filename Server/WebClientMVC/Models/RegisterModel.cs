@@ -6,7 +6,7 @@ using System.Web;
 namespace WebClientMVC.Models
 {
     public class RegisterModel
-    {     
+    {
         public virtual string Cpr { get; set; }
 
         public virtual string FirstName { get; set; }

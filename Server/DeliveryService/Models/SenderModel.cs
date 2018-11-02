@@ -9,10 +9,8 @@ namespace DeliveryService.Models
     [DataContract]
     [KnownType(typeof(PersonModel))]
     [KnownType(typeof(AccountTypeEnum))]
-    public class SenderModel
+    public class SenderModel:PersonModel
     {
-        [DataMember]
-        public PersonModel Person { get; set; }
         [DataMember]
         public string Username { get; set; }
         [DataMember]
