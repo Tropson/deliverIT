@@ -2,7 +2,7 @@
 using WebClientMVC.Tests.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebClientMVC.Models;
-using WebClientMVC.ServiceReference;
+using WebClientMVC.ServiceReference1;
 using WebClientMVC.Controllers;
 using System.Web.Mvc;
 using Moq;
