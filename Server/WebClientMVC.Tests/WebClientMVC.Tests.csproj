@@ -133,6 +133,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DeliveryService\DeliveryService.csproj">
+      <Project>{2A52FBEC-48FF-4FC5-9A1A-9F65F038CA22}</Project>
+      <Name>DeliveryService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebClientMVC\WebClientMVC.csproj">
       <Project>{671FE8E0-DA4D-4482-992A-4D06B2D5BAAC}</Project>
       <Name>WebClientMVC</Name>
