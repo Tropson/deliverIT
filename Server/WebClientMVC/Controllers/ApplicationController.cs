@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
+
 
 namespace WebClientMVC.Controllers
 {
@@ -35,17 +37,19 @@ namespace WebClientMVC.Controllers
 
         // POST: Application/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(ApplicationModel app)
         {
+
             try
             {
-                // TODO: Add insert logic here
-
+                if (!ModelState.IsValid)
+                    return View("Create", app);
+                _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber,  ZipCode = app.ZipCode, CVPath=app.CVPath,IDPicturePath=app.IDPicturePath,YellowCardPath=app.YellowCardPath});
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
 

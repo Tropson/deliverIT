@@ -13,6 +13,5 @@ namespace WebClientMVC.Models
         public string CVPath { get; set; }
         public string IDPicturePath { get; set; }
         public string YellowCardPath { get; set; }
-       
     }
 }
