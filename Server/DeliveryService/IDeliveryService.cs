@@ -19,6 +19,7 @@ namespace DeliveryService
         [OperationContract]
         int AddApplication(ApplicationModel application);
 
+        [OperationContract]
         List<ApplicationModel> GetApplications();
 
         [OperationContract]
