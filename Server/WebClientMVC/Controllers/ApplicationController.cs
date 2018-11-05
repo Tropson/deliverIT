@@ -37,7 +37,7 @@ namespace WebClientMVC.Controllers
 
         // POST: Application/Create
         [HttpPost]
-        public ActionResult Create(ApplicationModel app)
+        public ActionResult Create(Models.ApplicationModel app)
         {
 
             try
