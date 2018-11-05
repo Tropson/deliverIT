@@ -189,6 +189,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountTypeEnum.cs" />
+    <Compile Include="Models\ApplicationModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\SenderModel.cs" />
