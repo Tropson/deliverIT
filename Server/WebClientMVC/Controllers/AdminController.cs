@@ -18,9 +18,14 @@ namespace WebClientMVC.Controllers
             this._proxy = proxy;
         }
         // GET: Admin
+        //TODO : NEED TO BE REVISED BECAUSE OF THE HTTTP FILES LIST 
         public ActionResult Index()
         {
-            return View();
+            List<DeliveryService.ApplicationModel> list = _proxy.GetApplications();
+
+            IEnumerable<Models.ApplicationModel> applications = list.Select(x => new Models.ApplicationModel { Cpr = x.Cpr, FirstName = x.FirstName, LastName = x.LastName, PhoneNumber = x.PhoneNumber, Email = x.Email, Address = x.Address, ZipCode = x.ZipCode, City = x.City, files = new HttpPostedFileBase[3] });
+
+            return View(applications);
         }
 
         // GET: Admin/Details/5

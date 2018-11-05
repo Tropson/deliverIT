@@ -135,14 +135,32 @@ namespace DeliveryService
             return 1;
         }
 
-        public ApplicationModel[] GetApplications()
+        public List<ApplicationModel> GetApplications()
         {
-           Application[] applications = db.Applications.ToArray();
+            Application[] dbApplications = db.Applications.ToArray();
+            List<ApplicationModel> applications = new List<ApplicationModel>();
+            ApplicationModel model = new ApplicationModel();
 
-            foreach(Application app in applications)
+            foreach(Application app in dbApplications)
             {
-                app.
+                model.Cpr = app.Person.Cpr;
+                model.FirstName = app.Person.FirstName;
+                model.LastName = app.Person.LastName;
+                model.PhoneNumber = app.Person.PhoneNumber;
+                model.Email = app.Person.Email;
+                model.Address = app.Person.Address;
+                model.ZipCode = app.Person.ZipCode;
+                model.City = app.Person.City;
+                model.CVPath = app.CVPath;
+                model.IDPicturePath = app.IDPicturePath;
+                model.YellowCardPath = app.YellowCardPath;
+
+                applications.Add(model);
             }
+
+            return applications;
+
+           
         }
         public void ClearDB()
         {

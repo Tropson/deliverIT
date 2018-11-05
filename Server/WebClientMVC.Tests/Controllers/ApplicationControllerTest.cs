@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Net;
 using System.Web.Mvc;
-using DeliveryService;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using WebClientMVC.Controllers;
@@ -19,8 +18,8 @@ namespace WebClientMVC.Tests.Controllers
         {
           
                 //setup
-                var courierServiceMock = new Mock<DeliveryService.ISenderService>();
-                var app = new Models.ApplicationModel(cpr, firstName, lastName, phone, email, address, zipCode, city)  { CVPath = cvpath, IDPicturePath = idpicturepath, YellowCardPath = yellowcardpath };
+                var courierServiceMock = new Mock<ISenderService>();
+                var app = new Models.ApplicationModel{Cpr = cpr,FirstName = firstName,LastName = lastName,PhoneNumber = phone,Email = email,Address = address,ZipCode = zipCode,City = city, files=new System.Web.HttpPostedFileBase[3] };
                 
 
                 //senderServiceMock.Setup(x => x.AddSender(senderToService)).Returns(1);
