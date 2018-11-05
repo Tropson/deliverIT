@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeliveryService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,12 @@ namespace WebClientMVC.Controllers
 {
     public class ApplicationController : Controller
     {
+        public readonly ISenderService _proxy;
+
+        public ApplicationController(ISenderService proxy)
+        {
+            this._proxy = proxy;
+        }
         // GET: Application
         public ActionResult Index()
         {
