@@ -19,6 +19,8 @@ namespace DeliveryService
         [OperationContract]
         int AddApplication(ApplicationModel application);
 
+        ApplicationModel[] GetApplications();
+
         [OperationContract]
         void ClearDB();
     }

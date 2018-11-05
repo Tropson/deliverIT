@@ -134,6 +134,16 @@ namespace DeliveryService
             }
             return 1;
         }
+
+        public ApplicationModel[] GetApplications()
+        {
+           Application[] applications = db.Applications.ToArray();
+
+            foreach(Application app in applications)
+            {
+                app.
+            }
+        }
         public void ClearDB()
         {
             db.ExecuteCommand("Delete FROM Person");
