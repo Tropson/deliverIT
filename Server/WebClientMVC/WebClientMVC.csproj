@@ -255,11 +255,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Sender\Create.cshtml" />
     <Content Include="Views\Sender\Index.cshtml" />
+    <Content Include="Views\Application\Create.cshtml" />
+    <Content Include="Views\Application\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Resources\" />
-    <Folder Include="Views\Application\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -5,11 +5,16 @@ using System.Web;
 
 namespace WebClientMVC.Models
 {
-    public class ApplicationModel:PersonModel
+    public class ApplicationModel
     {
-        public ApplicationModel(string cpr, string firstName, string lastName, string phone, string email, string address, string zipCode, string city) : base(cpr, firstName, lastName, phone, email, address, zipCode, city)
-        {
-        }
+        public virtual string Cpr { get; set; }
+        public virtual string FirstName { get; set; }
+        public virtual string LastName { get; set; }
+        public virtual string PhoneNumber { get; set; }
+        public virtual string Email { get; set; }
+        public virtual string Address { get; set; }
+        public virtual string ZipCode { get; set; }
+        public virtual string City { get; set; }
         public string CVPath { get; set; }
         public string IDPicturePath { get; set; }
         public string YellowCardPath { get; set; }

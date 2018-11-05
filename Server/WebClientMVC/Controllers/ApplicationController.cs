@@ -1,8 +1,8 @@
-﻿using DeliveryService;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebClientMVC.SenderServiceReference;
 using System.Web.Mvc;
 using System.Net;
 
@@ -37,15 +37,18 @@ namespace WebClientMVC.Controllers
 
         // POST: Application/Create
         [HttpPost]
-        public ActionResult Create(Models.ApplicationModel app)
+        public ActionResult Create(Models.ApplicationModel app, HttpPostedFileBase[] file)
         {
 
             try
             {
                 if (!ModelState.IsValid)
-                    return View("Create", app);
-                _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber,  ZipCode = app.ZipCode, CVPath=app.CVPath,IDPicturePath=app.IDPicturePath,YellowCardPath=app.YellowCardPath});
-                return RedirectToAction("Index");
+                    return View("Create",app);
+                string cv = file[0].FileName;
+                string idpic = file[1].FileName;
+                string yellow = file[2].FileName;
+                _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber,  ZipCode = app.ZipCode, CVPath=cv,IDPicturePath=idpic,YellowCardPath=yellow});
+                return RedirectToAction("Create");
             }
             catch
             {
