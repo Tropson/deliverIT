@@ -17,6 +17,9 @@ namespace DeliveryService
         int AddSender(SenderModel sender);
 
         [OperationContract]
+        int AddApplication(ApplicationModel application);
+
+        [OperationContract]
         void ClearDB();
     }
     
@@ -41,6 +44,18 @@ namespace DeliveryService
         public string ZipCode { get; set; }
         [DataMember]
         public string City { get; set; }
+    }
+
+    [KnownType(typeof(PersonModel))]
+    [DataContract(Name = "ApplicationResource")]
+    public class ApplicationModel : PersonModel
+    {
+        [DataMember]
+        public string CVPath { get; set; }
+        [DataMember]
+        public string IDPicturePath { get; set; }
+        [DataMember]
+        public string YellowCardPath { get; set; }
     }
 
     [KnownType(typeof(PersonModel))]

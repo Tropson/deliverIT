@@ -75,6 +75,65 @@ namespace DeliveryService
             }
             return 1;
         }
+        public int AddApplication(ApplicationModel applicationObj)
+        {
+            ApplicationModel application = applicationObj;
+            int nextPersonId = 0;
+            try
+            {
+                nextPersonId = db.Persons.OrderBy(x => x.ID).ToList().Last().ID + 1;
+            }
+            catch (Exception e)
+            {
+                nextPersonId = 1;
+            }
+            Person person = new Person
+            {
+                Cpr = application.Cpr,
+                FirstName = application.FirstName,
+                LastName = application.LastName,
+                PhoneNumber = application.PhoneNumber,
+                Email = application.Email,
+                Address = application.Address,
+                ZipCode = application.ZipCode,
+                City = application.City
+            };
+            Application myApplication = new Application
+            {
+                IDPicturePath = application.IDPicturePath,
+                CVPath = application.CVPath,
+                PersonID = application.ID,
+                YellowCardPath = application.YellowCardPath
+            };
+            var persons = db.Persons;
+            var applications = db.Applications;
+            persons.InsertOnSubmit(person);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+            Task.Delay(1000);
+            db.Connection.Close();
+            applications.InsertOnSubmit(myApplication);
+            try
+            {
+                db.Connection.Open();
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+            finally
+            {
+                db.Connection.Close();
+            }
+            return 1;
+        }
         public void ClearDB()
         {
             db.ExecuteCommand("Delete FROM Person");
