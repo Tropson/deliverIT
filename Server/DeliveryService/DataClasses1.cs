@@ -33,6 +33,9 @@ namespace DeliveyService
     partial void InsertAccountType(AccountType instance);
     partial void UpdateAccountType(AccountType instance);
     partial void DeleteAccountType(AccountType instance);
+    partial void InsertApplication(Application instance);
+    partial void UpdateApplication(Application instance);
+    partial void DeleteApplication(Application instance);
     partial void InsertDelivery(Delivery instance);
     partial void UpdateDelivery(Delivery instance);
     partial void DeleteDelivery(Delivery instance);
@@ -55,9 +58,8 @@ namespace DeliveyService
 		{
 			OnCreated();
 		}
-
-       
-        public DataClasses1DataContext(System.Data.IDbConnection connection) : 
+		
+		public DataClasses1DataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -247,8 +249,10 @@ namespace DeliveyService
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Application")]
-	public partial class Application
+	public partial class Application : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private System.Nullable<int> _PersonID;
 		
@@ -258,8 +262,30 @@ namespace DeliveyService
 		
 		private string _YellowCardPath;
 		
+		private int _ID;
+		
+		private EntityRef<Person> _Person;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnPersonIDChanging(System.Nullable<int> value);
+    partial void OnPersonIDChanged();
+    partial void OnCVPathChanging(string value);
+    partial void OnCVPathChanged();
+    partial void OnIDPicturePathChanging(string value);
+    partial void OnIDPicturePathChanged();
+    partial void OnYellowCardPathChanging(string value);
+    partial void OnYellowCardPathChanged();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    #endregion
+		
 		public Application()
 		{
+			this._Person = default(EntityRef<Person>);
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PersonID", DbType="Int")]
@@ -273,7 +299,15 @@ namespace DeliveyService
 			{
 				if ((this._PersonID != value))
 				{
+					if (this._Person.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPersonIDChanging(value);
+					this.SendPropertyChanging();
 					this._PersonID = value;
+					this.SendPropertyChanged("PersonID");
+					this.OnPersonIDChanged();
 				}
 			}
 		}
@@ -289,7 +323,11 @@ namespace DeliveyService
 			{
 				if ((this._CVPath != value))
 				{
+					this.OnCVPathChanging(value);
+					this.SendPropertyChanging();
 					this._CVPath = value;
+					this.SendPropertyChanged("CVPath");
+					this.OnCVPathChanged();
 				}
 			}
 		}
@@ -305,7 +343,11 @@ namespace DeliveyService
 			{
 				if ((this._IDPicturePath != value))
 				{
+					this.OnIDPicturePathChanging(value);
+					this.SendPropertyChanging();
 					this._IDPicturePath = value;
+					this.SendPropertyChanged("IDPicturePath");
+					this.OnIDPicturePathChanged();
 				}
 			}
 		}
@@ -321,8 +363,86 @@ namespace DeliveyService
 			{
 				if ((this._YellowCardPath != value))
 				{
+					this.OnYellowCardPathChanging(value);
+					this.SendPropertyChanging();
 					this._YellowCardPath = value;
+					this.SendPropertyChanged("YellowCardPath");
+					this.OnYellowCardPathChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__Applicati__Perso__18B6AB08", Storage="_Person", ThisKey="PersonID", OtherKey="ID", IsForeignKey=true)]
+		public Person Person
+		{
+			get
+			{
+				return this._Person.Entity;
+			}
+			set
+			{
+				Person previousValue = this._Person.Entity;
+				if (((previousValue != value) 
+							|| (this._Person.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Person.Entity = null;
+						previousValue.Applications.Remove(this);
+					}
+					this._Person.Entity = value;
+					if ((value != null))
+					{
+						value.Applications.Add(this);
+						this._PersonID = value.ID;
+					}
+					else
+					{
+						this._PersonID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Person");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -931,6 +1051,8 @@ namespace DeliveyService
 		
 		private string _City;
 		
+		private EntitySet<Application> _Applications;
+		
 		private EntitySet<User> _Users;
 		
     #region Extensibility Method Definitions
@@ -959,6 +1081,7 @@ namespace DeliveyService
 		
 		public Person()
 		{
+			this._Applications = new EntitySet<Application>(new Action<Application>(this.attach_Applications), new Action<Application>(this.detach_Applications));
 			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
 			OnCreated();
 		}
@@ -1143,6 +1266,19 @@ namespace DeliveyService
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__Applicati__Perso__18B6AB08", Storage="_Applications", ThisKey="ID", OtherKey="PersonID", DeleteRule="NO ACTION")]
+		public EntitySet<Application> Applications
+		{
+			get
+			{
+				return this._Applications;
+			}
+			set
+			{
+				this._Applications.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__User__PersonID__0C50D423", Storage="_Users", ThisKey="ID", OtherKey="PersonID", DeleteRule="NO ACTION")]
 		public EntitySet<User> Users
 		{
@@ -1174,6 +1310,18 @@ namespace DeliveyService
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Applications(Application entity)
+		{
+			this.SendPropertyChanging();
+			entity.Person = this;
+		}
+		
+		private void detach_Applications(Application entity)
+		{
+			this.SendPropertyChanging();
+			entity.Person = null;
 		}
 		
 		private void attach_Users(User entity)
