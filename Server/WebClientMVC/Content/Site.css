@@ -216,6 +216,11 @@ ul {
         opacity: 0.8;
     }
 
+.bigEmptyBox {
+    font-size: 10vh;
+    text-align: center;
+    color: black;
+}
 .emptyBox {
     font-size: 5vh;
     color: black;
@@ -285,7 +290,20 @@ ul {
         display: block;
     }
 }
-
+#bigTopCont {
+    height: 100vh;
+    background-image: url(../Resources/bg.png);
+    background-attachment: scroll;
+    background-size: cover;
+    transform: scale(1.0);
+    margin: 0 auto;
+    text-align: center;
+}
+    #bigTopCont p {
+        position: absolute;
+        top: 40%;
+        left: 20%;
+    }
 #topCont {
     height: 30vh;
     background-image: url(../Resources/bg.png);

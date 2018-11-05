@@ -45,8 +45,8 @@
             </div>
         </div>
         <div id="content">
-            <div class="emptyBox" id="topCont">
-                <div id="emptyText">
+            <div class="emptyBox" @(ViewBag.Title=="Home Page"?"id=bigTopCont class=bigEmptyBox":"id=topCont class=emptyBox")>
+                <div @(ViewBag.Title=="Home Page"?"":"id=emptyText")>
                     <p>Delivery made easy and fast</p>
                 </div>
             </div>
