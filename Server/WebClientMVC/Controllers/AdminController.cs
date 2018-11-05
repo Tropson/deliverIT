@@ -37,7 +37,7 @@ namespace WebClientMVC.Controllers
 
         // POST: Admin/Create
         [HttpPost]
-        public ActionResult CreateOnAccept(ApplicationModel app)
+        public ActionResult CreateOnAccept(Models.ApplicationModel app)
         {
             try
             {
