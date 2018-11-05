@@ -14,7 +14,7 @@ namespace WebClientMVC.Tests.Controllers
           
                 //setup
                 var courierServiceMock = new Mock<ISenderService>();
-                var app = new ApplicationModel {CVpath = cvpath, IDPicturePath = idpicturepath, YellowCardPath = yellowcardpath } : base{ Cpr = cpr, FirstName = firstName, LastName = lastName, PhoneNumber = phone, Email = email, Address = address, ZipCode = zipCode, City = city};
+                var app = new ApplicationModel {CVpath = cvpath, IDPicturePath = idpicturepath, YellowCardPath = yellowcardpath } : base(cpr, firstName, lastName, phone, email, address, zipCode, city);
                 
 
                 //senderServiceMock.Setup(x => x.AddSender(senderToService)).Returns(1);
