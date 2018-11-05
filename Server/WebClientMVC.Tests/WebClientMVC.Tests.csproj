@@ -109,7 +109,7 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="Controllers\SenderControllerTest.cs" />
-    <Compile Include="Controllers\CourierControllerTest.cs" />
+    <Compile Include="Controllers\ApplicationControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>

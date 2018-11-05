@@ -7,7 +7,7 @@ using WebClientMVC.Controllers;
 namespace WebClientMVC.Tests.Controllers
 {
     [TestClass]
-    public class CourierControllerTest
+    public class ApplicationControllerTest
     {
         [DataRow("2611982375", "David", "Szoke", "91933260", "tropson90@gmail.com", "Fredensgade 7, 2st", "9000", "Aalborg", "CVpath", "IDPicture Path", "Yellow Card Path")]
         [TestMethod]
