@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DeliveryService
+namespace DeliveyService
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -18,7 +18,6 @@ namespace DeliveryService
 	using System.Reflection;
 	using System.Linq;
 	using System.Linq.Expressions;
-	using System.Runtime.Serialization;
 	using System.ComponentModel;
 	using System;
 	
@@ -51,19 +50,14 @@ namespace DeliveryService
     partial void DeleteUser(User instance);
     #endregion
 		
-		public DataClasses1DataContext() : 
-				base(global::DeliveryService.Properties.Settings.Default.dmaj0917_1067643ConnectionString, mappingSource)
-		{
-			OnCreated();
-		}
-		
 		public DataClasses1DataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
-		
-		public DataClasses1DataContext(System.Data.IDbConnection connection) : 
+
+       
+        public DataClasses1DataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -86,6 +80,14 @@ namespace DeliveryService
 			get
 			{
 				return this.GetTable<AccountType>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Application> Applications
+		{
+			get
+			{
+				return this.GetTable<Application>();
 			}
 		}
 		
@@ -131,7 +133,6 @@ namespace DeliveryService
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AccountType")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class AccountType : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -142,8 +143,6 @@ namespace DeliveryService
 		private string _Type;
 		
 		private EntitySet<User> _Users;
-		
-		private bool serializing;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -157,11 +156,11 @@ namespace DeliveryService
 		
 		public AccountType()
 		{
-			this.Initialize();
+			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int ID
 		{
 			get
@@ -182,7 +181,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="VarChar(20)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public string Type
 		{
 			get
@@ -202,17 +200,11 @@ namespace DeliveryService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AccountType_User", Storage="_Users", ThisKey="ID", OtherKey="AccountTypeID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3, EmitDefaultValue=false)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__User__AccountTyp__0D44F85C", Storage="_Users", ThisKey="ID", OtherKey="AccountTypeID", DeleteRule="NO ACTION")]
 		public EntitySet<User> Users
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._Users.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
 				return this._Users;
 			}
 			set
@@ -252,37 +244,90 @@ namespace DeliveryService
 			this.SendPropertyChanging();
 			entity.AccountType = null;
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Application")]
+	public partial class Application
+	{
 		
-		private void Initialize()
+		private System.Nullable<int> _PersonID;
+		
+		private string _CVPath;
+		
+		private string _IDPicturePath;
+		
+		private string _YellowCardPath;
+		
+		public Application()
 		{
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
-			OnCreated();
 		}
 		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PersonID", DbType="Int")]
+		public System.Nullable<int> PersonID
 		{
-			this.Initialize();
+			get
+			{
+				return this._PersonID;
+			}
+			set
+			{
+				if ((this._PersonID != value))
+				{
+					this._PersonID = value;
+				}
+			}
 		}
 		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CVPath", DbType="VarChar(200)")]
+		public string CVPath
 		{
-			this.serializing = true;
+			get
+			{
+				return this._CVPath;
+			}
+			set
+			{
+				if ((this._CVPath != value))
+				{
+					this._CVPath = value;
+				}
+			}
 		}
 		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDPicturePath", DbType="VarChar(200)")]
+		public string IDPicturePath
 		{
-			this.serializing = false;
+			get
+			{
+				return this._IDPicturePath;
+			}
+			set
+			{
+				if ((this._IDPicturePath != value))
+				{
+					this._IDPicturePath = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YellowCardPath", DbType="VarChar(200)")]
+		public string YellowCardPath
+		{
+			get
+			{
+				return this._YellowCardPath;
+			}
+			set
+			{
+				if ((this._YellowCardPath != value))
+				{
+					this._YellowCardPath = value;
+				}
+			}
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Delivery")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Delivery : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -314,11 +359,11 @@ namespace DeliveryService
 		
 		public Delivery()
 		{
-			this.Initialize();
+			this._Package = default(EntityRef<Package>);
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int ID
 		{
 			get
@@ -339,7 +384,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageID", DbType="Int")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Nullable<int> PackageID
 		{
 			get
@@ -364,7 +408,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Distance", DbType="Float")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.Nullable<double> Distance
 		{
 			get
@@ -385,7 +428,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price", DbType="Int")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.Nullable<int> Price
 		{
 			get
@@ -405,7 +447,7 @@ namespace DeliveryService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Package_Delivery", Storage="_Package", ThisKey="PackageID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__Delivery__Packag__16CE6296", Storage="_Package", ThisKey="PackageID", OtherKey="ID", IsForeignKey=true)]
 		public Package Package
 		{
 			get
@@ -458,23 +500,9 @@ namespace DeliveryService
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
-		
-		private void Initialize()
-		{
-			this._Package = default(EntityRef<Package>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Package")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Package : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -500,13 +528,11 @@ namespace DeliveryService
 		
 		private EntitySet<Delivery> _Deliveries;
 		
-		private EntityRef<Status> _Status;
-		
 		private EntityRef<User> _User;
 		
-		private EntityRef<User> _User1;
+		private EntityRef<User> _Sender;
 		
-		private bool serializing;
+		private EntityRef<Status> _Status;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -534,11 +560,14 @@ namespace DeliveryService
 		
 		public Package()
 		{
-			this.Initialize();
+			this._Deliveries = new EntitySet<Delivery>(new Action<Delivery>(this.attach_Deliveries), new Action<Delivery>(this.detach_Deliveries));
+			this._User = default(EntityRef<User>);
+			this._Sender = default(EntityRef<User>);
+			this._Status = default(EntityRef<Status>);
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int ID
 		{
 			get
@@ -559,7 +588,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Nullable<int> StatusID
 		{
 			get
@@ -584,7 +612,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SenderID", DbType="Int")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.Nullable<int> SenderID
 		{
 			get
@@ -595,7 +622,7 @@ namespace DeliveryService
 			{
 				if ((this._SenderID != value))
 				{
-					if (this._User1.HasLoadedOrAssignedValue)
+					if (this._Sender.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -609,7 +636,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CourierID", DbType="Int")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public System.Nullable<int> CourierID
 		{
 			get
@@ -634,7 +660,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ToAddress", DbType="VarChar(30)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public string ToAddress
 		{
 			get
@@ -655,7 +680,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FromAddress", DbType="VarChar(30)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public string FromAddress
 		{
 			get
@@ -676,7 +700,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Width", DbType="Float")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7)]
 		public System.Nullable<double> Width
 		{
 			get
@@ -697,7 +720,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Height", DbType="Float")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8)]
 		public System.Nullable<double> Height
 		{
 			get
@@ -718,7 +740,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weight", DbType="Float")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=9)]
 		public System.Nullable<double> Weight
 		{
 			get
@@ -738,17 +759,11 @@ namespace DeliveryService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Package_Delivery", Storage="_Deliveries", ThisKey="ID", OtherKey="PackageID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=10, EmitDefaultValue=false)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__Delivery__Packag__16CE6296", Storage="_Deliveries", ThisKey="ID", OtherKey="PackageID", DeleteRule="NO ACTION")]
 		public EntitySet<Delivery> Deliveries
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._Deliveries.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
 				return this._Deliveries;
 			}
 			set
@@ -757,41 +772,7 @@ namespace DeliveryService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_Package", Storage="_Status", ThisKey="StatusID", OtherKey="ID", IsForeignKey=true)]
-		public Status Status
-		{
-			get
-			{
-				return this._Status.Entity;
-			}
-			set
-			{
-				Status previousValue = this._Status.Entity;
-				if (((previousValue != value) 
-							|| (this._Status.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Status.Entity = null;
-						previousValue.Packages.Remove(this);
-					}
-					this._Status.Entity = value;
-					if ((value != null))
-					{
-						value.Packages.Add(this);
-						this._StatusID = value.ID;
-					}
-					else
-					{
-						this._StatusID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Status");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Package", Storage="_User", ThisKey="CourierID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__Package__Courier__13F1F5EB", Storage="_User", ThisKey="CourierID", OtherKey="ID", IsForeignKey=true)]
 		public User User
 		{
 			get
@@ -825,36 +806,70 @@ namespace DeliveryService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Package1", Storage="_User1", ThisKey="SenderID", OtherKey="ID", IsForeignKey=true)]
-		public User User1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__Package__SenderI__12FDD1B2", Storage="_Sender", ThisKey="SenderID", OtherKey="ID", IsForeignKey=true)]
+		public User Sender
 		{
 			get
 			{
-				return this._User1.Entity;
+				return this._Sender.Entity;
 			}
 			set
 			{
-				User previousValue = this._User1.Entity;
+				User previousValue = this._Sender.Entity;
 				if (((previousValue != value) 
-							|| (this._User1.HasLoadedOrAssignedValue == false)))
+							|| (this._Sender.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._User1.Entity = null;
-						previousValue.Packages1.Remove(this);
+						this._Sender.Entity = null;
+						previousValue._Package__SenderI__12FDD1B2s.Remove(this);
 					}
-					this._User1.Entity = value;
+					this._Sender.Entity = value;
 					if ((value != null))
 					{
-						value.Packages1.Add(this);
+						value._Package__SenderI__12FDD1B2s.Add(this);
 						this._SenderID = value.ID;
 					}
 					else
 					{
 						this._SenderID = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("User1");
+					this.SendPropertyChanged("Sender");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__Package__StatusI__1209AD79", Storage="_Status", ThisKey="StatusID", OtherKey="ID", IsForeignKey=true)]
+		public Status Status
+		{
+			get
+			{
+				return this._Status.Entity;
+			}
+			set
+			{
+				Status previousValue = this._Status.Entity;
+				if (((previousValue != value) 
+							|| (this._Status.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Status.Entity = null;
+						previousValue.Packages.Remove(this);
+					}
+					this._Status.Entity = value;
+					if ((value != null))
+					{
+						value.Packages.Add(this);
+						this._StatusID = value.ID;
+					}
+					else
+					{
+						this._StatusID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Status");
 				}
 			}
 		}
@@ -890,40 +905,9 @@ namespace DeliveryService
 			this.SendPropertyChanging();
 			entity.Package = null;
 		}
-		
-		private void Initialize()
-		{
-			this._Deliveries = new EntitySet<Delivery>(new Action<Delivery>(this.attach_Deliveries), new Action<Delivery>(this.detach_Deliveries));
-			this._Status = default(EntityRef<Status>);
-			this._User = default(EntityRef<User>);
-			this._User1 = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
-		{
-			this.serializing = true;
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
-		{
-			this.serializing = false;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Person")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Person : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -948,8 +932,6 @@ namespace DeliveryService
 		private string _City;
 		
 		private EntitySet<User> _Users;
-		
-		private bool serializing;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -977,11 +959,11 @@ namespace DeliveryService
 		
 		public Person()
 		{
-			this.Initialize();
+			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int ID
 		{
 			get
@@ -1002,7 +984,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Cpr", DbType="VarChar(10)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public string Cpr
 		{
 			get
@@ -1023,7 +1004,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(15)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public string FirstName
 		{
 			get
@@ -1044,7 +1024,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(15)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public string LastName
 		{
 			get
@@ -1065,7 +1044,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhoneNumber", DbType="VarChar(16)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public string PhoneNumber
 		{
 			get
@@ -1086,7 +1064,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(40)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public string Email
 		{
 			get
@@ -1107,7 +1084,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(30)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7)]
 		public string Address
 		{
 			get
@@ -1128,7 +1104,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ZipCode", DbType="VarChar(10)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8)]
 		public string ZipCode
 		{
 			get
@@ -1149,7 +1124,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_City", DbType="VarChar(30)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=9)]
 		public string City
 		{
 			get
@@ -1169,17 +1143,11 @@ namespace DeliveryService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Person_User", Storage="_Users", ThisKey="ID", OtherKey="PersonID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=10, EmitDefaultValue=false)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__User__PersonID__0C50D423", Storage="_Users", ThisKey="ID", OtherKey="PersonID", DeleteRule="NO ACTION")]
 		public EntitySet<User> Users
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._Users.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
 				return this._Users;
 			}
 			set
@@ -1219,37 +1187,9 @@ namespace DeliveryService
 			this.SendPropertyChanging();
 			entity.Person = null;
 		}
-		
-		private void Initialize()
-		{
-			this._Users = new EntitySet<User>(new Action<User>(this.attach_Users), new Action<User>(this.detach_Users));
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
-		{
-			this.serializing = true;
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
-		{
-			this.serializing = false;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Status")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
 	public partial class Status : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1260,8 +1200,6 @@ namespace DeliveryService
 		private string _StatusString;
 		
 		private EntitySet<Package> _Packages;
-		
-		private bool serializing;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1275,11 +1213,11 @@ namespace DeliveryService
 		
 		public Status()
 		{
-			this.Initialize();
+			this._Packages = new EntitySet<Package>(new Action<Package>(this.attach_Packages), new Action<Package>(this.detach_Packages));
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int ID
 		{
 			get
@@ -1300,7 +1238,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusString", DbType="VarChar(20)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public string StatusString
 		{
 			get
@@ -1320,17 +1257,11 @@ namespace DeliveryService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_Package", Storage="_Packages", ThisKey="ID", OtherKey="StatusID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3, EmitDefaultValue=false)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__Package__StatusI__1209AD79", Storage="_Packages", ThisKey="ID", OtherKey="StatusID", DeleteRule="NO ACTION")]
 		public EntitySet<Package> Packages
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._Packages.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
 				return this._Packages;
 			}
 			set
@@ -1370,37 +1301,9 @@ namespace DeliveryService
 			this.SendPropertyChanging();
 			entity.Status = null;
 		}
-		
-		private void Initialize()
-		{
-			this._Packages = new EntitySet<Package>(new Action<Package>(this.attach_Packages), new Action<Package>(this.detach_Packages));
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
-		{
-			this.serializing = true;
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
-		{
-			this.serializing = false;
-		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[User]")]
-	[global::System.Runtime.Serialization.DataContractAttribute()]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.User")]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
@@ -1420,13 +1323,11 @@ namespace DeliveryService
 		
 		private EntitySet<Package> _Packages;
 		
-		private EntitySet<Package> _Packages1;
+		private EntitySet<Package> @__Package__SenderI__12FDD1B2s;
 		
 		private EntityRef<AccountType> _AccountType;
 		
 		private EntityRef<Person> _Person;
-		
-		private bool serializing;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1448,11 +1349,14 @@ namespace DeliveryService
 		
 		public User()
 		{
-			this.Initialize();
+			this._Packages = new EntitySet<Package>(new Action<Package>(this.attach_Packages), new Action<Package>(this.detach_Packages));
+			this.@__Package__SenderI__12FDD1B2s = new EntitySet<Package>(new Action<Package>(this.attach__Package__SenderI__12FDD1B2s), new Action<Package>(this.detach__Package__SenderI__12FDD1B2s));
+			this._AccountType = default(EntityRef<AccountType>);
+			this._Person = default(EntityRef<Person>);
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=1)]
 		public int ID
 		{
 			get
@@ -1473,7 +1377,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PersonID", DbType="Int")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=2)]
 		public System.Nullable<int> PersonID
 		{
 			get
@@ -1498,7 +1401,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AccountTypeID", DbType="Int")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=3)]
 		public System.Nullable<int> AccountTypeID
 		{
 			get
@@ -1523,7 +1425,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(30)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=4)]
 		public string Username
 		{
 			get
@@ -1544,7 +1445,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(100)")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=5)]
 		public string Password
 		{
 			get
@@ -1565,7 +1465,6 @@ namespace DeliveryService
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Points", DbType="Int")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=6)]
 		public System.Nullable<int> Points
 		{
 			get
@@ -1585,17 +1484,11 @@ namespace DeliveryService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Package", Storage="_Packages", ThisKey="ID", OtherKey="CourierID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=7, EmitDefaultValue=false)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__Package__Courier__13F1F5EB", Storage="_Packages", ThisKey="ID", OtherKey="CourierID", DeleteRule="NO ACTION")]
 		public EntitySet<Package> Packages
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._Packages.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
 				return this._Packages;
 			}
 			set
@@ -1604,26 +1497,20 @@ namespace DeliveryService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_Package1", Storage="_Packages1", ThisKey="ID", OtherKey="SenderID")]
-		[global::System.Runtime.Serialization.DataMemberAttribute(Order=8, EmitDefaultValue=false)]
-		public EntitySet<Package> Packages1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__Package__SenderI__12FDD1B2", Storage="__Package__SenderI__12FDD1B2s", ThisKey="ID", OtherKey="SenderID", DeleteRule="NO ACTION")]
+		public EntitySet<Package> _Package__SenderI__12FDD1B2s
 		{
 			get
 			{
-				if ((this.serializing 
-							&& (this._Packages1.HasLoadedOrAssignedValues == false)))
-				{
-					return null;
-				}
-				return this._Packages1;
+				return this.@__Package__SenderI__12FDD1B2s;
 			}
 			set
 			{
-				this._Packages1.Assign(value);
+				this.@__Package__SenderI__12FDD1B2s.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AccountType_User", Storage="_AccountType", ThisKey="AccountTypeID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__User__AccountTyp__0D44F85C", Storage="_AccountType", ThisKey="AccountTypeID", OtherKey="ID", IsForeignKey=true)]
 		public AccountType AccountType
 		{
 			get
@@ -1657,7 +1544,7 @@ namespace DeliveryService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Person_User", Storage="_Person", ThisKey="PersonID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__User__PersonID__0C50D423", Storage="_Person", ThisKey="PersonID", OtherKey="ID", IsForeignKey=true)]
 		public Person Person
 		{
 			get
@@ -1723,46 +1610,16 @@ namespace DeliveryService
 			entity.User = null;
 		}
 		
-		private void attach_Packages1(Package entity)
+		private void attach__Package__SenderI__12FDD1B2s(Package entity)
 		{
 			this.SendPropertyChanging();
-			entity.User1 = this;
+			entity.Sender = this;
 		}
 		
-		private void detach_Packages1(Package entity)
+		private void detach__Package__SenderI__12FDD1B2s(Package entity)
 		{
 			this.SendPropertyChanging();
-			entity.User1 = null;
-		}
-		
-		private void Initialize()
-		{
-			this._Packages = new EntitySet<Package>(new Action<Package>(this.attach_Packages), new Action<Package>(this.detach_Packages));
-			this._Packages1 = new EntitySet<Package>(new Action<Package>(this.attach_Packages1), new Action<Package>(this.detach_Packages1));
-			this._AccountType = default(EntityRef<AccountType>);
-			this._Person = default(EntityRef<Person>);
-			OnCreated();
-		}
-		
-		[global::System.Runtime.Serialization.OnDeserializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnDeserializing(StreamingContext context)
-		{
-			this.Initialize();
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializingAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerializing(StreamingContext context)
-		{
-			this.serializing = true;
-		}
-		
-		[global::System.Runtime.Serialization.OnSerializedAttribute()]
-		[global::System.ComponentModel.EditorBrowsableAttribute(EditorBrowsableState.Never)]
-		public void OnSerialized(StreamingContext context)
-		{
-			this.serializing = false;
+			entity.Sender = null;
 		}
 	}
 }

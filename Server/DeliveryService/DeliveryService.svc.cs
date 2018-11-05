@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DeliveyService;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -16,7 +18,7 @@ namespace DeliveryService
         InstanceContextMode = InstanceContextMode.Single)]
     public class SenderService : ISenderService
     {
-        DataClasses1DataContext db = new DataClasses1DataContext();
+        DataClasses1DataContext db = new DataClasses1DataContext(ConfigurationManager.ConnectionStrings["deliveryCon"].ConnectionString);
         public int AddSender(SenderModel senderObj)
         {
             SenderModel sender = senderObj;
