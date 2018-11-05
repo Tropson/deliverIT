@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Net;
+using System.Web.Mvc;
 using DeliveryService;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using WebClientMVC.Controllers;
+using WebClientMVC.Models;
+using WebClientMVC.SenderServiceReference;
 
 namespace WebClientMVC.Tests.Controllers
 {
@@ -15,8 +19,8 @@ namespace WebClientMVC.Tests.Controllers
         {
           
                 //setup
-                var courierServiceMock = new Mock<ISenderService>();
-                var app = new ApplicationModel {CVPath = cvpath, IDPicturePath = idpicturepath, YellowCardPath = yellowcardpath } : base(cpr, firstName, lastName, phone, email, address, zipCode, city);
+                var courierServiceMock = new Mock<DeliveryService.ISenderService>();
+                var app = new Models.ApplicationModel(cpr, firstName, lastName, phone, email, address, zipCode, city)  { CVPath = cvpath, IDPicturePath = idpicturepath, YellowCardPath = yellowcardpath };
                 
 
                 //senderServiceMock.Setup(x => x.AddSender(senderToService)).Returns(1);
@@ -28,14 +32,11 @@ namespace WebClientMVC.Tests.Controllers
 
                 //assert
                 Assert.AreNotEqual(app, new HttpStatusCodeResult(HttpStatusCode.InternalServerError));
-                //afte
+                
           
         }
 
-        [TestMethod]
-        public void CheckIfDataIsInsertedAndRetrivedFromDB()
-        {
 
-        }
+        
     }
 }
