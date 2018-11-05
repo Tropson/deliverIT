@@ -29,6 +29,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetApplications">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetApplicationsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="GetApplicationsResult" nillable="true" type="q3:ArrayOfApplicationResource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ClearDB">
     <xs:complexType>
       <xs:sequence />
