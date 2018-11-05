@@ -21,6 +21,12 @@ namespace WebClientMVC.SenderServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
         System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.SenderModel sender);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddApplication", ReplyAction="http://tempuri.org/ISenderService/AddApplicationResponse")]
+        int AddApplication(DeliveryService.ApplicationModel application);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddApplication", ReplyAction="http://tempuri.org/ISenderService/AddApplicationResponse")]
+        System.Threading.Tasks.Task<int> AddApplicationAsync(DeliveryService.ApplicationModel application);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ClearDB", ReplyAction="http://tempuri.org/ISenderService/ClearDBResponse")]
         void ClearDB();
         
@@ -61,6 +67,14 @@ namespace WebClientMVC.SenderServiceReference {
         
         public System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.SenderModel sender) {
             return base.Channel.AddSenderAsync(sender);
+        }
+        
+        public int AddApplication(DeliveryService.ApplicationModel application) {
+            return base.Channel.AddApplication(application);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddApplicationAsync(DeliveryService.ApplicationModel application) {
+            return base.Channel.AddApplicationAsync(application);
         }
         
         public void ClearDB() {
