@@ -16,10 +16,10 @@ namespace WebClientMVC.SenderServiceReference {
     public interface ISenderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        int AddSender(DeliveryService.SenderModel sender);
+        int AddSender(DeliveryService.UserModel sender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.SenderModel sender);
+        System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.UserModel sender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddApplication", ReplyAction="http://tempuri.org/ISenderService/AddApplicationResponse")]
         int AddApplication(DeliveryService.ApplicationModel application);
@@ -61,11 +61,11 @@ namespace WebClientMVC.SenderServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public int AddSender(DeliveryService.SenderModel sender) {
+        public int AddSender(DeliveryService.UserModel sender) {
             return base.Channel.AddSender(sender);
         }
         
-        public System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.SenderModel sender) {
+        public System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.UserModel sender) {
             return base.Channel.AddSenderAsync(sender);
         }
         

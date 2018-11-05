@@ -36,7 +36,7 @@ namespace WebClientMVC.Tests.Controllers
             //DeliveryService.SenderModel senderToService = new DeliveryService.SenderModel { AccountType = sender.AccountType, Address = sender.Address, City = sender.City, Cpr = sender.Cpr, Email = sender.Email, FirstName = sender.FirstName, LastName = sender.LastName, Password = sender.Password, PhoneNumber = sender.PhoneNumber, Points = sender.Points, Username = sender.Username, ZipCode = sender.ZipCode });
 
             //senderServiceMock.Setup(x => x.AddSender(senderToService)).Returns(1);
-            senderServiceMock.Setup(x => x.AddSender(It.IsAny<DeliveryService.SenderModel>())).Returns(1);
+            senderServiceMock.Setup(x => x.AddSender(It.IsAny<DeliveryService.UserModel>())).Returns(1);
 
             var sut = new SenderController(senderServiceMock.Object);
 

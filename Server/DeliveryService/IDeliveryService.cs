@@ -14,7 +14,7 @@ namespace DeliveryService
     public interface ISenderService
     {
         [OperationContract]
-        int AddSender(SenderModel sender);
+        int AddSender(UserModel sender);
 
         [OperationContract]
         int AddApplication(ApplicationModel application);
@@ -60,7 +60,7 @@ namespace DeliveryService
 
     [KnownType(typeof(PersonModel))]
     [DataContract(Name = "SenderResource")]
-    public class SenderModel : PersonModel
+    public class UserModel : PersonModel
     {
         [DataMember]
         public string Username { get; set; }

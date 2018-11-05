@@ -19,9 +19,9 @@ namespace DeliveryService
     public class SenderService : ISenderService
     {
         DataClasses1DataContext db = new DataClasses1DataContext(ConfigurationManager.ConnectionStrings["deliveryCon"].ConnectionString);
-        public int AddSender(SenderModel senderObj)
+        public int AddSender(UserModel senderObj)
         {
-            SenderModel sender = senderObj;
+            UserModel sender = senderObj;
             int nextPersonId = 0;
             try {
                 nextPersonId = db.Persons.OrderBy(x => x.ID).ToList().Last().ID + 1;
@@ -139,11 +139,11 @@ namespace DeliveryService
             db.ExecuteCommand("Delete FROM Person");
             db.ExecuteCommand("DBCC CHECKIDENT ('Person', RESEED, 1);");
         }
-        public SenderModel getSenderByCpr(string cpr)
+        public UserModel getSenderByCpr(string cpr)
         {
             var sender = db.Users.Single(x => x.Person.Cpr == cpr);
             var person = db.Persons.Single(x => x.Cpr == cpr);
-            SenderModel mySender = new SenderModel
+            UserModel mySender = new UserModel
             {
                 FirstName = person.FirstName,
                 LastName = person.LastName,
