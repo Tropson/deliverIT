@@ -15,8 +15,6 @@ namespace WebClientMVC.Models
         public virtual string Address { get; set; }
         public virtual string ZipCode { get; set; }
         public virtual string City { get; set; }
-        public string CVPath { get; set; }
-        public string IDPicturePath { get; set; }
-        public string YellowCardPath { get; set; }
+        public virtual HttpPostedFileBase[] files { get; set; }
     }
 }

@@ -37,16 +37,16 @@ namespace WebClientMVC.Controllers
 
         // POST: Application/Create
         [HttpPost]
-        public ActionResult Create(Models.ApplicationModel app, HttpPostedFileBase[] file)
+        public ActionResult Create(Models.ApplicationModel app)
         {
 
             try
             {
                 if (!ModelState.IsValid)
                     return View("Create",app);
-                string cv = file[0].FileName;
-                string idpic = file[1].FileName;
-                string yellow = file[2].FileName;
+                string cv = app.files[0].FileName;
+                string idpic = app.files[1].FileName;
+                string yellow = app.files[2].FileName;
                 _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber,  ZipCode = app.ZipCode, CVPath=cv,IDPicturePath=idpic,YellowCardPath=yellow});
                 return RedirectToAction("Create");
             }
