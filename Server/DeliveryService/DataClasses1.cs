@@ -264,6 +264,8 @@ namespace DeliveyService
 		
 		private int _ID;
 		
+		private string _Guid;
+		
 		private EntityRef<Person> _Person;
 		
     #region Extensibility Method Definitions
@@ -280,6 +282,8 @@ namespace DeliveyService
     partial void OnYellowCardPathChanged();
     partial void OnIDChanging(int value);
     partial void OnIDChanged();
+    partial void OnGuidChanging(string value);
+    partial void OnGuidChanged();
     #endregion
 		
 		public Application()
@@ -388,6 +392,26 @@ namespace DeliveyService
 					this._ID = value;
 					this.SendPropertyChanged("ID");
 					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="guid", Storage="_Guid", DbType="VarChar(60)")]
+		public string Guid
+		{
+			get
+			{
+				return this._Guid;
+			}
+			set
+			{
+				if ((this._Guid != value))
+				{
+					this.OnGuidChanging(value);
+					this.SendPropertyChanging();
+					this._Guid = value;
+					this.SendPropertyChanged("Guid");
+					this.OnGuidChanged();
 				}
 			}
 		}
