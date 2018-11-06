@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WebClientMVC.SenderServiceReference;
 using System.Web.Mvc;
+using Limilabs.FTP.Client;
 using System.Net;
 
 
@@ -48,7 +49,10 @@ namespace WebClientMVC.Controllers
                 string idpic = app.files[1].FileName;
                 string yellow = app.files[2].FileName;
                 var guid = Guid.NewGuid().ToString();
-                _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber,  ZipCode = app.ZipCode, CVPath=cv,IDPicturePath=idpic,YellowCardPath=yellow,GuidLine=guid});
+                Ftp client = new Ftp();
+                client.Connect("ftp.example.com");
+
+                _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
                 return RedirectToAction("Create");
             }
             catch
