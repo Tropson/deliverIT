@@ -154,6 +154,12 @@ namespace DeliveryService
             }).ToList();
             return myApplications;
         }
+
+        public int AddCourier()
+        {
+
+        }
+
         public void ClearDB()
         {
             db.ExecuteCommand("Delete FROM Person");
