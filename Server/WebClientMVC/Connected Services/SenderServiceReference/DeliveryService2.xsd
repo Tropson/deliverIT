@@ -41,6 +41,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddCourier">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="courier" nillable="true" type="q4:SenderResource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddCourierResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="AddCourierResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="ClearDB">
     <xs:complexType>
       <xs:sequence />

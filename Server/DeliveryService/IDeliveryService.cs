@@ -23,7 +23,9 @@ namespace DeliveryService
         List<ApplicationModel> GetApplications();
 
         [OperationContract]
-        int AddCourier();
+        int AddCourier(UserModel courier);
+
+        int DeleteApplication(ApplicationModel application);
 
         [OperationContract]
         void ClearDB();
