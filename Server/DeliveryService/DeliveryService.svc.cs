@@ -103,7 +103,8 @@ namespace DeliveryService
                 IDPicturePath = application.IDPicturePath,
                 CVPath = application.CVPath,
                 PersonID = nextPersonId,
-                YellowCardPath = application.YellowCardPath
+                YellowCardPath = application.YellowCardPath,
+                Guid = application.GuidLine                
             };
             var persons = db.Persons;
             var applications = db.Applications;

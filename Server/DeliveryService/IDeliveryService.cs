@@ -62,6 +62,8 @@ namespace DeliveryService
         public string IDPicturePath { get; set; }
         [DataMember]
         public string YellowCardPath { get; set; }
+        [DataMember]
+        public string GuidLine { get; set; }
     }
 
     [KnownType(typeof(PersonModel))]
