@@ -62,17 +62,19 @@ namespace WebClientMVC.Controllers
 
                 MailMessage mail = new MailMessage("piotr.gzubicki97@gmail.com", app.Email);
                 SmtpClient mailClient = new SmtpClient();
-                mailClient.Port = 25;
+                mailClient.Port = 587;
                 mailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                mailClient.UseDefaultCredentials = false;
+                mailClient.Credentials = new NetworkCredential("tropson90@gmail.com", "gtavcsa45");
                 mailClient.Host = "smtp.gmail.com";
+                mailClient.EnableSsl = true;
                 mail.Subject = "Your application has been sent!";
                 mail.Body = "We got your application. Wait for the admin to accpet you.";
+                
                 mailClient.Send(mail);
 
                 return RedirectToAction("Create");
             }
-            catch
+            catch(Exception e)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
