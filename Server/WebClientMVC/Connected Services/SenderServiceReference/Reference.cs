@@ -33,6 +33,12 @@ namespace WebClientMVC.SenderServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetApplications", ReplyAction="http://tempuri.org/ISenderService/GetApplicationsResponse")]
         System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetApplicationsAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddCourier", ReplyAction="http://tempuri.org/ISenderService/AddCourierResponse")]
+        int AddCourier(DeliveryService.UserModel courier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddCourier", ReplyAction="http://tempuri.org/ISenderService/AddCourierResponse")]
+        System.Threading.Tasks.Task<int> AddCourierAsync(DeliveryService.UserModel courier);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ClearDB", ReplyAction="http://tempuri.org/ISenderService/ClearDBResponse")]
         void ClearDB();
         
@@ -89,6 +95,14 @@ namespace WebClientMVC.SenderServiceReference {
         
         public System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetApplicationsAsync() {
             return base.Channel.GetApplicationsAsync();
+        }
+        
+        public int AddCourier(DeliveryService.UserModel courier) {
+            return base.Channel.AddCourier(courier);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddCourierAsync(DeliveryService.UserModel courier) {
+            return base.Channel.AddCourierAsync(courier);
         }
         
         public void ClearDB() {

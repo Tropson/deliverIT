@@ -32,6 +32,7 @@
       <xs:extension base="tns:PersonResource">
         <xs:sequence>
           <xs:element minOccurs="0" name="CVPath" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="GuidLine" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="IDPicturePath" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="YellowCardPath" nillable="true" type="xs:string" />
         </xs:sequence>

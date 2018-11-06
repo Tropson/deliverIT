@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DeliveryService;
+using AccountTypeEnum = WebClientMVC.Models.AccountTypeEnum;
+using System.Web.Security;
+using System.Net;
 
 namespace WebClientMVC.Controllers
 {
@@ -49,17 +52,16 @@ namespace WebClientMVC.Controllers
                 if (!ModelState.IsValid)
                     return View("Create", app);
 
-                string cv = app.files[0].FileName;
-                string idpic = app.files[1].FileName;
-                string yellow = app.files[2].FileName;
-                _proxy.AddCourier();
+                string generPassword = Membership.GeneratePassword(6, 2);
+                SenderModel courier = new SenderModel(app.Cpr, app.FirstName, app.LastName, app.PhoneNumber, app.Email, app.Address, app.ZipCode, app.City) { AccountType = (int)AccountTypeEnum.COURIER, Points = 0 };
+                _proxy.AddCourier(new DeliveryService.UserModel {AccountType= courier.AccountType, Address=courier.Address,City=courier.City,ZipCode=courier.ZipCode,Cpr=courier.Cpr,Email=courier.Email,FirstName=courier.FirstName,LastName=courier.LastName,PhoneNumber=courier.PhoneNumber,Points=courier.Points,Username=courier.Email, Password=generPassword});
                     //new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow });
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
 

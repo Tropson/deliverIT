@@ -156,10 +156,67 @@ namespace DeliveryService
             return myApplications;
         }
 
-        public int AddCourier()
+        public int AddCourier(UserModel courierObj)
         {
-
+            UserModel courier = courierObj;
+            int nextPersonId = 0;
+            try
+            {
+                nextPersonId = db.Persons.OrderBy(x => x.ID).ToList().Last().ID + 1;
+            }
+            catch (Exception e)
+            {
+                nextPersonId = 1;
+            }
+            Person person = new Person
+            {
+                Cpr = courier.Cpr,
+                FirstName = courier.FirstName,
+                LastName = courier.LastName,
+                PhoneNumber = courier.PhoneNumber,
+                Email = courier.Email,
+                Address = courier.Address,
+                ZipCode = courier.ZipCode,
+                City = courier.City
+            };
+            User user = new User
+            {
+                Username = courier.Username,
+                Password = courier.Password,
+                Points = courier.Points,
+                AccountTypeID = courier.AccountType,
+                PersonID = nextPersonId
+            };
+            var senders = db.Persons;
+            var users = db.Users;
+            senders.InsertOnSubmit(person);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+            Task.Delay(1000);
+            db.Connection.Close();
+            users.InsertOnSubmit(user);
+            try
+            {
+                db.Connection.Open();
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+            finally
+            {
+                db.Connection.Close();
+            }
+            return 1;
         }
+    
 
         public void ClearDB()
         {

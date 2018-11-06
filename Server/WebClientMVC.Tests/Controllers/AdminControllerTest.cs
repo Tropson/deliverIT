@@ -8,6 +8,7 @@ using System.Linq;
 using WebClientMVC.Controllers;
 using WebClientMVC.Models;
 using System.Web;
+using System.Net;
 
 namespace WebClientMVC.Tests.Controllers
 {
@@ -32,6 +33,28 @@ namespace WebClientMVC.Tests.Controllers
 
         }
 
+
+        [DataRow("2611982375", "David", "Szoke", "91933260", "tropson90@gmail.com", "Fredensgade 7, 2st", "9000", "Aalborg")]
+        [TestMethod]
+        public void AddCourierTest(string cpr, string firstName, string lastName, string phone, string email, string address, string zipCode, string city)
+        {
+            //setup
+            var senderServiceMock = new Mock<ISenderService>();
+            var app = new Models.ApplicationModel { Address = address, City = city, Cpr = cpr, Email = email, FirstName = firstName, LastName = lastName, PhoneNumber = phone, ZipCode = zipCode };
+            
+
+            senderServiceMock.Setup(x => x.AddSender(It.IsAny<DeliveryService.UserModel>())).Returns(1);
+
+            var sut = new AdminController(senderServiceMock.Object);
+
+            var res = sut.CreateOnAccept(app);
+
+            //assert
+            Assert.AreNotEqual(res, new HttpStatusCodeResult(HttpStatusCode.InternalServerError));
+            //afte
+        }
+
+
         //TODO : This freaking test idk how to even start it kurwa
 
         //[TestMethod]
@@ -53,7 +76,7 @@ namespace WebClientMVC.Tests.Controllers
         //    serviceStub.Verify(x => x.AcceptCourier(It.IsAny<Models.ApplicationModel>(), Times.Once()));
 
         //    Assert.IsTrue(app.Address == "Mock address" && app.City == "Mock City" && app.Cpr == "Mock Cpr" && app.Email == "Mock Email" && app.FirstName == "Mock First name" && app.LastName == "Mock Last Name" && app.PhoneNumber == "Mock PhoneNumber" && app.ZipCode == "Mock Zip Code");
-            
+
 
         //}
     }
