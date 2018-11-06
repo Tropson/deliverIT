@@ -46,7 +46,14 @@ namespace WebClientMVC.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                if (!ModelState.IsValid)
+                    return View("Create", app);
+
+                string cv = app.files[0].FileName;
+                string idpic = app.files[1].FileName;
+                string yellow = app.files[2].FileName;
+                _proxy.AddCourier();
+                    //new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow });
 
                 return RedirectToAction("Index");
             }
