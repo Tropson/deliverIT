@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
@@ -133,6 +135,19 @@ namespace DeliveryService
             {
                 db.Connection.Close();
             }
+
+            MailMessage mail = new MailMessage("deliveritassociation@gmail.com", application.Email);
+            SmtpClient client = new SmtpClient();
+            client.Port = 587;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
+            client.Host = "smtp.gmail.com";
+            client.EnableSsl = true;
+            mail.Subject = "We got your application!";
+            mail.Body = "We got your application. If your personal data is valid our admin will accept you in the near future!";
+            client.Send(mail);
+
             return 1;
         }
 
@@ -214,6 +229,18 @@ namespace DeliveryService
             {
                 db.Connection.Close();
             }
+
+            MailMessage mail = new MailMessage("deliveritassociation@gmail.com", courier.Email);
+            SmtpClient client = new SmtpClient();
+            client.Port = 587;
+            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
+            client.Host = "smtp.gmail.com";
+            mail.Subject = "You are accepted as a courier!";
+            mail.Body = "Our admin acceperd you. You can log in and star deliver like maniac!";
+            client.Send(mail);
+
+
             return 1;
         }
 
