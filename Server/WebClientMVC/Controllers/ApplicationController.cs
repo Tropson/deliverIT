@@ -6,7 +6,8 @@ using WebClientMVC.SenderServiceReference;
 using System.Web.Mvc;
 using Limilabs.FTP.Client;
 using System.Net;
-
+using System.IO;
+using System.Text;
 
 namespace WebClientMVC.Controllers
 {
@@ -50,8 +51,12 @@ namespace WebClientMVC.Controllers
                 string yellow = app.files[2].FileName;
                 var guid = Guid.NewGuid().ToString();
                 Ftp client = new Ftp();
-                client.Connect("ftp.example.com");
-
+                client.Connect("files.000webhost.com");
+                client.Login("tropson", "GTAvcsa345");
+                client.CreateFolder("public_html/Files/" + guid);
+                client.Upload($"public_html/Files/{guid}/{cv}", app.files[0].InputStream);
+                client.Upload($"public_html/Files/{guid}/{idpic}", app.files[1].InputStream);
+                client.Upload($"public_html/Files/{guid}/{yellow}", app.files[2].InputStream);
                 _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
                 return RedirectToAction("Create");
             }
@@ -104,5 +109,10 @@ namespace WebClientMVC.Controllers
                 return View();
             }
         }
+       
+    }
+    public static class Methods
+    {
+        
     }
 }
