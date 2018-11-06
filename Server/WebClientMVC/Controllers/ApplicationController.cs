@@ -47,7 +47,8 @@ namespace WebClientMVC.Controllers
                 string cv = app.files[0].FileName;
                 string idpic = app.files[1].FileName;
                 string yellow = app.files[2].FileName;
-                _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber,  ZipCode = app.ZipCode, CVPath=cv,IDPicturePath=idpic,YellowCardPath=yellow});
+                var guid = Guid.NewGuid().ToString();
+                _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber,  ZipCode = app.ZipCode, CVPath=cv,IDPicturePath=idpic,YellowCardPath=yellow,GuidLine=guid});
                 return RedirectToAction("Create");
             }
             catch
