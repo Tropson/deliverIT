@@ -57,7 +57,7 @@ namespace DeliveryService
             {
                 return 0;
             }
-            Task.Delay(1000);
+            
             db.Connection.Close();
             users.InsertOnSubmit(user);
             try
@@ -117,7 +117,7 @@ namespace DeliveryService
             {
                 return 0;
             }
-            Task.Delay(1000);
+            
             db.Connection.Close();
             applications.InsertOnSubmit(myApplication);
             try
@@ -198,7 +198,7 @@ namespace DeliveryService
             {
                 return 0;
             }
-            Task.Delay(1000);
+            
             db.Connection.Close();
             users.InsertOnSubmit(user);
             try
@@ -215,6 +215,44 @@ namespace DeliveryService
                 db.Connection.Close();
             }
             return 1;
+        }
+
+        public int DeleteApplication(ApplicationModel app)
+        {
+            Person personToDelete = db.Persons.Single(x => x.Cpr == app.Cpr);
+            Application applicationToDelete = db.Applications.Single(x => x.PersonID == personToDelete.ID);
+
+            var persons = db.Persons;
+            var applications = db.Applications;
+
+            applications.DeleteOnSubmit(applicationToDelete);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+
+            persons.DeleteOnSubmit(personToDelete);
+
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+
+            finally
+            {
+                db.Connection.Close();
+            }
+
+            return 1;
+
         }
     
 

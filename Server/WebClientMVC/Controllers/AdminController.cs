@@ -65,6 +65,25 @@ namespace WebClientMVC.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult DelteWhenDecline(Models.ApplicationModel app)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                    return View("Create", app);
+
+                
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+
+        }
+
         // GET: Admin/Edit/5
         public ActionResult Edit(int id)
         {
