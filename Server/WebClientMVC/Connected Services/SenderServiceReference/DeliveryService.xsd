@@ -39,4 +39,10 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ApplicationResource" nillable="true" type="tns:ApplicationResource" />
+  <xs:complexType name="ArrayOfApplicationResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ApplicationResource" nillable="true" type="tns:ApplicationResource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfApplicationResource" nillable="true" type="tns:ArrayOfApplicationResource" />
 </xs:schema>
