@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DeliveryService;
+using Limilabs.FTP.Client;
+using System.IO;
 
 namespace WebClientMVC.Controllers
 {
@@ -21,8 +23,49 @@ namespace WebClientMVC.Controllers
         //TODO : NEED TO BE REVISED BECAUSE OF THE HTTTP FILES LIST 
         public ActionResult Index()
         {
-            List<DeliveryService.ApplicationModel> list = _proxy.GetApplications();
-            var cvFtp =Guid.NewGuid()+ "\\" + list[0].CVPath;
+            List<Models.ApplicationModel> list = _proxy.GetApplications().Select(x => new Models.ApplicationModel {
+                Address = x.Address,
+                City = x.City,
+                Cpr = x.Cpr,
+                Email = x.Email,
+                GuidLine = x.GuidLine,
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                PhoneNumber = x.PhoneNumber,
+                ZipCode = x.ZipCode,
+                files = new HttpPostedFileBase[3]
+            }).ToList();
+            Ftp client = new Ftp();
+            client.Connect("files.000webhost.com");
+            client.Login("tropson", "GTAvcsa345");
+            foreach (var a in list)
+            {
+                var guid = a.GuidLine;
+                string cvName = _proxy.GetApplications().SingleOrDefault(x => x.Cpr == a.Cpr).CVPath;
+                string idName = _proxy.GetApplications().SingleOrDefault(x => x.Cpr == a.Cpr).IDPicturePath;
+                string yellowName = _proxy.GetApplications().SingleOrDefault(x => x.Cpr == a.Cpr).YellowCardPath;
+                if (client.FolderExists($"/public_html/Files/{guid}"))
+                {
+                    byte[] streamCv = client.Download($"/public_html/Files/{guid}/{cvName}");
+                    if (streamCv.Length == 0)
+                    {
+                        streamCv = client.Download($"/public_html/Files/{guid}/FtpTrial-{cvName}");
+                    }
+                    a.files[0] = new MemoryPostedFile(streamCv,cvName);
+                    byte[] streamID = client.Download($"/public_html/Files/{guid}/{idName}");
+                    if (streamID.Length == 0)
+                    {
+                        streamID = client.Download($"/public_html/Files/{guid}/FtpTrial-{cvName}");
+                    }
+                    a.files[1] = new MemoryPostedFile(streamID,cvName);
+                    byte[] streamYellow = client.Download($"/public_html/Files/{guid}/{yellowName}");
+                    if (streamID.Length == 0)
+                    {
+                        streamID = client.Download($"/public_html/Files/{guid}/FtpTrial-{cvName}");
+                    }
+                    a.files[2] = new MemoryPostedFile(streamYellow,cvName);
+                }
+            }
             IEnumerable<Models.ApplicationModel> applications = list.Select(x => new Models.ApplicationModel { Cpr = x.Cpr, FirstName = x.FirstName, LastName = x.LastName, PhoneNumber = x.PhoneNumber, Email = x.Email, Address = x.Address, ZipCode = x.ZipCode, City = x.City, files = new HttpPostedFileBase[3] });
 
             return View(applications);
@@ -105,6 +148,23 @@ namespace WebClientMVC.Controllers
             {
                 return View();
             }
+        }
+        public class MemoryPostedFile : HttpPostedFileBase
+        {
+            private readonly byte[] fileBytes;
+
+            public MemoryPostedFile(byte[] fileBytes, string fileName)
+            {
+                this.fileBytes = fileBytes;
+                this.FileName = fileName;
+                this.InputStream = new MemoryStream(fileBytes);
+            }
+
+            public override int ContentLength => fileBytes.Length;
+
+            public override string FileName { get; }
+
+            public override Stream InputStream { get; }
         }
     }
 }
