@@ -8,6 +8,7 @@ using DeliveryService;
 using AccountTypeEnum = WebClientMVC.Models.AccountTypeEnum;
 using System.Web.Security;
 using System.Net;
+using System.Net.Mail;
 
 namespace WebClientMVC.Controllers
 {
@@ -55,7 +56,16 @@ namespace WebClientMVC.Controllers
                 string generPassword = Membership.GeneratePassword(6, 2);
                 SenderModel courier = new SenderModel(app.Cpr, app.FirstName, app.LastName, app.PhoneNumber, app.Email, app.Address, app.ZipCode, app.City) { AccountType = (int)AccountTypeEnum.COURIER, Points = 0 };
                 _proxy.AddCourier(new DeliveryService.UserModel {AccountType= courier.AccountType, Address=courier.Address,City=courier.City,ZipCode=courier.ZipCode,Cpr=courier.Cpr,Email=courier.Email,FirstName=courier.FirstName,LastName=courier.LastName,PhoneNumber=courier.PhoneNumber,Points=courier.Points,Username=courier.Email, Password=generPassword});
-                    //new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow });
+
+                MailMessage mail = new MailMessage("piotr.gzubicki97@gmail.com", app.Email);
+                SmtpClient client = new SmtpClient();
+                client.Port = 25;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Host = "smtp.gmail.com";
+                mail.Subject = "You are accepted as a courier!";
+                mail.Body = "Our admin acceperd you. You can log in and star deliver like maniac!";
+                client.Send(mail);
 
                 return RedirectToAction("Index");
             }

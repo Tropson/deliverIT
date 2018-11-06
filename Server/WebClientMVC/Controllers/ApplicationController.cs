@@ -8,6 +8,7 @@ using Limilabs.FTP.Client;
 using System.Net;
 using System.IO;
 using System.Text;
+using System.Net.Mail;
 
 namespace WebClientMVC.Controllers
 {
@@ -58,6 +59,17 @@ namespace WebClientMVC.Controllers
                 client.Upload($"public_html/Files/{guid}/{idpic}", app.files[1].InputStream);
                 client.Upload($"public_html/Files/{guid}/{yellow}", app.files[2].InputStream);
                 _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
+
+                MailMessage mail = new MailMessage("piotr.gzubicki97@gmail.com", app.Email);
+                SmtpClient mailClient = new SmtpClient();
+                mailClient.Port = 25;
+                mailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                mailClient.UseDefaultCredentials = false;
+                mailClient.Host = "smtp.gmail.com";
+                mail.Subject = "Your application has been sent!";
+                mail.Body = "We got your application. Wait for the admin to accpet you.";
+                mailClient.Send(mail);
+
                 return RedirectToAction("Create");
             }
             catch
