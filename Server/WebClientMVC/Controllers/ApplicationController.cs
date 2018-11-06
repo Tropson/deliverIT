@@ -4,12 +4,11 @@ using System.Linq;
 using System.Web;
 using WebClientMVC.SenderServiceReference;
 using System.Web.Mvc;
-using Limilabs.FTP.Client;
 using System.Net;
 using System.IO;
 using System.Text;
 using System.Net.Mail;
-
+using FluentFTP;
 namespace WebClientMVC.Controllers
 {
     public class ApplicationController : Controller
@@ -51,28 +50,17 @@ namespace WebClientMVC.Controllers
                 string idpic = app.files[1].FileName;
                 string yellow = app.files[2].FileName;
                 var guid = Guid.NewGuid().ToString();
-                Ftp client = new Ftp();
-                client.Connect("files.000webhost.com");
-                client.Login("tropson", "GTAvcsa345");
-                client.CreateFolder("public_html/Files/" + guid);
-                client.Upload($"public_html/Files/{guid}/{cv}", app.files[0].InputStream);
-                client.Upload($"public_html/Files/{guid}/{idpic}", app.files[1].InputStream);
-                client.Upload($"public_html/Files/{guid}/{yellow}", app.files[2].InputStream);
+                FtpClient client = new FtpClient("files.000webhost.com");
+                client.Credentials = new NetworkCredential("tropson", "GTAvcsa345");
+                client.Connect();
+                client.CreateDirectory($"public_html/Files/{guid}");
+                client.Upload(app.files[0].InputStream, $"public_html/Files/{guid}/{cv}");
+                client.Upload(app.files[1].InputStream, $"public_html/Files/{guid}/{idpic}");
+                client.Upload(app.files[2].InputStream, $"public_html/Files/{guid}/{yellow}");
                 _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
-
-                MailMessage mail = new MailMessage("piotr.gzubicki97@gmail.com", app.Email);
-                SmtpClient mailClient = new SmtpClient();
-                mailClient.Port = 25;
-                mailClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                mailClient.UseDefaultCredentials = false;
-                mailClient.Host = "smtp.gmail.com";
-                mail.Subject = "Your application has been sent!";
-                mail.Body = "We got your application. Wait for the admin to accpet you.";
-                mailClient.Send(mail);
-
                 return RedirectToAction("Create");
             }
-            catch
+            catch(Exception e)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
