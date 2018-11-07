@@ -19,11 +19,11 @@
   <wsdl:message name="ISenderService_AddApplication_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddApplicationResponse" />
   </wsdl:message>
-  <wsdl:message name="ISenderService_GetApplications_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetApplications" />
+  <wsdl:message name="ISenderService_GetAllApplications_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApplications" />
   </wsdl:message>
-  <wsdl:message name="ISenderService_GetApplications_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetApplicationsResponse" />
+  <wsdl:message name="ISenderService_GetAllApplications_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApplicationsResponse" />
   </wsdl:message>
   <wsdl:message name="ISenderService_AddCourier_InputMessage">
     <wsdl:part name="parameters" element="tns:AddCourier" />
@@ -46,9 +46,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddApplication" message="tns:ISenderService_AddApplication_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/AddApplicationResponse" message="tns:ISenderService_AddApplication_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetApplications">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetApplications" message="tns:ISenderService_GetApplications_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetApplicationsResponse" message="tns:ISenderService_GetApplications_OutputMessage" />
+    <wsdl:operation name="GetAllApplications">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetAllApplications" message="tns:ISenderService_GetAllApplications_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetAllApplicationsResponse" message="tns:ISenderService_GetAllApplications_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddCourier">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddCourier" message="tns:ISenderService_AddCourier_InputMessage" />
@@ -79,8 +79,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetApplications">
-      <soap:operation soapAction="http://tempuri.org/ISenderService/GetApplications" style="document" />
+    <wsdl:operation name="GetAllApplications">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/GetAllApplications" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

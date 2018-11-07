@@ -151,7 +151,7 @@ namespace DeliveryService
             return 1;
         }
 
-        public List<ApplicationModel> GetApplications()
+        public ApplicationModel[] GetAllApplications()
         {
             var applications = db.Applications.ToList();
             var myApplications = applications.Select(x => new ApplicationModel
@@ -167,7 +167,7 @@ namespace DeliveryService
                 PhoneNumber = x.Person.PhoneNumber,
                 YellowCardPath = x.YellowCardPath,
                 ZipCode = x.Person.ZipCode
-            }).ToList();
+            }).ToArray();
             return myApplications;
         }
 

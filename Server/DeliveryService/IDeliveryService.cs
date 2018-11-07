@@ -20,7 +20,7 @@ namespace DeliveryService
         int AddApplication(ApplicationModel application);
 
         [OperationContract]
-        List<ApplicationModel> GetApplications();
+        ApplicationModel[] GetAllApplications();
 
         [OperationContract]
         int AddCourier(UserModel courier);

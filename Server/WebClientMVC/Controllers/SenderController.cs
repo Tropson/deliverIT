@@ -5,7 +5,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebClientMVC.Models;
-using WebClientMVC.SenderServiceReference;
+using WebClientMVC.SenderServiceReference1;
 using System.Runtime.Serialization;
 
 namespace WebClientMVC.Controllers

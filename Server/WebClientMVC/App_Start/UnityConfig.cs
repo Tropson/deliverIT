@@ -1,7 +1,7 @@
 using System.Web.Mvc;
 using Unity;
 using Unity.Mvc5;
-using WebClientMVC.SenderServiceReference;
+using WebClientMVC.SenderServiceReference1;
 using Unity.Injection;
 
 namespace WebClientMVC

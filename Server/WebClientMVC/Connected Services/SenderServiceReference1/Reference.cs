@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebClientMVC.SenderServiceReference {
+namespace WebClientMVC.SenderServiceReference1 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SenderServiceReference.ISenderService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SenderServiceReference1.ISenderService")]
     public interface ISenderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
@@ -27,11 +27,11 @@ namespace WebClientMVC.SenderServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddApplication", ReplyAction="http://tempuri.org/ISenderService/AddApplicationResponse")]
         System.Threading.Tasks.Task<int> AddApplicationAsync(DeliveryService.ApplicationModel application);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetApplications", ReplyAction="http://tempuri.org/ISenderService/GetApplicationsResponse")]
-        DeliveryService.ApplicationModel[] GetApplications();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllApplications", ReplyAction="http://tempuri.org/ISenderService/GetAllApplicationsResponse")]
+        DeliveryService.ApplicationModel[] GetAllApplications();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetApplications", ReplyAction="http://tempuri.org/ISenderService/GetApplicationsResponse")]
-        System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetApplicationsAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllApplications", ReplyAction="http://tempuri.org/ISenderService/GetAllApplicationsResponse")]
+        System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetAllApplicationsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddCourier", ReplyAction="http://tempuri.org/ISenderService/AddCourierResponse")]
         int AddCourier(DeliveryService.UserModel courier);
@@ -47,12 +47,12 @@ namespace WebClientMVC.SenderServiceReference {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISenderServiceChannel : WebClientMVC.SenderServiceReference.ISenderService, System.ServiceModel.IClientChannel {
+    public interface ISenderServiceChannel : WebClientMVC.SenderServiceReference1.ISenderService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SenderServiceClient : System.ServiceModel.ClientBase<WebClientMVC.SenderServiceReference.ISenderService>, WebClientMVC.SenderServiceReference.ISenderService {
+    public partial class SenderServiceClient : System.ServiceModel.ClientBase<WebClientMVC.SenderServiceReference1.ISenderService>, WebClientMVC.SenderServiceReference1.ISenderService {
         
         public SenderServiceClient() {
         }
@@ -89,12 +89,12 @@ namespace WebClientMVC.SenderServiceReference {
             return base.Channel.AddApplicationAsync(application);
         }
         
-        public DeliveryService.ApplicationModel[] GetApplications() {
-            return base.Channel.GetApplications();
+        public DeliveryService.ApplicationModel[] GetAllApplications() {
+            return base.Channel.GetAllApplications();
         }
         
-        public System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetApplicationsAsync() {
-            return base.Channel.GetApplicationsAsync();
+        public System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetAllApplicationsAsync() {
+            return base.Channel.GetAllApplicationsAsync();
         }
         
         public int AddCourier(DeliveryService.UserModel courier) {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using DeliveryService;
+using WebClientMVC.SenderServiceReference1;
 using AccountTypeEnum = WebClientMVC.Models.AccountTypeEnum;
 using System.Web.Security;
 using System.Net;
@@ -15,7 +15,7 @@ namespace WebClientMVC.Controllers
     public class AdminController : Controller
     {
 
-        private readonly ISenderService _proxy;
+        public readonly ISenderService _proxy;
 
         public AdminController(ISenderService proxy)
         {
@@ -25,9 +25,8 @@ namespace WebClientMVC.Controllers
         //TODO : NEED TO BE REVISED BECAUSE OF THE HTTTP FILES LIST 
         public ActionResult Index()
         {
-            List<DeliveryService.ApplicationModel> list = _proxy.GetApplications();
+            DeliveryService.ApplicationModel[] list = _proxy.GetAllApplications();
             IEnumerable<Models.ApplicationModel> applications = list.Select(x => new Models.ApplicationModel { Cpr = x.Cpr, FirstName = x.FirstName, LastName = x.LastName, PhoneNumber = x.PhoneNumber, Email = x.Email, Address = x.Address, ZipCode = x.ZipCode, City = x.City, files = new HttpPostedFileBase[3] });
-
             return View(applications);
         }
 
