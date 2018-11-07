@@ -57,13 +57,13 @@ namespace WebClientMVC.Controllers
 
         // POST: Admin/Create
         [HttpPost]
-        public ActionResult CreateOnAccept(Models.ApplicationModel app)
+        public ActionResult CreateOnAccept(string Cpr)
         {
             try
             {
                 if (!ModelState.IsValid)
-                    return View("Create", app);
-
+                    return View("Index");
+                var app = _proxy.GetAllApplications().SingleOrDefault(x => x.Cpr == Cpr);
                 string generPassword = Membership.GeneratePassword(6, 2);
                 SenderModel courier = new SenderModel(app.Cpr, app.FirstName, app.LastName, app.PhoneNumber, app.Email, app.Address, app.ZipCode, app.City) { AccountType = (int)AccountTypeEnum.COURIER, Points = 0 };
                 _proxy.AddCourier(new DeliveryService.UserModel {AccountType= courier.AccountType, Address=courier.Address,City=courier.City,ZipCode=courier.ZipCode,Cpr=courier.Cpr,Email=courier.Email,FirstName=courier.FirstName,LastName=courier.LastName,PhoneNumber=courier.PhoneNumber,Points=courier.Points,Username=courier.Email, Password=generPassword});

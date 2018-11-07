@@ -30,8 +30,8 @@ namespace WebClientMVC.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            var users = _proxy.getUsers();
-           
+            //var users = _proxy.getUsers();
+            return View();
         }
 
         // GET: Sender/Details/5

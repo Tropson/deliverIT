@@ -43,7 +43,6 @@ namespace WebClientMVC.Models
 
         [Required(ErrorMessage ="This field is required")]
         public virtual HttpPostedFileBase[] files { get; set; }
-
         public virtual string GuidLine { get; set; }
         public virtual string cv { get; set; }
         public virtual string idcard { get; set; }

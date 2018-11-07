@@ -36,6 +36,8 @@
                         <td>@Html.ActionLink(app.cv.Substring(0,app.cv.Length>15?15:app.cv.Length) + (app.cv.Length>15 ?"...":""), "Download",new { guid=app.GuidLine,file=app.cv})</td>
                         <td>@Html.ActionLink(app.idcard.Substring(0, app.idcard.Length > 15 ? 15 : app.idcard.Length) + (app.idcard.Length > 15 ? "..." : ""), "Download/", new { guid = app.GuidLine, file = app.idcard })</td>
                         <td>@Html.ActionLink(app.yellow.Substring(0, app.yellow.Length > 15 ? 15 : app.yellow.Length) + (app.yellow.Length > 15 ? "..." : ""), "Download", new { guid = app.GuidLine, file = app.yellow })</td>
+                        <td>@Html.ActionLink("Accept", "CreateOnAccept", new {Cpr=app.Cpr}, new { @class = "btn btn-success" })</td>
+                        <td>@Html.ActionLink("Decline", "DeleteOnDecline", new {Cpr=app.Cpr},new { @class="btn btn-danger"})</td>
                 </tr>
 
             }
