@@ -25,6 +25,15 @@ namespace WebClientMVC.Controllers
             return View();
         }
 
+        public ActionResult Login(SenderModel user)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            var users = _proxy.getUsers();
+           
+        }
+
         // GET: Sender/Details/5
         public ActionResult Details(int id)
         {
