@@ -144,7 +144,7 @@ namespace DeliveryService
             client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
             client.Host = "smtp.gmail.com";
             client.EnableSsl = true;
-            mail.Subject = "We got your application!";
+            mail.Subject = $"We got your application {person.FirstName}!";
             mail.Body = "We got your application. If your personal data is valid our admin will accept you in the near future!";
             client.Send(mail);
 
@@ -236,7 +236,7 @@ namespace DeliveryService
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
             client.Host = "smtp.gmail.com";
-            mail.Subject = "You are accepted as a courier!";
+            mail.Subject = $"{courier.FirstName}You are accepted as a courier!";
             mail.Body = "Our admin acceperd you. You can log in and star deliver like maniac!";
             client.Send(mail);
 
