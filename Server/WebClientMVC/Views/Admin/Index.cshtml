@@ -1,40 +1,46 @@
-﻿@model WebClientMVC.Models.ApplicationModel
+﻿@model IEnumerable<WebClientMVC.Models.ApplicationModel>
 @{
     ViewBag.Title = "Login";
 }
 
 <h2>Login</h2>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<h2>List</h2>
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-9">
+        <table class="table">
+            <thead>
+            <th>Cpr</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>ZipCode</th>
+            <th>City</th>
+            </thead>
+            <tbody>
+                @foreach (var app in Model)
+                {
+                    <tr>
+                        <td>@app.Cpr</td>
+                        <td>@app.FirstName</td>
+                        <td>@app.LastName</td>
+                        <td>@app.PhoneNumber</td>
+                        <td>@app.Email</td>
+                        <td>@app.Address</td>
+                        <td>@app.ZipCode</td>
+                        <td>@app.City</td>
+                        <td>
+                            @Html.ActionLink("Details", "Details", "ApplicationModel", new { app.Cpr }, new { @class = "btn btn-default col-md-3" })
+                    </td>
+                </tr>
 
-<div class="form-horizontal col-md-12">
-    <h4>Sender</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        <label class="control-label col-md-2">Username or email:</label>
-        <div class="col-md-4">
-            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2">Password:</label>
-        <div class="col-md-4">
-            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group col-md-7">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" class="btn btn-default" />
-            </div>
-    </div>
-        <div class="col-md-7">
-            @Html.ActionLink("Don't have an account? Register here", "Create")
-        </div>
+            }
 
+            </tbody>
+
+        </table>
+
+    </div>
 </div>
-}

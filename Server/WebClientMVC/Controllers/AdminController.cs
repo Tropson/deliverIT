@@ -26,7 +26,6 @@ namespace WebClientMVC.Controllers
         public ActionResult Index()
         {
             List<DeliveryService.ApplicationModel> list = _proxy.GetApplications();
-            var cvFtp =Guid.NewGuid()+ "\\" + list[0].CVPath;
             IEnumerable<Models.ApplicationModel> applications = list.Select(x => new Models.ApplicationModel { Cpr = x.Cpr, FirstName = x.FirstName, LastName = x.LastName, PhoneNumber = x.PhoneNumber, Email = x.Email, Address = x.Address, ZipCode = x.ZipCode, City = x.City, files = new HttpPostedFileBase[3] });
 
             return View(applications);
