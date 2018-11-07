@@ -13,8 +13,9 @@ function loading() {
 function navScroll() {
     yScroll = window.scrollY;
     console.log(yScroll);
-    console.log(cont.offsetHeight);
-    if (cont != null) {
+    console.log(cont);
+    console.log(cont2);
+    if (cont!=null) {
         if (yScroll >= cont.offsetHeight / 3) {
             nav.style.backgroundColor = "black";
         }
@@ -33,11 +34,15 @@ function navScroll() {
 }
 function showMenu() {
     if (!shown) {
-        document.getElementById("hidden").style.display = "block";
+        document.getElementById("hidden").style.zIndex = "7";
+        document.getElementById("hidden").style.left = "0px";
+        console.log(document.getElementById("hidden").style.left);
         shown = true;
     }
     else {
-        document.getElementById("hidden").style.display = "none";
+        document.getElementById("hidden").style.zIndex = "-100";
+        document.getElementById("hidden").style.left = "-200px";
+        console.log(document.getElementById("hidden").style.left);
         shown = false;
     }
 

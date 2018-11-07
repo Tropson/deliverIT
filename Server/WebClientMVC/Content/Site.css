@@ -30,7 +30,6 @@ a {
 
     a:hover {
         color: #EEEEEE;
-        padding-bottom: 2px;
         text-decoration: none;
     }
 
@@ -57,10 +56,10 @@ ul {
 }
 
 #right {
-    position: relative;
+    position: absolute;
     float: right;
     right: 1vw;
-    top: 3vh;
+    top: 25px;
 }
 
 #left ul li {
@@ -83,7 +82,7 @@ ul {
 }
 
     #joinbutton:hover {
-        background-color: rgba(0,0,0,0.1);
+        background-color: rgba(255,255,255,0.1);
         color: #EEEEEE;
     }
 
@@ -108,15 +107,15 @@ ul {
     }
 
 #left {
-    position: relative;
+    position: absolute;
     float: left;
-    top: 3vh;
+    top: 22px;
 }
 
 #nav {
     display: block;
     position: fixed;
-    min-height: 8vh;
+    min-height: 60px;
     color: white;
     width: 100%;
     background-color: rgba(0,0,0,0.1);
@@ -128,12 +127,12 @@ ul {
 #mobilenav {
     position: fixed;
     display: none;
-    height: 8vh;
+    height: 60px;
     min-height: 50px;
     width: 100%;
     padding-top: 10px;
     box-shadow: 1px .5px 3px black;
-    background-color: #0278da;
+    background-color: black;
     z-index: 41;
 }
 
@@ -143,10 +142,10 @@ ul {
 
     #mobilenav #title {
         transition: color 0.2s;
-        position: relative;
+        position: absolute;
         text-align: center;
-        top: 1vh;
-        left: 3vw;
+        top: 18px;
+        left: 50px;
     }
 
     #mobilenav #sendbutton {
@@ -158,10 +157,16 @@ ul {
     }
 
 #hidden {
-    display: none;
-    width: 100%;
-    z-index: 7;
+    display: block;
+    position: absolute;
+    width: 200px;
+    height: 100vh;
+    z-index: -100;
     transition: 0.1s;
+    top: 45px;
+    left:-200px;
+    background-color: rgba(0,0,0,0.7);
+    transition:left .6s;
 }
 
     #hidden ul {
@@ -170,9 +175,10 @@ ul {
     }
 
         #hidden ul li {
-            padding-top: 3%;
-            padding-bottom: 3%;
-            background-color: rgba(93,155,230,0.7);
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin:0 auto;
+            
             display: block;
             text-align: center;
             transition: background-color .4s;
@@ -188,18 +194,18 @@ ul {
             }
 
     #hidden #placeHolder {
-        height: 10px;
+        height: 0px;
         background-color: #0278da;
     }
 
 #pic {
-    position: relative;
-    min-height: 40px;
-    min-width: 40px;
+    position:absolute;
+    min-height: 20px;
+    min-width: 20px;
     background-image: url(../Resources/mobile_menu.png);
     background-size: cover;
-    top: -0.5vh;
-    left: 1vw;
+    top: 20px;
+    left: 10px;
     float: left;
 }
 
@@ -217,27 +223,38 @@ ul {
     }
 
 .bigEmptyBox {
-    font-size: 10vh;
+    font-size: 50px;
     text-align: center;
-    color: black;
-}
-.emptyBox {
-    font-size: 5vh;
     color: black;
     position:relative;
 }
-.emptyBox #emptyText{
+    .bigEmptyBox #bigEmptyText {
+        min-width: 60vw;
+        min-height: 15vh;
+        text-align: center;
+        position: absolute;
+        text-wrap: avoid;
+        top: 40vh;
+        left: 15vw;
+    }
+.emptyBox {
+    font-size: 35px;
+    color: black;
+    position:relative;
+    
+}
+.emptyBox #emptyText{    
     min-width:30vw;
     min-height:4vh;
     text-align:center;
     position:absolute;
     text-wrap:avoid;
-    top:15vh;
-    left:35vw;
+    top:100px;
+    left:34vw;
 }
-
+    
 .textBox {
-    padding-top: 10vh;
+    padding-top: 80px;
     padding-bottom: 10vh;
     min-height: 10vh;
     padding-left: 5%;
@@ -304,8 +321,9 @@ ul {
         top: 40%;
         left: 20%;
     }
+
 #topCont {
-    height: 30vh;
+    height: 200px;
     background-image: url(../Resources/bg.png);
     background-attachment: scroll;
     background-size: cover;

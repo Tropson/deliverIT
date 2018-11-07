@@ -17,25 +17,29 @@ namespace WebClientMVC.Controllers
     {
 
         public readonly ISenderService _proxy;
-
+        public FtpClient client;
+        
         public AdminController(ISenderService proxy)
         {
             this._proxy = proxy;
+            client = new FtpClient("files.000webhost.com");
+            client.Credentials = new NetworkCredential("tropson", "GTAvcsa345");
         }
         // GET: Admin
         //TODO : NEED TO BE REVISED BECAUSE OF THE HTTTP FILES LIST 
         public ActionResult Index()
         {
+            client.Connect();
             DeliveryService.ApplicationModel[] list = _proxy.GetAllApplications();
             IEnumerable<Models.ApplicationModel> applications = list.Select(x => new Models.ApplicationModel { Cpr = x.Cpr, FirstName = x.FirstName, LastName = x.LastName, PhoneNumber = x.PhoneNumber, Email = x.Email, Address = x.Address, ZipCode = x.ZipCode, City = x.City,cv=x.CVPath,idcard=x.IDPicturePath,yellow=x.YellowCardPath,GuidLine=x.GuidLine, files = new HttpPostedFileBase[3] });
             return View(applications);
         }
         public ActionResult Download(string guid,string file)
         {
-            FtpClient client = new FtpClient("files.000webhost.com");
-            client.Credentials = new NetworkCredential("tropson", "GTAvcsa345");
+            
+            
             string path = $"public_html/Files/{guid}/{file}";
-            client.Connect();
+            
             System.IO.MemoryStream mem = new System.IO.MemoryStream();
             client.Download(mem, path);
             byte[] fileBytes = new byte[mem.Length];
@@ -66,7 +70,8 @@ namespace WebClientMVC.Controllers
                 var app = _proxy.GetAllApplications().SingleOrDefault(x => x.Cpr == Cpr);
                 string generPassword = Membership.GeneratePassword(6, 2);
                 SenderModel courier = new SenderModel(app.Cpr, app.FirstName, app.LastName, app.PhoneNumber, app.Email, app.Address, app.ZipCode, app.City) { AccountType = (int)AccountTypeEnum.COURIER, Points = 0 };
-                _proxy.AddCourier(new DeliveryService.UserModel {AccountType= courier.AccountType, Address=courier.Address,City=courier.City,ZipCode=courier.ZipCode,Cpr=courier.Cpr,Email=courier.Email,FirstName=courier.FirstName,LastName=courier.LastName,PhoneNumber=courier.PhoneNumber,Points=courier.Points,Username=courier.Email, Password=generPassword});
+                _proxy.AddCourier(new DeliveryService.UserModel { AccountType = courier.AccountType, Address = courier.Address, City = courier.City, ZipCode = courier.ZipCode, Cpr = courier.Cpr, Email = courier.Email, FirstName = courier.FirstName, LastName = courier.LastName, PhoneNumber = courier.PhoneNumber, Points = courier.Points, Username = courier.Email, Password = generPassword });
+                client.Disconnect();
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -83,8 +88,8 @@ namespace WebClientMVC.Controllers
                 if (!ModelState.IsValid)
                     return View("Create", app);
 
-                
 
+                client.Disconnect();
                 return RedirectToAction("Index");
             }
             catch
