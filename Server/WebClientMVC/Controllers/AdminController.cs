@@ -8,6 +8,7 @@ using WebClientMVC.SenderServiceReference1;
 using AccountTypeEnum = WebClientMVC.Models.AccountTypeEnum;
 using System.Web.Security;
 using System.Net;
+using FluentFTP;
 using System.Net.Mail;
 
 namespace WebClientMVC.Controllers
@@ -26,10 +27,22 @@ namespace WebClientMVC.Controllers
         public ActionResult Index()
         {
             DeliveryService.ApplicationModel[] list = _proxy.GetAllApplications();
-            IEnumerable<Models.ApplicationModel> applications = list.Select(x => new Models.ApplicationModel { Cpr = x.Cpr, FirstName = x.FirstName, LastName = x.LastName, PhoneNumber = x.PhoneNumber, Email = x.Email, Address = x.Address, ZipCode = x.ZipCode, City = x.City, files = new HttpPostedFileBase[3] });
+            IEnumerable<Models.ApplicationModel> applications = list.Select(x => new Models.ApplicationModel { Cpr = x.Cpr, FirstName = x.FirstName, LastName = x.LastName, PhoneNumber = x.PhoneNumber, Email = x.Email, Address = x.Address, ZipCode = x.ZipCode, City = x.City,cv=x.CVPath,idcard=x.IDPicturePath,yellow=x.YellowCardPath,GuidLine=x.GuidLine, files = new HttpPostedFileBase[3] });
             return View(applications);
         }
-
+        public ActionResult Download(string guid,string file)
+        {
+            FtpClient client = new FtpClient("files.000webhost.com");
+            client.Credentials = new NetworkCredential("tropson", "GTAvcsa345");
+            string path = $"public_html/Files/{guid}/{file}";
+            client.Connect();
+            System.IO.MemoryStream mem = new System.IO.MemoryStream();
+            client.Download(mem, path);
+            byte[] fileBytes = new byte[mem.Length];
+            fileBytes = mem.ToArray();
+            string fileName = file;
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, fileName);
+        }
         // GET: Admin/Details/5
         public ActionResult Details(int id)
         {

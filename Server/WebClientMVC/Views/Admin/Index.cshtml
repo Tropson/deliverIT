@@ -9,14 +9,17 @@
     <div class="col-lg-9 col-md-9 col-sm-9">
         <table class="table">
             <thead>
-            <th>Cpr</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Phone Number</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>ZipCode</th>
-            <th>City</th>
+                <th>Cpr</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>ZipCode</th>
+                <th>City</th>
+                <th>CV</th>
+                <th>ID Picture</th>
+                <th>Yellow Card Picture</th>
             </thead>
             <tbody>
                 @foreach (var app in Model)
@@ -30,9 +33,9 @@
                         <td>@app.Address</td>
                         <td>@app.ZipCode</td>
                         <td>@app.City</td>
-                        <td>
-                            @Html.ActionLink("Details", "Details", "ApplicationModel", new { app.Cpr }, new { @class = "btn btn-default col-md-3",})
-                    </td>
+                        <td>@Html.ActionLink(app.cv.Substring(0,app.cv.Length>15?15:app.cv.Length) + (app.cv.Length>15 ?"...":""), "Download",new { guid=app.GuidLine,file=app.cv})</td>
+                        <td>@Html.ActionLink(app.idcard.Substring(0, app.idcard.Length > 15 ? 15 : app.idcard.Length) + (app.idcard.Length > 15 ? "..." : ""), "Download/", new { guid = app.GuidLine, file = app.idcard })</td>
+                        <td>@Html.ActionLink(app.yellow.Substring(0, app.yellow.Length > 15 ? 15 : app.yellow.Length) + (app.yellow.Length > 15 ? "..." : ""), "Download", new { guid = app.GuidLine, file = app.yellow })</td>
                 </tr>
 
             }

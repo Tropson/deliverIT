@@ -166,7 +166,8 @@ namespace DeliveryService
                 LastName = x.Person.LastName,
                 PhoneNumber = x.Person.PhoneNumber,
                 YellowCardPath = x.YellowCardPath,
-                ZipCode = x.Person.ZipCode
+                ZipCode = x.Person.ZipCode,
+                GuidLine = x.Guid
             }).ToArray();
             return myApplications;
         }
