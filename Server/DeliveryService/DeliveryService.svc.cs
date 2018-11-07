@@ -235,10 +235,15 @@ namespace DeliveryService
             SmtpClient client = new SmtpClient();
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
+            client.EnableSsl = true;
+            client.UseDefaultCredentials = false;
             client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
             client.Host = "smtp.gmail.com";
             mail.Subject = $"{courier.FirstName}You are accepted as a courier!";
-            mail.Body = "Our admin acceperd you. You can log in and star deliver like maniac!";
+            mail.Body = "Our admin acceperd you. You can log in and start deliver like maniac!" + Environment.NewLine +
+                "To log in use those credentials:" + Environment.NewLine + 
+                $"Username: {courier.Email}" + Environment.NewLine +
+                $"Password: {courier.Password}";
             client.Send(mail);
 
 
