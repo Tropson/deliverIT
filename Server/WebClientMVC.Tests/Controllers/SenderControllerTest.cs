@@ -2,7 +2,7 @@
 using WebClientMVC.Tests.Controllers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebClientMVC.Models;
-using WebClientMVC.SenderServiceReference;
+using WebClientMVC.SenderServiceReference1;
 using WebClientMVC.Controllers;
 using System.Web.Mvc;
 using WebClientMVC.Models;

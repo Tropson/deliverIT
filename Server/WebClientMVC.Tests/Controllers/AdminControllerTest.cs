@@ -20,7 +20,7 @@ namespace WebClientMVC.Tests.Controllers
         {
             //Setup
             var serviceStub = new Mock<ISenderService>();
-            serviceStub.Setup(x => x.GetApplications()).Returns(new List<DeliveryService.ApplicationModel> { new DeliveryService.ApplicationModel { Cpr = "123" } });
+            serviceStub.Setup(x => x.GetAllApplications()).Returns(new List<DeliveryService.ApplicationModel> { new DeliveryService.ApplicationModel { Cpr = "123" } });
             var sut = new AdminController(serviceStub.Object);
 
             //Act

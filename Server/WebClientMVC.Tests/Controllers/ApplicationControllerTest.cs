@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using WebClientMVC.Controllers;
 using WebClientMVC.Models;
-using WebClientMVC.SenderServiceReference;
+using WebClientMVC.SenderServiceReference1;
 
 namespace WebClientMVC.Tests.Controllers
 {
