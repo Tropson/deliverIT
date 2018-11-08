@@ -34,7 +34,7 @@
             </div>
             <a id="title" href="@Url.Action("Index","Home")">DeliverIT</a>
             <a id="sendbutton" href="@Url.Action("Index","Sender")">Send</a>
-            <a id="joinbutton"  href="@Url.Action("Index","Application")">Join us</a>
+            <a id="joinbutton" href="@Url.Action("Index","Application")">Join us</a>
             <div id="hidden">
                 <ul>
                     <li onclick="goToAbout()"><a>About us</a></li>
@@ -44,8 +44,8 @@
             </div>
         </div>
         <div id="content">
-            <div @(ViewBag.Title=="Home Page"?"id=bigTopCont class=bigEmptyBox":"id=topCont class=emptyBox")>
-                <div @(ViewBag.Title=="Home Page"?"id=bigEmptyText":"id=emptyText")>
+            <div @(ViewBag.Title == "Home Page" ? "id=bigTopCont class=bigEmptyBox" : "id=topCont class=emptyBox")>
+                <div @(ViewBag.Title == "Home Page" ? "id=bigEmptyText" : "id=emptyText")>
                     <p>Delivery made easy and fast</p>
                 </div>
             </div>
@@ -62,5 +62,6 @@
             @RenderSection("scripts", required: false)
         </div>
     </div>
+    
 </body>
 </html>

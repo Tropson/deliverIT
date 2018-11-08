@@ -46,8 +46,8 @@ ul li {
     list-style-type: none;
     display: inline;
     position: relative;
-    top: -0.8vh;
     cursor: default;
+    top:-5px;
     text-shadow: 1.5px 0px 2px black;
 }
 
@@ -258,19 +258,25 @@ ul {
     
 .textBox {
     padding-top: 80px;
-    padding-bottom: 10vh;
-    min-height: 10vh;
+    padding-bottom: 10px;
+    min-height: 70%;
     padding-left: 5%;
     padding-right: 5%;
     width: 100%;
     background-color: white;
     opacity: .8;
-    box-shadow: 1px 10px 3px black, 1px -1px 1px black;
-    z-index: 5;
+    box-shadow:1px -1px 1px black;
+    z-index: 0;
+    position:relative;
 }
     .textBox a {
         color:black;
         transition:.4s;
+    }
+    .textBox> footer {
+        position:absolute;
+        bottom:0px;
+        left:45%;
     }
         .textBox a:hover {
             opacity:0.8;
