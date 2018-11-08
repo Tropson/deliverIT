@@ -63,6 +63,14 @@ namespace WebClientMVC.Controllers
             if (!ModelState.IsValid)
                 return View(user);
             var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == user.Username);
+            if (userFromDB == null)
+            {
+                userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Email == user.Username);
+            }
+            if (userFromDB == null)
+            {
+                return View(user);
+            }
             string hash = HashString(user.Password);
             if (userFromDB.Password == user.Password)
             {
