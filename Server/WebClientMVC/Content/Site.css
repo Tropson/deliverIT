@@ -177,8 +177,7 @@ ul {
         #hidden ul li {
             padding-top: 30px;
             padding-bottom: 30px;
-            margin:0 auto;
-            
+            margin: 0 auto;
             display: block;
             text-align: center;
             transition: background-color .4s;
@@ -189,10 +188,14 @@ ul {
                 border-bottom: none;
             }
 
-            #hidden ul li a:hover {
+            #hidden ul li a:hover { 
                 border-bottom: none;
             }
-
+    #hidden hr {
+        height: 1px;
+        border: 0;
+        background-color:darkgrey;
+    }
     #hidden #placeHolder {
         height: 0px;
         background-color: #0278da;
@@ -274,9 +277,11 @@ ul {
         }
 @media only screen and (max-width: 800px) {
     .emptyBox {
-        font-size: 6vh;
+        font-size: 30px;
     }
-
+        .emptyBox #emptyText {
+            left:10vw;
+        }
     #fixednav {
         display: none;
     }
@@ -287,14 +292,22 @@ ul {
 
     #mobilenav {
         display: block;
+    }
+    .bigEmptyBox {
+        font-size: 30px;
+        text-align: center;
+        color: black;
+        position: relative;
     }
 }
 
 @media only screen and (max-width: 600px) {
     .emptyBox {
-        font-size: 5vh;
+        font-size: 30px;
     }
-
+        .emptyBox #emptyText {
+            left: 10vw;
+        }
     #fixednav {
         display: none;
     }
@@ -305,6 +318,12 @@ ul {
 
     #mobilenav {
         display: block;
+    }
+    .bigEmptyBox {
+        font-size: 30px;
+        text-align: center;
+        color: black;
+        position: relative;
     }
 }
 #bigTopCont {
