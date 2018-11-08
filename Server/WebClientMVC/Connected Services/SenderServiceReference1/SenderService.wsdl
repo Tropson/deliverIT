@@ -31,6 +31,12 @@
   <wsdl:message name="ISenderService_AddCourier_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddCourierResponse" />
   </wsdl:message>
+  <wsdl:message name="ISenderService_DeleteApplication_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteApplication" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_DeleteApplication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteApplicationResponse" />
+  </wsdl:message>
   <wsdl:message name="ISenderService_ClearDB_InputMessage">
     <wsdl:part name="parameters" element="tns:ClearDB" />
   </wsdl:message>
@@ -53,6 +59,10 @@
     <wsdl:operation name="AddCourier">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddCourier" message="tns:ISenderService_AddCourier_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/AddCourierResponse" message="tns:ISenderService_AddCourier_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteApplication">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/DeleteApplication" message="tns:ISenderService_DeleteApplication_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/DeleteApplicationResponse" message="tns:ISenderService_DeleteApplication_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="ClearDB">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/ClearDB" message="tns:ISenderService_ClearDB_InputMessage" />
@@ -90,6 +100,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddCourier">
       <soap:operation soapAction="http://tempuri.org/ISenderService/AddCourier" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteApplication">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/DeleteApplication" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

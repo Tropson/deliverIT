@@ -39,6 +39,12 @@ namespace WebClientMVC.SenderServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddCourier", ReplyAction="http://tempuri.org/ISenderService/AddCourierResponse")]
         System.Threading.Tasks.Task<int> AddCourierAsync(DeliveryService.UserModel courier);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/DeleteApplication", ReplyAction="http://tempuri.org/ISenderService/DeleteApplicationResponse")]
+        int DeleteApplication(DeliveryService.ApplicationModel application, bool deletePerson);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/DeleteApplication", ReplyAction="http://tempuri.org/ISenderService/DeleteApplicationResponse")]
+        System.Threading.Tasks.Task<int> DeleteApplicationAsync(DeliveryService.ApplicationModel application, bool deletePerson);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ClearDB", ReplyAction="http://tempuri.org/ISenderService/ClearDBResponse")]
         void ClearDB();
         
@@ -103,6 +109,14 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         public System.Threading.Tasks.Task<int> AddCourierAsync(DeliveryService.UserModel courier) {
             return base.Channel.AddCourierAsync(courier);
+        }
+        
+        public int DeleteApplication(DeliveryService.ApplicationModel application, bool deletePerson) {
+            return base.Channel.DeleteApplication(application, deletePerson);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeleteApplicationAsync(DeliveryService.ApplicationModel application, bool deletePerson) {
+            return base.Channel.DeleteApplicationAsync(application, deletePerson);
         }
         
         public void ClearDB() {

@@ -250,7 +250,7 @@ namespace DeliveryService
             return 1;
         }
 
-        public int DeleteApplication(ApplicationModel app)
+        public int DeleteApplication(ApplicationModel app, bool deletePerson)
         {
             Person personToDelete = db.Persons.Single(x => x.Cpr == app.Cpr);
             Application applicationToDelete = db.Applications.Single(x => x.PersonID == personToDelete.ID);
@@ -267,23 +267,28 @@ namespace DeliveryService
             {
                 return 0;
             }
-
-            persons.DeleteOnSubmit(personToDelete);
-
-            try
+            if (deletePerson)
             {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                return 0;
-            }
+                persons.DeleteOnSubmit(personToDelete);
 
-            finally
+                try
+                {
+                    db.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    return 0;
+                }
+
+                finally
+                {
+                    db.Connection.Close();
+                }
+            }
+            else
             {
                 db.Connection.Close();
             }
-
             return 1;
 
         }

@@ -60,6 +60,7 @@ namespace WebClientMVC.Controllers
                 client.Upload(app.files[1].InputStream, $"public_html/Files/{guid}/{idpic}");
                 client.Upload(app.files[2].InputStream, $"public_html/Files/{guid}/{yellow}");
                 _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
+                client.Disconnect();
                 return RedirectToAction("Create");
             }
             catch(Exception e)
