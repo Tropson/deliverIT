@@ -7,13 +7,15 @@ using System.Web.Mvc;
 using WebClientMVC.Models;
 using WebClientMVC.SenderServiceReference1;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace WebClientMVC.Controllers
 {
     public class SenderController : Controller
     {
         public readonly ISenderService _proxy;
-        
+
         public SenderController(ISenderService proxy)
         {
             this._proxy = proxy;
@@ -28,30 +30,15 @@ namespace WebClientMVC.Controllers
             }
             else
             {
-                string userName = Request.Cookies.Get("login").Values["username"];
-                var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == userName);
-                Models.SenderModel userToPass = new Models.SenderModel(userFromDB.Cpr, userFromDB.FirstName, userFromDB.LastName, userFromDB.PhoneNumber, userFromDB.Email, userFromDB.Address, userFromDB.ZipCode, userFromDB.City)
-                {
-                    Username = userFromDB.Username,
-                    Password = userFromDB.Password,
-                    Points = userFromDB.Points,
-                    AccountType = userFromDB.AccountType
-                };
-                return RedirectToAction("LoggedIn", userToPass);
+                string userName = Request.Cookies.Get("login").Values["feketePorzeczka"];
+                LoginPassModel obj = new LoginPassModel { Username = userName };
+                return RedirectToAction("LoggedInPost", obj);
             }
         }
-
-        public ActionResult LoggedIn(Models.SenderModel user)
+        public ActionResult LoggedInPost(LoginPassModel user)
         {
             if (!ModelState.IsValid)
                 return RedirectToAction("Index");
-            return View(user);
-        }
-        [HttpPost]
-        public ActionResult Index(LoginModel user)
-        {
-            if (!ModelState.IsValid)
-                return View(user);
             var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == user.Username);
             Models.SenderModel userToPass = new Models.SenderModel(userFromDB.Cpr, userFromDB.FirstName, userFromDB.LastName, userFromDB.PhoneNumber, userFromDB.Email, userFromDB.Address, userFromDB.ZipCode, userFromDB.City)
             {
@@ -60,18 +47,41 @@ namespace WebClientMVC.Controllers
                 Points = userFromDB.Points,
                 AccountType = userFromDB.AccountType
             };
-            if (userFromDB != null)
-            {
-                HttpCookie cookie = new HttpCookie("login");
-                cookie.Values.Add("username", userToPass.Username); 
-                cookie.Expires = DateTime.Now.AddDays(7);
-                Response.Cookies.Add(cookie);
-                return RedirectToAction("LoggedIn",userToPass);
+            if (Request.Cookies.Get("login") != null)
+            { 
+                if (HashString(userToPass.Password) == Request.Cookies.Get("login").Values["pirosPorzeczka"])
+                {
+                    return View("LoggedIn", userToPass);
+                }
+                else return RedirectToAction("Index");
             }
-            else
-            {
+            else return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult Index(LoginModel user)
+        {
+            if (!ModelState.IsValid)
                 return View(user);
+            var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == user.Username);
+            string hash = HashString(user.Password);
+            if (userFromDB.Password == user.Password)
+            {
+                LoginPassModel userToPass = new LoginPassModel { Username = userFromDB.Username };
+                if (userFromDB != null)
+                {
+                    HttpCookie cookie = new HttpCookie("login");
+                    cookie.Values.Add("feketePorzeczka", userToPass.Username);
+                    cookie.Values.Add("pirosPorzeczka", hash);
+                    cookie.Expires = DateTime.Now.AddDays(7);
+                    Response.Cookies.Add(cookie);
+                    return RedirectToAction("LoggedInPost", userToPass);
+                }
+                else
+                {
+                    return View(user);
+                }
             }
+            else return View(user);
         }
 
         // GET: Sender/Details/5
@@ -93,10 +103,10 @@ namespace WebClientMVC.Controllers
             try
             {
                 if (!ModelState.IsValid)
-                    return View("Create",reg);
+                    return View("Create", reg);
                 SenderModel sender = new SenderModel(reg.Cpr, reg.FirstName, reg.LastName, reg.PhoneNumber, reg.Email, reg.Address, reg.ZipCode, reg.City) { AccountType = (int)AccountTypeEnum.SENDER, Password = reg.Password, Username = reg.Username, Points = 0 };
-                _proxy.AddSender(new DeliveryService.UserModel { AccountType=sender.AccountType,Address=sender.Address,City=sender.City,Cpr=sender.Cpr,Email=sender.Email,FirstName=sender.FirstName,LastName=sender.LastName,Password=sender.Password,PhoneNumber=sender.PhoneNumber,Points=sender.Points,Username=sender.Username,ZipCode=sender.ZipCode});
-                return RedirectToAction("Index");   
+                _proxy.AddSender(new DeliveryService.UserModel { AccountType = sender.AccountType, Address = sender.Address, City = sender.City, Cpr = sender.Cpr, Email = sender.Email, FirstName = sender.FirstName, LastName = sender.LastName, Password = sender.Password, PhoneNumber = sender.PhoneNumber, Points = sender.Points, Username = sender.Username, ZipCode = sender.ZipCode });
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -109,7 +119,20 @@ namespace WebClientMVC.Controllers
         {
             return View();
         }
-
+        public ActionResult Logout()
+        {
+            try
+            {
+                HttpCookie cookie = new HttpCookie("login");
+                cookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(cookie);
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+        }
         // POST: Sender/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
@@ -130,6 +153,29 @@ namespace WebClientMVC.Controllers
         public ActionResult Delete(int id)
         {
             return View();
+        }
+
+        public string HashString(string input)
+        {
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < hash.Length; i++)
+
+            {
+
+                sb.Append(hash[i].ToString("x2"));
+
+            }
+
+            return sb.ToString();
         }
 
         // POST: Sender/Delete/5

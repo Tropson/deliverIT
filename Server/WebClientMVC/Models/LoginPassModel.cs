@@ -5,9 +5,8 @@ using System.Web;
 
 namespace WebClientMVC.Models
 {
-    public class LoginModel
+    public class LoginPassModel
     {
-        public virtual string Username { get; set; }
-        public virtual string Password { get; set; }
+        public string Username { get; set; }
     }
 }
