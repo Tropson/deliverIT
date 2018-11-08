@@ -77,6 +77,25 @@ namespace DeliveryService
             }
             return 1;
         }
+        public UserModel[] GetAllUsers()
+        {
+            var users = db.Users.Select(x => new UserModel
+            {
+                AccountType = (int)x.AccountTypeID,
+                Address = x.Person.Address,
+                City = x.Person.City,
+                Cpr = x.Person.Cpr,
+                Email = x.Person.Email,
+                FirstName = x.Person.FirstName,
+                LastName = x.Person.LastName,
+                Password = x.Password,
+                PhoneNumber = x.Person.PhoneNumber,
+                Points = (int)x.Points,
+                Username = x.Username,
+                ZipCode = x.Person.ZipCode
+            }).ToArray();
+            return users;
+        }
         public int AddApplication(ApplicationModel applicationObj)
         {
             ApplicationModel application = applicationObj;
@@ -174,52 +193,19 @@ namespace DeliveryService
 
         public int AddCourier(UserModel courierObj)
         {
-            UserModel courier = courierObj;
-            int nextPersonId = 0;
-            try
-            {
-                nextPersonId = db.Persons.OrderBy(x => x.ID).ToList().Last().ID + 1;
-            }
-            catch (Exception e)
-            {
-                nextPersonId = 1;
-            }
-            Person person = new Person
-            {
-                Cpr = courier.Cpr,
-                FirstName = courier.FirstName,
-                LastName = courier.LastName,
-                PhoneNumber = courier.PhoneNumber,
-                Email = courier.Email,
-                Address = courier.Address,
-                ZipCode = courier.ZipCode,
-                City = courier.City
-            };
+            int PersonId = db.Persons.Single(x => x.Cpr == courierObj.Cpr).ID;
             User user = new User
             {
-                Username = courier.Username,
-                Password = courier.Password,
-                Points = courier.Points,
-                AccountTypeID = courier.AccountType,
-                PersonID = nextPersonId
+                Username = courierObj.Username,
+                Password = courierObj.Password,
+                Points = courierObj.Points,
+                AccountTypeID = courierObj.AccountType,
+                PersonID = PersonId
             };
-            var senders = db.Persons;
             var users = db.Users;
-            senders.InsertOnSubmit(person);
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                return 0;
-            }
-            
-            db.Connection.Close();
             users.InsertOnSubmit(user);
             try
             {
-                db.Connection.Open();
                 db.SubmitChanges();
             }
             catch (Exception e)
@@ -231,7 +217,7 @@ namespace DeliveryService
                 db.Connection.Close();
             }
 
-            MailMessage mail = new MailMessage("deliveritassociation@gmail.com", courier.Email);
+            MailMessage mail = new MailMessage("deliveritassociation@gmail.com", courierObj.Email);
             SmtpClient client = new SmtpClient();
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -239,11 +225,11 @@ namespace DeliveryService
             client.UseDefaultCredentials = false;
             client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
             client.Host = "smtp.gmail.com";
-            mail.Subject = $"{courier.FirstName} You are accepted as a courier!";
+            mail.Subject = $"{courierObj.FirstName} You are accepted as a courier!";
             mail.Body = "Our admin accepted you. You can log in and start deliver like maniac!" + Environment.NewLine +
                 "To log in use those credentials:" + Environment.NewLine + 
-                $"Username: {courier.Email}" + Environment.NewLine +
-                $"Password: {courier.Password}";
+                $"Username: {courierObj.Email}" + Environment.NewLine +
+                $"Password: {courierObj.Password}";
             client.Send(mail);
 
 

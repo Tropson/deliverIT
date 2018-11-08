@@ -11,7 +11,7 @@ namespace WebClientMVC.Models
         public SenderModel(string cpr, string firstName, string lastName, string phone, string email, string address, string zipCode, string city) : base(cpr,firstName,lastName,phone,email,address,zipCode,city)
         {           
         }
-        
+        public SenderModel() { }
         public virtual string Username { get; set; }
         
         public virtual string Password { get; set; }

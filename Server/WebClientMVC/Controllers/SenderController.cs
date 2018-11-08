@@ -18,20 +18,60 @@ namespace WebClientMVC.Controllers
         {
             this._proxy = proxy;
         }
-        
+
         // GET: Sender
         public ActionResult Index()
         {
-            return View();
+            if (Request.Cookies.Get("login") == null)
+            {
+                return View();
+            }
+            else
+            {
+                string userName = Request.Cookies.Get("login").Values["username"];
+                var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == userName);
+                Models.SenderModel userToPass = new Models.SenderModel(userFromDB.Cpr, userFromDB.FirstName, userFromDB.LastName, userFromDB.PhoneNumber, userFromDB.Email, userFromDB.Address, userFromDB.ZipCode, userFromDB.City)
+                {
+                    Username = userFromDB.Username,
+                    Password = userFromDB.Password,
+                    Points = userFromDB.Points,
+                    AccountType = userFromDB.AccountType
+                };
+                return RedirectToAction("LoggedIn", userToPass);
+            }
         }
 
-        public ActionResult Login(SenderModel user)
+        public ActionResult LoggedIn(Models.SenderModel user)
         {
             if (!ModelState.IsValid)
-                return View();
-
-            //var users = _proxy.getUsers();
-            return View();
+                return RedirectToAction("Index");
+            return View(user);
+        }
+        [HttpPost]
+        public ActionResult Index(LoginModel user)
+        {
+            if (!ModelState.IsValid)
+                return View(user);
+            var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == user.Username);
+            Models.SenderModel userToPass = new Models.SenderModel(userFromDB.Cpr, userFromDB.FirstName, userFromDB.LastName, userFromDB.PhoneNumber, userFromDB.Email, userFromDB.Address, userFromDB.ZipCode, userFromDB.City)
+            {
+                Username = userFromDB.Username,
+                Password = userFromDB.Password,
+                Points = userFromDB.Points,
+                AccountType = userFromDB.AccountType
+            };
+            if (userFromDB != null)
+            {
+                HttpCookie cookie = new HttpCookie("login");
+                cookie.Values.Add("username", userToPass.Username); 
+                cookie.Expires = DateTime.Now.AddDays(7);
+                Response.Cookies.Add(cookie);
+                return RedirectToAction("LoggedIn",userToPass);
+            }
+            else
+            {
+                return View(user);
+            }
         }
 
         // GET: Sender/Details/5

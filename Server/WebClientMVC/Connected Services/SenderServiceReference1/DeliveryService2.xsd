@@ -15,10 +15,22 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAllUsers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllUsersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="GetAllUsersResult" nillable="true" type="q2:ArrayOfSenderResource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="AddApplication">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="application" nillable="true" type="q2:ApplicationResource" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="application" nillable="true" type="q3:ApplicationResource" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -37,14 +49,14 @@
   <xs:element name="GetAllApplicationsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="GetAllApplicationsResult" nillable="true" type="q3:ArrayOfApplicationResource" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="GetAllApplicationsResult" nillable="true" type="q4:ArrayOfApplicationResource" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AddCourier">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="courier" nillable="true" type="q4:SenderResource" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="courier" nillable="true" type="q5:SenderResource" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -58,7 +70,7 @@
   <xs:element name="DeleteApplication">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="application" nillable="true" type="q5:ApplicationResource" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="application" nillable="true" type="q6:ApplicationResource" />
         <xs:element minOccurs="0" name="deletePerson" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>

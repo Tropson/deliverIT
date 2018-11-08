@@ -27,6 +27,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PersonResource" nillable="true" type="tns:PersonResource" />
+  <xs:complexType name="ArrayOfSenderResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SenderResource" nillable="true" type="tns:SenderResource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSenderResource" nillable="true" type="tns:ArrayOfSenderResource" />
   <xs:complexType name="ApplicationResource">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:PersonResource">

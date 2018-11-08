@@ -13,6 +13,12 @@
   <wsdl:message name="ISenderService_AddSender_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddSenderResponse" />
   </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
+  </wsdl:message>
   <wsdl:message name="ISenderService_AddApplication_InputMessage">
     <wsdl:part name="parameters" element="tns:AddApplication" />
   </wsdl:message>
@@ -48,6 +54,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddSender" message="tns:ISenderService_AddSender_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/AddSenderResponse" message="tns:ISenderService_AddSender_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetAllUsers" message="tns:ISenderService_GetAllUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetAllUsersResponse" message="tns:ISenderService_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AddApplication">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddApplication" message="tns:ISenderService_AddApplication_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/AddApplicationResponse" message="tns:ISenderService_AddApplication_OutputMessage" />
@@ -73,6 +83,15 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="AddSender">
       <soap:operation soapAction="http://tempuri.org/ISenderService/AddSender" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/GetAllUsers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

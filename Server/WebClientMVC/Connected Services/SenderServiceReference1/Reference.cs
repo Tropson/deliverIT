@@ -21,6 +21,12 @@ namespace WebClientMVC.SenderServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
         System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.UserModel sender);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsersResponse")]
+        DeliveryService.UserModel[] GetAllUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsersResponse")]
+        System.Threading.Tasks.Task<DeliveryService.UserModel[]> GetAllUsersAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddApplication", ReplyAction="http://tempuri.org/ISenderService/AddApplicationResponse")]
         int AddApplication(DeliveryService.ApplicationModel application);
         
@@ -85,6 +91,14 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         public System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.UserModel sender) {
             return base.Channel.AddSenderAsync(sender);
+        }
+        
+        public DeliveryService.UserModel[] GetAllUsers() {
+            return base.Channel.GetAllUsers();
+        }
+        
+        public System.Threading.Tasks.Task<DeliveryService.UserModel[]> GetAllUsersAsync() {
+            return base.Channel.GetAllUsersAsync();
         }
         
         public int AddApplication(DeliveryService.ApplicationModel application) {

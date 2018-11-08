@@ -19,7 +19,7 @@ namespace WebClientMVC.Models
             this.ZipCode = zipCode;
             this.City = city;
         }
-        
+        public PersonModel() { }
         private int ID { get; set; }
         
         public virtual string Cpr { get; set; }
