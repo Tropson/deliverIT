@@ -14,7 +14,7 @@ namespace WebClientMVC.Tests.Controllers
     [TestClass]
     public class SenderControllerTest
     {
-        
+        [TestMethod]
         public void ServiceConnectionTest()
         {
             //setup
