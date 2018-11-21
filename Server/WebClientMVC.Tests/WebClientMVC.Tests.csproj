@@ -111,7 +111,6 @@
     <Compile Include="Controllers\SenderControllerTest.cs" />
     <Compile Include="Controllers\ApplicationControllerTest.cs" />
     <Compile Include="Controllers\AdminControllerTest.cs" />
-    <Compile Include="Controllers\CookieTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>

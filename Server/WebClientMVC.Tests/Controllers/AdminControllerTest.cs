@@ -20,7 +20,7 @@ namespace WebClientMVC.Tests.Controllers
         {
             //Setup
             var serviceStub = new Mock<ISenderService>();
-            serviceStub.Setup(x => x.GetAllApplications()).Returns(new List<DeliveryService.ApplicationModel> { new DeliveryService.ApplicationModel { Cpr = "123" } });
+            serviceStub.Setup(x => x.GetAllApplications()).Returns(new DeliveryService.ApplicationModel[] { new DeliveryService.ApplicationModel { Cpr = "123" } });
             var sut = new AdminController(serviceStub.Object);
 
             //Act
@@ -34,20 +34,20 @@ namespace WebClientMVC.Tests.Controllers
         }
 
 
-        [DataRow("2611982375", "David", "Szoke", "91933260", "tropson90@gmail.com", "Fredensgade 7, 2st", "9000", "Aalborg")]
+        [DataRow("2611982375")]
         [TestMethod]
-        public void AddCourierTest(string cpr, string firstName, string lastName, string phone, string email, string address, string zipCode, string city)
+        public void AddCourierTest(string cpr)
         {
             //setup
             var senderServiceMock = new Mock<ISenderService>();
-            var app = new Models.ApplicationModel { Address = address, City = city, Cpr = cpr, Email = email, FirstName = firstName, LastName = lastName, PhoneNumber = phone, ZipCode = zipCode };
+            
             
 
             senderServiceMock.Setup(x => x.AddSender(It.IsAny<DeliveryService.UserModel>())).Returns(1);
 
             var sut = new AdminController(senderServiceMock.Object);
 
-            var res = sut.CreateOnAccept(app);
+            var res = sut.CreateOnAccept(cpr);
 
             //assert
             Assert.AreNotEqual(res, new HttpStatusCodeResult(HttpStatusCode.InternalServerError));
