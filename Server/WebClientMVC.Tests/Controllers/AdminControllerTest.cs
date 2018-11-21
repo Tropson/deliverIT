@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using DeliveryService;
+using WebClientMVC.SenderServiceReference1;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using System.Linq;
