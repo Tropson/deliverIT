@@ -40,7 +40,7 @@ namespace WebClientMVC.Controllers
 
 
             //string path = $"public_html/Files/{guid}/{file}";
-            string path = Server.MapPath($"/Download/test2.rar");            
+            string path = Server.MapPath($"/Download/{guid}/{file}");            
             System.IO.MemoryStream mem = new System.IO.MemoryStream();
             //client.Download(mem, path);
             new System.IO.FileStream(path, FileMode.Open, FileAccess.Read).CopyTo(mem); 
