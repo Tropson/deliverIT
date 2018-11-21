@@ -111,11 +111,15 @@
     <Compile Include="Controllers\SenderControllerTest.cs" />
     <Compile Include="Controllers\ApplicationControllerTest.cs" />
     <Compile Include="Controllers\AdminControllerTest.cs" />
+    <Compile Include="Controllers\PointsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
+    <None Include="Connected Services\SenderServiceReference\DeliveryService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Connected Services\SenderServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -130,6 +134,8 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\SenderServiceReference\SenderService.wsdl" />
+    <None Include="Properties\DataSources\DeliveryService.ApplicationModel.datasource" />
+    <None Include="Properties\DataSources\DeliveryService.UserModel.datasource" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

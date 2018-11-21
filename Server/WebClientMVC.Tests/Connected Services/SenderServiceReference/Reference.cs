@@ -16,10 +16,40 @@ namespace WebClientMVC.Tests.SenderServiceReference {
     public interface ISenderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        int AddSender(object sender);
+        int AddSender(DeliveryService.UserModel sender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        System.Threading.Tasks.Task<int> AddSenderAsync(object sender);
+        System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.UserModel sender);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsersResponse")]
+        DeliveryService.UserModel[] GetAllUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsersResponse")]
+        System.Threading.Tasks.Task<DeliveryService.UserModel[]> GetAllUsersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddApplication", ReplyAction="http://tempuri.org/ISenderService/AddApplicationResponse")]
+        int AddApplication(DeliveryService.ApplicationModel application);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddApplication", ReplyAction="http://tempuri.org/ISenderService/AddApplicationResponse")]
+        System.Threading.Tasks.Task<int> AddApplicationAsync(DeliveryService.ApplicationModel application);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllApplications", ReplyAction="http://tempuri.org/ISenderService/GetAllApplicationsResponse")]
+        DeliveryService.ApplicationModel[] GetAllApplications();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllApplications", ReplyAction="http://tempuri.org/ISenderService/GetAllApplicationsResponse")]
+        System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetAllApplicationsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddCourier", ReplyAction="http://tempuri.org/ISenderService/AddCourierResponse")]
+        int AddCourier(DeliveryService.UserModel courier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddCourier", ReplyAction="http://tempuri.org/ISenderService/AddCourierResponse")]
+        System.Threading.Tasks.Task<int> AddCourierAsync(DeliveryService.UserModel courier);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/DeleteApplication", ReplyAction="http://tempuri.org/ISenderService/DeleteApplicationResponse")]
+        int DeleteApplication(DeliveryService.ApplicationModel application, bool deletePerson);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/DeleteApplication", ReplyAction="http://tempuri.org/ISenderService/DeleteApplicationResponse")]
+        System.Threading.Tasks.Task<int> DeleteApplicationAsync(DeliveryService.ApplicationModel application, bool deletePerson);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ClearDB", ReplyAction="http://tempuri.org/ISenderService/ClearDBResponse")]
         void ClearDB();
@@ -55,12 +85,52 @@ namespace WebClientMVC.Tests.SenderServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public int AddSender(object sender) {
+        public int AddSender(DeliveryService.UserModel sender) {
             return base.Channel.AddSender(sender);
         }
         
-        public System.Threading.Tasks.Task<int> AddSenderAsync(object sender) {
+        public System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.UserModel sender) {
             return base.Channel.AddSenderAsync(sender);
+        }
+        
+        public DeliveryService.UserModel[] GetAllUsers() {
+            return base.Channel.GetAllUsers();
+        }
+        
+        public System.Threading.Tasks.Task<DeliveryService.UserModel[]> GetAllUsersAsync() {
+            return base.Channel.GetAllUsersAsync();
+        }
+        
+        public int AddApplication(DeliveryService.ApplicationModel application) {
+            return base.Channel.AddApplication(application);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddApplicationAsync(DeliveryService.ApplicationModel application) {
+            return base.Channel.AddApplicationAsync(application);
+        }
+        
+        public DeliveryService.ApplicationModel[] GetAllApplications() {
+            return base.Channel.GetAllApplications();
+        }
+        
+        public System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetAllApplicationsAsync() {
+            return base.Channel.GetAllApplicationsAsync();
+        }
+        
+        public int AddCourier(DeliveryService.UserModel courier) {
+            return base.Channel.AddCourier(courier);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddCourierAsync(DeliveryService.UserModel courier) {
+            return base.Channel.AddCourierAsync(courier);
+        }
+        
+        public int DeleteApplication(DeliveryService.ApplicationModel application, bool deletePerson) {
+            return base.Channel.DeleteApplication(application, deletePerson);
+        }
+        
+        public System.Threading.Tasks.Task<int> DeleteApplicationAsync(DeliveryService.ApplicationModel application, bool deletePerson) {
+            return base.Channel.DeleteApplicationAsync(application, deletePerson);
         }
         
         public void ClearDB() {

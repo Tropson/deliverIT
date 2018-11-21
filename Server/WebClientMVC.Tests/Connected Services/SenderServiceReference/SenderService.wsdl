@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:50512/DeliveryService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:50512/DeliveryService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:50512/DeliveryService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/DeliveryService" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ISenderService_AddSender_InputMessage">
@@ -11,6 +12,36 @@
   </wsdl:message>
   <wsdl:message name="ISenderService_AddSender_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddSenderResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_AddApplication_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddApplication" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_AddApplication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllApplications_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApplications" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllApplications_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllApplicationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_AddCourier_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCourier" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_AddCourier_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCourierResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_DeleteApplication_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteApplication" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_DeleteApplication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteApplicationResponse" />
   </wsdl:message>
   <wsdl:message name="ISenderService_ClearDB_InputMessage">
     <wsdl:part name="parameters" element="tns:ClearDB" />
@@ -23,6 +54,26 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddSender" message="tns:ISenderService_AddSender_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/AddSenderResponse" message="tns:ISenderService_AddSender_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetAllUsers" message="tns:ISenderService_GetAllUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetAllUsersResponse" message="tns:ISenderService_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddApplication">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddApplication" message="tns:ISenderService_AddApplication_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/AddApplicationResponse" message="tns:ISenderService_AddApplication_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApplications">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetAllApplications" message="tns:ISenderService_GetAllApplications_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetAllApplicationsResponse" message="tns:ISenderService_GetAllApplications_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddCourier">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddCourier" message="tns:ISenderService_AddCourier_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/AddCourierResponse" message="tns:ISenderService_AddCourier_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteApplication">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/DeleteApplication" message="tns:ISenderService_DeleteApplication_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/DeleteApplicationResponse" message="tns:ISenderService_DeleteApplication_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="ClearDB">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/ClearDB" message="tns:ISenderService_ClearDB_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/ClearDBResponse" message="tns:ISenderService_ClearDB_OutputMessage" />
@@ -32,6 +83,51 @@
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="AddSender">
       <soap:operation soapAction="http://tempuri.org/ISenderService/AddSender" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/GetAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddApplication">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/AddApplication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllApplications">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/GetAllApplications" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddCourier">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/AddCourier" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteApplication">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/DeleteApplication" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

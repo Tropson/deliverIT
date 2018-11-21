@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DeliveryService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DeliveryService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="SenderResource">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:PersonResource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AccountType" type="xs:int" />
+          <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Points" type="xs:int" />
+          <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="SenderResource" nillable="true" type="tns:SenderResource" />
+  <xs:complexType name="PersonResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cpr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ZipCode" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PersonResource" nillable="true" type="tns:PersonResource" />
+  <xs:complexType name="ArrayOfSenderResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SenderResource" nillable="true" type="tns:SenderResource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSenderResource" nillable="true" type="tns:ArrayOfSenderResource" />
+  <xs:complexType name="ApplicationResource">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:PersonResource">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CVPath" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="GuidLine" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IDPicturePath" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="YellowCardPath" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ApplicationResource" nillable="true" type="tns:ApplicationResource" />
+  <xs:complexType name="ArrayOfApplicationResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ApplicationResource" nillable="true" type="tns:ApplicationResource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfApplicationResource" nillable="true" type="tns:ArrayOfApplicationResource" />
+</xs:schema>

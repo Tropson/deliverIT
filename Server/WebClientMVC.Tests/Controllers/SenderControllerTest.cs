@@ -18,10 +18,10 @@ namespace WebClientMVC.Tests.Controllers
         public void ServiceConnectionTest()
         {
             //setup
-            var proxy = new SenderServiceClient();
+            var proxy = new SenderServiceReference.SenderServiceClient();
 
             //assert
-            proxy.Close();
+            
             Assert.IsNotNull(proxy);
             proxy.Close();
         }
