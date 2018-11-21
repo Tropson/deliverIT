@@ -10,6 +10,7 @@ using System.Web.Security;
 using System.Net;
 using FluentFTP;
 using System.Net.Mail;
+using System.IO;
 
 namespace WebClientMVC.Controllers
 {
@@ -36,12 +37,13 @@ namespace WebClientMVC.Controllers
         }
         public ActionResult Download(string guid,string file)
         {
-            
-            
-            string path = $"public_html/Files/{guid}/{file}";
-            
+
+
+            //string path = $"public_html/Files/{guid}/{file}";
+            string path = Server.MapPath($"/Download/test2.rar");            
             System.IO.MemoryStream mem = new System.IO.MemoryStream();
-            client.Download(mem, path);
+            //client.Download(mem, path);
+            new System.IO.FileStream(path, FileMode.Open, FileAccess.Read).CopyTo(mem); 
             byte[] fileBytes = new byte[mem.Length];
             fileBytes = mem.ToArray();
             string fileName = file;
