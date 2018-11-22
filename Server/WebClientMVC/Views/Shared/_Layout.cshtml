@@ -24,8 +24,25 @@
             </div>
             <div id="right">
                 <ul>
-                    <li><a href="@Url.Action("Index","Application")" id="joinbutton">Join us</a></li>
-                    <li><a href="@Url.Action("Index","Sender")" id="sendbutton">Send</a></li>
+                    @if (Request.Cookies.Get("login") != null)
+                    {
+                        var proxy = new WebClientMVC.SenderServiceReference1.SenderServiceClient();
+                        <li><a href="@Url.Action("Index", "Sender")">@Request.Cookies.Get("login").Values["feketePorzeczka"] &nbsp;&nbsp;</a></li>
+                        <li><a href="@Url.Action("Points", "Sender")">Points: @(proxy.GetBalanceByUsername(Request.Cookies.Get("login").Values["feketePorzeczka"]))</a></li>
+                        var currentUser = proxy.GetAllUsers().SingleOrDefault(x => x.Username == Request.Cookies.Get("login").Values["feketePorzeczka"]);
+                        if (currentUser.AccountType == 1)
+                        {
+                            <li><a href="@Url.Action("Index", "Sender")" id="sendbutton">Send</a></li>
+                        }
+                        else if (currentUser.AccountType == 2)
+                        {
+                            <li><a href="@Url.Action("Index","Application")" id="joinbutton">Deliver</a></li>
+                        }
+                    }
+                    else{
+                        <li><a href="@Url.Action("Index","Application")" id="joinbutton">Deliver</a></li>
+                        <li><a href="@Url.Action("Index","Sender")" id="sendbutton">Send</a></li>
+                    }
                 </ul>
             </div>
         </div>

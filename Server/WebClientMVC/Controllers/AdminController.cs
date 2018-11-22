@@ -40,10 +40,10 @@ namespace WebClientMVC.Controllers
 
 
             //string path = $"public_html/Files/{guid}/{file}";
-            string path = Server.MapPath($"/Download/{guid}/{file}");            
+            string path = Server.MapPath($"/Download/{guid}/{file}");
             System.IO.MemoryStream mem = new System.IO.MemoryStream();
             //client.Download(mem, path);
-            new System.IO.FileStream(path, FileMode.Open, FileAccess.Read).CopyTo(mem); 
+            new System.IO.FileStream(path, FileMode.Open, FileAccess.Read).CopyTo(mem);
             byte[] fileBytes = new byte[mem.Length];
             fileBytes = mem.ToArray();
             string fileName = file;
@@ -75,7 +75,7 @@ namespace WebClientMVC.Controllers
                 _proxy.AddCourier(new DeliveryService.UserModel { AccountType = courier.AccountType, Address = courier.Address, City = courier.City, ZipCode = courier.ZipCode, Cpr = courier.Cpr, Email = courier.Email, FirstName = courier.FirstName, LastName = courier.LastName, PhoneNumber = courier.PhoneNumber, Points = courier.Points, Username = courier.Email, Password = generPassword });
                 DeliveryService.ApplicationModel appToDelete = new DeliveryService.ApplicationModel { Cpr = app.Cpr };
                 _proxy.DeleteApplication(appToDelete,false);
-                client.Disconnect();
+                //client.Disconnect();
                 return RedirectToAction("Index");
             }
             catch (Exception e)
@@ -85,7 +85,7 @@ namespace WebClientMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult DelteWhenDecline(Models.ApplicationModel app)
+        public ActionResult DeleteOnDecline(Models.ApplicationModel app)
         {
             try
             {
@@ -93,7 +93,7 @@ namespace WebClientMVC.Controllers
                     return View("Index");
                 DeliveryService.ApplicationModel appToDelete = new DeliveryService.ApplicationModel { Cpr = app.Cpr };
                 _proxy.DeleteApplication(appToDelete,true);
-                client.Disconnect();
+                //client.Disconnect();
                 return RedirectToAction("Index");
             }
             catch

@@ -56,6 +56,12 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ClearDB", ReplyAction="http://tempuri.org/ISenderService/ClearDBResponse")]
         System.Threading.Tasks.Task ClearDBAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetBalanceByUsername", ReplyAction="http://tempuri.org/ISenderService/GetBalanceByUsernameResponse")]
+        int GetBalanceByUsername(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetBalanceByUsername", ReplyAction="http://tempuri.org/ISenderService/GetBalanceByUsernameResponse")]
+        System.Threading.Tasks.Task<int> GetBalanceByUsernameAsync(string username);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -139,6 +145,14 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         public System.Threading.Tasks.Task ClearDBAsync() {
             return base.Channel.ClearDBAsync();
+        }
+        
+        public int GetBalanceByUsername(string username) {
+            return base.Channel.GetBalanceByUsername(username);
+        }
+        
+        public System.Threading.Tasks.Task<int> GetBalanceByUsernameAsync(string username) {
+            return base.Channel.GetBalanceByUsernameAsync(username);
         }
     }
 }

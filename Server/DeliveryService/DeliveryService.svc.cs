@@ -307,5 +307,19 @@ namespace DeliveryService
             return mySender;
 
         }
+
+        public int GetBalanceByUsername(string username)
+        {
+            var user = db.Users.SingleOrDefault(x=>x.Username==username);
+            int balance = (int)user.Points;
+            return balance;
+        }
+
+        public void AddToBalance(string username, int amount)
+        {
+            var balance = db.Users.SingleOrDefault(x => x.Username == username).Points;
+            balance += amount;
+            db.SubmitChanges();
+        }
     }
 }
