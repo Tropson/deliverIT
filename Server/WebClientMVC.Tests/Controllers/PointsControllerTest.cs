@@ -4,6 +4,7 @@ using Moq;
 using WebClientMVC.SenderServiceReference1;
 using WebClientMVC.Models;
 using System.Web.Mvc;
+using WebClientMVC.Controllers;
 
 namespace WebClientMVC.Tests.Controllers
 {
@@ -14,7 +15,7 @@ namespace WebClientMVC.Tests.Controllers
         public void GetBalanceTest(string username)
         {
             var serviceStub = new Mock<ISenderService>();
-            serviceStub.Setup(x => x.GetBalanceByUsername(username)).Returns(new SenderModel { Points = 100 });
+            serviceStub.Setup(x => x.GetBalanceByUsername(username)).Returns(100);
             var sut = new PointsController(serviceStub.Object);
 
 
@@ -32,7 +33,7 @@ namespace WebClientMVC.Tests.Controllers
 
             int points = serv.GetBalanceByUsername(username);
 
-            PointsController pointsCtr = new PointsController();
+            PointsController pointsCtr = new PointsController(serv);
 
             pointsCtr.AddPoints(50);
 
