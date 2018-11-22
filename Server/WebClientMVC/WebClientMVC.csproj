@@ -220,12 +220,18 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Resources\bg.png" />
+    <Content Include="Resources\card.png" />
+    <Content Include="Resources\favicon.ico" />
+    <Content Include="Resources\mobile_menu.png" />
+    <Content Include="Resources\voucher.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Properties\DataSources\DeliveryService.ApplicationModel.datasource" />
+    <Content Include="Properties\DataSources\DeliveryService.UserModel.datasource" />
     <None Include="Connected Services\SenderServiceReference1\DeliveryService.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -236,7 +242,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Connected Services\SenderServiceReference1\SenderService.wsdl" />
-    <Content Include="Properties\DataSources\DeliveryService.UserModel.datasource" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\customScripts.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -269,10 +275,11 @@
     <Content Include="Views\Application\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Sender\LoggedIn.cshtml" />
+    <Content Include="Views\Sender\Points.cshtml" />
+    <Content Include="Views\Sender\Voucher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Resources\" />
     <Folder Include="Views\Points\" />
   </ItemGroup>
   <ItemGroup>

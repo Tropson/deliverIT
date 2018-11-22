@@ -82,10 +82,10 @@
   <ItemGroup>
     <Folder Include="App_Data\uploads\" />
     <Folder Include="Models\" />
-    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Tests\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
