@@ -236,7 +236,6 @@
     </None>
     <None Include="Connected Services\SenderServiceReference1\SenderService.wsdl" />
     <Content Include="Properties\DataSources\DeliveryService.UserModel.datasource" />
-    <Content Include="Download\test.zip" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\customScripts.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

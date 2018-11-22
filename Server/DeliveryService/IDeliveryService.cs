@@ -33,6 +33,12 @@ namespace DeliveryService
 
         [OperationContract]
         void ClearDB();
+
+        [OperationContract]
+        int GetBalanceByUsername(string username);
+
+        [OperationContract]
+        void AddToBalance(string username, int amount);
     }
     
     [DataContract(Name = "PersonResource")]

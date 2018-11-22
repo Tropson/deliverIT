@@ -35,7 +35,7 @@ a {
 
 #title {
     text-transform: capitalize;
-    text-shadow: 1.5px 0px 2px black;
+    
 }
 
     #title:hover {
@@ -48,7 +48,7 @@ ul li {
     position: relative;
     cursor: default;
     top:-5px;
-    text-shadow: 1.5px 0px 2px black;
+    
 }
 
 ul {
