@@ -14,7 +14,7 @@ namespace WebClientMVC.Tests.Controllers
         public void GetBalanceTest(string username)
         {
             var serviceStub = new Mock<ISenderService>();
-            serviceStub.Setup(x => x.GetBalanceByUsername()).Returns(new SenderModel { Points = 100 });
+            serviceStub.Setup(x => x.GetBalanceByUsername(username)).Returns(new SenderModel { Points = 100 });
             var sut = new PointsController(serviceStub.Object);
 
 
@@ -28,7 +28,17 @@ namespace WebClientMVC.Tests.Controllers
         [TestMethod]
         public void AddPointsToUseerAccount(string username)
         {
-            
+            SenderServiceClient serv = new SenderServiceClient();
+
+            int points = serv.GetBalanceByUsername(username);
+
+            PointsController pointsCtr = new PointsController();
+
+            pointsCtr.AddPoints(50);
+
+            int resPoints = serv.GetBalanceByUsername(username);
+
+            Assert.Equals(points, resPoints + 50);
             
         }
     }
