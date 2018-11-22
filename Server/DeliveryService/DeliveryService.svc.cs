@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Linq;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -25,13 +26,6 @@ namespace DeliveryService
         {
             UserModel sender = senderObj;
             int nextPersonId = 0;
-            try {
-                nextPersonId = db.Persons.OrderBy(x => x.ID).ToList().Last().ID + 1;
-            }
-            catch (Exception e)
-            {
-                nextPersonId = 1;
-            }
             Person person = new Person { Cpr = sender.Cpr,
                 FirstName = sender.FirstName,
                 LastName = sender.LastName,
@@ -40,14 +34,6 @@ namespace DeliveryService
                 Address = sender.Address,
                 ZipCode = sender.ZipCode,
                 City = sender.City };
-            User user = new User
-            {
-                Username = sender.Username,
-                Password = sender.Password,
-                Points = sender.Points,
-                AccountTypeID = sender.AccountType,
-                PersonID = nextPersonId
-            };
             var senders = db.Persons;
             var users = db.Users;
             senders.InsertOnSubmit(person);
@@ -57,10 +43,30 @@ namespace DeliveryService
             }
             catch (Exception e)
             {
-                return 0;
+                if (e.Message.Contains("UNIQUE") && e.Message.Contains("Cpr"))
+                {
+                    db.ExecuteCommand($"DBCC CHECKIDENT (Person, RESEED, {db.Persons.OrderBy(x => x.ID).ToList().Last().ID});");
+                    db.DiscardPendingChanges();
+                    return -1;
+                }
+                else if (e.Message.Contains("UNIQUE") && e.Message.Contains("Email"))
+                {
+                    db.ExecuteCommand($"DBCC CHECKIDENT (Person, RESEED, {db.Persons.OrderBy(x => x.ID).ToList().Last().ID});");
+                    db.DiscardPendingChanges();
+                    return -2;
+                }
+                else return 0;
             }
-            
             db.Connection.Close();
+            nextPersonId = db.Persons.SingleOrDefault(x=>x.Cpr==senderObj.Cpr).ID;
+            User user = new User
+            {
+                Username = sender.Username,
+                Password = sender.Password,
+                Points = sender.Points,
+                AccountTypeID = sender.AccountType,
+                PersonID = nextPersonId
+            };
             users.InsertOnSubmit(user);
             try
             {
@@ -69,7 +75,16 @@ namespace DeliveryService
             }
             catch (Exception e)
             {
-                return 0;
+                if (e.Message.Contains("UNIQUE") && e.Message.Contains("Username"))
+                {
+                    db.DiscardPendingChanges();
+                    db.Persons.DeleteOnSubmit(person);
+                    db.SubmitChanges();
+                    db.ExecuteCommand($"DBCC CHECKIDENT (Person, RESEED, {db.Persons.OrderBy(x => x.ID).ToList().Last().ID});");
+                    db.ExecuteCommand($"DBCC CHECKIDENT ([User], RESEED, {db.Users.OrderBy(x => x.ID).ToList().Last().ID});");
+                    return -3;
+                }
+                else return 0;
             }
             finally
             {
@@ -320,6 +335,48 @@ namespace DeliveryService
             var balance = db.Users.SingleOrDefault(x => x.Username == username).Points;
             balance += amount;
             db.SubmitChanges();
+        }
+    }
+}
+public static class DataContextExtensions
+{
+    /// <summary>
+    ///     Discard all pending changes of current DataContext.
+    ///     All un-submitted changes, including insert/delete/modify will lost.
+    /// </summary>
+    /// <param name="context"></param>
+    public static void DiscardPendingChanges(this DataContext context)
+    {
+        context.RefreshPendingChanges(RefreshMode.OverwriteCurrentValues);
+        ChangeSet changeSet = context.GetChangeSet();
+        if (changeSet != null)
+        {
+            //Undo inserts
+            foreach (object objToInsert in changeSet.Inserts)
+            {
+                context.GetTable(objToInsert.GetType()).DeleteOnSubmit(objToInsert);
+            }
+            //Undo deletes
+            foreach (object objToDelete in changeSet.Deletes)
+            {
+                context.GetTable(objToDelete.GetType()).InsertOnSubmit(objToDelete);
+            }
+        }
+    }
+
+    /// <summary>
+    ///     Refreshes all pending Delete/Update entity objects of current DataContext according to the specified mode.
+    ///     Nothing will do on Pending Insert entity objects.
+    /// </summary>
+    /// <param name="context"></param>
+    /// <param name="refreshMode">A value that specifies how optimistic concurrency conflicts are handled.</param>
+    public static void RefreshPendingChanges(this DataContext context, RefreshMode refreshMode)
+    {
+        ChangeSet changeSet = context.GetChangeSet();
+        if (changeSet != null)
+        {
+            context.Refresh(refreshMode, changeSet.Deletes);
+            context.Refresh(refreshMode, changeSet.Updates);
         }
     }
 }

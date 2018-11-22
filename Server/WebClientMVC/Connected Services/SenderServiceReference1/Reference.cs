@@ -62,6 +62,12 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetBalanceByUsername", ReplyAction="http://tempuri.org/ISenderService/GetBalanceByUsernameResponse")]
         System.Threading.Tasks.Task<int> GetBalanceByUsernameAsync(string username);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddToBalance", ReplyAction="http://tempuri.org/ISenderService/AddToBalanceResponse")]
+        void AddToBalance(string username, int amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddToBalance", ReplyAction="http://tempuri.org/ISenderService/AddToBalanceResponse")]
+        System.Threading.Tasks.Task AddToBalanceAsync(string username, int amount);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -153,6 +159,14 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         public System.Threading.Tasks.Task<int> GetBalanceByUsernameAsync(string username) {
             return base.Channel.GetBalanceByUsernameAsync(username);
+        }
+        
+        public void AddToBalance(string username, int amount) {
+            base.Channel.AddToBalance(username, amount);
+        }
+        
+        public System.Threading.Tasks.Task AddToBalanceAsync(string username, int amount) {
+            return base.Channel.AddToBalanceAsync(username, amount);
         }
     }
 }
