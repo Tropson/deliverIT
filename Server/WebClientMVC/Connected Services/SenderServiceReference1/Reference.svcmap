@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="56dd8bdb-dcba-4e01-961b-a4c09b842626" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="13b52f6e-1583-483a-ae79-642b37655176" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost:50512/DeliveryService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="DeliveryService.disco" MetadataType="Disco" ID="146bf735-58b2-4edd-9433-d4cec287911f" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?disco" />
-    <MetadataFile FileName="DeliveryService.xsd" MetadataType="Schema" ID="8ae9ee7c-19fb-48a8-927f-eb571f7827df" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd2" />
-    <MetadataFile FileName="DeliveryService1.xsd" MetadataType="Schema" ID="b798365f-ea18-46ce-b6f1-b01ab5f00f66" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd1" />
-    <MetadataFile FileName="DeliveryService2.xsd" MetadataType="Schema" ID="c987d2ae-9661-4989-ae05-acfdb7b9f13f" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd0" />
-    <MetadataFile FileName="SenderService.wsdl" MetadataType="Wsdl" ID="f0a230f7-5413-447a-a474-793e2a2624de" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?wsdl" />
+    <MetadataFile FileName="DeliveryService.disco" MetadataType="Disco" ID="5cdae0a4-ead9-4716-9569-abf851e60541" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?disco" />
+    <MetadataFile FileName="DeliveryService.xsd" MetadataType="Schema" ID="87a3db30-8289-44c1-bd38-47387371faf5" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd2" />
+    <MetadataFile FileName="DeliveryService1.xsd" MetadataType="Schema" ID="ba8856d0-fbb1-41e4-bb71-8277cfeb3acb" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd1" />
+    <MetadataFile FileName="DeliveryService2.xsd" MetadataType="Schema" ID="186de19d-8ee9-4d77-a1a7-29da10064ef8" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?xsd=xsd0" />
+    <MetadataFile FileName="SenderService.wsdl" MetadataType="Wsdl" ID="b6f91e79-c449-41e2-87b3-993008240585" SourceId="1" SourceUrl="http://localhost:50512/DeliveryService.svc?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

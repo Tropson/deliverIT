@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Points";
+}
+
+<h2>Points</h2>
+<div class="col-md-12">
+    <hr />
+    <div class="col-md-6">
+        <center><img src="~/Resources/card.png" style="height:100px" /></center>
+        <br />
+        <center><p>Press this button if you would like to top up your points via your credit card</p></center>
+        <center><a href="@Url.Action("Pay","Sender")" class="btn btn-default">Pay</a></center>
+        <br />
+    </div>
+    <div class="col-md-6">
+        <center><img src="~/Resources/voucher.png" style="height:100px" /></center>
+        <br />
+        <center><p>Do you have a voucher code? Press this button!</p></center>
+        <center><a href="@Url.Action("Voucher","Sender")" class="btn btn-default">Voucher</a></center>
+        <br />
+    </div>
+</div>
+

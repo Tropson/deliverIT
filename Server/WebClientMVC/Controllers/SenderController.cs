@@ -222,5 +222,15 @@ namespace WebClientMVC.Controllers
                 return View();
             }
         }
+
+        public ActionResult Points()
+        {
+            return View();
+        }
+
+        public ActionResult Voucher()
+        {
+            return View();
+        }
     }
 }
