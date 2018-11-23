@@ -200,6 +200,7 @@
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\SenderModel.cs" />
+    <Compile Include="Models\VoucherModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

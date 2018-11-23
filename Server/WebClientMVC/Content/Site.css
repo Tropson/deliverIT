@@ -20,7 +20,7 @@
 }
 
 a {
-    cursor: default;
+    cursor: pointer;
     text-transform: uppercase;
     transition: padding-bottom 0.2s;
     font-weight: 600;
