@@ -119,4 +119,16 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAllVouchers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllVouchersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="GetAllVouchersResult" nillable="true" type="q7:ArrayOfVoucherResource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

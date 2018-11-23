@@ -61,6 +61,12 @@
   <wsdl:message name="ISenderService_AddToBalance_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddToBalanceResponse" />
   </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllVouchers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllVouchers" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllVouchers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllVouchersResponse" />
+  </wsdl:message>
   <wsdl:portType name="ISenderService">
     <wsdl:operation name="AddSender">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddSender" message="tns:ISenderService_AddSender_InputMessage" />
@@ -97,6 +103,10 @@
     <wsdl:operation name="AddToBalance">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddToBalance" message="tns:ISenderService_AddToBalance_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/AddToBalanceResponse" message="tns:ISenderService_AddToBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllVouchers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetAllVouchers" message="tns:ISenderService_GetAllVouchers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetAllVouchersResponse" message="tns:ISenderService_GetAllVouchers_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ISenderService" type="tns:ISenderService">
@@ -175,6 +185,15 @@
     </wsdl:operation>
     <wsdl:operation name="AddToBalance">
       <soap:operation soapAction="http://tempuri.org/ISenderService/AddToBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllVouchers">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/GetAllVouchers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

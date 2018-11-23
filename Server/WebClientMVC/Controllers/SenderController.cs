@@ -232,5 +232,29 @@ namespace WebClientMVC.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Voucher(VoucherModel voucherm)
+        {
+            var voucher = _proxy.GetAllVouchers().Select(x => new VoucherModel { amount = x.amount, code = x.code, status = x.status }).SingleOrDefault(x => x.code == voucherm.code);
+            if (voucher != null)
+            {
+                if (voucher.status == null)
+                {
+                    _proxy.AddToBalance(Request.Cookies.Get("login").Values["feketePorzeczka"], voucher.amount);
+                }
+                else
+                {
+                    ModelState.AddModelError("code", "This voucher was already used.");
+                    return View("Voucher", voucherm);
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("code", "This voucher doesn't exist");
+                return View("Voucher", voucherm);
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

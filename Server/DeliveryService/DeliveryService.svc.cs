@@ -336,6 +336,11 @@ namespace DeliveryService
             balance += amount;
             db.SubmitChanges();
         }
+        public VoucherModel[] GetAllVouchers()
+        {
+            var vouchers = db.Vouchers.Select(x => new VoucherModel { amount = (int)x.Amount, code = x.Code, status = x.Status }).ToArray();
+            return vouchers;
+        }
     }
 }
 public static class DataContextExtensions

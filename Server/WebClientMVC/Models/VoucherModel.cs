@@ -9,5 +9,6 @@ namespace WebClientMVC.Models
     {
         public string code { get; set; }
         public int amount { get; set; }
+        public int? status { get; set; }
     }
 }

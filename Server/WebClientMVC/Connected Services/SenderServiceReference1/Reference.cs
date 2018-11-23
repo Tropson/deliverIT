@@ -68,6 +68,12 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddToBalance", ReplyAction="http://tempuri.org/ISenderService/AddToBalanceResponse")]
         System.Threading.Tasks.Task AddToBalanceAsync(string username, int amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllVouchersResponse")]
+        DeliveryService.VoucherModel[] GetAllVouchers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllVouchersResponse")]
+        System.Threading.Tasks.Task<DeliveryService.VoucherModel[]> GetAllVouchersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -167,6 +173,14 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         public System.Threading.Tasks.Task AddToBalanceAsync(string username, int amount) {
             return base.Channel.AddToBalanceAsync(username, amount);
+        }
+        
+        public DeliveryService.VoucherModel[] GetAllVouchers() {
+            return base.Channel.GetAllVouchers();
+        }
+        
+        public System.Threading.Tasks.Task<DeliveryService.VoucherModel[]> GetAllVouchersAsync() {
+            return base.Channel.GetAllVouchersAsync();
         }
     }
 }

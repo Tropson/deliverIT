@@ -52,4 +52,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfApplicationResource" nillable="true" type="tns:ArrayOfApplicationResource" />
+  <xs:complexType name="ArrayOfVoucherResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VoucherResource" nillable="true" type="tns:VoucherResource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVoucherResource" nillable="true" type="tns:ArrayOfVoucherResource" />
+  <xs:complexType name="VoucherResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="amount" type="xs:int" />
+      <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="status" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VoucherResource" nillable="true" type="tns:VoucherResource" />
 </xs:schema>
