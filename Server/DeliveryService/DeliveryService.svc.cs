@@ -332,14 +332,35 @@ namespace DeliveryService
 
         public void AddToBalance(string username, int amount)
         {
-            var balance = db.Users.SingleOrDefault(x => x.Username == username).Points;
-            balance += amount;
+
+            var user = db.Users.SingleOrDefault(x => x.Username == username);
+            user.Points += amount;
             db.SubmitChanges();
         }
         public VoucherModel[] GetAllVouchers()
         {
-            var vouchers = db.Vouchers.Select(x => new VoucherModel { amount = (int)x.Amount, code = x.Code, status = x.Status }).ToArray();
+            var vouchers = db.Vouchers.Select(x => new VoucherModel { amount = (int)x.Amount, code = x.Code}).ToArray();
             return vouchers;
+        }
+        public VouchersUsedModel[] GetAllUsedVouchers()
+        {
+            var vouchersUsed = db.VouchersUseds.Select(x => new VouchersUsedModel { code = x.Voucher.Code, username = x.User.Username }).ToArray();
+            return vouchersUsed;
+        }
+
+        public void UseVoucher(string username, string code)
+        {
+            var voucher = db.Vouchers.SingleOrDefault(x => x.Code == code);
+            var user = db.Users.SingleOrDefault(x => x.Username == username);
+            var usedVoucher = new VouchersUsed { UserID = user.ID, VoucherID = voucher.ID };
+            try
+            {
+                db.VouchersUseds.InsertOnSubmit(usedVoucher);
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            { }
+            AddToBalance(username, (int)voucher.Amount);
         }
     }
 }

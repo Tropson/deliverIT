@@ -41,7 +41,13 @@ namespace DeliveryService
         void AddToBalance(string username, int amount);
 
         [OperationContract]
+        void UseVoucher(string username, string code);
+
+        [OperationContract]
         VoucherModel[] GetAllVouchers();
+
+        [OperationContract]
+        VouchersUsedModel[] GetAllUsedVouchers();
     }
 
     [DataContract(Name = "VoucherResource")]
@@ -51,10 +57,15 @@ namespace DeliveryService
         public string code { get; set; }
         [DataMember]
         public int amount { get; set; }
-        [DataMember]
-        public int? status { get; set; }
     }
-
+    [DataContract(Name = "VouchersUsedResource")]
+    public class VouchersUsedModel
+    {
+        [DataMember]
+        public string username { get; set; }
+        [DataMember]
+        public string code { get; set; }
+    }
     [DataContract(Name = "PersonResource")]
     public class PersonModel
     {

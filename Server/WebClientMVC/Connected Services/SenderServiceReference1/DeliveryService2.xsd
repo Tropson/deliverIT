@@ -119,6 +119,19 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="UseVoucher">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UseVoucherResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetAllVouchers">
     <xs:complexType>
       <xs:sequence />
@@ -128,6 +141,18 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="GetAllVouchersResult" nillable="true" type="q7:ArrayOfVoucherResource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllUsedVouchers">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllUsedVouchersResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="GetAllUsedVouchersResult" nillable="true" type="q8:ArrayOfVouchersUsedResource" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

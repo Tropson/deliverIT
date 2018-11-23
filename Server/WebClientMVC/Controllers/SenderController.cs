@@ -236,25 +236,41 @@ namespace WebClientMVC.Controllers
         [HttpPost]
         public ActionResult Voucher(VoucherModel voucherm)
         {
-            var voucher = _proxy.GetAllVouchers().Select(x => new VoucherModel { amount = x.amount, code = x.code, status = x.status }).SingleOrDefault(x => x.code == voucherm.code);
-            if (voucher != null)
+            try
             {
-                if (voucher.status == null)
+                int status = 0;
+                string username = Request.Cookies.Get("login").Values["feketePorzeczka"];
+                var usedVouchers = _proxy.GetAllUsedVouchers();
+                var voucher = _proxy.GetAllVouchers().Select(x => new VoucherModel { amount = x.amount, code = x.code }).SingleOrDefault(x => x.code == voucherm.code);
+                if (voucher != null)
                 {
-                    _proxy.AddToBalance(Request.Cookies.Get("login").Values["feketePorzeczka"], voucher.amount);
+                    foreach (var a in usedVouchers)
+                    {
+                        if (a.code == voucherm.code && a.username == username)
+                        {
+                            status = 1;
+                        }
+                    }
+                    if (status == 0)
+                    {
+                        _proxy.UseVoucher(username, voucherm.code);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("code", "This voucher was already used.");
+                        return View("Voucher", voucherm);
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError("code", "This voucher was already used.");
+                    ModelState.AddModelError("code", "This voucher doesn't exist");
                     return View("Voucher", voucherm);
                 }
+                return RedirectToAction("Index");
             }
-            else
-            {
-                ModelState.AddModelError("code", "This voucher doesn't exist");
-                return View("Voucher", voucherm);
+            catch {
+                return View();
             }
-            return RedirectToAction("Index");
         }
     }
 }

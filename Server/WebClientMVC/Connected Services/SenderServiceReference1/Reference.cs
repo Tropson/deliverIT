@@ -69,11 +69,23 @@ namespace WebClientMVC.SenderServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddToBalance", ReplyAction="http://tempuri.org/ISenderService/AddToBalanceResponse")]
         System.Threading.Tasks.Task AddToBalanceAsync(string username, int amount);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/UseVoucher", ReplyAction="http://tempuri.org/ISenderService/UseVoucherResponse")]
+        void UseVoucher(string username, string code);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/UseVoucher", ReplyAction="http://tempuri.org/ISenderService/UseVoucherResponse")]
+        System.Threading.Tasks.Task UseVoucherAsync(string username, string code);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllVouchersResponse")]
         DeliveryService.VoucherModel[] GetAllVouchers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllVouchersResponse")]
         System.Threading.Tasks.Task<DeliveryService.VoucherModel[]> GetAllVouchersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsedVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsedVouchersResponse")]
+        DeliveryService.VouchersUsedModel[] GetAllUsedVouchers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsedVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsedVouchersResponse")]
+        System.Threading.Tasks.Task<DeliveryService.VouchersUsedModel[]> GetAllUsedVouchersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -175,12 +187,28 @@ namespace WebClientMVC.SenderServiceReference1 {
             return base.Channel.AddToBalanceAsync(username, amount);
         }
         
+        public void UseVoucher(string username, string code) {
+            base.Channel.UseVoucher(username, code);
+        }
+        
+        public System.Threading.Tasks.Task UseVoucherAsync(string username, string code) {
+            return base.Channel.UseVoucherAsync(username, code);
+        }
+        
         public DeliveryService.VoucherModel[] GetAllVouchers() {
             return base.Channel.GetAllVouchers();
         }
         
         public System.Threading.Tasks.Task<DeliveryService.VoucherModel[]> GetAllVouchersAsync() {
             return base.Channel.GetAllVouchersAsync();
+        }
+        
+        public DeliveryService.VouchersUsedModel[] GetAllUsedVouchers() {
+            return base.Channel.GetAllUsedVouchers();
+        }
+        
+        public System.Threading.Tasks.Task<DeliveryService.VouchersUsedModel[]> GetAllUsedVouchersAsync() {
+            return base.Channel.GetAllUsedVouchersAsync();
         }
     }
 }
