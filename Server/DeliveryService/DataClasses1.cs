@@ -22,7 +22,7 @@ namespace DeliveyService
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="dmaj0917_1067643")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="DeliverITDatabase")]
 	public partial class DataClasses1DataContext : System.Data.Linq.DataContext
 	{
 		
