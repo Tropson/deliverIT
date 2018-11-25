@@ -49,6 +49,36 @@
   <wsdl:message name="ISenderService_ClearDB_OutputMessage">
     <wsdl:part name="parameters" element="tns:ClearDBResponse" />
   </wsdl:message>
+  <wsdl:message name="ISenderService_GetBalanceByUsername_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBalanceByUsername" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetBalanceByUsername_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBalanceByUsernameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_AddToBalance_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddToBalance" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_AddToBalance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddToBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_UseVoucher_InputMessage">
+    <wsdl:part name="parameters" element="tns:UseVoucher" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_UseVoucher_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UseVoucherResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllVouchers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllVouchers" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllVouchers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllVouchersResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllUsedVouchers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsedVouchers" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllUsedVouchers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsedVouchersResponse" />
+  </wsdl:message>
   <wsdl:portType name="ISenderService">
     <wsdl:operation name="AddSender">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddSender" message="tns:ISenderService_AddSender_InputMessage" />
@@ -77,6 +107,26 @@
     <wsdl:operation name="ClearDB">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/ClearDB" message="tns:ISenderService_ClearDB_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/ClearDBResponse" message="tns:ISenderService_ClearDB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBalanceByUsername">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetBalanceByUsername" message="tns:ISenderService_GetBalanceByUsername_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetBalanceByUsernameResponse" message="tns:ISenderService_GetBalanceByUsername_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddToBalance">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddToBalance" message="tns:ISenderService_AddToBalance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/AddToBalanceResponse" message="tns:ISenderService_AddToBalance_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UseVoucher">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/UseVoucher" message="tns:ISenderService_UseVoucher_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/UseVoucherResponse" message="tns:ISenderService_UseVoucher_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllVouchers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetAllVouchers" message="tns:ISenderService_GetAllVouchers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetAllVouchersResponse" message="tns:ISenderService_GetAllVouchers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsedVouchers">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetAllUsedVouchers" message="tns:ISenderService_GetAllUsedVouchers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetAllUsedVouchersResponse" message="tns:ISenderService_GetAllUsedVouchers_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ISenderService" type="tns:ISenderService">
@@ -137,6 +187,51 @@
     </wsdl:operation>
     <wsdl:operation name="ClearDB">
       <soap:operation soapAction="http://tempuri.org/ISenderService/ClearDB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBalanceByUsername">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/GetBalanceByUsername" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToBalance">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/AddToBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UseVoucher">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/UseVoucher" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllVouchers">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/GetAllVouchers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsedVouchers">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/GetAllUsedVouchers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

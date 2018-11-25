@@ -136,6 +136,8 @@
     <None Include="Connected Services\SenderServiceReference\SenderService.wsdl" />
     <None Include="Properties\DataSources\DeliveryService.ApplicationModel.datasource" />
     <None Include="Properties\DataSources\DeliveryService.UserModel.datasource" />
+    <None Include="Properties\DataSources\DeliveryService.VoucherModel.datasource" />
+    <None Include="Properties\DataSources\DeliveryService.VouchersUsedModel.datasource" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

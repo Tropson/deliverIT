@@ -52,4 +52,30 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfApplicationResource" nillable="true" type="tns:ArrayOfApplicationResource" />
+  <xs:complexType name="ArrayOfVoucherResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VoucherResource" nillable="true" type="tns:VoucherResource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVoucherResource" nillable="true" type="tns:ArrayOfVoucherResource" />
+  <xs:complexType name="VoucherResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="amount" type="xs:int" />
+      <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VoucherResource" nillable="true" type="tns:VoucherResource" />
+  <xs:complexType name="ArrayOfVouchersUsedResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="VouchersUsedResource" nillable="true" type="tns:VouchersUsedResource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfVouchersUsedResource" nillable="true" type="tns:ArrayOfVouchersUsedResource" />
+  <xs:complexType name="VouchersUsedResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="VouchersUsedResource" nillable="true" type="tns:VouchersUsedResource" />
 </xs:schema>
