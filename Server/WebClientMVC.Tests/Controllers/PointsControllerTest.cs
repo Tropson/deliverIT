@@ -14,28 +14,32 @@ namespace WebClientMVC.Tests.Controllers
         [TestMethod]
         public void GetBalanceTest(string username)
         {
+            LoginPassModel log = new LoginPassModel { Username = "tropson2" };
             var serviceStub = new Mock<ISenderService>();
             serviceStub.Setup(x => x.GetBalanceByUsername(username)).Returns(100);
-            var sut = new PointsController(serviceStub.Object);
+            var sut = new SenderController(serviceStub.Object);
 
 
-            var resPage = sut.Index() as ViewResult;
+            var resPage = sut.LoggedInPost(log) as ViewResult;
 
             var model = resPage.ViewData as SenderModel;
 
             Assert.AreEqual(100, model.Points);
         }
 
+
         [TestMethod]
-        public void AddPointsToUseerAccount(string username)
+        public void AddPointsToUseerAccount()
         {
-            SenderServiceClient serv = new SenderServiceClient();
+            var voucher = new VoucherModel { code = "test2", amount = 200 };
+            var username = "tropson2";
+            SenderServiceReference.SenderServiceClient serv = new SenderServiceReference.SenderServiceClient();
 
             int points = serv.GetBalanceByUsername(username);
 
-            PointsController pointsCtr = new PointsController(serv);
+            SenderController senderContr = new SenderController(serv as SenderServiceReference1.ISenderService);
 
-            pointsCtr.AddPoints(50);
+            senderContr.Voucher(voucher);
 
             int resPoints = serv.GetBalanceByUsername(username);
 
