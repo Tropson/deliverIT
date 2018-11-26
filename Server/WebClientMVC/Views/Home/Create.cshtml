@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+<div class="col-md-12">
+    <hr />
+    <div class="col-md-6">
+        <center><img src="~/Resources/package.png" style="height:100px" /></center>
+        <br />
+        <center><p>Do you want to use our service to send packages? Sign up for free!</p></center>
+        <center><a href="@Url.Action("Create","Sender")" class="btn btn-default">Sender</a></center>
+        <br />
+    </div>
+    <div class="col-md-6">
+        <center><img src="~/Resources/courier.png" style="height:100px" /></center>
+        <br />
+        <center><p>Want to be a deliverer? Fill in the form to apply.</p></center>
+        <center><a href="@Url.Action("Create","Application")" class="btn btn-default">Deliverer</a></center>
+        <br />
+    </div>
+</div>

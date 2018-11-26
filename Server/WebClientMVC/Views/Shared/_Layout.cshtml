@@ -17,9 +17,9 @@
             <div id="left">
                 <ul>
                     <li><a href="@Url.Action("Index","Home")" id="title">DeliverIT</a></li>
-                    <li><a>About us</a></li>
+                    <li><a href="@Url.Action("About","Home")">About us</a></li>
                     <li><a>Help</a></li>
-                    <li><a>Contact us</a></li>
+                    <li><a href="@Url.Action("Contact","Home")">Contact us</a></li>
                 </ul>
             </div>
             <div id="right">
@@ -40,8 +40,8 @@
                         }
                     }
                     else{
-                        <li><a href="@Url.Action("Index","Application")" id="joinbutton">Deliver</a></li>
-                        <li><a href="@Url.Action("Index","Sender")" id="sendbutton">Send</a></li>
+                        <li><a href="@Url.Action("Create","Home")" id="joinbutton">Register</a></li>
+                        <li><a href="@Url.Action("Login","Home")" id="sendbutton">Log in</a></li>
                     }
                 </ul>
             </div>
@@ -50,8 +50,8 @@
             <div id="pic" onclick="showMenu()">
             </div>
             <a id="title" href="@Url.Action("Index","Home")">DeliverIT</a>
-            <a id="sendbutton" href="@Url.Action("Index","Sender")">Send</a>
-            <a id="joinbutton" href="@Url.Action("Index","Application")">Join us</a>
+            <a id="joinbutton" href="@Url.Action("Create","Home")">Register</a>
+            <a id="sendbutton" href="@Url.Action("Login","Home")">Log in</a>
             <div id="hidden">
                 <ul>
                     <li onclick="goToAbout()"><a>About us</a></li>

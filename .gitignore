@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /Server/DebugConsole
 /Server/WebClientMVC.Tests/Controllers/UnitTest1.cs
+/Server/WebClientMVC/Download

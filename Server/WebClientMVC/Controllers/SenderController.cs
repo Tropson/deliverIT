@@ -57,40 +57,6 @@ namespace WebClientMVC.Controllers
             }
             else return RedirectToAction("Index");
         }
-        [HttpPost]
-        public ActionResult Index(LoginModel user)
-        {
-            if (!ModelState.IsValid)
-                return View(user);
-            var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == user.Username);
-            if (userFromDB == null)
-            {
-                userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Email == user.Username);
-            }
-            if (userFromDB == null)
-            {
-                return View(user);
-            }
-            string hash = HashString(user.Password);
-            if (userFromDB.Password == user.Password)
-            {
-                LoginPassModel userToPass = new LoginPassModel { Username = userFromDB.Username };
-                if (userFromDB != null)
-                {
-                    HttpCookie cookie = new HttpCookie("login");
-                    cookie.Values.Add("feketePorzeczka", userToPass.Username);
-                    cookie.Values.Add("pirosPorzeczka", hash);
-                    cookie.Expires = DateTime.Now.AddDays(7);
-                    Response.Cookies.Add(cookie);
-                    return RedirectToAction("LoggedInPost", userToPass);
-                }
-                else
-                {
-                    return View(user);
-                }
-            }
-            else return View(user);
-        }
 
         // GET: Sender/Details/5
         public ActionResult Details(int id)
@@ -155,7 +121,7 @@ namespace WebClientMVC.Controllers
                 HttpCookie cookie = new HttpCookie("login");
                 cookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(cookie);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
             }
             catch (Exception e)
             {

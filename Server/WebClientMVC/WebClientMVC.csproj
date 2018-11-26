@@ -222,8 +222,10 @@
     <Content Include="Content\Site.css" />
     <Content Include="Resources\bg.png" />
     <Content Include="Resources\card.png" />
+    <Content Include="Resources\courier.png" />
     <Content Include="Resources\favicon.ico" />
     <Content Include="Resources\mobile_menu.png" />
+    <Content Include="Resources\package.png" />
     <Content Include="Resources\voucher.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -280,6 +282,8 @@
     <Content Include="Views\Sender\Points.cshtml" />
     <Content Include="Views\Sender\Voucher.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Create.cshtml" />
+    <Content Include="Views\Application\LoggedIn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,10 +6,11 @@ using WebClientMVC.SenderServiceReference1;
 using System.Web.Mvc;
 using System.Net;
 using System.IO;
+using WebClientMVC.Models;
 using System.Text;
 using System.Net.Mail;
 using FluentFTP;
-
+using System.Security.Cryptography;
 
 namespace WebClientMVC.Controllers
 {
@@ -27,6 +28,42 @@ namespace WebClientMVC.Controllers
             return View();
         }
 
+        public ActionResult LoggedInPost(LoginPassModel user)
+        {
+            if (!ModelState.IsValid)
+                return RedirectToAction("Index");
+            var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == user.Username);
+            Models.SenderModel userToPass = new Models.SenderModel(userFromDB.Cpr, userFromDB.FirstName, userFromDB.LastName, userFromDB.PhoneNumber, userFromDB.Email, userFromDB.Address, userFromDB.ZipCode, userFromDB.City)
+            {
+                Username = userFromDB.Username,
+                Password = userFromDB.Password,
+                Points = userFromDB.Points,
+                AccountType = userFromDB.AccountType
+            };
+            if (Request.Cookies.Get("login") != null)
+            {
+                if (HashString(userToPass.Password) == Request.Cookies.Get("login").Values["pirosPorzeczka"])
+                {
+                    return View("LoggedIn", userToPass);
+                }
+                else return RedirectToAction("Index");
+            }
+            else return RedirectToAction("Index");
+        }
+        public ActionResult Logout()
+        {
+            try
+            {
+                HttpCookie cookie = new HttpCookie("login");
+                cookie.Expires = DateTime.Now.AddDays(-1d);
+                Response.Cookies.Add(cookie);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception e)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+        }
         // GET: Application/Details/5
         public ActionResult Details(int id)
         {
@@ -120,7 +157,29 @@ namespace WebClientMVC.Controllers
                 return View();
             }
         }
-       
+        public string HashString(string input)
+        {
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < hash.Length; i++)
+
+            {
+
+                sb.Append(hash[i].ToString("x2"));
+
+            }
+
+            return sb.ToString();
+        }
+
     }
     public static class Methods
     {
