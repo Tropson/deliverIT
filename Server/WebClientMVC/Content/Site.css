@@ -112,8 +112,8 @@ ul {
     top: 22px;
 }
 #map {
-    border:1.5px #CCCCCC solid;
-    border-radius:25px;
+    border-radius:20px;
+    border:1px solid #CCCCCC;
     height:375px;
     width:450px;
     z-index:500;

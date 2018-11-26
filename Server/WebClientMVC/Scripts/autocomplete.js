@@ -1,4 +1,4 @@
-﻿var placeSearch, autocomplete, map;
+﻿var placeSearch, autocomplete, map, marker;
 var componentForm = {
     street_number: 'short_name',
     route: 'long_name',
@@ -17,7 +17,7 @@ function initMap() {
     // The map, centered at Uluru
     map = new google.maps.Map(
         document.getElementById('map'), { zoom: 15, center: aalborg });
-    var marker = new google.maps.Marker({ position: aalborg, map: map });
+    marker = new google.maps.Marker({ position: aalborg, map: map });
     // The marker, positioned at Uluru
 }
 
@@ -68,7 +68,8 @@ function fillInAddress() {
     geocoder.geocode({ 'address': address }, function (results, status) {
         if (status === 'OK') {
             map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
+            marker.setMap(null);
+            marker = new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location
             });
