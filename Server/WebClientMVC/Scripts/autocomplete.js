@@ -7,6 +7,19 @@ var componentForm = {
     country: 'long_name',
     postal_code: 'short_name'
 };
+function initialize() {
+    initMap();
+    initAutocomplete();
+}
+function initMap() {
+    // The location of Uluru
+    var aalborg = { lat: 57.0488, lng: 9.9217 };
+    // The map, centered at Uluru
+    var map = new google.maps.Map(
+        document.getElementById('map'), { zoom: 15, center: aalborg });
+    var marker = new google.maps.Marker({ position: aalborg, map: map });
+    // The marker, positioned at Uluru
+}
 
 function initAutocomplete() {
     // Create the autocomplete object, restricting the search to geographical
@@ -43,6 +56,9 @@ function fillInAddress() {
     document.getElementById("route").disabled = "true";
     document.getElementById("postal_code").disabled = "true";
     document.getElementById("street_number").disabled = "true";
+    var place = autocomplete.getPlace();
+    map.setCenter(place.geometry.location);
+    map.setZoom(17);
 }
 
 // Bias the autocomplete object to the user's geographical location,

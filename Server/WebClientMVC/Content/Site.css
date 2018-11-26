@@ -111,7 +111,13 @@ ul {
     float: left;
     top: 22px;
 }
-
+#map {
+    border:1.5px #CCCCCC solid;
+    border-radius:25px;
+    height:375px;
+    width:450px;
+    z-index:500;
+}
 #nav {
     display: block;
     position: fixed;
