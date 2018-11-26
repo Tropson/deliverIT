@@ -1,4 +1,4 @@
-﻿var placeSearch, autocomplete;
+﻿var placeSearch, autocomplete, map;
 var componentForm = {
     street_number: 'short_name',
     route: 'long_name',
@@ -15,7 +15,7 @@ function initMap() {
     // The location of Uluru
     var aalborg = { lat: 57.0488, lng: 9.9217 };
     // The map, centered at Uluru
-    var map = new google.maps.Map(
+    map = new google.maps.Map(
         document.getElementById('map'), { zoom: 15, center: aalborg });
     var marker = new google.maps.Marker({ position: aalborg, map: map });
     // The marker, positioned at Uluru
@@ -56,9 +56,31 @@ function fillInAddress() {
     document.getElementById("route").disabled = "true";
     document.getElementById("postal_code").disabled = "true";
     document.getElementById("street_number").disabled = "true";
-    var place = autocomplete.getPlace();
-    map.setCenter(place.geometry.location);
-    map.setZoom(17);
+    var currentCenter;
+    //var jsonURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + document.getElementById("route").value + "%20" + document.getElementById("street_number").value + "%20" + document.getElementById("locality").value + "&key=AIzaSyD-i9eQttqqwEOLH8tqPgYocn3Cx-aAa7I";
+    //console.log(jsonURL);
+    //var obj = $.getJSON(jsonURL).done(function (data) {
+    //    $.each(data.items, function (i, item) {
+    //    });
+    //});
+    var geocoder = new google.maps.Geocoder();
+    var address = document.getElementById("route").value + " " + document.getElementById("street_number").value + " " + document.getElementById("locality").value;
+    geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status === 'OK') {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+                map: map,
+                position: results[0].geometry.location
+            });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+    //var geo = obj.responseJSON.results[0].geometry.bounds.northeast;
+    //console.log(geo);
+    //var currentCenter = { lat: geo.lat, lng: geo.lng };
+    //map.setCenter(currentCenter);
+    //var marker = new google.maps.Marker({ position: currentCenter, map: map });
 }
 
 // Bias the autocomplete object to the user's geographical location,
