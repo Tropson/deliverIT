@@ -5,7 +5,8 @@
 
 <h2>Apply as deliverer</h2>
 
-
+<script src="~/Scripts/autocomplete.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-i9eQttqqwEOLH8tqPgYocn3Cx-aAa7I&signed_in=true&libraries=places&callback=initialize" async defer></script>
 @using (Html.BeginForm("Create", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -53,19 +54,28 @@
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="control-label col-md-2">Address:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    <input class="form-control" id="autocomplete" onFocus="geolocate()" type="text" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Street, nr:</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", id = "route", disabled = "true" } })
                     @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-2">
+                    @Html.EditorFor(model => model.Number, new { htmlAttributes = new { @class = "form-control", id = "street_number", disabled = "true" } })
+                    @Html.ValidationMessageFor(model => model.Number, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <label class="control-label col-md-2">Zip code:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", @id = "postal_code", disabled = "true" } })
                     @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -73,35 +83,39 @@
             <div class="form-group">
                 <label class="control-label col-md-2">City:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @id = "locality", disabled = "true" } })
                     @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <span id="administrative_area_level_1" style="display:none"></span>
+            <span id="country" style="display:none"></span>
+            <span id="street_number" style="display:none"></span>
         </div>
         <div class="col-md-6">
             <h4>Additional information</h4>
             <hr />
             <div class="form-group">
-                <label class="control-label col-md-5">Curriculum vitae:</label>
-                <div class="col-md-6">
-                    <input type="file" multiple="multiple" name="files[0]" id="files_0" class="form-control"/>
+                <label class="control-label col-md-3" style="text-align:left">Curriculum vitae:</label>
+                <div class="col-md-4">
+                    <input type="file" multiple="multiple" name="files[0]" id="files_0" class="form-control" />
                     @Html.ValidationMessageFor(model => model.files, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-5">Picture of yellow card:</label>
-                <div class="col-md-6">
+                <label class="control-label col-md-3" style="text-align:left">Picture of yellow card:</label>
+                <div class="col-md-4">
                     <input type="file" multiple="multiple" name="files[1]" id="files_1" class="form-control" />
                     @Html.ValidationMessageFor(model => model.files, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-5">Picture of ID card:</label>
-                <div class="col-md-6">
+                <label class="control-label col-md-3" style="text-align:left">Picture of ID card:</label>
+                <div class="col-md-4">
                     <input type="file" multiple="multiple" name="files[2]" id="files_2" class="form-control" />
                     @Html.ValidationMessageFor(model => model.files, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <div id="map"></div><br />
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

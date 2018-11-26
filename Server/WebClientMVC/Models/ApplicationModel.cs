@@ -17,21 +17,24 @@ namespace WebClientMVC.Models
         [StringLength(15, ErrorMessage = "Too long")]
         public virtual string FirstName { get; set; }
 
-        [Required(ErrorMessage ="This field is required")]
+        [Required(ErrorMessage = "This field is required")]
         [StringLength(15, ErrorMessage = "Too long")]
         public virtual string LastName { get; set; }
 
-        [Required(ErrorMessage ="This field is required")]
+        [Required(ErrorMessage = "This field is required")]
         [Phone(ErrorMessage = "Not a valid phone number")]
         public virtual string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage ="This field is required")]
+        [Required(ErrorMessage = "This field is required")]
         [EmailAddress(ErrorMessage = "Not a valid email address")]
         public virtual string Email { get; set; }
 
-        [Required(ErrorMessage ="This field is required")]
+        [Required(ErrorMessage = "This field is required")]
         [StringLength(30, ErrorMessage = "Too long")]
         public virtual string Address { get; set; }
+
+        [Required(ErrorMessage = "This field is required")]
+        public virtual string Number { get; set; }
 
         [Required(ErrorMessage ="This field is required")]
         [StringLength(10, ErrorMessage = "Too long")]
@@ -43,6 +46,7 @@ namespace WebClientMVC.Models
 
         [Required(ErrorMessage ="This field is required")]
         public virtual HttpPostedFileBase[] files { get; set; }
+
         public virtual string GuidLine { get; set; }
         public virtual string cv { get; set; }
         public virtual string idcard { get; set; }
