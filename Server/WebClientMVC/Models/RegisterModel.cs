@@ -34,6 +34,10 @@ namespace WebClientMVC.Models
         public virtual string Address { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
+        [StringLength(30, ErrorMessage = "Too long")]
+        public virtual string Number { get; set; }
+
+        [Required(ErrorMessage = "This field is required")]
         [StringLength(10, ErrorMessage = "Too long")]
         public virtual string ZipCode { get; set; }
 
