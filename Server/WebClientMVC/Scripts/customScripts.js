@@ -20,7 +20,7 @@ function navScroll() {
             nav.style.backgroundColor = "black";
         }
         else {
-            nav.style.backgroundColor = "rgba(0,0,0,0.1)";
+            nav.style.backgroundColor = "rgba(0,0,0,0.25)";
         }
     }
     else if (cont2 != null) {
@@ -28,7 +28,7 @@ function navScroll() {
             nav.style.backgroundColor = "black";
         }
         else {
-            nav.style.backgroundColor = "rgba(0,0,0,0.1)";
+            nav.style.backgroundColor = "rgba(0,0,0,0.25)";
         }
     }
 }
@@ -46,7 +46,4 @@ function showMenu() {
         shown = false;
     }
 
-}
-function goToAbout() {
-    window.open("https://www.facebook.com", "_self")
 }
