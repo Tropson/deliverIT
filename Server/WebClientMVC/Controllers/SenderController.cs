@@ -109,6 +109,11 @@ namespace WebClientMVC.Controllers
             }
         }
 
+        public ActionResult CreatePackage()
+        {
+            return View();
+        }
+
         // GET: Sender/Edit/5
         public ActionResult Edit(int id)
         {

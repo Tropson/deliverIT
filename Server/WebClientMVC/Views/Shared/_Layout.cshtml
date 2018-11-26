@@ -32,7 +32,7 @@
                         var currentUser = proxy.GetAllUsers().SingleOrDefault(x => x.Username == Request.Cookies.Get("login").Values["feketePorzeczka"]);
                         if (currentUser.AccountType == 1)
                         {
-                            <li><a href="@Url.Action("Index", "Sender")" id="sendbutton">Send</a></li>
+                            <li><a href="@Url.Action("CreatePackage", "Sender")" id="sendbutton">Send</a></li>
                         }
                         else if (currentUser.AccountType == 2)
                         {
