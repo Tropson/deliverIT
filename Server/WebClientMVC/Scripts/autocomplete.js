@@ -52,10 +52,10 @@ function fillInAddress() {
             document.getElementById(addressType).value = val;
         }
     }
-    document.getElementById("locality").disabled = "true";
-    document.getElementById("route").disabled = "true";
-    document.getElementById("postal_code").disabled = "true";
-    document.getElementById("street_number").disabled = "true";
+    document.getElementById("locality").readonly = "true";
+    document.getElementById("route").readonly = "true";
+    document.getElementById("postal_code").readonly = "true";
+    document.getElementById("street_number").readonly = "true";
     var currentCenter;
     //var jsonURL = "https://maps.googleapis.com/maps/api/geocode/json?address=" + document.getElementById("route").value + "%20" + document.getElementById("street_number").value + "%20" + document.getElementById("locality").value + "&key=AIzaSyD-i9eQttqqwEOLH8tqPgYocn3Cx-aAa7I";
     //console.log(jsonURL);

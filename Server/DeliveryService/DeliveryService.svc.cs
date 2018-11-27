@@ -436,11 +436,11 @@ namespace DeliveryService
             {
                 return 0;
             }
-
             finally
             {
                 db.Connection.Close();
             }
+            AddToBalance(Username, delivery.Price * -1);
             return 1;
         }
     }

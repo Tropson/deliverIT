@@ -26,7 +26,7 @@ namespace WebClientMVC.Controllers
         {
             if (Request.Cookies.Get("login") == null)
             {
-                return View();
+                return RedirectToAction("Login", "Home");
             }
             else
             {
