@@ -104,9 +104,16 @@ namespace WebClientMVC.Controllers
                 //client.Upload(app.files[0].InputStream, $"public_html/Files/{guid}/{cv}");
                 //client.Upload(app.files[1].InputStream, $"public_html/Files/{guid}/{idpic}");
                 //client.Upload(app.files[2].InputStream, $"public_html/Files/{guid}/{yellow}");
-                _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
+                var result = _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
                 //client.Disconnect();
-                return RedirectToAction("Create");
+                if (result == 1)
+                {
+                    return RedirectToAction("Index");
+                }
+
+                else return RedirectToAction("Create", app);
+
+                
             }
             catch(Exception e)
             {
