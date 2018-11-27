@@ -368,10 +368,11 @@ namespace DeliveryService
             return db.Packages.Select(x => new PackageModel { CourierID = x.CourierID, FromAddress = x.FromAddress, Height = (double)x.Height, SenderID = (int)x.SenderID, StatusID = (int)x.StatusID, ToAddress = x.ToAddress, Weight = (double)x.Weight, Width = (double)x.Width, ReceiverFirstName = x.ReceiverFirstName, ReceiverLastName = x.ReceiverLastName, ReceiverPhoneNumber = x.ReceiverPhoneNumber }).ToArray();
         }
 
-        public int AddPackage(PackageModel package, string Username)
+        public int AddPackage(PackageModel package, string Username, DeliveryModel delivery)
         {
             
             int nextPackageId = 0;
+            var barcode = new Random().Next(12345679, 99999999);
             Package packageObj = new Package
             {
                 StatusID = 1,
@@ -384,6 +385,7 @@ namespace DeliveryService
                 ReceiverFirstName = package.ReceiverFirstName,
                 ReceiverLastName = package.ReceiverLastName,
                 ReceiverPhoneNumber = package.ReceiverPhoneNumber,
+                Barcode=barcode
                 
             };
             var packages = db.Packages;
@@ -399,14 +401,14 @@ namespace DeliveryService
                 return 0;
             }
             db.Connection.Close();
-            //TODO
-            nextPackageId = db.Packages.SingleOrDefault(x => x. ).ID;    
+            
+            nextPackageId = db.Packages.SingleOrDefault(x => x.Barcode== packageObj.Barcode).ID;    
             DeliveryDate deliveryDate = new DeliveryDate
             {
                 PackageID = nextPackageId,
                 CreateTime = DateTime.Now,
             };
-            users.InsertOnSubmit(user);
+            packagesDates.InsertOnSubmit(deliveryDate);
             try
             {
                 db.Connection.Open();
@@ -414,17 +416,29 @@ namespace DeliveryService
             }
             catch (Exception e)
             {
-                if (e.Message.Contains("UNIQUE") && e.Message.Contains("Username"))
-                {
-                    db.DiscardPendingChanges();
-                    db.Persons.DeleteOnSubmit(person);
-                    db.SubmitChanges();
-                    db.ExecuteCommand($"DBCC CHECKIDENT (Person, RESEED, {db.Persons.OrderBy(x => x.ID).ToList().Last().ID});");
-                    db.ExecuteCommand($"DBCC CHECKIDENT ([User], RESEED, {db.Users.OrderBy(x => x.ID).ToList().Last().ID});");
-                    return -3;
-                }
-                else return 0;
+               return 0;
             }
+
+
+            Delivery deliveryObj = new Delivery
+            {
+                PackageID = nextPackageId,
+                Distance = delivery.Distance,
+                Price = delivery.Price,
+                
+            };
+
+            deliveries.InsertOnSubmit(deliveryObj);
+            try
+            {
+                db.Connection.Open();
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+
             finally
             {
                 db.Connection.Close();
