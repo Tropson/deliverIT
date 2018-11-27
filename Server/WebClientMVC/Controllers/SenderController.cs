@@ -48,7 +48,7 @@ namespace WebClientMVC.Controllers
                 AccountType = userFromDB.AccountType
             };
             if (Request.Cookies.Get("login") != null)
-            { 
+            {
                 if (HashString(userToPass.Password) == Request.Cookies.Get("login").Values["pirosPorzeczka"])
                 {
                     return View("LoggedIn", userToPass);
@@ -78,28 +78,28 @@ namespace WebClientMVC.Controllers
             {
                 if (!ModelState.IsValid)
                     return View("Create", reg);
-                SenderModel sender = new SenderModel(reg.Cpr, reg.FirstName, reg.LastName, reg.PhoneNumber, reg.Email, reg.Address+", "+reg.Number, reg.ZipCode, reg.City) { AccountType = (int)AccountTypeEnum.SENDER, Password = reg.Password, Username = reg.Username, Points = 0 };
+                SenderModel sender = new SenderModel(reg.Cpr, reg.FirstName, reg.LastName, reg.PhoneNumber, reg.Email, reg.Address + ", " + reg.Number, reg.ZipCode, reg.City) { AccountType = (int)AccountTypeEnum.SENDER, Password = reg.Password, Username = reg.Username, Points = 0 };
                 int ret = _proxy.AddSender(new DeliveryService.UserModel { AccountType = sender.AccountType, Address = sender.Address, City = sender.City, Cpr = sender.Cpr, Email = sender.Email, FirstName = sender.FirstName, LastName = sender.LastName, Password = sender.Password, PhoneNumber = sender.PhoneNumber, Points = sender.Points, Username = sender.Username, ZipCode = sender.ZipCode });
                 switch (ret)
                 {
                     case 1: return RedirectToAction("Index");
                     case 0: return View("Create", reg);
                     case -1:
-                    {
-                         ModelState.AddModelError("Cpr", "This CPR is already registered");
-                         return View("Create", reg);
-                    }
+                        {
+                            ModelState.AddModelError("Cpr", "This CPR is already registered");
+                            return View("Create", reg);
+                        }
                     case -2:
-                    {
-                         ModelState.AddModelError("Email", "This email is already registered");
-                         return View("Create", reg);
-                    }
+                        {
+                            ModelState.AddModelError("Email", "This email is already registered");
+                            return View("Create", reg);
+                        }
                     case -3:
-                    {
-                         ModelState.AddModelError("Username", "This username is taken");
-                         return View("Create", reg);
-                    }
-                       
+                        {
+                            ModelState.AddModelError("Username", "This username is taken");
+                            return View("Create", reg);
+                        }
+
                 }
                 return RedirectToAction("Index");
             }
@@ -118,6 +118,17 @@ namespace WebClientMVC.Controllers
         public ActionResult CreatePackage(PackageModel package)
         {
 
+            try
+            {
+                if (!ModelState.IsValid)
+                    return View("CreatePackage", package);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
         }
 
         // GET: Sender/Edit/5
@@ -132,7 +143,7 @@ namespace WebClientMVC.Controllers
                 HttpCookie cookie = new HttpCookie("login");
                 cookie.Expires = DateTime.Now.AddDays(-1d);
                 Response.Cookies.Add(cookie);
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception e)
             {
@@ -245,7 +256,8 @@ namespace WebClientMVC.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            catch {
+            catch
+            {
                 return View();
             }
         }

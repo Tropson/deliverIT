@@ -365,12 +365,85 @@ namespace DeliveryService
 
         public PackageModel[] GetAllPackages()
         {
-            return db.Packages.Select(x => new PackageModel { CourierID = x.CourierID, FromAddress = x.FromAddress, Height = (double)x.Height, SenderID = (int)x.SenderID, StatusID = (int)x.StatusID, ToAddress = x.ToAddress, Weight = (double)x.Weight, Width = (double)x.Width }).ToArray();
+            return db.Packages.Select(x => new PackageModel { CourierID = x.CourierID, FromAddress = x.FromAddress, Height = (double)x.Height, SenderID = (int)x.SenderID, StatusID = (int)x.StatusID, ToAddress = x.ToAddress, Weight = (double)x.Weight, Width = (double)x.Width, ReceiverFirstName = x.ReceiverFirstName, ReceiverLastName = x.ReceiverLastName, ReceiverPhoneNumber = x.ReceiverPhoneNumber }).ToArray();
         }
 
-        public int AddPackage(PackageModel package)
+        public int AddPackage(PackageModel package, string Username, DeliveryModel delivery)
         {
+            
+            int nextPackageId = 0;
+            var barcode = new Random().Next(12345679, 99999999);
+            Package packageObj = new Package
+            {
+                StatusID = 1,
+                SenderID = db.Users.Single(x => x.Username == Username).PersonID,
+                ToAddress = package.ToAddress,
+                FromAddress = package.FromAddress,
+                Weight = package.Weight,
+                Width = package.Width,
+                Height = package.Height,
+                ReceiverFirstName = package.ReceiverFirstName,
+                ReceiverLastName = package.ReceiverLastName,
+                ReceiverPhoneNumber = package.ReceiverPhoneNumber,
+                Barcode=barcode
+                
+            };
+            var packages = db.Packages;
+            var packagesDates = db.DeliveryDates;
+            var deliveries = db.Deliveries;
+            packages.InsertOnSubmit(packageObj);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+            db.Connection.Close();
+            
+            nextPackageId = db.Packages.SingleOrDefault(x => x.Barcode== packageObj.Barcode).ID;    
+            DeliveryDate deliveryDate = new DeliveryDate
+            {
+                PackageID = nextPackageId,
+                CreateTime = DateTime.Now,
+            };
+            packagesDates.InsertOnSubmit(deliveryDate);
+            try
+            {
+                db.Connection.Open();
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+               return 0;
+            }
 
+
+            Delivery deliveryObj = new Delivery
+            {
+                PackageID = nextPackageId,
+                Distance = delivery.Distance,
+                Price = delivery.Price,
+                
+            };
+
+            deliveries.InsertOnSubmit(deliveryObj);
+            try
+            {
+                db.Connection.Open();
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+
+            finally
+            {
+                db.Connection.Close();
+            }
+            return 1;
         }
     }
 }

@@ -18,5 +18,7 @@ namespace WebClientMVC.Models
         public string ReceiverFirstName { get; set; }
         public string ReceiverLastName { get; set; }
         public string ReceiverPhoneNumber { get; set; }
+        public double Distance { get; set; }
+        public int Price { get; set; }
     }
 }

@@ -53,7 +53,7 @@ namespace DeliveryService
         PackageModel[] GetAllPackages();
 
         [OperationContract]
-        int AddPackage(PackageModel model);
+        int AddPackage(PackageModel model, string Username, DeliveryModel delivery);
 
     }
 
@@ -99,6 +99,15 @@ namespace DeliveryService
         public string ReceiverLastName { get; set; }
         [DataMember]
         public string ReceiverPhoneNumber { get; set; }
+    }
+
+    [DataContract(Name = "DeliveryModel")]
+    public class DeliveryModel
+    {
+        [DataMember]
+        public double Distance { get; set; }
+        [DataMember]
+        public int Price { get; set; }
     }
 
     [DataContract(Name = "PersonResource")]
