@@ -932,6 +932,8 @@ namespace DeliveyService
 		
 		private string _ReceiverPhoneNumber;
 		
+		private System.Nullable<int> _Barcode;
+		
 		private EntitySet<Delivery> _Deliveries;
 		
 		private EntitySet<DeliveryDate> _DeliveryDates;
@@ -970,6 +972,8 @@ namespace DeliveyService
     partial void OnReceiverLastNameChanged();
     partial void OnReceiverPhoneNumberChanging(string value);
     partial void OnReceiverPhoneNumberChanged();
+    partial void OnBarcodeChanging(System.Nullable<int> value);
+    partial void OnBarcodeChanged();
     #endregion
 		
 		public Package()
@@ -1230,6 +1234,26 @@ namespace DeliveyService
 					this._ReceiverPhoneNumber = value;
 					this.SendPropertyChanged("ReceiverPhoneNumber");
 					this.OnReceiverPhoneNumberChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Barcode", DbType="Int")]
+		public System.Nullable<int> Barcode
+		{
+			get
+			{
+				return this._Barcode;
+			}
+			set
+			{
+				if ((this._Barcode != value))
+				{
+					this.OnBarcodeChanging(value);
+					this.SendPropertyChanging();
+					this._Barcode = value;
+					this.SendPropertyChanged("Barcode");
+					this.OnBarcodeChanged();
 				}
 			}
 		}

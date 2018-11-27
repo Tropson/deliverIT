@@ -30,26 +30,27 @@ function initAutocomplete() {
 
     // When the user selects an address from the dropdown, populate the address
     // fields in the form.
-    autocomplete.addListener('place_changed', fillInAddress);
+    autocomplete.addListener('place_changed', fillInAddress('autocomplete'));
 }
 
-function fillInAddress() {
+function fillInAddress(auto) {
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
-
+    console.log(place);
     for (var component in componentForm) {
         document.getElementById(component).value = '';
         document.getElementById(component).disabled = false;
     }
-    document.getElementById("autocomplete").value = "";
-    document.getElementById("autocomplete").placeholder = "";
+    document.getElementById(auto).value = "";
+    document.getElementById(auto).placeholder = "";
     // Get each component of the address from the place details
     // and fill the corresponding field on the form.
+    var fullAddress = "";
     for (var i = 0; i < place.address_components.length; i++) {
         var addressType = place.address_components[i].types[0];
         if (componentForm[addressType]) {
             var val = place.address_components[i][componentForm[addressType]];
-            document.getElementById(addressType).value = val;
+            fullAddress += val;
         }
     }
     document.getElementById("locality").disabled = "true";
