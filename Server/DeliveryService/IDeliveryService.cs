@@ -29,7 +29,7 @@ namespace DeliveryService
         int AddCourier(UserModel courier);
 
         [OperationContract]
-        int DeleteApplication(ApplicationModel application,bool deletePerson);
+        int DeleteApplication(ApplicationModel application, bool deletePerson);
 
         [OperationContract]
         void ClearDB();
@@ -48,6 +48,13 @@ namespace DeliveryService
 
         [OperationContract]
         VouchersUsedModel[] GetAllUsedVouchers();
+
+        [OperationContract]
+        PackageModel[] GetAllPackages();
+
+        [OperationContract]
+        int AddPackage(PackageModel model);
+
     }
 
     [DataContract(Name = "VoucherResource")]
@@ -66,6 +73,34 @@ namespace DeliveryService
         [DataMember]
         public string code { get; set; }
     }
+
+    [DataContract(Name = "PackageModel")]
+    public class PackageModel
+    {
+        [DataMember]
+        public int StatusID { get; set; }
+        [DataMember]
+        public int SenderID { get; set; }
+        [DataMember]
+        public int? CourierID { get; set; }
+        [DataMember]
+        public string ToAddress { get; set; }
+        [DataMember]
+        public string FromAddress { get; set; }
+        [DataMember]
+        public double Weight { get; set; }
+        [DataMember]
+        public double Width { get; set; }
+        [DataMember]
+        public double Height { get; set; }
+        [DataMember]
+        public string ReceiverFirstName { get; set; }
+        [DataMember]
+        public string ReceiverLastName { get; set; }
+        [DataMember]
+        public string ReceiverPhoneNumber { get; set; }
+    }
+
     [DataContract(Name = "PersonResource")]
     public class PersonModel
     {
