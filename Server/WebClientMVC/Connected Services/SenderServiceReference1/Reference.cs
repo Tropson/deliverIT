@@ -86,6 +86,18 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsedVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsedVouchersResponse")]
         System.Threading.Tasks.Task<DeliveryService.VouchersUsedModel[]> GetAllUsedVouchersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllPackages", ReplyAction="http://tempuri.org/ISenderService/GetAllPackagesResponse")]
+        DeliveryService.PackageModel[] GetAllPackages();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllPackages", ReplyAction="http://tempuri.org/ISenderService/GetAllPackagesResponse")]
+        System.Threading.Tasks.Task<DeliveryService.PackageModel[]> GetAllPackagesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddPackage", ReplyAction="http://tempuri.org/ISenderService/AddPackageResponse")]
+        int AddPackage(DeliveryService.PackageModel model, string Username, DeliveryService.DeliveryModel delivery);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddPackage", ReplyAction="http://tempuri.org/ISenderService/AddPackageResponse")]
+        System.Threading.Tasks.Task<int> AddPackageAsync(DeliveryService.PackageModel model, string Username, DeliveryService.DeliveryModel delivery);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -209,6 +221,22 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         public System.Threading.Tasks.Task<DeliveryService.VouchersUsedModel[]> GetAllUsedVouchersAsync() {
             return base.Channel.GetAllUsedVouchersAsync();
+        }
+        
+        public DeliveryService.PackageModel[] GetAllPackages() {
+            return base.Channel.GetAllPackages();
+        }
+        
+        public System.Threading.Tasks.Task<DeliveryService.PackageModel[]> GetAllPackagesAsync() {
+            return base.Channel.GetAllPackagesAsync();
+        }
+        
+        public int AddPackage(DeliveryService.PackageModel model, string Username, DeliveryService.DeliveryModel delivery) {
+            return base.Channel.AddPackage(model, Username, delivery);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddPackageAsync(DeliveryService.PackageModel model, string Username, DeliveryService.DeliveryModel delivery) {
+            return base.Channel.AddPackageAsync(model, Username, delivery);
         }
     }
 }

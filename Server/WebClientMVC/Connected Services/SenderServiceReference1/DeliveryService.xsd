@@ -78,4 +78,33 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="VouchersUsedResource" nillable="true" type="tns:VouchersUsedResource" />
+  <xs:complexType name="ArrayOfPackageModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PackageModel" nillable="true" type="tns:PackageModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPackageModel" nillable="true" type="tns:ArrayOfPackageModel" />
+  <xs:complexType name="PackageModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CourierID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="FromAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Height" type="xs:double" />
+      <xs:element minOccurs="0" name="ReceiverFirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReceiverLastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReceiverPhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SenderID" type="xs:int" />
+      <xs:element minOccurs="0" name="StatusID" type="xs:int" />
+      <xs:element minOccurs="0" name="ToAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Weight" type="xs:double" />
+      <xs:element minOccurs="0" name="Width" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PackageModel" nillable="true" type="tns:PackageModel" />
+  <xs:complexType name="DeliveryModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Distance" type="xs:double" />
+      <xs:element minOccurs="0" name="Price" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeliveryModel" nillable="true" type="tns:DeliveryModel" />
 </xs:schema>

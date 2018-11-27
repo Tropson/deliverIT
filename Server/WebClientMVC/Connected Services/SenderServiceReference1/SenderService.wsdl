@@ -79,6 +79,18 @@
   <wsdl:message name="ISenderService_GetAllUsedVouchers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllUsedVouchersResponse" />
   </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllPackages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPackages" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_GetAllPackages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPackagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_AddPackage_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPackage" />
+  </wsdl:message>
+  <wsdl:message name="ISenderService_AddPackage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPackageResponse" />
+  </wsdl:message>
   <wsdl:portType name="ISenderService">
     <wsdl:operation name="AddSender">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddSender" message="tns:ISenderService_AddSender_InputMessage" />
@@ -127,6 +139,14 @@
     <wsdl:operation name="GetAllUsedVouchers">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetAllUsedVouchers" message="tns:ISenderService_GetAllUsedVouchers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetAllUsedVouchersResponse" message="tns:ISenderService_GetAllUsedVouchers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPackages">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetAllPackages" message="tns:ISenderService_GetAllPackages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetAllPackagesResponse" message="tns:ISenderService_GetAllPackages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPackage">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddPackage" message="tns:ISenderService_AddPackage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/AddPackageResponse" message="tns:ISenderService_AddPackage_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ISenderService" type="tns:ISenderService">
@@ -232,6 +252,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllUsedVouchers">
       <soap:operation soapAction="http://tempuri.org/ISenderService/GetAllUsedVouchers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPackages">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/GetAllPackages" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPackage">
+      <soap:operation soapAction="http://tempuri.org/ISenderService/AddPackage" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

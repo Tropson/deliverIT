@@ -248,6 +248,7 @@
     <None Include="Connected Services\SenderServiceReference1\SenderService.wsdl" />
     <Content Include="Properties\DataSources\DeliveryService.VoucherModel.datasource" />
     <Content Include="Properties\DataSources\DeliveryService.VouchersUsedModel.datasource" />
+    <Content Include="Properties\DataSources\DeliveryService.PackageModel.datasource" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\customScripts.js" />
