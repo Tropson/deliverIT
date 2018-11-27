@@ -362,6 +362,16 @@ namespace DeliveryService
             { }
             AddToBalance(username, (int)voucher.Amount);
         }
+
+        public PackageModel[] GetAllPackages()
+        {
+            return db.Packages.Select(x => new PackageModel { CourierID = x.CourierID, FromAddress = x.FromAddress, Height = (double)x.Height, SenderID = (int)x.SenderID, StatusID = (int)x.StatusID, ToAddress = x.ToAddress, Weight = (double)x.Weight, Width = (double)x.Width }).ToArray();
+        }
+
+        public int AddPackage(PackageModel package)
+        {
+
+        }
     }
 }
 public static class DataContextExtensions
