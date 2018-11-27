@@ -117,7 +117,10 @@ namespace WebClientMVC.Controllers
         [HttpPost]
         public ActionResult CreatePackage(PackageModel package)
         {
+            if (!ModelState.IsValid)
+                return View("CreatePackage", package);
 
+            int ret = _proxy.
         }
 
         // GET: Sender/Edit/5

@@ -365,12 +365,71 @@ namespace DeliveryService
 
         public PackageModel[] GetAllPackages()
         {
-            return db.Packages.Select(x => new PackageModel { CourierID = x.CourierID, FromAddress = x.FromAddress, Height = (double)x.Height, SenderID = (int)x.SenderID, StatusID = (int)x.StatusID, ToAddress = x.ToAddress, Weight = (double)x.Weight, Width = (double)x.Width }).ToArray();
+            return db.Packages.Select(x => new PackageModel { CourierID = x.CourierID, FromAddress = x.FromAddress, Height = (double)x.Height, SenderID = (int)x.SenderID, StatusID = (int)x.StatusID, ToAddress = x.ToAddress, Weight = (double)x.Weight, Width = (double)x.Width, ReceiverFirstName = x.ReceiverFirstName, ReceiverLastName = x.ReceiverLastName, ReceiverPhoneNumber = x.ReceiverPhoneNumber }).ToArray();
         }
 
-        public int AddPackage(PackageModel package)
+        public int AddPackage(PackageModel package, string Username)
         {
-
+            
+            int nextPackageId = 0;
+            Package packageObj = new Package
+            {
+                StatusID = 1,
+                SenderID = db.Users.Single(x => x.Username == Username).PersonID,
+                ToAddress = package.ToAddress,
+                FromAddress = package.FromAddress,
+                Weight = package.Weight,
+                Width = package.Width,
+                Height = package.Height,
+                ReceiverFirstName = package.ReceiverFirstName,
+                ReceiverLastName = package.ReceiverLastName,
+                ReceiverPhoneNumber = package.ReceiverPhoneNumber,
+                
+            };
+            var packages = db.Packages;
+            var packagesDates = db.DeliveryDates;
+            var deliveries = db.Deliveries;
+            packages.InsertOnSubmit(packageObj);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+            db.Connection.Close();
+            //TODO
+            nextPackageId = db.Packages.SingleOrDefault(x => x. ).ID;    
+            DeliveryDate deliveryDate = new DeliveryDate
+            {
+                PackageID = nextPackageId,
+                CreateTime = DateTime.Now,
+            };
+            users.InsertOnSubmit(user);
+            try
+            {
+                db.Connection.Open();
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                if (e.Message.Contains("UNIQUE") && e.Message.Contains("Username"))
+                {
+                    db.DiscardPendingChanges();
+                    db.Persons.DeleteOnSubmit(person);
+                    db.SubmitChanges();
+                    db.ExecuteCommand($"DBCC CHECKIDENT (Person, RESEED, {db.Persons.OrderBy(x => x.ID).ToList().Last().ID});");
+                    db.ExecuteCommand($"DBCC CHECKIDENT ([User], RESEED, {db.Users.OrderBy(x => x.ID).ToList().Last().ID});");
+                    return -3;
+                }
+                else return 0;
+            }
+            finally
+            {
+                db.Connection.Close();
+            }
+            return 1;
         }
     }
 }

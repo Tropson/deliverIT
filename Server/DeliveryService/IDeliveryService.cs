@@ -53,7 +53,7 @@ namespace DeliveryService
         PackageModel[] GetAllPackages();
 
         [OperationContract]
-        int AddPackage(PackageModel model);
+        int AddPackage(PackageModel model, string Username);
 
     }
 
