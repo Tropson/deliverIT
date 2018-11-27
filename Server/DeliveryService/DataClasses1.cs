@@ -916,10 +916,6 @@ namespace DeliveyService
 		
 		private System.Nullable<int> _CourierID;
 		
-		private string _ToAddress;
-		
-		private string _FromAddress;
-		
 		private System.Nullable<double> _Width;
 		
 		private System.Nullable<double> _Height;
@@ -932,7 +928,11 @@ namespace DeliveyService
 		
 		private string _ReceiverPhoneNumber;
 		
-		private System.Nullable<int> _Barcode;
+		private System.Nullable<double> _Barcode;
+		
+		private string _ToAddress;
+		
+		private string _FromAddress;
 		
 		private EntitySet<Delivery> _Deliveries;
 		
@@ -956,10 +956,6 @@ namespace DeliveyService
     partial void OnSenderIDChanged();
     partial void OnCourierIDChanging(System.Nullable<int> value);
     partial void OnCourierIDChanged();
-    partial void OnToAddressChanging(string value);
-    partial void OnToAddressChanged();
-    partial void OnFromAddressChanging(string value);
-    partial void OnFromAddressChanged();
     partial void OnWidthChanging(System.Nullable<double> value);
     partial void OnWidthChanged();
     partial void OnHeightChanging(System.Nullable<double> value);
@@ -972,8 +968,12 @@ namespace DeliveyService
     partial void OnReceiverLastNameChanged();
     partial void OnReceiverPhoneNumberChanging(string value);
     partial void OnReceiverPhoneNumberChanged();
-    partial void OnBarcodeChanging(System.Nullable<int> value);
+    partial void OnBarcodeChanging(System.Nullable<double> value);
     partial void OnBarcodeChanged();
+    partial void OnToAddressChanging(string value);
+    partial void OnToAddressChanged();
+    partial void OnFromAddressChanging(string value);
+    partial void OnFromAddressChanged();
     #endregion
 		
 		public Package()
@@ -1074,46 +1074,6 @@ namespace DeliveyService
 					this._CourierID = value;
 					this.SendPropertyChanged("CourierID");
 					this.OnCourierIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ToAddress", DbType="VarChar(30)")]
-		public string ToAddress
-		{
-			get
-			{
-				return this._ToAddress;
-			}
-			set
-			{
-				if ((this._ToAddress != value))
-				{
-					this.OnToAddressChanging(value);
-					this.SendPropertyChanging();
-					this._ToAddress = value;
-					this.SendPropertyChanged("ToAddress");
-					this.OnToAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FromAddress", DbType="VarChar(30)")]
-		public string FromAddress
-		{
-			get
-			{
-				return this._FromAddress;
-			}
-			set
-			{
-				if ((this._FromAddress != value))
-				{
-					this.OnFromAddressChanging(value);
-					this.SendPropertyChanging();
-					this._FromAddress = value;
-					this.SendPropertyChanged("FromAddress");
-					this.OnFromAddressChanged();
 				}
 			}
 		}
@@ -1238,8 +1198,8 @@ namespace DeliveyService
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Barcode", DbType="Int")]
-		public System.Nullable<int> Barcode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Barcode", DbType="Float")]
+		public System.Nullable<double> Barcode
 		{
 			get
 			{
@@ -1254,6 +1214,46 @@ namespace DeliveyService
 					this._Barcode = value;
 					this.SendPropertyChanged("Barcode");
 					this.OnBarcodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ToAddress", DbType="VarChar(150)")]
+		public string ToAddress
+		{
+			get
+			{
+				return this._ToAddress;
+			}
+			set
+			{
+				if ((this._ToAddress != value))
+				{
+					this.OnToAddressChanging(value);
+					this.SendPropertyChanging();
+					this._ToAddress = value;
+					this.SendPropertyChanged("ToAddress");
+					this.OnToAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FromAddress", DbType="VarChar(150)")]
+		public string FromAddress
+		{
+			get
+			{
+				return this._FromAddress;
+			}
+			set
+			{
+				if ((this._FromAddress != value))
+				{
+					this.OnFromAddressChanging(value);
+					this.SendPropertyChanging();
+					this._FromAddress = value;
+					this.SendPropertyChanged("FromAddress");
+					this.OnFromAddressChanged();
 				}
 			}
 		}

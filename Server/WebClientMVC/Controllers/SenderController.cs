@@ -126,7 +126,7 @@ namespace WebClientMVC.Controllers
                 string username = Request.Cookies.Get("login").Values["feketePorzeczka"];
 
                 var packageModelToInsert = new DeliveryService.PackageModel { ToAddress = package.ToAddress, FromAddress = package.FromAddress, Weight = package.Weight, Width = package.Width, Height = package.Width, ReceiverFirstName = package.ReceiverFirstName, ReceiverLastName = package.ReceiverLastName, ReceiverPhoneNumber = package.ReceiverPhoneNumber };
-                var deliveryModelToInsert = new DeliveryService.DeliveryModel { Distance = package.Distance, Price = package.Price };
+                var deliveryModelToInsert = new DeliveryService.DeliveryModel { Distance = double.Parse(package.Distance.Split(' ')[0]), Price = int.Parse(package.Price) };
 
                 var result = _proxy.AddPackage(packageModelToInsert, username, deliveryModelToInsert);
 

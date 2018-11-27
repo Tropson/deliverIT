@@ -372,7 +372,7 @@ namespace DeliveryService
         {
             
             int nextPackageId = 0;
-            var barcode = new Random().Next(12345679, 99999999);
+            double barcode = new Random().Next(12345679, 99999999);
             Package packageObj = new Package
             {
                 StatusID = 1,
@@ -386,7 +386,6 @@ namespace DeliveryService
                 ReceiverLastName = package.ReceiverLastName,
                 ReceiverPhoneNumber = package.ReceiverPhoneNumber,
                 Barcode=barcode
-                
             };
             var packages = db.Packages;
             var packagesDates = db.DeliveryDates;
@@ -431,7 +430,6 @@ namespace DeliveryService
             deliveries.InsertOnSubmit(deliveryObj);
             try
             {
-                db.Connection.Open();
                 db.SubmitChanges();
             }
             catch (Exception e)

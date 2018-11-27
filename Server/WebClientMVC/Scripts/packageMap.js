@@ -164,9 +164,9 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             console.log(response);
             var results = response.rows[0].elements;
             document.getElementById("distance").value = results[0].distance.text;
-            var a = 1000;
-            var b = results[0].distance.value;
-            var c = b / a;
+            var a = results[0].distance.value;
+            var b = a/1000;
+            var c = Math.ceil(b / 1) * 1; 
             document.getElementById("price").value = c*10+10;
         }
         })

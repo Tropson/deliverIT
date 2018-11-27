@@ -68,7 +68,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2">Price:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @id = "price", disabled = "true", } })
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @id = "price", @readonly = "true" } })
                     @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -76,24 +76,25 @@
 
         <div class="col-md-6">
             <h4>Delivery addresses</h4>
+            <p><span style="color:#e00000">IMPORTANT:</span> Please type in the address and be careful to include the street number also.</p>
             <div class="form-group">
                 <label class="control-label col-md-2">Pick up:</label>
                 <div class="col-md-4">
-                    <input class="form-control" id="autocomplete" onFocus="geolocate()" type="text" />
+                    <input class="form-control" id="autocomplete" name="FromAddress" onFocus="geolocate()" type="text" />
+                    @Html.ValidationMessageFor(model => model.FromAddress, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="control-label col-md-2">Destination:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.ToAddress, new { htmlAttributes = new { @class = "form-control", @id = "autocomplete2" } })
+                    <input class="form-control" name="ToAddress" id="autocomplete2" type="text" />
                     @Html.ValidationMessageFor(model => model.ToAddress, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Distance:</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Distance, new { htmlAttributes = new { @class = "form-control", @id="distance", disabled = "true" } })
+                    @Html.EditorFor(model => model.Distance, new { htmlAttributes = new { @class = "form-control", @id="distance", @readonly="true" } })
                     @Html.ValidationMessageFor(model => model.Distance, "", new { @class = "text-danger" })
                 </div>
             </div>
