@@ -39,6 +39,9 @@ namespace DeliveyService
     partial void InsertDelivery(Delivery instance);
     partial void UpdateDelivery(Delivery instance);
     partial void DeleteDelivery(Delivery instance);
+    partial void InsertDeliveryDate(DeliveryDate instance);
+    partial void UpdateDeliveryDate(DeliveryDate instance);
+    partial void DeleteDeliveryDate(DeliveryDate instance);
     partial void InsertPackage(Package instance);
     partial void UpdatePackage(Package instance);
     partial void DeletePackage(Package instance);
@@ -104,6 +107,14 @@ namespace DeliveyService
 			get
 			{
 				return this.GetTable<Delivery>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DeliveryDate> DeliveryDates
+		{
+			get
+			{
+				return this.GetTable<DeliveryDate>();
 			}
 		}
 		
@@ -668,6 +679,229 @@ namespace DeliveyService
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DeliveryDates")]
+	public partial class DeliveryDate : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _PackageID;
+		
+		private System.Nullable<System.DateTime> _CreateTime;
+		
+		private System.Nullable<System.DateTime> _TimeToPickUp;
+		
+		private System.Nullable<System.DateTime> _PickedUpTime;
+		
+		private System.Nullable<System.DateTime> _DeliverTime;
+		
+		private EntityRef<Package> _Package;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnPackageIDChanging(System.Nullable<int> value);
+    partial void OnPackageIDChanged();
+    partial void OnCreateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreateTimeChanged();
+    partial void OnTimeToPickUpChanging(System.Nullable<System.DateTime> value);
+    partial void OnTimeToPickUpChanged();
+    partial void OnPickedUpTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnPickedUpTimeChanged();
+    partial void OnDeliverTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnDeliverTimeChanged();
+    #endregion
+		
+		public DeliveryDate()
+		{
+			this._Package = default(EntityRef<Package>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PackageID", DbType="Int")]
+		public System.Nullable<int> PackageID
+		{
+			get
+			{
+				return this._PackageID;
+			}
+			set
+			{
+				if ((this._PackageID != value))
+				{
+					if (this._Package.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPackageIDChanging(value);
+					this.SendPropertyChanging();
+					this._PackageID = value;
+					this.SendPropertyChanged("PackageID");
+					this.OnPackageIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreateTime
+		{
+			get
+			{
+				return this._CreateTime;
+			}
+			set
+			{
+				if ((this._CreateTime != value))
+				{
+					this.OnCreateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._CreateTime = value;
+					this.SendPropertyChanged("CreateTime");
+					this.OnCreateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeToPickUp", DbType="DateTime")]
+		public System.Nullable<System.DateTime> TimeToPickUp
+		{
+			get
+			{
+				return this._TimeToPickUp;
+			}
+			set
+			{
+				if ((this._TimeToPickUp != value))
+				{
+					this.OnTimeToPickUpChanging(value);
+					this.SendPropertyChanging();
+					this._TimeToPickUp = value;
+					this.SendPropertyChanged("TimeToPickUp");
+					this.OnTimeToPickUpChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PickedUpTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> PickedUpTime
+		{
+			get
+			{
+				return this._PickedUpTime;
+			}
+			set
+			{
+				if ((this._PickedUpTime != value))
+				{
+					this.OnPickedUpTimeChanging(value);
+					this.SendPropertyChanging();
+					this._PickedUpTime = value;
+					this.SendPropertyChanged("PickedUpTime");
+					this.OnPickedUpTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeliverTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DeliverTime
+		{
+			get
+			{
+				return this._DeliverTime;
+			}
+			set
+			{
+				if ((this._DeliverTime != value))
+				{
+					this.OnDeliverTimeChanging(value);
+					this.SendPropertyChanging();
+					this._DeliverTime = value;
+					this.SendPropertyChanged("DeliverTime");
+					this.OnDeliverTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__DeliveryD__Packa__6A30C649", Storage="_Package", ThisKey="PackageID", OtherKey="ID", IsForeignKey=true)]
+		public Package Package
+		{
+			get
+			{
+				return this._Package.Entity;
+			}
+			set
+			{
+				Package previousValue = this._Package.Entity;
+				if (((previousValue != value) 
+							|| (this._Package.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Package.Entity = null;
+						previousValue.DeliveryDates.Remove(this);
+					}
+					this._Package.Entity = value;
+					if ((value != null))
+					{
+						value.DeliveryDates.Add(this);
+						this._PackageID = value.ID;
+					}
+					else
+					{
+						this._PackageID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Package");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Package")]
 	public partial class Package : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -692,7 +926,15 @@ namespace DeliveyService
 		
 		private System.Nullable<double> _Weight;
 		
+		private string _ReceiverFirstName;
+		
+		private string _ReceiverLastName;
+		
+		private string _ReceiverPhoneNumber;
+		
 		private EntitySet<Delivery> _Deliveries;
+		
+		private EntitySet<DeliveryDate> _DeliveryDates;
 		
 		private EntityRef<User> _User;
 		
@@ -722,11 +964,18 @@ namespace DeliveyService
     partial void OnHeightChanged();
     partial void OnWeightChanging(System.Nullable<double> value);
     partial void OnWeightChanged();
+    partial void OnReceiverFirstNameChanging(string value);
+    partial void OnReceiverFirstNameChanged();
+    partial void OnReceiverLastNameChanging(string value);
+    partial void OnReceiverLastNameChanged();
+    partial void OnReceiverPhoneNumberChanging(string value);
+    partial void OnReceiverPhoneNumberChanged();
     #endregion
 		
 		public Package()
 		{
 			this._Deliveries = new EntitySet<Delivery>(new Action<Delivery>(this.attach_Deliveries), new Action<Delivery>(this.detach_Deliveries));
+			this._DeliveryDates = new EntitySet<DeliveryDate>(new Action<DeliveryDate>(this.attach_DeliveryDates), new Action<DeliveryDate>(this.detach_DeliveryDates));
 			this._User = default(EntityRef<User>);
 			this._Sender = default(EntityRef<User>);
 			this._Status = default(EntityRef<Status>);
@@ -925,6 +1174,66 @@ namespace DeliveyService
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiverFirstName", DbType="VarChar(20)")]
+		public string ReceiverFirstName
+		{
+			get
+			{
+				return this._ReceiverFirstName;
+			}
+			set
+			{
+				if ((this._ReceiverFirstName != value))
+				{
+					this.OnReceiverFirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._ReceiverFirstName = value;
+					this.SendPropertyChanged("ReceiverFirstName");
+					this.OnReceiverFirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiverLastName", DbType="VarChar(20)")]
+		public string ReceiverLastName
+		{
+			get
+			{
+				return this._ReceiverLastName;
+			}
+			set
+			{
+				if ((this._ReceiverLastName != value))
+				{
+					this.OnReceiverLastNameChanging(value);
+					this.SendPropertyChanging();
+					this._ReceiverLastName = value;
+					this.SendPropertyChanged("ReceiverLastName");
+					this.OnReceiverLastNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ReceiverPhoneNumber", DbType="VarChar(20)")]
+		public string ReceiverPhoneNumber
+		{
+			get
+			{
+				return this._ReceiverPhoneNumber;
+			}
+			set
+			{
+				if ((this._ReceiverPhoneNumber != value))
+				{
+					this.OnReceiverPhoneNumberChanging(value);
+					this.SendPropertyChanging();
+					this._ReceiverPhoneNumber = value;
+					this.SendPropertyChanged("ReceiverPhoneNumber");
+					this.OnReceiverPhoneNumberChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__Delivery__Packag__16CE6296", Storage="_Deliveries", ThisKey="ID", OtherKey="PackageID", DeleteRule="NO ACTION")]
 		public EntitySet<Delivery> Deliveries
 		{
@@ -935,6 +1244,19 @@ namespace DeliveyService
 			set
 			{
 				this._Deliveries.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FK__DeliveryD__Packa__6A30C649", Storage="_DeliveryDates", ThisKey="ID", OtherKey="PackageID", DeleteRule="NO ACTION")]
+		public EntitySet<DeliveryDate> DeliveryDates
+		{
+			get
+			{
+				return this._DeliveryDates;
+			}
+			set
+			{
+				this._DeliveryDates.Assign(value);
 			}
 		}
 		
@@ -1067,6 +1389,18 @@ namespace DeliveyService
 		}
 		
 		private void detach_Deliveries(Delivery entity)
+		{
+			this.SendPropertyChanging();
+			entity.Package = null;
+		}
+		
+		private void attach_DeliveryDates(DeliveryDate entity)
+		{
+			this.SendPropertyChanging();
+			entity.Package = this;
+		}
+		
+		private void detach_DeliveryDates(DeliveryDate entity)
 		{
 			this.SendPropertyChanging();
 			entity.Package = null;

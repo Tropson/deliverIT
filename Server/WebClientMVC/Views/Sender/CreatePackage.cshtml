@@ -1,69 +1,95 @@
 ﻿@model WebClientMVC.Models.PackageModel
 
 @{
-    ViewBag.Title = "CreatePackage";
+    ViewBag.Title = "Package";
 }
 
-<h2>Create delivery request</h2>
-
-@using (Html.BeginForm()) 
+<h2>Package delivery information</h2>
+<script src="~/Scripts/packageMap.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-i9eQttqqwEOLH8tqPgYocn3Cx-aAa7I&signed_in=true&libraries=places&callback=initialize" async defer></script>
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
+        <p>Please fill in this form carefully. We are not responsible for mistaken information provided.</p>
+        <hr />
+
         <div class="col-md-6">
+            <h4>Receiver information</h4>
+            <div class="form-group">
+                <label class="control-label col-md-2">First name:</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ReceiverFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ReceiverFirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Last name:</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ReceiverLastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ReceiverLastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Phone number:</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ReceiverPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ReceiverPhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
             <h4>Package information</h4>
-            <hr />
-
-
             <div class="form-group">
-                <label class="control-label col-md-3">Destination Address:</label>
-                <div class="col-md-5">
-                    @Html.EditorFor(model => model.ToAddress, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ToAddress, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <span id="administrative_area_level_1" style="display:none"></span>
-            <span id="country" style="display:none"></span>
-            <span id="street_number" style="display:none"></span>
-
-            <div class="form-group">
-                <label class="control-label col-md-3">From Address:</label>
-                <div class="col-md-5">
-                    @Html.EditorFor(model => model.FromAddress, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.FromAddress, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="control-label col-md-3">Width:</label>
-                <div class="col-md-5">
-                    @Html.EditorFor(model => model.Width, new { htmlAttributes = new { @class = "form-control" } })
+                <label class="control-label col-md-2">Width:</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Width, new { htmlAttributes = new { @class = "form-control", placeholder = "cm" } })
                     @Html.ValidationMessageFor(model => model.Width, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-3">Height:</label>
-                <div class="col-md-5">
-                    @Html.EditorFor(model => model.Height, new { htmlAttributes = new { @class = "form-control" } })
+                <label class="control-label col-md-2">Height:</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Height, new { htmlAttributes = new { @class = "form-control", placeholder = "cm" } })
                     @Html.ValidationMessageFor(model => model.Height, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <label class="control-label col-md-3">Weight:</label>
-                <div class="col-md-5">
-                    @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
+                <label class="control-label col-md-2">Weight:</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control", placeholder = "kg" } })
                     @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h4>Delivery addresses</h4>
+            <div class="form-group">
+                <label class="control-label col-md-2">Pick up:</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.FromAddress, new { htmlAttributes = new { @class = "form-control", @id = "autocomplete" } })
+                    @Html.ValidationMessageFor(model => model.FromAddress, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                <label class="control-label col-md-2">Destination:</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ToAddress, new { htmlAttributes = new { @class = "form-control", @id = "autocomplete2" } })
+                    @Html.ValidationMessageFor(model => model.ToAddress, "", new { @class = "text-danger" })
                 </div>
+            </div>
+            <div id="map"></div>
+        </div>
+        <span id="administrative_area_level_1" style="display:none"></span>
+        <span id="country" style="display:none"></span>
+        <span id="street_number" style="display:none"></span>
+        <span id="route" style="display:none"></span>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>

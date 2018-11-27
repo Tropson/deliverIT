@@ -15,5 +15,8 @@ namespace WebClientMVC.Models
         public double Width { get; set; }
         public double Height { get; set; }
         public double Weight { get; set; }
+        public string ReceiverFirstName { get; set; }
+        public string ReceiverLastName { get; set; }
+        public string ReceiverPhoneNumber { get; set; }
     }
 }
