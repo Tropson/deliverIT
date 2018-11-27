@@ -1,4 +1,5 @@
-﻿var placeSearch, autocomplete, map, marker;
+﻿var placeSearch, autocomplete, autocomplete2, map;
+var markers = [];
 var componentForm = {
     street_number: 'short_name',
     route: 'long_name',
@@ -10,6 +11,7 @@ var componentForm = {
 function initialize() {
     initMap();
     initAutocomplete();
+    initAutocomplete2();
 }
 function initMap() {
     // The location of Uluru
@@ -17,42 +19,55 @@ function initMap() {
     // The map, centered at Uluru
     map = new google.maps.Map(
         document.getElementById('map'), { zoom: 15, center: aalborg });
-    marker = new google.maps.Marker({ position: aalborg, map: map });
     // The marker, positioned at Uluru
 }
 
 function initAutocomplete() {
     // Create the autocomplete object, restricting the search to geographical
     // location types.
+    var auto = 'autocomplete';
     autocomplete = new google.maps.places.Autocomplete(
             /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
         { types: ['geocode'] });
 
     // When the user selects an address from the dropdown, populate the address
     // fields in the form.
-    autocomplete.addListener('place_changed', fillInAddress('autocomplete'));
+    autocomplete.addListener('place_changed', function () { fillInAddress(auto) });
 }
+function initAutocomplete2() {
+    // Create the autocomplete object, restricting the search to geographical
+    // location types.
+    var auto = 'autocomplete2';
+    autocomplete2 = new google.maps.places.Autocomplete(
+            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete2')),
+        { types: ['geocode'] });
 
+    // When the user selects an address from the dropdown, populate the address
+    // fields in the form.
+    autocomplete2.addListener('place_changed', function () { fillInAddress(auto) });
+}
 function fillInAddress(auto) {
     // Get the place details from the autocomplete object.
-    var place = autocomplete.getPlace();
-    console.log(place);
+    var autoToUse;
+    if (auto === 'autocomplete') {
+        autoToUse = autocomplete;
+    }
+    else autoToUse = autocomplete2;
+    var place = autoToUse.getPlace();
     for (var component in componentForm) {
         document.getElementById(component).value = '';
         document.getElementById(component).disabled = false;
     }
-    document.getElementById(auto).value = "";
-    document.getElementById(auto).placeholder = "";
     // Get each component of the address from the place details
     // and fill the corresponding field on the form.
-    var fullAddress = "";
     for (var i = 0; i < place.address_components.length; i++) {
         var addressType = place.address_components[i].types[0];
         if (componentForm[addressType]) {
             var val = place.address_components[i][componentForm[addressType]];
-            fullAddress += val;
+            document.getElementById(addressType).value = val;
         }
     }
+    console.log(auto);
     document.getElementById("locality").disabled = "true";
     document.getElementById("route").disabled = "true";
     document.getElementById("postal_code").disabled = "true";
@@ -69,11 +84,10 @@ function fillInAddress(auto) {
     geocoder.geocode({ 'address': address }, function (results, status) {
         if (status === 'OK') {
             map.setCenter(results[0].geometry.location);
-            marker.setMap(null);
-            marker = new google.maps.Marker({
+            markers.push(new google.maps.Marker({
                 map: map,
                 position: results[0].geometry.location
-            });
+            }));
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
