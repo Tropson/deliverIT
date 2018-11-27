@@ -1,4 +1,4 @@
-﻿var placeSearch, autocomplete, autocomplete2, map;
+﻿var placeSearch, autocomplete, autocomplete2, map, directionsService, directionsDisplay;
 var markers = [];
 var componentForm = {
     street_number: 'short_name',
@@ -15,10 +15,13 @@ function initialize() {
 }
 function initMap() {
     // The location of Uluru
+    directionsService = new google.maps.DirectionsService;
+    directionsDisplay = new google.maps.DirectionsRenderer;
     var aalborg = { lat: 57.0488, lng: 9.9217 };
     // The map, centered at Uluru
     map = new google.maps.Map(
         document.getElementById('map'), { zoom: 15, center: aalborg });
+    directionsDisplay.setMap(map);
     // The marker, positioned at Uluru
 }
 
@@ -48,11 +51,16 @@ function initAutocomplete2() {
 }
 function fillInAddress(auto) {
     // Get the place details from the autocomplete object.
+    var mapLabel;
     var autoToUse;
     if (auto === 'autocomplete') {
         autoToUse = autocomplete;
+        mapLabel = 'A';
     }
-    else autoToUse = autocomplete2;
+    else {
+        autoToUse = autocomplete2;
+        mapLabel = 'B';
+    } 
     var place = autoToUse.getPlace();
     for (var component in componentForm) {
         document.getElementById(component).value = '';
@@ -79,6 +87,14 @@ function fillInAddress(auto) {
     //    $.each(data.items, function (i, item) {
     //    });
     //});
+    for (var i = 0; i < markers.length; i++)
+    {
+        if (markers[i].label === mapLabel)
+        {
+            markers[i].setMap(null);
+            markers[i].setLabel(null);
+        }
+    }
     var geocoder = new google.maps.Geocoder();
     var address = document.getElementById("route").value + " " + document.getElementById("street_number").value + " " + document.getElementById("locality").value;
     geocoder.geocode({ 'address': address }, function (results, status) {
@@ -86,19 +102,75 @@ function fillInAddress(auto) {
             map.setCenter(results[0].geometry.location);
             markers.push(new google.maps.Marker({
                 map: map,
-                position: results[0].geometry.location
+                position: results[0].geometry.location,
+                label:mapLabel
             }));
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
     });
+    checkMarkers();
     //var geo = obj.responseJSON.results[0].geometry.bounds.northeast;
     //console.log(geo);
     //var currentCenter = { lat: geo.lat, lng: geo.lng };
     //map.setCenter(currentCenter);
     //var marker = new google.maps.Marker({ position: currentCenter, map: map });
 }
-
+function checkMarkers(){
+    setTimeout(function () {
+        var DestIsThere;
+        var OriginIsThere;
+        for (var i = 0; i < markers.length; i++) {
+            if (markers[i].label === 'A') OriginIsThere = true;
+            else if (markers[i].label === 'B') DestIsThere = true;
+        }
+        if (DestIsThere && OriginIsThere) {
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
+        }
+    }, 1000);  
+}
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    var origin;
+    var destination;
+    for (var i = 0; i < markers.length; i++) {
+        if (markers[i].label === 'A') {
+            origin = "" + markers[i].position.lat() + "," + markers[i].position.lng();
+        }
+        else if (markers[i].label === 'B') {
+            destination = "" + markers[i].position.lat() + "," + markers[i].position.lng();
+        }
+    }
+    console.log(origin);
+    console.log(destination);
+    directionsService.route({
+        origin: origin,
+        destination: destination,
+        travelMode: 'BICYCLING'
+    }, function (response, status) {
+        if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+    var service = new google.maps.DistanceMatrixService;
+    service.getDistanceMatrix({
+        origins: [origin],
+        destinations: [destination],
+        travelMode: 'BICYCLING',
+        unitSystem: google.maps.UnitSystem.METRIC
+    }, function (response, status) {
+        if (status === 'OK') {
+            console.log(response);
+            var results = response.rows[0].elements;
+            document.getElementById("distance").value = results[0].distance.text;
+            var a = 1000;
+            var b = results[0].distance.value;
+            var c = b / a;
+            document.getElementById("price").value = c*10+10;
+        }
+        })
+}
 // Bias the autocomplete object to the user's geographical location,
 // as supplied by the browser's 'navigator.geolocation' object.
 function geolocate() {
