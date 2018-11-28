@@ -15,10 +15,12 @@ namespace WebClientMVC.Models
 
         [Required(ErrorMessage = "This field is required")]
         [StringLength(15, ErrorMessage = "Too long")]
+        [RegularExpression(@"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$",ErrorMessage ="Please use only English letters")]
         public virtual string FirstName { get; set; }
 
         [Required(ErrorMessage = "This field is required")]
         [StringLength(15, ErrorMessage = "Too long")]
+        [RegularExpression(@"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$", ErrorMessage = "Please use only English letters")]
         public virtual string LastName { get; set; }
 
         [Required(ErrorMessage = "This field is required")]

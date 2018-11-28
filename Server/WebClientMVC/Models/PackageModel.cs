@@ -22,8 +22,10 @@ namespace WebClientMVC.Models
         [Required(ErrorMessage = "This field can not be empty")]
         public double Weight { get; set; }
         [Required(ErrorMessage = "This field can not be empty")]
+        [RegularExpression(@"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$", ErrorMessage = "Please use only English letters")]
         public string ReceiverFirstName { get; set; }
         [Required(ErrorMessage = "This field can not be empty")]
+        [RegularExpression(@"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$", ErrorMessage = "Please use only English letters")]
         public string ReceiverLastName { get; set; }
         [Required(ErrorMessage = "This field can not be empty")]
         [Phone]
