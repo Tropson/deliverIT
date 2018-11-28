@@ -16,7 +16,7 @@ function initialize() {
 function initMap() {
     // The location of Uluru
     directionsService = new google.maps.DirectionsService;
-    directionsDisplay = new google.maps.DirectionsRenderer;
+    directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers:true});
     var aalborg = { lat: 57.0488, lng: 9.9217 };
     // The map, centered at Uluru
     map = new google.maps.Map(
