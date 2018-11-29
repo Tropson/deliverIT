@@ -123,19 +123,31 @@ namespace WebClientMVC.Controllers
                 if (!ModelState.IsValid)
                     return View("CreatePackage", package);
 
+
                 string username = Request.Cookies.Get("login").Values["feketePorzeczka"];
 
-                var packageModelToInsert = new DeliveryService.PackageModel { ToAddress = package.ToAddress, FromAddress = package.FromAddress, Weight = package.Weight, Width = package.Width, Height = package.Width, ReceiverFirstName = package.ReceiverFirstName, ReceiverLastName = package.ReceiverLastName, ReceiverPhoneNumber = package.ReceiverPhoneNumber };
-                var deliveryModelToInsert = new DeliveryService.DeliveryModel { Distance = double.Parse(package.Distance.Split(' ')[0]), Price = int.Parse(package.Price) };
+                var userPoints = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == username).Points;
 
-                var result = _proxy.AddPackage(packageModelToInsert, username, deliveryModelToInsert);
+                if (int.Parse(package.Price) <= userPoints)
+                {
+                    var packageModelToInsert = new DeliveryService.PackageModel { ToAddress = package.ToAddress, FromAddress = package.FromAddress, Weight = package.Weight, Width = package.Width, Height = package.Width, ReceiverFirstName = package.ReceiverFirstName, ReceiverLastName = package.ReceiverLastName, ReceiverPhoneNumber = package.ReceiverPhoneNumber };
+                    var deliveryModelToInsert = new DeliveryService.DeliveryModel { Distance = double.Parse(package.Distance.Split(' ')[0]), Price = int.Parse(package.Price) };
 
-                if (result == 1)
-                { 
-                return RedirectToAction("Index");
+                    var result = _proxy.AddPackage(packageModelToInsert, username, deliveryModelToInsert);
+
+                    if (result == 1)
+                    {
+                        return RedirectToAction("Index");
+                    }
+
+                    else return RedirectToAction("CreatePackage", package);
                 }
-
-                else return RedirectToAction("CreatePackage", package);
+                else
+                {
+                    ModelState.AddModelError("Price", "You do not have enough points!");
+                    return View("CreatePackage", package);
+                }
+                
             }
             catch
             {
