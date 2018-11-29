@@ -374,7 +374,7 @@ ul {
 .package {
     margin-top:10px;
     margin-bottom:10px;
-    min-height:60vh;
+    min-height:70vh;
     position:relative;
     border-radius:2px;
     text-align:center;
@@ -427,8 +427,16 @@ ul {
             border-radius:5px;
         }
     .package .addressLine {
-        font-size:14px;
+        font-size:1em;
         text-transform:uppercase;
+    }
+    .package .price {
+        font-size: 1.5em;
+        text-transform: uppercase;
+        border:1px solid #888888;
+        border-radius:5px;
+        width:50%;
+        margin:0 auto;
     }
     .package .package_desc > .addressDiv {
         text-align:center;
