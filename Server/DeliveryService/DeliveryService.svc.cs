@@ -365,7 +365,7 @@ namespace DeliveryService
 
         public PackageModel[] GetAllPackages()
         {
-            return db.Packages.Select(x => new PackageModel { CourierID = x.CourierID, FromAddress = x.FromAddress, Height = (double)x.Height, SenderID = (int)x.SenderID, StatusID = (int)x.StatusID, ToAddress = x.ToAddress, Weight = (double)x.Weight, Width = (double)x.Width, ReceiverFirstName = x.ReceiverFirstName, ReceiverLastName = x.ReceiverLastName, ReceiverPhoneNumber = x.ReceiverPhoneNumber }).ToArray();
+            return db.Packages.Select(x => new PackageModel { CourierID = x.CourierID, FromAddress = x.FromAddress, Height = (double)x.Height, SenderID = (int)x.SenderID, StatusID = (int)x.StatusID, ToAddress = x.ToAddress, Weight = (double)x.Weight, Width = (double)x.Width, ReceiverFirstName = x.ReceiverFirstName, ReceiverLastName = x.ReceiverLastName, ReceiverPhoneNumber = x.ReceiverPhoneNumber,barcode=(double)x.Barcode }).ToArray();
         }
 
         public int AddPackage(PackageModel package, string Username, DeliveryModel delivery)
@@ -442,6 +442,13 @@ namespace DeliveryService
             }
             AddToBalance(Username, delivery.Price * -1);
             return 1;
+        }
+
+        public DeliveryModel GetDeliveryByPackageBarcode(double barcode)
+        {
+            var package = db.Packages.SingleOrDefault(x => x.Barcode == barcode);
+            var delivery = db.Deliveries.SingleOrDefault(x => x.PackageID == package.ID);
+            return new DeliveryModel { Distance=(double)delivery.Distance,Price=(int)delivery.Price};
         }
     }
 }

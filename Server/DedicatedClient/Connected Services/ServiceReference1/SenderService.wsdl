@@ -85,12 +85,6 @@
   <wsdl:message name="ISenderService_GetAllPackages_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllPackagesResponse" />
   </wsdl:message>
-  <wsdl:message name="ISenderService_GetDeliveryByPackageBarcode_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDeliveryByPackageBarcode" />
-  </wsdl:message>
-  <wsdl:message name="ISenderService_GetDeliveryByPackageBarcode_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDeliveryByPackageBarcodeResponse" />
-  </wsdl:message>
   <wsdl:message name="ISenderService_AddPackage_InputMessage">
     <wsdl:part name="parameters" element="tns:AddPackage" />
   </wsdl:message>
@@ -149,10 +143,6 @@
     <wsdl:operation name="GetAllPackages">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetAllPackages" message="tns:ISenderService_GetAllPackages_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetAllPackagesResponse" message="tns:ISenderService_GetAllPackages_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetDeliveryByPackageBarcode">
-      <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcode" message="tns:ISenderService_GetDeliveryByPackageBarcode_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcodeResponse" message="tns:ISenderService_GetDeliveryByPackageBarcode_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddPackage">
       <wsdl:input wsaw:Action="http://tempuri.org/ISenderService/AddPackage" message="tns:ISenderService_AddPackage_InputMessage" />
@@ -271,15 +261,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetAllPackages">
       <soap:operation soapAction="http://tempuri.org/ISenderService/GetAllPackages" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="GetDeliveryByPackageBarcode">
-      <soap:operation soapAction="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcode" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

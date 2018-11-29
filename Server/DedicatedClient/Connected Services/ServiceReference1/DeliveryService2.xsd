@@ -168,26 +168,12 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetDeliveryByPackageBarcode">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="barcode" type="xs:double" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetDeliveryByPackageBarcodeResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="GetDeliveryByPackageBarcodeResult" nillable="true" type="q10:DeliveryModel" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="AddPackage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="model" nillable="true" type="q11:PackageModel" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="model" nillable="true" type="q10:PackageModel" />
         <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="delivery" nillable="true" type="q12:DeliveryModel" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/DeliveryService" minOccurs="0" name="delivery" nillable="true" type="q11:DeliveryModel" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

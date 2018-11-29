@@ -53,6 +53,9 @@ namespace DeliveryService
         PackageModel[] GetAllPackages();
 
         [OperationContract]
+        DeliveryModel GetDeliveryByPackageBarcode(double barcode);
+
+        [OperationContract]
         int AddPackage(PackageModel model, string Username, DeliveryModel delivery);
 
     }
@@ -99,6 +102,8 @@ namespace DeliveryService
         public string ReceiverLastName { get; set; }
         [DataMember]
         public string ReceiverPhoneNumber { get; set; }
+        [DataMember]
+        public double barcode { get; set; }
     }
 
     [DataContract(Name = "DeliveryModel")]

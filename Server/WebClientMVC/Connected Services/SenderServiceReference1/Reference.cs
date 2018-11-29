@@ -93,6 +93,12 @@ namespace WebClientMVC.SenderServiceReference1 {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllPackages", ReplyAction="http://tempuri.org/ISenderService/GetAllPackagesResponse")]
         System.Threading.Tasks.Task<DeliveryService.PackageModel[]> GetAllPackagesAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcode", ReplyAction="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcodeResponse")]
+        DeliveryService.DeliveryModel GetDeliveryByPackageBarcode(double barcode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcode", ReplyAction="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcodeResponse")]
+        System.Threading.Tasks.Task<DeliveryService.DeliveryModel> GetDeliveryByPackageBarcodeAsync(double barcode);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddPackage", ReplyAction="http://tempuri.org/ISenderService/AddPackageResponse")]
         int AddPackage(DeliveryService.PackageModel model, string Username, DeliveryService.DeliveryModel delivery);
         
@@ -229,6 +235,14 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         public System.Threading.Tasks.Task<DeliveryService.PackageModel[]> GetAllPackagesAsync() {
             return base.Channel.GetAllPackagesAsync();
+        }
+        
+        public DeliveryService.DeliveryModel GetDeliveryByPackageBarcode(double barcode) {
+            return base.Channel.GetDeliveryByPackageBarcode(barcode);
+        }
+        
+        public System.Threading.Tasks.Task<DeliveryService.DeliveryModel> GetDeliveryByPackageBarcodeAsync(double barcode) {
+            return base.Channel.GetDeliveryByPackageBarcodeAsync(barcode);
         }
         
         public int AddPackage(DeliveryService.PackageModel model, string Username, DeliveryService.DeliveryModel delivery) {

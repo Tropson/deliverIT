@@ -249,6 +249,7 @@
     <Content Include="Properties\DataSources\DeliveryService.VoucherModel.datasource" />
     <Content Include="Properties\DataSources\DeliveryService.VouchersUsedModel.datasource" />
     <Content Include="Properties\DataSources\DeliveryService.PackageModel.datasource" />
+    <Content Include="Properties\DataSources\DeliveryService.DeliveryModel.datasource" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\customScripts.js" />
@@ -290,6 +291,7 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Application\LoggedIn.cshtml" />
     <Content Include="Views\Sender\CreatePackage.cshtml" />
+    <Content Include="Views\Application\Deliveries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

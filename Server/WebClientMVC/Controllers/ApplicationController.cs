@@ -164,6 +164,11 @@ namespace WebClientMVC.Controllers
                 return View();
             }
         }
+        public ActionResult Deliveries()
+        {
+            var packages = _proxy.GetAllPackages().Select(x=>new PackageModel {FromAddress=x.FromAddress,ToAddress=x.ToAddress,Height=x.Height,Weight=x.Weight,Width=x.Width,Price=_proxy.GetDeliveryByPackageBarcode(x.barcode).Price+"",Distance=_proxy.GetDeliveryByPackageBarcode(x.barcode).Distance + "" }).ToList();
+            return View(packages);
+        }
         public string HashString(string input)
         {
             MD5 md5 = System.Security.Cryptography.MD5.Create();

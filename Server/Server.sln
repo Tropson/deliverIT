@@ -16,6 +16,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebClientMVC.Tests", "WebCl
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DedicatedClient", "DedicatedClient\DedicatedClient.csproj", "{4F0A1B2A-9CB0-448F-AE1E-21A4D84EE0ED}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2A52FBEC-48FF-4FC5-9A1A-9F65F038CA22} = {2A52FBEC-48FF-4FC5-9A1A-9F65F038CA22}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

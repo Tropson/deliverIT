@@ -97,7 +97,6 @@
       <xs:element minOccurs="0" name="ToAddress" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Weight" type="xs:double" />
       <xs:element minOccurs="0" name="Width" type="xs:double" />
-      <xs:element minOccurs="0" name="barcode" type="xs:double" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PackageModel" nillable="true" type="tns:PackageModel" />
