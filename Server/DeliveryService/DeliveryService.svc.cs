@@ -170,13 +170,13 @@ namespace DeliveryService
                 db.Connection.Close();
             }
 
-            MailMessage mail = new MailMessage("deliveritassociation@gmail.com", application.Email);
+            MailMessage mail = new MailMessage("noreply@deliverit.dk", application.Email);
             SmtpClient client = new SmtpClient();
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
-            client.Host = "smtp.gmail.com";
+            client.Credentials = new NetworkCredential("azure_9b9152f4374f3afe527d63630de50845@azure.com", "antraxxx1234");
+            client.Host = "smtp.sendgrid.net";
             client.EnableSsl = true;
             mail.Subject = $"We got your application {person.FirstName}!";
             mail.Body = "We got your application. If your personal data is valid our admin will accept you in the near future!";
@@ -232,14 +232,14 @@ namespace DeliveryService
                 db.Connection.Close();
             }
 
-            MailMessage mail = new MailMessage("deliveritassociation@gmail.com", courierObj.Email);
+            MailMessage mail = new MailMessage("noreply@deliverit.dk", courierObj.Email);
             SmtpClient client = new SmtpClient();
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.EnableSsl = true;
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
-            client.Host = "smtp.gmail.com";
+            client.Credentials = new NetworkCredential("azure_9b9152f4374f3afe527d63630de50845@azure.com", "antraxxx1234");
+            client.Host = "smtp.sendgrid.net";
+            client.EnableSsl = true;
             mail.Subject = $"{courierObj.FirstName} You are accepted as a courier!";
             mail.Body = "Our admin accepted you. You can log in and start deliver like maniac!" + Environment.NewLine +
                 "To log in use those credentials:" + Environment.NewLine + 
