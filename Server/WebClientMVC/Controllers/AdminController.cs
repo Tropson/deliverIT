@@ -70,7 +70,7 @@ namespace WebClientMVC.Controllers
                 if (!ModelState.IsValid)
                     return View("Index");
                 var app = _proxy.GetAllApplications().SingleOrDefault(x => x.Cpr == Cpr);
-                string generPassword = Membership.GeneratePassword(6, 2);
+                string generPassword = Membership.GeneratePassword(10, 0);
                 SenderModel courier = new SenderModel(app.Cpr, app.FirstName, app.LastName, app.PhoneNumber, app.Email, app.Address, app.ZipCode, app.City) { AccountType = (int)AccountTypeEnum.COURIER, Points = 0 };
                 _proxy.AddCourier(new DeliveryService.UserModel { AccountType = courier.AccountType, Address = courier.Address, City = courier.City, ZipCode = courier.ZipCode, Cpr = courier.Cpr, Email = courier.Email, FirstName = courier.FirstName, LastName = courier.LastName, PhoneNumber = courier.PhoneNumber, Points = courier.Points, Username = courier.Email, Password = generPassword });
                 DeliveryService.ApplicationModel appToDelete = new DeliveryService.ApplicationModel { Cpr = app.Cpr };
