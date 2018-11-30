@@ -98,8 +98,8 @@ namespace DeliveryService
             {
                 AccountType = (int)x.AccountTypeID,
                 Address = x.Person.Address,
-                City = x.Person.City,
                 Cpr = x.Person.Cpr,
+                City = x.Person.City,
                 Email = x.Person.Email,
                 FirstName = x.Person.FirstName,
                 LastName = x.Person.LastName,

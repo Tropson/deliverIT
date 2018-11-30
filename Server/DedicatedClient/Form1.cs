@@ -41,6 +41,16 @@ namespace DedicatedClient
             table.Columns.Add("Accept", typeof(bool));
             table.Columns.Add("Decline", typeof(bool));
         }
+
+        private void InitializeUSersTable()
+        {
+            table = new DataTable();
+            table.Columns.Add("Username", typeof(string));
+            table.Columns.Add("Points", typeof(string));
+            table.Columns.Add("Name", typeof(string));
+            table.Columns.Add("Cpr", typeof(string));
+            table.Columns.Add("Email", typeof(string));
+        }
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -153,6 +163,20 @@ namespace DedicatedClient
         private void ShowLogin()
         {
             Application.Run(new Login());
+        }
+
+        private void showUsersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            accepts.Clear();
+            InitializeUSersTable();
+            var users = proxy.GetAllUsers();
+            foreach (var i in users)
+            {
+                
+                table.Rows.Add(i.Username, i.Points, i.FirstName + " " + i.LastName, i.Cpr, i.Email);
+            }
+            dataGridView1.DataSource = table;
+            this.done();
         }
     }
 }
