@@ -1,7 +1,5 @@
-﻿using DeliveryServiceLibrary;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.Linq;
 using System.Linq;
 using System.Net;
@@ -9,18 +7,17 @@ using System.Net.Mail;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
-using System.Threading.Tasks;
+using DeliveryServiceLibrary;
 
 namespace DeliveryServiceLibrary
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
+    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     [ServiceBehavior(
         Name = "SenderService",
         InstanceContextMode = InstanceContextMode.Single)]
     public class SenderService : ISenderService
     {
-        DataClasses1DataContext db = new DataClasses1DataContext(ConfigurationManager.ConnectionStrings["deliveryCon"].ConnectionString);
+        DataClasses1DataContext db = new DataClasses1DataContext();
         public int AddSender(UserModel senderObj)
         {
             UserModel sender = senderObj;
@@ -142,7 +139,7 @@ namespace DeliveryServiceLibrary
                 CVPath = application.CVPath,
                 PersonID = nextPersonId,
                 YellowCardPath = application.YellowCardPath,
-                Guid = application.GuidLine
+                guid = application.GuidLine
             };
             var persons = db.Persons;
             var applications = db.Applications;
@@ -203,7 +200,7 @@ namespace DeliveryServiceLibrary
                 PhoneNumber = x.Person.PhoneNumber,
                 YellowCardPath = x.YellowCardPath,
                 ZipCode = x.Person.ZipCode,
-                GuidLine = x.Guid
+                GuidLine = x.guid
             }).ToArray();
             return myApplications;
         }
@@ -496,3 +493,4 @@ public static class DataContextExtensions
         }
     }
 }
+

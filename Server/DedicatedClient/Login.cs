@@ -14,7 +14,7 @@ namespace DedicatedClient
 {
     public partial class Login : Form
     {
-        SenderServiceClient proxy = new SenderServiceClient();
+        AdminServiceClient proxy = new AdminServiceClient();
         Thread th;
         public Login()
         {

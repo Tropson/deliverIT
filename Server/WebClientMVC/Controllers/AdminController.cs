@@ -31,7 +31,7 @@ namespace WebClientMVC.Controllers
         public ActionResult Index()
         {
             client.Connect();
-            DeliveryService.ApplicationModel[] list = _proxy.GetAllApplications();
+            SenderServiceReference1.ApplicationResource[] list = _proxy.GetAllApplications();
             IEnumerable<Models.ApplicationModel> applications = list.Select(x => new Models.ApplicationModel { Cpr = x.Cpr, FirstName = x.FirstName, LastName = x.LastName, PhoneNumber = x.PhoneNumber, Email = x.Email, Address = x.Address, ZipCode = x.ZipCode, City = x.City,cv=x.CVPath,idcard=x.IDPicturePath,yellow=x.YellowCardPath,GuidLine=x.GuidLine, files = new HttpPostedFileBase[3] });
             return View(applications);
         }
@@ -72,8 +72,8 @@ namespace WebClientMVC.Controllers
                 var app = _proxy.GetAllApplications().SingleOrDefault(x => x.Cpr == Cpr);
                 string generPassword = Membership.GeneratePassword(10, 0);
                 SenderModel courier = new SenderModel(app.Cpr, app.FirstName, app.LastName, app.PhoneNumber, app.Email, app.Address, app.ZipCode, app.City) { AccountType = (int)AccountTypeEnum.COURIER, Points = 0 };
-                _proxy.AddCourier(new DeliveryService.UserModel { AccountType = courier.AccountType, Address = courier.Address, City = courier.City, ZipCode = courier.ZipCode, Cpr = courier.Cpr, Email = courier.Email, FirstName = courier.FirstName, LastName = courier.LastName, PhoneNumber = courier.PhoneNumber, Points = courier.Points, Username = courier.Email, Password = generPassword });
-                DeliveryService.ApplicationModel appToDelete = new DeliveryService.ApplicationModel { Cpr = app.Cpr };
+                _proxy.AddCourier(new SenderResource { AccountType = courier.AccountType, Address = courier.Address, City = courier.City, ZipCode = courier.ZipCode, Cpr = courier.Cpr, Email = courier.Email, FirstName = courier.FirstName, LastName = courier.LastName, PhoneNumber = courier.PhoneNumber, Points = courier.Points, Username = courier.Email, Password = generPassword });
+                ApplicationResource appToDelete = new ApplicationResource { Cpr = app.Cpr };
                 _proxy.DeleteApplication(appToDelete,false);
                 //client.Disconnect();
                 return RedirectToAction("Index");
@@ -91,7 +91,7 @@ namespace WebClientMVC.Controllers
             {
                 if (!ModelState.IsValid)
                     return View("Index");
-                DeliveryService.ApplicationModel appToDelete = new DeliveryService.ApplicationModel { Cpr = app.Cpr };
+                ApplicationResource appToDelete = new ApplicationResource { Cpr = app.Cpr };
                 _proxy.DeleteApplication(appToDelete,true);
                 //client.Disconnect();
                 return RedirectToAction("Index");

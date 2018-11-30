@@ -104,7 +104,7 @@ namespace WebClientMVC.Controllers
                 //client.Upload(app.files[0].InputStream, $"public_html/Files/{guid}/{cv}");
                 //client.Upload(app.files[1].InputStream, $"public_html/Files/{guid}/{idpic}");
                 //client.Upload(app.files[2].InputStream, $"public_html/Files/{guid}/{yellow}");
-                var result = _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
+                var result = _proxy.AddApplication(new ApplicationResource { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
                 //client.Disconnect();
                 if (result == 1)
                 {
@@ -166,7 +166,7 @@ namespace WebClientMVC.Controllers
         }
         public ActionResult Deliveries()
         {
-            var packages = _proxy.GetAllPackages().Select(x=>new PackageModel {FromAddress=x.FromAddress,ToAddress=x.ToAddress,Height=x.Height,Weight=x.Weight,Width=x.Width,Price=_proxy.GetDeliveryByPackageBarcode(x.barcode).Price+"",Distance=_proxy.GetDeliveryByPackageBarcode(x.barcode).Distance + "" }).ToList();
+            var packages = _proxy.GetAllPackages().Select(x=>new Models.PackageModel { FromAddress=x.FromAddress,ToAddress=x.ToAddress,Height=x.Height,Weight=x.Weight,Width=x.Width,Price=_proxy.GetDeliveryByPackageBarcode(x.barcode).Price+"",Distance=_proxy.GetDeliveryByPackageBarcode(x.barcode).Distance + "" }).ToList();
             return View(packages);
         }
         public string HashString(string input)

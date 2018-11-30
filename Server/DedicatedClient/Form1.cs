@@ -19,7 +19,7 @@ namespace DedicatedClient
     public partial class Form1 : Form
     {
         List<bool> accepts = new List<bool>();
-        SenderServiceClient proxy = new SenderServiceClient();
+        AdminServiceClient proxy = new AdminServiceClient();
         DataTable table;
         Thread th;
         public Form1()
