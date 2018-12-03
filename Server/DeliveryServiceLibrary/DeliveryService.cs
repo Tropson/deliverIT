@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Transactions;
 using DeliveryServiceLibrary;
 
 namespace DeliveryServiceLibrary
@@ -125,39 +126,44 @@ namespace DeliveryServiceLibrary
                 ZipCode = application.ZipCode,
                 City = application.City
             };
-           
+
             var persons = db.Persons;
             var applications = db.Applications;
-            persons.InsertOnSubmit(person);
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                return 0;
-            }
 
-            db.Connection.Close();
-            nextPersonId= db.Persons.SingleOrDefault(x => x.Cpr == application.Cpr).ID;
-            Application myApplication = new Application
-            {
-                IDPicturePath = application.IDPicturePath,
-                CVPath = application.CVPath,
-                PersonID = nextPersonId,
-                YellowCardPath = application.YellowCardPath,
-                guid = application.GuidLine
-            };
-            applications.InsertOnSubmit(myApplication);
             try
             {
-                db.Connection.Open();
-                db.SubmitChanges();
+                using(TransactionScope tran = new TransactionScope(TransactionScopeOption.Required,new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted}))
+                {
+                    persons.InsertOnSubmit(person);
+
+                    db.SubmitChanges();
+
+
+                    db.Connection.Close();
+                    nextPersonId = db.Persons.SingleOrDefault(x => x.Cpr == application.Cpr).ID;
+                    Application myApplication = new Application
+                    {
+                        IDPicturePath = application.IDPicturePath,
+                        CVPath = application.CVPath,
+                        PersonID = nextPersonId,
+                        YellowCardPath = application.YellowCardPath,
+                        guid = application.GuidLine
+                    };
+                    applications.InsertOnSubmit(myApplication);
+
+                    db.Connection.Open();
+                    db.SubmitChanges();
+                    tran.Complete();
+                }
+
             }
-            catch (Exception e)
+            catch (TransactionAbortedException ex)
             {
+                
                 return 0;
             }
+           
+            
             finally
             {
                 db.Connection.Close();
@@ -210,20 +216,29 @@ namespace DeliveryServiceLibrary
                 AccountTypeID = courierObj.AccountType,
                 PersonID = PersonId
             };
-            var users = db.Users;
-            users.InsertOnSubmit(user);
+
             try
             {
-                db.SubmitChanges();
+                using (TransactionScope tran = new TransactionScope())
+                {
+                    var users = db.Users;
+                    users.InsertOnSubmit(user);
+                   
+                    db.SubmitChanges();
+
+                    tran.Complete();
+                }
             }
-            catch (Exception e)
+            catch(TransactionAbortedException ex)
             {
                 return 0;
             }
+
             finally
             {
                 db.Connection.Close();
             }
+
 
             MailMessage mail = new MailMessage("noreply@deliverit.dk", courierObj.Email);
             SmtpClient client = new SmtpClient();
@@ -251,37 +266,43 @@ namespace DeliveryServiceLibrary
 
             var persons = db.Persons;
             var applications = db.Applications;
-            applications.DeleteOnSubmit(applicationToDelete);
             try
             {
-                db.SubmitChanges();
+                using (TransactionScope tran = new TransactionScope())
+                {
+                    applications.DeleteOnSubmit(applicationToDelete);
+
+                    db.SubmitChanges();
+
+                    if (deletePerson)
+                    {
+                        persons.DeleteOnSubmit(personToDelete);
+
+                        try
+                        {
+                            db.SubmitChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            return 0;
+                        }
+
+                    }
+                    tran.Complete();
+                }
             }
-            catch (Exception e)
+            catch (TransactionAbortedException ex)
             {
                 return 0;
             }
-            if (deletePerson)
-            {
-                persons.DeleteOnSubmit(personToDelete);
 
-                try
-                {
-                    db.SubmitChanges();
-                }
-                catch (Exception e)
-                {
-                    return 0;
-                }
-
-                finally
-                {
-                    db.Connection.Close();
-                }
-            }
-            else
+            finally
             {
                 db.Connection.Close();
             }
+
+            
+           
             return 1;
 
         }
