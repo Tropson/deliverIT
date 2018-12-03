@@ -132,7 +132,7 @@ namespace DeliveryServiceLibrary
 
             try
             {
-                using(TransactionScope tran = new TransactionScope(TransactionScopeOption.Required,new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted}))
+                using(TransactionScope tran = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted}))
                 {
                     persons.InsertOnSubmit(person);
 
@@ -219,7 +219,7 @@ namespace DeliveryServiceLibrary
 
             try
             {
-                using (TransactionScope tran = new TransactionScope())
+                using (TransactionScope tran = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel= IsolationLevel.ReadCommitted}))
                 {
                     var users = db.Users;
                     users.InsertOnSubmit(user);
@@ -268,7 +268,7 @@ namespace DeliveryServiceLibrary
             var applications = db.Applications;
             try
             {
-                using (TransactionScope tran = new TransactionScope())
+                using (TransactionScope tran = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions{IsolationLevel = IsolationLevel.ReadCommitted}))
                 {
                     applications.DeleteOnSubmit(applicationToDelete);
 
@@ -305,6 +305,37 @@ namespace DeliveryServiceLibrary
            
             return 1;
 
+        }
+
+
+        public int TakePackage(double barcode, int courierId)
+        {
+
+            try
+            {
+                using (TransactionScope tran = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+                {
+                    var package = db.Packages.Single(x => x.Barcode == barcode);
+                    if (package.CourierID == null)
+                    {
+                        package.CourierID = courierId;
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                        throw new Exception("Package already taken!");
+                    }
+
+                    tran.Complete();
+                }
+            }
+            catch(TransactionAbortedException ex)
+            {
+                return 0;
+            }
+           
+
+            return 1;
         }
 
 

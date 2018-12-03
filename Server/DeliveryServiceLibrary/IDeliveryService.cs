@@ -55,6 +55,9 @@ namespace DeliveryServiceLibrary
 
         [OperationContract]
         int AddPackage(PackageModel model, string Username, DeliveryModel delivery);
+
+        [OperationContract]
+        int TakePackage(double barcode, int courierId);
     }
 
 

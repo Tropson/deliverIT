@@ -827,6 +827,12 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddPackage", ReplyAction="http://tempuri.org/ISenderService/AddPackageResponse")]
         System.Threading.Tasks.Task<int> AddPackageAsync(WebClientMVC.SenderServiceReference1.PackageModel model, string Username, WebClientMVC.SenderServiceReference1.DeliveryModel delivery);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/TakePackage", ReplyAction="http://tempuri.org/ISenderService/TakePackageResponse")]
+        int TakePackage(double barcode, int courierId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/TakePackage", ReplyAction="http://tempuri.org/ISenderService/TakePackageResponse")]
+        System.Threading.Tasks.Task<int> TakePackageAsync(double barcode, int courierId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -974,6 +980,14 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         public System.Threading.Tasks.Task<int> AddPackageAsync(WebClientMVC.SenderServiceReference1.PackageModel model, string Username, WebClientMVC.SenderServiceReference1.DeliveryModel delivery) {
             return base.Channel.AddPackageAsync(model, Username, delivery);
+        }
+        
+        public int TakePackage(double barcode, int courierId) {
+            return base.Channel.TakePackage(barcode, courierId);
+        }
+        
+        public System.Threading.Tasks.Task<int> TakePackageAsync(double barcode, int courierId) {
+            return base.Channel.TakePackageAsync(barcode, courierId);
         }
     }
 }
