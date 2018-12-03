@@ -197,6 +197,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\LoginPassModel.cs" />
     <Compile Include="Models\PackageModel.cs" />
+    <Compile Include="Models\PackagePassModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\SenderModel.cs" />

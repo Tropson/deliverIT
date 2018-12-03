@@ -166,8 +166,23 @@ namespace WebClientMVC.Controllers
         }
         public ActionResult Deliveries()
         {
-            var packages = _proxy.GetAllPackages().Select(x=>new Models.PackageModel { FromAddress=x.FromAddress,ToAddress=x.ToAddress,Height=x.Height,Weight=x.Weight,Width=x.Width,Price=_proxy.GetDeliveryByPackageBarcode(x.barcode).Price+"",Distance=_proxy.GetDeliveryByPackageBarcode(x.barcode).Distance + "" }).ToList();
+            var packages = _proxy.GetAllPackages().Select(x=>new Models.PackageModel { FromAddress=x.FromAddress,ToAddress=x.ToAddress,Height=x.Height,Weight=x.Weight,Width=x.Width,Price=_proxy.GetDeliveryByPackageBarcode(x.barcode).Price+"",Distance=_proxy.GetDeliveryByPackageBarcode(x.barcode).Distance + "",Barcode=x.barcode,SenderID=x.SenderID,CourierID=(x.CourierID==null)?0:(int)x.CourierID }).ToList();
             return View(packages);
+        }
+        [HttpPost]
+        public ActionResult TakePackage(PackagePassModel packageToTake)
+        {
+            var result = _proxy.TakePackage(packageToTake.Barcode, packageToTake.CourierID);
+            if (result == 1)
+            {
+                return View("Deliveries");
+            }
+            else if (result == 0)
+            {
+                ModelState.AddModelError(string.Empty, "The package you have selected was already taken by the moment.");
+                return View("Deliveries");
+            }
+            else return View("Deliveries");
         }
         public string HashString(string input)
         {

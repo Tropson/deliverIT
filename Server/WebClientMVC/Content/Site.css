@@ -374,7 +374,7 @@ ul {
 .package {
     margin-top:10px;
     margin-bottom:10px;
-    min-height:70vh;
+    min-height:85vh;
     position:relative;
     border-radius:2px;
     text-align:center;
@@ -412,7 +412,7 @@ ul {
         bottom: 0px;
         width: 40%;
         left: 30%;
-        padding-top: 2.5%;
+        padding-top: 10px;
         padding-bottom: 2.5%;
         margin-top: 10px;
         border-radius: 5px;
@@ -425,6 +425,10 @@ ul {
             padding-bottom: 5%;
             background-color: #2271c7;
             border-radius:5px;
+            margin:2%;
+        }
+        .package .package_confirm .take {
+            background-color: #82d737;
         }
     .package .addressLine {
         font-size:1em;
