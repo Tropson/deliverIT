@@ -370,13 +370,13 @@ namespace DeliveryService
 
         public int AddPackage(PackageModel package, string Username, DeliveryModel delivery)
         {
-            
+
             int nextPackageId = 0;
             double barcode = new Random().Next(12345679, 99999999);
             Package packageObj = new Package
             {
                 StatusID = 1,
-                SenderID = db.Users.Single(x => x.Username == Username).PersonID,
+                SenderID = db.Users.Single(x => x.Username == Username).ID,
                 ToAddress = package.ToAddress,
                 FromAddress = package.FromAddress,
                 Weight = package.Weight,

@@ -323,7 +323,7 @@ namespace DeliveryServiceLibrary
                     }
                     else
                     {
-                        throw new Exception("Package already taken!");
+                        throw new TransactionAbortedException("Package already taken!");
                     }
 
                     tran.Complete();
@@ -420,7 +420,7 @@ namespace DeliveryServiceLibrary
             Package packageObj = new Package
             {
                 StatusID = 1,
-                SenderID = db.Users.Single(x => x.Username == Username).PersonID,
+                SenderID = db.Users.Single(x => x.Username == Username).ID,
                 ToAddress = package.ToAddress,
                 FromAddress = package.FromAddress,
                 Weight = package.Weight,
