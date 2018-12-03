@@ -10,20 +10,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DedicatedClient.ServiceReference1;
+using DedicatedClient.ServiceReference2;
+using System.ServiceModel;
 using DedicatedClient.Models;
 using System.Web.Security;
 using System.Threading;
+using PubSub.Extension;
 
 namespace DedicatedClient
 {
     public partial class Form1 : Form
     {
+        
         List<bool> accepts = new List<bool>();
         AdminServiceClient proxy = new AdminServiceClient();
+        NotificationServiceClient notifyProxy = null;
         DataTable table;
         Thread th;
         public Form1()
         {
+            InstanceContext context = new InstanceContext(new Notify());
+            notifyProxy = new NotificationServiceClient(context);
+            notifyProxy.CallCallback();
+            this.Subscribe<NotificationModel>(x => { if (x.A == 1){ button1.PerformClick(); } } );
             InitializeComponent();
             InitializeTable();
         }

@@ -114,14 +114,6 @@ namespace DeliveryServiceLibrary
         {
             ApplicationModel application = applicationObj;
             int nextPersonId = 0;
-            try
-            {
-                nextPersonId = db.Persons.OrderBy(x => x.ID).ToList().Last().ID + 1;
-            }
-            catch (Exception e)
-            {
-                nextPersonId = 1;
-            }
             Person person = new Person
             {
                 Cpr = application.Cpr,
@@ -133,14 +125,7 @@ namespace DeliveryServiceLibrary
                 ZipCode = application.ZipCode,
                 City = application.City
             };
-            Application myApplication = new Application
-            {
-                IDPicturePath = application.IDPicturePath,
-                CVPath = application.CVPath,
-                PersonID = nextPersonId,
-                YellowCardPath = application.YellowCardPath,
-                guid = application.GuidLine
-            };
+           
             var persons = db.Persons;
             var applications = db.Applications;
             persons.InsertOnSubmit(person);
@@ -154,6 +139,15 @@ namespace DeliveryServiceLibrary
             }
 
             db.Connection.Close();
+            nextPersonId= db.Persons.SingleOrDefault(x => x.Cpr == application.Cpr).ID;
+            Application myApplication = new Application
+            {
+                IDPicturePath = application.IDPicturePath,
+                CVPath = application.CVPath,
+                PersonID = nextPersonId,
+                YellowCardPath = application.YellowCardPath,
+                guid = application.GuidLine
+            };
             applications.InsertOnSubmit(myApplication);
             try
             {
@@ -257,7 +251,6 @@ namespace DeliveryServiceLibrary
 
             var persons = db.Persons;
             var applications = db.Applications;
-
             applications.DeleteOnSubmit(applicationToDelete);
             try
             {
