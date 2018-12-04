@@ -25,7 +25,16 @@ namespace WebClientMVC.Controllers
         // GET: Application
         public ActionResult Index()
         {
-            return View();
+            if (Request.Cookies.Get("login") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                string userName = Request.Cookies.Get("login").Values["feketePorzeczka"];
+                LoginPassModel obj = new LoginPassModel { Username = userName };
+                return RedirectToAction("LoggedInPost", obj);
+            }
         }
 
         public ActionResult LoggedInPost(LoginPassModel user)
@@ -169,20 +178,21 @@ namespace WebClientMVC.Controllers
             var packages = _proxy.GetAllPackages().Select(x=>new Models.PackageModel { FromAddress=x.FromAddress,ToAddress=x.ToAddress,Height=x.Height,Weight=x.Weight,Width=x.Width,Price=_proxy.GetDeliveryByPackageBarcode(x.barcode).Price+"",Distance=_proxy.GetDeliveryByPackageBarcode(x.barcode).Distance + "",Barcode=x.barcode,SenderID=x.SenderID,CourierID=(x.CourierID==null)?0:(int)x.CourierID }).ToList();
             return View(packages);
         }
-        [HttpPost]
+
         public ActionResult TakePackage(PackagePassModel packageToTake)
         {
             var result = _proxy.TakePackage(packageToTake.Barcode, packageToTake.CourierID);
             if (result == 1)
             {
-                return View("Deliveries");
+                return RedirectToAction("Deliveries");
             }
             else if (result == 0)
             {
+                var packages = _proxy.GetAllPackages().Select(x => new Models.PackageModel { FromAddress = x.FromAddress, ToAddress = x.ToAddress, Height = x.Height, Weight = x.Weight, Width = x.Width, Price = _proxy.GetDeliveryByPackageBarcode(x.barcode).Price + "", Distance = _proxy.GetDeliveryByPackageBarcode(x.barcode).Distance + "", Barcode = x.barcode, SenderID = x.SenderID, CourierID = (x.CourierID == null) ? 0 : (int)x.CourierID }).ToList();
                 ModelState.AddModelError(string.Empty, "The package you have selected was already taken by the moment.");
-                return View("Deliveries");
+                return View("Deliveries",packages);
             }
-            else return View("Deliveries");
+            else return RedirectToAction("Deliveries");
         }
         public string HashString(string input)
         {

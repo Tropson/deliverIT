@@ -227,6 +227,8 @@
     <Content Include="Resources\favicon.ico" />
     <Content Include="Resources\mobile_menu.png" />
     <Content Include="Resources\package.png" />
+    <Content Include="Resources\profile.png" />
+    <Content Include="Resources\profile2.png" />
     <Content Include="Resources\voucher.png" />
     <Content Include="Scripts\autocomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -310,6 +312,8 @@
     <Content Include="Views\Application\LoggedIn.cshtml" />
     <Content Include="Views\Sender\CreatePackage.cshtml" />
     <Content Include="Views\Application\Deliveries.cshtml" />
+    <Content Include="Views\Sender\Edit.cshtml" />
+    <Content Include="Views\Sender\SentPackages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

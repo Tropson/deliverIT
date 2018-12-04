@@ -393,7 +393,7 @@ ul {
             position:absolute;
             height:70%;
             top:15%;
-            left:35%;
+            left:30%;
         }
     .package .package_desc {
         height: 65%;
@@ -437,8 +437,6 @@ ul {
     .package .price {
         font-size: 1.5em;
         text-transform: uppercase;
-        border:1px solid #888888;
-        border-radius:5px;
         width:50%;
         margin:0 auto;
     }
@@ -486,4 +484,20 @@ ul {
     width:1px;
     height:100%;
     background-image:linear-gradient(transparent,#cccccc,#bbbbbb,#cccccc,transparent);
+}
+#options ul {
+    padding-top:0px;
+}
+    #options ul li {
+        list-style-type: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: list-item;
+        border-bottom-style: solid;
+        border-image: linear-gradient(to right,#AAAAAA,#AAAAAA,transparent);
+        border-image-slice: 1;
+        border-bottom-width:1px;
+    }
+#options #noborder {
+    border-bottom-width: 0px;
 }

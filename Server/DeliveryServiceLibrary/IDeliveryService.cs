@@ -167,6 +167,8 @@ namespace DeliveryServiceLibrary
         public int Points { get; set; }
         [DataMember]
         public int AccountType { get; set; }
+        [DataMember]
+        public int IDInDB { get; set; }
     }
 
     [DataContract(Name = "AccountTypeResource")]

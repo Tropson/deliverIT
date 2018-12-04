@@ -154,10 +154,22 @@ namespace WebClientMVC.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
-
+        public ActionResult SentPackages(LoginPassModel user) {
+            var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == user.Username);
+            var packages = _proxy.GetAllPackages().Where(x => x.SenderID == userFromDB.IDInDB).Select(x => new WebClientMVC.Models.PackageModel {
+                Barcode = x.barcode,
+                Distance = _proxy.GetDeliveryByPackageBarcode(x.barcode).Distance.ToString(),
+                Price = _proxy.GetDeliveryByPackageBarcode(x.barcode).Price.ToString(),
+                ReceiverFirstName = x.ReceiverFirstName,
+                ReceiverLastName = x.ReceiverLastName,
+                StatusID = x.StatusID
+            });
+            return View(packages);
+        }
         // GET: Sender/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string Username)
         {
+            var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == Username);
             return View();
         }
         public ActionResult Logout()

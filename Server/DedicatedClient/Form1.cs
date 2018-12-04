@@ -85,8 +85,12 @@ namespace DedicatedClient
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.InitializeTable();
-            this.Bind_DataGridView_Using_DataTable_Load(sender, e);
+            var newFetch = proxy.GetAllApplications();
+            for (int i = dataGridView1.Rows.Count; i < newFetch.Length; i++)
+            {
+                var x = newFetch[i];
+                table.Rows.Add(x.Cpr,x.FirstName+" "+x.LastName,x.PhoneNumber,x.Email, x.Address + ", " + x.City + ", " + x.ZipCode,x.CVPath,x.IDPicturePath,x.YellowCardPath,false);
+            }
         }
         private void Bind_DataGridView_Using_DataTable_Load(object sender, EventArgs e)
         {

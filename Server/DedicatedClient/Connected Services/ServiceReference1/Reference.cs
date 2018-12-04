@@ -23,6 +23,9 @@ namespace DedicatedClient.ServiceReference1 {
         private int AccountTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDInDBField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -40,6 +43,19 @@ namespace DedicatedClient.ServiceReference1 {
                 if ((this.AccountTypeField.Equals(value) != true)) {
                     this.AccountTypeField = value;
                     this.RaisePropertyChanged("AccountType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IDInDB {
+            get {
+                return this.IDInDBField;
+            }
+            set {
+                if ((this.IDInDBField.Equals(value) != true)) {
+                    this.IDInDBField = value;
+                    this.RaisePropertyChanged("IDInDB");
                 }
             }
         }

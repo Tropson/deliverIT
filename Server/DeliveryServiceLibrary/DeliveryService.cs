@@ -107,7 +107,8 @@ namespace DeliveryServiceLibrary
                 PhoneNumber = x.Person.PhoneNumber,
                 Points = (int)x.Points,
                 Username = x.Username,
-                ZipCode = x.Person.ZipCode
+                ZipCode = x.Person.ZipCode,
+                IDInDB = x.ID
             }).ToArray();
             return users;
         }
@@ -151,7 +152,6 @@ namespace DeliveryServiceLibrary
                     };
                     applications.InsertOnSubmit(myApplication);
 
-                    db.Connection.Open();
                     db.SubmitChanges();
                     tran.Complete();
                 }
@@ -316,10 +316,29 @@ namespace DeliveryServiceLibrary
                 using (TransactionScope tran = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
                 {
                     var package = db.Packages.Single(x => x.Barcode == barcode);
+                    var sender = db.Users.SingleOrDefault(x => x.ID == package.SenderID);
+                    var courier = db.Users.SingleOrDefault(x => x.ID == courierId);
                     if (package.CourierID == null)
                     {
                         package.CourierID = courierId;
+                        package.StatusID = 2;
                         db.SubmitChanges();
+                        MailMessage mail = new MailMessage("noreply@deliverit.dk",sender.Person.Email);
+                        SmtpClient client = new SmtpClient();
+                        client.Port = 587;
+                        client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        client.UseDefaultCredentials = false;
+                        client.Credentials = new NetworkCredential("azure_9b9152f4374f3afe527d63630de50845@azure.com", "antraxxx1234");
+                        client.Host = "smtp.sendgrid.net";
+                        client.EnableSsl = true;
+                        mail.Subject = $"{sender.Person.FirstName}! Your package request ({package.Barcode}) has been accepted by one of our couriers.";
+                        mail.IsBodyHtml = true;
+                        mail.Body = $"Dear {sender.Person.FirstName} {sender.Person.LastName}," + "<br />" +
+                            $"Your package with the barcode {package.Barcode} will be picked up by {courier.Person.FirstName} {courier.Person.LastName}." + "<br />" +
+                            $"If you would like to contact the courier please send an email to {courier.Person.Email}" + "<br />" +
+                            $"<b>Best regards</b>" + "<br />" +
+                            "Team of DeliverIT";
+                        client.Send(mail);
                     }
                     else
                     {
