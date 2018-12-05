@@ -79,7 +79,7 @@ namespace WebClientMVC.Controllers
                 if (!ModelState.IsValid)
                     return View("Create", reg);
                 SenderModel sender = new SenderModel(reg.Cpr, reg.FirstName, reg.LastName, reg.PhoneNumber, reg.Email, reg.Address + ", " + reg.Number, reg.ZipCode, reg.City) { AccountType = (int)AccountTypeEnum.SENDER, Password = reg.Password, Username = reg.Username, Points = 0 };
-                int ret = _proxy.AddSender(new DeliveryService.UserModel { AccountType = sender.AccountType, Address = sender.Address, City = sender.City, Cpr = sender.Cpr, Email = sender.Email, FirstName = sender.FirstName, LastName = sender.LastName, Password = sender.Password, PhoneNumber = sender.PhoneNumber, Points = sender.Points, Username = sender.Username, ZipCode = sender.ZipCode });
+                int ret = _proxy.AddSender(new SenderResource { AccountType = sender.AccountType, Address = sender.Address, City = sender.City, Cpr = sender.Cpr, Email = sender.Email, FirstName = sender.FirstName, LastName = sender.LastName, Password = sender.Password, PhoneNumber = sender.PhoneNumber, Points = sender.Points, Username = sender.Username, ZipCode = sender.ZipCode });
                 switch (ret)
                 {
                     case 1: return RedirectToAction("Index");
@@ -115,7 +115,7 @@ namespace WebClientMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreatePackage(PackageModel package)
+        public ActionResult CreatePackage(Models.PackageModel package)
         {
 
             try
@@ -123,29 +123,53 @@ namespace WebClientMVC.Controllers
                 if (!ModelState.IsValid)
                     return View("CreatePackage", package);
 
+
                 string username = Request.Cookies.Get("login").Values["feketePorzeczka"];
 
-                var packageModelToInsert = new DeliveryService.PackageModel { ToAddress = package.ToAddress, FromAddress = package.FromAddress, Weight = package.Weight, Width = package.Width, Height = package.Width, ReceiverFirstName = package.ReceiverFirstName, ReceiverLastName = package.ReceiverLastName, ReceiverPhoneNumber = package.ReceiverPhoneNumber };
-                var deliveryModelToInsert = new DeliveryService.DeliveryModel { Distance = double.Parse(package.Distance.Split(' ')[0]), Price = int.Parse(package.Price) };
+                var userPoints = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == username).Points;
 
-                var result = _proxy.AddPackage(packageModelToInsert, username, deliveryModelToInsert);
+                if (int.Parse(package.Price) <= userPoints)
+                {
+                    var packageModelToInsert = new SenderServiceReference1.PackageModel { ToAddress = package.ToAddress, FromAddress = package.FromAddress, Weight = package.Weight, Width = package.Width, Height = package.Width, ReceiverFirstName = package.ReceiverFirstName, ReceiverLastName = package.ReceiverLastName, ReceiverPhoneNumber = package.ReceiverPhoneNumber };
+                    var deliveryModelToInsert = new SenderServiceReference1.DeliveryModel { Distance = double.Parse(package.Distance.Split(' ')[0]), Price = int.Parse(package.Price) };
 
-                if (result == 1)
-                { 
-                return RedirectToAction("Index");
+                    var result = _proxy.AddPackage(packageModelToInsert, username, deliveryModelToInsert);
+
+                    if (result == 1)
+                    {
+                        return RedirectToAction("Index");
+                    }
+
+                    else return RedirectToAction("CreatePackage", package);
                 }
-
-                else return RedirectToAction("CreatePackage", package);
+                else
+                {
+                    ModelState.AddModelError("Price", "You do not have enough points!");
+                    return View("CreatePackage", package);
+                }
+                
             }
             catch
             {
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
-
+        public ActionResult SentPackages(LoginPassModel user) {
+            var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == user.Username);
+            var packages = _proxy.GetAllPackages().Where(x => x.SenderID == userFromDB.IDInDB).Select(x => new WebClientMVC.Models.PackageModel {
+                Barcode = x.barcode,
+                Distance = _proxy.GetDeliveryByPackageBarcode(x.barcode).Distance.ToString(),
+                Price = _proxy.GetDeliveryByPackageBarcode(x.barcode).Price.ToString(),
+                ReceiverFirstName = x.ReceiverFirstName,
+                ReceiverLastName = x.ReceiverLastName,
+                StatusID = x.StatusID
+            });
+            return View(packages);
+        }
         // GET: Sender/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string Username)
         {
+            var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == Username);
             return View();
         }
         public ActionResult Logout()

@@ -32,5 +32,6 @@ namespace WebClientMVC.Models
         public string ReceiverPhoneNumber { get; set; }
         public string Distance { get; set; }
         public string Price { get; set; }
+        public double Barcode { get; set; }
     }
 }

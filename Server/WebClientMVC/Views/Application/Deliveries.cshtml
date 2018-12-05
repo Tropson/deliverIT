@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WebClientMVC.Models.PackageModel>
+
+@{
+    ViewBag.Title = "Delivery requests";
+}
+<h2>Delivery requests</h2>
+<div class="col-md-12">
+    <div class="col-md-2" id="filters">
+        <form>
+            <span class="col-md-6">Big:</span> <input type="checkbox" class="col-md-6" /><br />
+            <span class="col-md-6">Medium:</span> <input type="checkbox" class="col-md-6" /><br />
+            <span class="col-md-6">Small:</span> <input type="checkbox" class="col-md-6" /><br />
+            <span class="col-md-6">Minimum price:</span> <input type="text" class="col-md-1 form-control" /><br />
+            <span class="col-md-6">Maximum price:</span> <input type="text" class="col-md-2 form-control" /><br />
+            <span class="col-md-6">Minimum distance:</span> <input type="text" class="col-md-2 form-control" /><br />
+            <span class="col-md-6">Maximum distance:</span> <input type="text" class="col-md-2 form-control" /><br />
+
+        </form>
+    </div>
+    <div class="col-md-10" id="packages">
+        @{var proxy = new WebClientMVC.SenderServiceReference1.SenderServiceClient();
+            string usernameFromCookie = Request.Cookies.Get("login").Values["feketePorzeczka"];
+            string checkedUsername = usernameFromCookie.Contains("%40") ? usernameFromCookie.Replace("%40", "@") : usernameFromCookie;
+            var currentUser = proxy.GetAllUsers().SingleOrDefault(x => x.Username == checkedUsername);}
+            
+        @foreach (var a in Model)
+        {
+            if (a.CourierID != 0)
+            {
+            }
+            else
+            {
+                <div class="col-md-4 col-sm-12">
+                    <div class="package">
+                        <div class="package_pic">
+                            <img src="~/Resources/package.png" />
+                        </div>
+                        <div class="package_desc">
+                            <div class="addressDiv">
+                                <p class="addressLine"><b>Pickup:</b> @a.FromAddress</p>
+                                <p class="addressLine"><b>Dropdown:</b> @a.ToAddress</p>
+                                <p class="price"><b>Price: @a.Price </b></p>
+                            </div>
+                            <div class="informations col-md-12 col-sm-12">
+                                <div class="info col-md-3">
+                                    <p>Distance (km)</p>
+                                    <h3>@a.Distance</h3>
+                                </div>
+                                <div class="info col-md-3">
+                                    <p>Width (cm)</p>
+                                    <h3>@a.Width</h3>
+                                </div>
+                                <div class="info col-md-3">
+                                    <p>Height (cm)</p>
+                                    <h3>@a.Height</h3>
+                                </div>
+                                <div class="info col-md-3 noborder">
+                                    <p>Weight (kg)</p>
+                                    <h3>@a.Weight</h3>
+                                </div>
+                            </div>
+
+                            <div class="package_confirm">
+                                <center><a href="@Url.Action("PackageDetails", "Application", new WebClientMVC.Models.PackagePassModel() { Barcode = a.Barcode })">Details</a></center><br />
+                                <center><a class="take" href="@Url.Action("TakePackage", "Application",new WebClientMVC.Models.PackagePassModel() { CourierID=currentUser.IDInDB, Barcode=a.Barcode})">Take</a></center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

@@ -273,7 +273,7 @@ ul {
     opacity: .8;
     box-shadow:1px -1px 1px black;
     z-index: 0;
-    position:relative;
+    position:absolute;
 }
     .textBox a {
         color:black;
@@ -361,4 +361,143 @@ ul {
     transform: scale(1.0);
     margin: 0 auto;
     text-align: center;
+}
+#filters {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-right:1px #CCCCCC solid;
+}
+#packages {
+    padding-top:20px;
+    padding-bottom:20px;
+}
+.package {
+    margin-top:10px;
+    margin-bottom:10px;
+    min-height:85vh;
+    position:relative;
+    border-radius:2px;
+    text-align:center;
+    border-bottom:2px solid #eeeeee;
+    box-shadow:4px 4px 15px #888888;
+}
+    .package .package_pic {
+        height: 35%;
+        width: 100%;
+        border-top-left-radius: 2px;
+        border-top-right-radius: 2px;
+        background-color: #2271c7;
+        position: absolute;
+    }
+        .package .package_pic img {
+            position:absolute;
+            height:70%;
+            top:15%;
+            left:30%;
+        }
+    .package .package_desc {
+        height: 65%;
+        width: 100%;
+        position: absolute;
+        background-color: white;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+        top: 35%;
+        padding-top:5%;
+    }
+    .package .package_confirm {
+        background-color:transparent;
+        color: white;
+        position: absolute;
+        bottom: 0px;
+        width: 40%;
+        left: 30%;
+        padding-top: 10px;
+        padding-bottom: 2.5%;
+        margin-top: 10px;
+        border-radius: 5px;
+    }
+        .package .package_confirm a {
+            color: white;
+            padding-left: 30%;
+            padding-right: 30%;
+            padding-top: 5%;
+            padding-bottom: 5%;
+            background-color: #2271c7;
+            border-radius:5px;
+            margin:2%;
+        }
+        .package .package_confirm .take {
+            background-color: #82d737;
+        }
+    .package .addressLine {
+        font-size:1em;
+        text-transform:uppercase;
+    }
+    .package .price {
+        font-size: 1.5em;
+        text-transform: uppercase;
+        width:50%;
+        margin:0 auto;
+    }
+    .package .package_desc > .addressDiv {
+        text-align:center;
+        position:absolute;
+        height:55%;
+        width:100%;
+        padding-top:10%;
+        padding-left:10px;
+        padding-right:10px;
+        top:0px;
+    }
+    .package .package_desc > .informations {
+        position: absolute;
+        background-color: #eeeeee;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        top: 55%;
+        height: 45%;
+        border-left: 5px solid #eeeeee;
+        border-right: 5px solid #eeeeee;
+    }
+        .package .informations p {
+            margin: 0px;
+            padding: 0px;
+            text-wrap:normal;
+        }
+        .package .informations h3 {
+            margin: 0px;
+            padding: 0px;
+        }
+    .package .info {
+        padding:0px ;
+        border-right-style:solid;
+        border-image :linear-gradient(transparent,#dddddd,#dddddd,#dddddd,transparent);
+        border-image-slice:1;
+        border-right-width:1px;
+    }
+        .package .noborder {
+            border:none;
+        }
+.package .package_desc > .informations .vl {
+    position:absolute;
+    width:1px;
+    height:100%;
+    background-image:linear-gradient(transparent,#cccccc,#bbbbbb,#cccccc,transparent);
+}
+#options ul {
+    padding-top:0px;
+}
+    #options ul li {
+        list-style-type: none;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: list-item;
+        border-bottom-style: solid;
+        border-image: linear-gradient(to right,#AAAAAA,#AAAAAA,transparent);
+        border-image-slice: 1;
+        border-bottom-width:1px;
+    }
+#options #noborder {
+    border-bottom-width: 0px;
 }

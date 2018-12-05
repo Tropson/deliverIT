@@ -98,8 +98,8 @@ namespace DeliveryService
             {
                 AccountType = (int)x.AccountTypeID,
                 Address = x.Person.Address,
-                City = x.Person.City,
                 Cpr = x.Person.Cpr,
+                City = x.Person.City,
                 Email = x.Person.Email,
                 FirstName = x.Person.FirstName,
                 LastName = x.Person.LastName,
@@ -170,13 +170,13 @@ namespace DeliveryService
                 db.Connection.Close();
             }
 
-            MailMessage mail = new MailMessage("deliveritassociation@gmail.com", application.Email);
+            MailMessage mail = new MailMessage("noreply@deliverit.dk", application.Email);
             SmtpClient client = new SmtpClient();
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
-            client.Host = "smtp.gmail.com";
+            client.Credentials = new NetworkCredential("azure_9b9152f4374f3afe527d63630de50845@azure.com", "antraxxx1234");
+            client.Host = "smtp.sendgrid.net";
             client.EnableSsl = true;
             mail.Subject = $"We got your application {person.FirstName}!";
             mail.Body = "We got your application. If your personal data is valid our admin will accept you in the near future!";
@@ -232,14 +232,14 @@ namespace DeliveryService
                 db.Connection.Close();
             }
 
-            MailMessage mail = new MailMessage("deliveritassociation@gmail.com", courierObj.Email);
+            MailMessage mail = new MailMessage("noreply@deliverit.dk", courierObj.Email);
             SmtpClient client = new SmtpClient();
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.EnableSsl = true;
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
-            client.Host = "smtp.gmail.com";
+            client.Credentials = new NetworkCredential("azure_9b9152f4374f3afe527d63630de50845@azure.com", "antraxxx1234");
+            client.Host = "smtp.sendgrid.net";
+            client.EnableSsl = true;
             mail.Subject = $"{courierObj.FirstName} You are accepted as a courier!";
             mail.Body = "Our admin accepted you. You can log in and start deliver like maniac!" + Environment.NewLine +
                 "To log in use those credentials:" + Environment.NewLine + 
@@ -365,18 +365,18 @@ namespace DeliveryService
 
         public PackageModel[] GetAllPackages()
         {
-            return db.Packages.Select(x => new PackageModel { CourierID = x.CourierID, FromAddress = x.FromAddress, Height = (double)x.Height, SenderID = (int)x.SenderID, StatusID = (int)x.StatusID, ToAddress = x.ToAddress, Weight = (double)x.Weight, Width = (double)x.Width, ReceiverFirstName = x.ReceiverFirstName, ReceiverLastName = x.ReceiverLastName, ReceiverPhoneNumber = x.ReceiverPhoneNumber }).ToArray();
+            return db.Packages.Select(x => new PackageModel { CourierID = x.CourierID, FromAddress = x.FromAddress, Height = (double)x.Height, SenderID = (int)x.SenderID, StatusID = (int)x.StatusID, ToAddress = x.ToAddress, Weight = (double)x.Weight, Width = (double)x.Width, ReceiverFirstName = x.ReceiverFirstName, ReceiverLastName = x.ReceiverLastName, ReceiverPhoneNumber = x.ReceiverPhoneNumber,barcode=(double)x.Barcode }).ToArray();
         }
 
         public int AddPackage(PackageModel package, string Username, DeliveryModel delivery)
         {
-            
+
             int nextPackageId = 0;
             double barcode = new Random().Next(12345679, 99999999);
             Package packageObj = new Package
             {
                 StatusID = 1,
-                SenderID = db.Users.Single(x => x.Username == Username).PersonID,
+                SenderID = db.Users.Single(x => x.Username == Username).ID,
                 ToAddress = package.ToAddress,
                 FromAddress = package.FromAddress,
                 Weight = package.Weight,
@@ -442,6 +442,13 @@ namespace DeliveryService
             }
             AddToBalance(Username, delivery.Price * -1);
             return 1;
+        }
+
+        public DeliveryModel GetDeliveryByPackageBarcode(double barcode)
+        {
+            var package = db.Packages.SingleOrDefault(x => x.Barcode == barcode);
+            var delivery = db.Deliveries.SingleOrDefault(x => x.PackageID == package.ID);
+            return new DeliveryModel { Distance=(double)delivery.Distance,Price=(int)delivery.Price};
         }
     }
 }

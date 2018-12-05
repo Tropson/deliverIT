@@ -9,47 +9,786 @@
 //------------------------------------------------------------------------------
 
 namespace WebClientMVC.SenderServiceReference1 {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PersonResource", Namespace="http://schemas.datacontract.org/2004/07/DeliveryServiceLibrary")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebClientMVC.SenderServiceReference1.ApplicationResource))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(WebClientMVC.SenderServiceReference1.SenderResource))]
+    public partial class PersonResource : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CprField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FirstNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LastNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ZipCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string City {
+            get {
+                return this.CityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CityField, value) != true)) {
+                    this.CityField = value;
+                    this.RaisePropertyChanged("City");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Cpr {
+            get {
+                return this.CprField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CprField, value) != true)) {
+                    this.CprField = value;
+                    this.RaisePropertyChanged("Cpr");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FirstName {
+            get {
+                return this.FirstNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FirstNameField, value) != true)) {
+                    this.FirstNameField = value;
+                    this.RaisePropertyChanged("FirstName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LastName {
+            get {
+                return this.LastNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LastNameField, value) != true)) {
+                    this.LastNameField = value;
+                    this.RaisePropertyChanged("LastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PhoneNumber {
+            get {
+                return this.PhoneNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneNumberField, value) != true)) {
+                    this.PhoneNumberField = value;
+                    this.RaisePropertyChanged("PhoneNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ZipCode {
+            get {
+                return this.ZipCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ZipCodeField, value) != true)) {
+                    this.ZipCodeField = value;
+                    this.RaisePropertyChanged("ZipCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ApplicationResource", Namespace="http://schemas.datacontract.org/2004/07/DeliveryServiceLibrary")]
+    [System.SerializableAttribute()]
+    public partial class ApplicationResource : WebClientMVC.SenderServiceReference1.PersonResource {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CVPathField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GuidLineField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IDPicturePathField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string YellowCardPathField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CVPath {
+            get {
+                return this.CVPathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CVPathField, value) != true)) {
+                    this.CVPathField = value;
+                    this.RaisePropertyChanged("CVPath");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GuidLine {
+            get {
+                return this.GuidLineField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GuidLineField, value) != true)) {
+                    this.GuidLineField = value;
+                    this.RaisePropertyChanged("GuidLine");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IDPicturePath {
+            get {
+                return this.IDPicturePathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IDPicturePathField, value) != true)) {
+                    this.IDPicturePathField = value;
+                    this.RaisePropertyChanged("IDPicturePath");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string YellowCardPath {
+            get {
+                return this.YellowCardPathField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.YellowCardPathField, value) != true)) {
+                    this.YellowCardPathField = value;
+                    this.RaisePropertyChanged("YellowCardPath");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SenderResource", Namespace="http://schemas.datacontract.org/2004/07/DeliveryServiceLibrary")]
+    [System.SerializableAttribute()]
+    public partial class SenderResource : WebClientMVC.SenderServiceReference1.PersonResource {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AccountTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDInDBField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PointsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AccountType {
+            get {
+                return this.AccountTypeField;
+            }
+            set {
+                if ((this.AccountTypeField.Equals(value) != true)) {
+                    this.AccountTypeField = value;
+                    this.RaisePropertyChanged("AccountType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IDInDB {
+            get {
+                return this.IDInDBField;
+            }
+            set {
+                if ((this.IDInDBField.Equals(value) != true)) {
+                    this.IDInDBField = value;
+                    this.RaisePropertyChanged("IDInDB");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password {
+            get {
+                return this.PasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Points {
+            get {
+                return this.PointsField;
+            }
+            set {
+                if ((this.PointsField.Equals(value) != true)) {
+                    this.PointsField = value;
+                    this.RaisePropertyChanged("Points");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Username {
+            get {
+                return this.UsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
+                    this.UsernameField = value;
+                    this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="VoucherResource", Namespace="http://schemas.datacontract.org/2004/07/DeliveryServiceLibrary")]
+    [System.SerializableAttribute()]
+    public partial class VoucherResource : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int amountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string codeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                if ((this.amountField.Equals(value) != true)) {
+                    this.amountField = value;
+                    this.RaisePropertyChanged("amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string code {
+            get {
+                return this.codeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.codeField, value) != true)) {
+                    this.codeField = value;
+                    this.RaisePropertyChanged("code");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="VouchersUsedResource", Namespace="http://schemas.datacontract.org/2004/07/DeliveryServiceLibrary")]
+    [System.SerializableAttribute()]
+    public partial class VouchersUsedResource : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string codeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string usernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string code {
+            get {
+                return this.codeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.codeField, value) != true)) {
+                    this.codeField = value;
+                    this.RaisePropertyChanged("code");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string username {
+            get {
+                return this.usernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.usernameField, value) != true)) {
+                    this.usernameField = value;
+                    this.RaisePropertyChanged("username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PackageModel", Namespace="http://schemas.datacontract.org/2004/07/DeliveryServiceLibrary")]
+    [System.SerializableAttribute()]
+    public partial class PackageModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> CourierIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FromAddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double HeightField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReceiverFirstNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReceiverLastNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReceiverPhoneNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SenderIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int StatusIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ToAddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double WeightField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double WidthField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double barcodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> CourierID {
+            get {
+                return this.CourierIDField;
+            }
+            set {
+                if ((this.CourierIDField.Equals(value) != true)) {
+                    this.CourierIDField = value;
+                    this.RaisePropertyChanged("CourierID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FromAddress {
+            get {
+                return this.FromAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FromAddressField, value) != true)) {
+                    this.FromAddressField = value;
+                    this.RaisePropertyChanged("FromAddress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Height {
+            get {
+                return this.HeightField;
+            }
+            set {
+                if ((this.HeightField.Equals(value) != true)) {
+                    this.HeightField = value;
+                    this.RaisePropertyChanged("Height");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReceiverFirstName {
+            get {
+                return this.ReceiverFirstNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReceiverFirstNameField, value) != true)) {
+                    this.ReceiverFirstNameField = value;
+                    this.RaisePropertyChanged("ReceiverFirstName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReceiverLastName {
+            get {
+                return this.ReceiverLastNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReceiverLastNameField, value) != true)) {
+                    this.ReceiverLastNameField = value;
+                    this.RaisePropertyChanged("ReceiverLastName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReceiverPhoneNumber {
+            get {
+                return this.ReceiverPhoneNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReceiverPhoneNumberField, value) != true)) {
+                    this.ReceiverPhoneNumberField = value;
+                    this.RaisePropertyChanged("ReceiverPhoneNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SenderID {
+            get {
+                return this.SenderIDField;
+            }
+            set {
+                if ((this.SenderIDField.Equals(value) != true)) {
+                    this.SenderIDField = value;
+                    this.RaisePropertyChanged("SenderID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int StatusID {
+            get {
+                return this.StatusIDField;
+            }
+            set {
+                if ((this.StatusIDField.Equals(value) != true)) {
+                    this.StatusIDField = value;
+                    this.RaisePropertyChanged("StatusID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ToAddress {
+            get {
+                return this.ToAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ToAddressField, value) != true)) {
+                    this.ToAddressField = value;
+                    this.RaisePropertyChanged("ToAddress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Weight {
+            get {
+                return this.WeightField;
+            }
+            set {
+                if ((this.WeightField.Equals(value) != true)) {
+                    this.WeightField = value;
+                    this.RaisePropertyChanged("Weight");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Width {
+            get {
+                return this.WidthField;
+            }
+            set {
+                if ((this.WidthField.Equals(value) != true)) {
+                    this.WidthField = value;
+                    this.RaisePropertyChanged("Width");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double barcode {
+            get {
+                return this.barcodeField;
+            }
+            set {
+                if ((this.barcodeField.Equals(value) != true)) {
+                    this.barcodeField = value;
+                    this.RaisePropertyChanged("barcode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeliveryModel", Namespace="http://schemas.datacontract.org/2004/07/DeliveryServiceLibrary")]
+    [System.SerializableAttribute()]
+    public partial class DeliveryModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double DistanceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PriceField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Distance {
+            get {
+                return this.DistanceField;
+            }
+            set {
+                if ((this.DistanceField.Equals(value) != true)) {
+                    this.DistanceField = value;
+                    this.RaisePropertyChanged("Distance");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Price {
+            get {
+                return this.PriceField;
+            }
+            set {
+                if ((this.PriceField.Equals(value) != true)) {
+                    this.PriceField = value;
+                    this.RaisePropertyChanged("Price");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SenderServiceReference1.ISenderService")]
     public interface ISenderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        int AddSender(DeliveryService.UserModel sender);
+        int AddSender(WebClientMVC.SenderServiceReference1.SenderResource sender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.UserModel sender);
+        System.Threading.Tasks.Task<int> AddSenderAsync(WebClientMVC.SenderServiceReference1.SenderResource sender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsersResponse")]
-        DeliveryService.UserModel[] GetAllUsers();
+        WebClientMVC.SenderServiceReference1.SenderResource[] GetAllUsers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsersResponse")]
-        System.Threading.Tasks.Task<DeliveryService.UserModel[]> GetAllUsersAsync();
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.SenderResource[]> GetAllUsersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddApplication", ReplyAction="http://tempuri.org/ISenderService/AddApplicationResponse")]
-        int AddApplication(DeliveryService.ApplicationModel application);
+        int AddApplication(WebClientMVC.SenderServiceReference1.ApplicationResource application);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddApplication", ReplyAction="http://tempuri.org/ISenderService/AddApplicationResponse")]
-        System.Threading.Tasks.Task<int> AddApplicationAsync(DeliveryService.ApplicationModel application);
+        System.Threading.Tasks.Task<int> AddApplicationAsync(WebClientMVC.SenderServiceReference1.ApplicationResource application);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllApplications", ReplyAction="http://tempuri.org/ISenderService/GetAllApplicationsResponse")]
-        DeliveryService.ApplicationModel[] GetAllApplications();
+        WebClientMVC.SenderServiceReference1.ApplicationResource[] GetAllApplications();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllApplications", ReplyAction="http://tempuri.org/ISenderService/GetAllApplicationsResponse")]
-        System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetAllApplicationsAsync();
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.ApplicationResource[]> GetAllApplicationsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddCourier", ReplyAction="http://tempuri.org/ISenderService/AddCourierResponse")]
-        int AddCourier(DeliveryService.UserModel courier);
+        int AddCourier(WebClientMVC.SenderServiceReference1.SenderResource courier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddCourier", ReplyAction="http://tempuri.org/ISenderService/AddCourierResponse")]
-        System.Threading.Tasks.Task<int> AddCourierAsync(DeliveryService.UserModel courier);
+        System.Threading.Tasks.Task<int> AddCourierAsync(WebClientMVC.SenderServiceReference1.SenderResource courier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/DeleteApplication", ReplyAction="http://tempuri.org/ISenderService/DeleteApplicationResponse")]
-        int DeleteApplication(DeliveryService.ApplicationModel application, bool deletePerson);
+        int DeleteApplication(WebClientMVC.SenderServiceReference1.ApplicationResource application, bool deletePerson);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/DeleteApplication", ReplyAction="http://tempuri.org/ISenderService/DeleteApplicationResponse")]
-        System.Threading.Tasks.Task<int> DeleteApplicationAsync(DeliveryService.ApplicationModel application, bool deletePerson);
+        System.Threading.Tasks.Task<int> DeleteApplicationAsync(WebClientMVC.SenderServiceReference1.ApplicationResource application, bool deletePerson);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ClearDB", ReplyAction="http://tempuri.org/ISenderService/ClearDBResponse")]
         void ClearDB();
@@ -76,28 +815,40 @@ namespace WebClientMVC.SenderServiceReference1 {
         System.Threading.Tasks.Task UseVoucherAsync(string username, string code);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllVouchersResponse")]
-        DeliveryService.VoucherModel[] GetAllVouchers();
+        WebClientMVC.SenderServiceReference1.VoucherResource[] GetAllVouchers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllVouchersResponse")]
-        System.Threading.Tasks.Task<DeliveryService.VoucherModel[]> GetAllVouchersAsync();
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.VoucherResource[]> GetAllVouchersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsedVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsedVouchersResponse")]
-        DeliveryService.VouchersUsedModel[] GetAllUsedVouchers();
+        WebClientMVC.SenderServiceReference1.VouchersUsedResource[] GetAllUsedVouchers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsedVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsedVouchersResponse")]
-        System.Threading.Tasks.Task<DeliveryService.VouchersUsedModel[]> GetAllUsedVouchersAsync();
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.VouchersUsedResource[]> GetAllUsedVouchersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllPackages", ReplyAction="http://tempuri.org/ISenderService/GetAllPackagesResponse")]
-        DeliveryService.PackageModel[] GetAllPackages();
+        WebClientMVC.SenderServiceReference1.PackageModel[] GetAllPackages();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllPackages", ReplyAction="http://tempuri.org/ISenderService/GetAllPackagesResponse")]
-        System.Threading.Tasks.Task<DeliveryService.PackageModel[]> GetAllPackagesAsync();
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.PackageModel[]> GetAllPackagesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcode", ReplyAction="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcodeResponse")]
+        WebClientMVC.SenderServiceReference1.DeliveryModel GetDeliveryByPackageBarcode(double barcode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcode", ReplyAction="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcodeResponse")]
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.DeliveryModel> GetDeliveryByPackageBarcodeAsync(double barcode);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddPackage", ReplyAction="http://tempuri.org/ISenderService/AddPackageResponse")]
-        int AddPackage(DeliveryService.PackageModel model, string Username, DeliveryService.DeliveryModel delivery);
+        int AddPackage(WebClientMVC.SenderServiceReference1.PackageModel model, string Username, WebClientMVC.SenderServiceReference1.DeliveryModel delivery);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddPackage", ReplyAction="http://tempuri.org/ISenderService/AddPackageResponse")]
-        System.Threading.Tasks.Task<int> AddPackageAsync(DeliveryService.PackageModel model, string Username, DeliveryService.DeliveryModel delivery);
+        System.Threading.Tasks.Task<int> AddPackageAsync(WebClientMVC.SenderServiceReference1.PackageModel model, string Username, WebClientMVC.SenderServiceReference1.DeliveryModel delivery);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/TakePackage", ReplyAction="http://tempuri.org/ISenderService/TakePackageResponse")]
+        int TakePackage(double barcode, int courierId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/TakePackage", ReplyAction="http://tempuri.org/ISenderService/TakePackageResponse")]
+        System.Threading.Tasks.Task<int> TakePackageAsync(double barcode, int courierId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -127,51 +878,51 @@ namespace WebClientMVC.SenderServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public int AddSender(DeliveryService.UserModel sender) {
+        public int AddSender(WebClientMVC.SenderServiceReference1.SenderResource sender) {
             return base.Channel.AddSender(sender);
         }
         
-        public System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.UserModel sender) {
+        public System.Threading.Tasks.Task<int> AddSenderAsync(WebClientMVC.SenderServiceReference1.SenderResource sender) {
             return base.Channel.AddSenderAsync(sender);
         }
         
-        public DeliveryService.UserModel[] GetAllUsers() {
+        public WebClientMVC.SenderServiceReference1.SenderResource[] GetAllUsers() {
             return base.Channel.GetAllUsers();
         }
         
-        public System.Threading.Tasks.Task<DeliveryService.UserModel[]> GetAllUsersAsync() {
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.SenderResource[]> GetAllUsersAsync() {
             return base.Channel.GetAllUsersAsync();
         }
         
-        public int AddApplication(DeliveryService.ApplicationModel application) {
+        public int AddApplication(WebClientMVC.SenderServiceReference1.ApplicationResource application) {
             return base.Channel.AddApplication(application);
         }
         
-        public System.Threading.Tasks.Task<int> AddApplicationAsync(DeliveryService.ApplicationModel application) {
+        public System.Threading.Tasks.Task<int> AddApplicationAsync(WebClientMVC.SenderServiceReference1.ApplicationResource application) {
             return base.Channel.AddApplicationAsync(application);
         }
         
-        public DeliveryService.ApplicationModel[] GetAllApplications() {
+        public WebClientMVC.SenderServiceReference1.ApplicationResource[] GetAllApplications() {
             return base.Channel.GetAllApplications();
         }
         
-        public System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetAllApplicationsAsync() {
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.ApplicationResource[]> GetAllApplicationsAsync() {
             return base.Channel.GetAllApplicationsAsync();
         }
         
-        public int AddCourier(DeliveryService.UserModel courier) {
+        public int AddCourier(WebClientMVC.SenderServiceReference1.SenderResource courier) {
             return base.Channel.AddCourier(courier);
         }
         
-        public System.Threading.Tasks.Task<int> AddCourierAsync(DeliveryService.UserModel courier) {
+        public System.Threading.Tasks.Task<int> AddCourierAsync(WebClientMVC.SenderServiceReference1.SenderResource courier) {
             return base.Channel.AddCourierAsync(courier);
         }
         
-        public int DeleteApplication(DeliveryService.ApplicationModel application, bool deletePerson) {
+        public int DeleteApplication(WebClientMVC.SenderServiceReference1.ApplicationResource application, bool deletePerson) {
             return base.Channel.DeleteApplication(application, deletePerson);
         }
         
-        public System.Threading.Tasks.Task<int> DeleteApplicationAsync(DeliveryService.ApplicationModel application, bool deletePerson) {
+        public System.Threading.Tasks.Task<int> DeleteApplicationAsync(WebClientMVC.SenderServiceReference1.ApplicationResource application, bool deletePerson) {
             return base.Channel.DeleteApplicationAsync(application, deletePerson);
         }
         
@@ -207,36 +958,52 @@ namespace WebClientMVC.SenderServiceReference1 {
             return base.Channel.UseVoucherAsync(username, code);
         }
         
-        public DeliveryService.VoucherModel[] GetAllVouchers() {
+        public WebClientMVC.SenderServiceReference1.VoucherResource[] GetAllVouchers() {
             return base.Channel.GetAllVouchers();
         }
         
-        public System.Threading.Tasks.Task<DeliveryService.VoucherModel[]> GetAllVouchersAsync() {
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.VoucherResource[]> GetAllVouchersAsync() {
             return base.Channel.GetAllVouchersAsync();
         }
         
-        public DeliveryService.VouchersUsedModel[] GetAllUsedVouchers() {
+        public WebClientMVC.SenderServiceReference1.VouchersUsedResource[] GetAllUsedVouchers() {
             return base.Channel.GetAllUsedVouchers();
         }
         
-        public System.Threading.Tasks.Task<DeliveryService.VouchersUsedModel[]> GetAllUsedVouchersAsync() {
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.VouchersUsedResource[]> GetAllUsedVouchersAsync() {
             return base.Channel.GetAllUsedVouchersAsync();
         }
         
-        public DeliveryService.PackageModel[] GetAllPackages() {
+        public WebClientMVC.SenderServiceReference1.PackageModel[] GetAllPackages() {
             return base.Channel.GetAllPackages();
         }
         
-        public System.Threading.Tasks.Task<DeliveryService.PackageModel[]> GetAllPackagesAsync() {
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.PackageModel[]> GetAllPackagesAsync() {
             return base.Channel.GetAllPackagesAsync();
         }
         
-        public int AddPackage(DeliveryService.PackageModel model, string Username, DeliveryService.DeliveryModel delivery) {
+        public WebClientMVC.SenderServiceReference1.DeliveryModel GetDeliveryByPackageBarcode(double barcode) {
+            return base.Channel.GetDeliveryByPackageBarcode(barcode);
+        }
+        
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.DeliveryModel> GetDeliveryByPackageBarcodeAsync(double barcode) {
+            return base.Channel.GetDeliveryByPackageBarcodeAsync(barcode);
+        }
+        
+        public int AddPackage(WebClientMVC.SenderServiceReference1.PackageModel model, string Username, WebClientMVC.SenderServiceReference1.DeliveryModel delivery) {
             return base.Channel.AddPackage(model, Username, delivery);
         }
         
-        public System.Threading.Tasks.Task<int> AddPackageAsync(DeliveryService.PackageModel model, string Username, DeliveryService.DeliveryModel delivery) {
+        public System.Threading.Tasks.Task<int> AddPackageAsync(WebClientMVC.SenderServiceReference1.PackageModel model, string Username, WebClientMVC.SenderServiceReference1.DeliveryModel delivery) {
             return base.Channel.AddPackageAsync(model, Username, delivery);
+        }
+        
+        public int TakePackage(double barcode, int courierId) {
+            return base.Channel.TakePackage(barcode, courierId);
+        }
+        
+        public System.Threading.Tasks.Task<int> TakePackageAsync(double barcode, int courierId) {
+            return base.Channel.TakePackageAsync(barcode, courierId);
         }
     }
 }

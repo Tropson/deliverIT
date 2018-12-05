@@ -197,6 +197,7 @@
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\LoginPassModel.cs" />
     <Compile Include="Models\PackageModel.cs" />
+    <Compile Include="Models\PackagePassModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\PersonModel.cs" />
     <Compile Include="Models\SenderModel.cs" />
@@ -205,7 +206,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
-    <None Include="Connected Services\SenderServiceReference1\DeliveryService.disco" />
     <None Include="Connected Services\SenderServiceReference1\configuration91.svcinfo" />
     <None Include="Connected Services\SenderServiceReference1\configuration.svcinfo" />
     <None Include="Connected Services\SenderServiceReference1\Reference.svcmap">
@@ -227,6 +227,8 @@
     <Content Include="Resources\favicon.ico" />
     <Content Include="Resources\mobile_menu.png" />
     <Content Include="Resources\package.png" />
+    <Content Include="Resources\profile.png" />
+    <Content Include="Resources\profile2.png" />
     <Content Include="Resources\voucher.png" />
     <Content Include="Scripts\autocomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -236,19 +238,38 @@
     </Content>
     <Content Include="Properties\DataSources\DeliveryService.ApplicationModel.datasource" />
     <Content Include="Properties\DataSources\DeliveryService.UserModel.datasource" />
-    <None Include="Connected Services\SenderServiceReference1\DeliveryService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SenderServiceReference1\DeliveryService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SenderServiceReference1\DeliveryService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SenderServiceReference1\SenderService.wsdl" />
     <Content Include="Properties\DataSources\DeliveryService.VoucherModel.datasource" />
     <Content Include="Properties\DataSources\DeliveryService.VouchersUsedModel.datasource" />
     <Content Include="Properties\DataSources\DeliveryService.PackageModel.datasource" />
+    <Content Include="Properties\DataSources\DeliveryService.DeliveryModel.datasource" />
+    <None Include="Connected Services\SenderServiceReference1\DeliveryServiceLibrary.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SenderServiceReference1\service.wsdl" />
+    <None Include="Connected Services\SenderServiceReference1\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\SenderServiceReference1\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Connected Services\SenderServiceReference1\WebClientMVC.SenderServiceReference1.ApplicationResource.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\SenderServiceReference1\WebClientMVC.SenderServiceReference1.DeliveryModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\SenderServiceReference1\WebClientMVC.SenderServiceReference1.PackageModel.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\SenderServiceReference1\WebClientMVC.SenderServiceReference1.SenderResource.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\SenderServiceReference1\WebClientMVC.SenderServiceReference1.VoucherResource.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\SenderServiceReference1\WebClientMVC.SenderServiceReference1.VouchersUsedResource.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\customScripts.js" />
@@ -290,6 +311,9 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Application\LoggedIn.cshtml" />
     <Content Include="Views\Sender\CreatePackage.cshtml" />
+    <Content Include="Views\Application\Deliveries.cshtml" />
+    <Content Include="Views\Sender\Edit.cshtml" />
+    <Content Include="Views\Sender\SentPackages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -25,7 +25,16 @@ namespace WebClientMVC.Controllers
         // GET: Application
         public ActionResult Index()
         {
-            return View();
+            if (Request.Cookies.Get("login") == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                string userName = Request.Cookies.Get("login").Values["feketePorzeczka"];
+                LoginPassModel obj = new LoginPassModel { Username = userName };
+                return RedirectToAction("LoggedInPost", obj);
+            }
         }
 
         public ActionResult LoggedInPost(LoginPassModel user)
@@ -104,7 +113,7 @@ namespace WebClientMVC.Controllers
                 //client.Upload(app.files[0].InputStream, $"public_html/Files/{guid}/{cv}");
                 //client.Upload(app.files[1].InputStream, $"public_html/Files/{guid}/{idpic}");
                 //client.Upload(app.files[2].InputStream, $"public_html/Files/{guid}/{yellow}");
-                var result = _proxy.AddApplication(new DeliveryService.ApplicationModel { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
+                var result = _proxy.AddApplication(new ApplicationResource { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
                 //client.Disconnect();
                 if (result == 1)
                 {
@@ -163,6 +172,27 @@ namespace WebClientMVC.Controllers
             {
                 return View();
             }
+        }
+        public ActionResult Deliveries()
+        {
+            var packages = _proxy.GetAllPackages().Select(x=>new Models.PackageModel { FromAddress=x.FromAddress,ToAddress=x.ToAddress,Height=x.Height,Weight=x.Weight,Width=x.Width,Price=_proxy.GetDeliveryByPackageBarcode(x.barcode).Price+"",Distance=_proxy.GetDeliveryByPackageBarcode(x.barcode).Distance + "",Barcode=x.barcode,SenderID=x.SenderID,CourierID=(x.CourierID==null)?0:(int)x.CourierID }).ToList();
+            return View(packages);
+        }
+
+        public ActionResult TakePackage(PackagePassModel packageToTake)
+        {
+            var result = _proxy.TakePackage(packageToTake.Barcode, packageToTake.CourierID);
+            if (result == 1)
+            {
+                return RedirectToAction("Deliveries");
+            }
+            else if (result == 0)
+            {
+                var packages = _proxy.GetAllPackages().Select(x => new Models.PackageModel { FromAddress = x.FromAddress, ToAddress = x.ToAddress, Height = x.Height, Weight = x.Weight, Width = x.Width, Price = _proxy.GetDeliveryByPackageBarcode(x.barcode).Price + "", Distance = _proxy.GetDeliveryByPackageBarcode(x.barcode).Distance + "", Barcode = x.barcode, SenderID = x.SenderID, CourierID = (x.CourierID == null) ? 0 : (int)x.CourierID }).ToList();
+                ModelState.AddModelError(string.Empty, "The package you have selected was already taken by the moment.");
+                return View("Deliveries",packages);
+            }
+            else return RedirectToAction("Deliveries");
         }
         public string HashString(string input)
         {
