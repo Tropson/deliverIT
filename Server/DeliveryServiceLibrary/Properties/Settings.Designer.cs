@@ -33,5 +33,16 @@ namespace DeliveryServiceLibrary.Properties {
                 return ((string)(this["DeliverITDatabaseConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=deliverit.database.windows.net;Initial Catalog=DeliverITDatabase;User" +
+            " ID=DeliverAdmin;Password=DeliverIT123")]
+        public string DeliverITDatabaseConnectionString1 {
+            get {
+                return ((string)(this["DeliverITDatabaseConnectionString1"]));
+            }
+        }
     }
 }

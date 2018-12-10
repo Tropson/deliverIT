@@ -221,15 +221,20 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Resources\barcode.png" />
     <Content Include="Resources\bg.png" />
     <Content Include="Resources\card.png" />
     <Content Include="Resources\courier.png" />
     <Content Include="Resources\favicon.ico" />
+    <Content Include="Resources\height.png" />
+    <Content Include="Resources\location.png" />
     <Content Include="Resources\mobile_menu.png" />
     <Content Include="Resources\package.png" />
     <Content Include="Resources\profile.png" />
     <Content Include="Resources\profile2.png" />
     <Content Include="Resources\voucher.png" />
+    <Content Include="Resources\weight.png" />
+    <Content Include="Resources\width.png" />
     <Content Include="Scripts\autocomplete.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -314,6 +319,7 @@
     <Content Include="Views\Application\Deliveries.cshtml" />
     <Content Include="Views\Sender\Edit.cshtml" />
     <Content Include="Views\Sender\SentPackages.cshtml" />
+    <Content Include="Views\Application\DeliveredPackages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -321,7 +321,7 @@ namespace DeliveryServiceLibrary
                     if (package.CourierID == null)
                     {
                         package.CourierID = courierId;
-                        package.StatusID = 2;
+                        package.StatusID = 1;
                         db.SubmitChanges();
                         MailMessage mail = new MailMessage("noreply@deliverit.dk",sender.Person.Email);
                         SmtpClient client = new SmtpClient();
@@ -438,7 +438,7 @@ namespace DeliveryServiceLibrary
             double barcode = new Random().Next(12345679, 99999999);
             Package packageObj = new Package
             {
-                StatusID = 1,
+                StatusID = 0,
                 SenderID = db.Users.Single(x => x.Username == Username).ID,
                 ToAddress = package.ToAddress,
                 FromAddress = package.FromAddress,
@@ -512,6 +512,58 @@ namespace DeliveryServiceLibrary
             var package = db.Packages.SingleOrDefault(x => x.Barcode == barcode);
             var delivery = db.Deliveries.SingleOrDefault(x => x.PackageID == package.ID);
             return new DeliveryModel { Distance = (double)delivery.Distance, Price = (int)delivery.Price };
+        }
+
+        public int ChangeStatus(double barcode)
+        {
+            try
+            {
+                using (TransactionScope tran = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted}))
+                {
+                    var package = db.Packages.Single(x => x.Barcode == barcode);
+                    var delivery = db.Deliveries.SingleOrDefault(x => x.PackageID == package.ID);
+                    var sender = db.Users.SingleOrDefault(x => x.ID == package.SenderID);
+                    var courier = db.Users.SingleOrDefault(x => x.ID == package.CourierID);
+                    if (package.CourierID != null && package.StatusID!=3)
+                    {
+                        package.StatusID += 1;
+                        db.SubmitChanges();
+                        if (package.StatusID == 3)
+                        {
+                            AddToBalance(courier.Username, (int)delivery.Price);
+                        }
+                        MailMessage mail = new MailMessage("noreply@deliverit.dk", sender.Person.Email);
+                        SmtpClient client = new SmtpClient();
+                        client.Port = 587;
+                        client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        client.UseDefaultCredentials = false;
+                        client.Credentials = new NetworkCredential("azure_9b9152f4374f3afe527d63630de50845@azure.com", "antraxxx1234");
+                        client.Host = "smtp.sendgrid.net";
+                        client.EnableSsl = true;
+                        mail.Subject = $"{sender.Person.FirstName}! Your package request ({package.Barcode}) got a new status.";
+                        mail.IsBodyHtml = true;
+                        mail.Body = $"Dear {sender.Person.FirstName} {sender.Person.LastName}," + "<br />" +
+                            $"Your package with the barcode {package.Barcode} just received a new status update!" + "<br />" +
+                            $"Open the website and check your packages!" + "<br />" +
+                            $"<b>Best regards</b>" + "<br />" +
+                            "Team of DeliverIT";
+                        client.Send(mail);
+                    }
+                    else
+                    {
+                        throw new TransactionAbortedException("Something happened");
+                    }
+
+                    tran.Complete();
+                }
+            }
+            catch (TransactionAbortedException ex)
+            {
+                return 0;
+            }
+
+
+            return 1;
         }
     }
 }

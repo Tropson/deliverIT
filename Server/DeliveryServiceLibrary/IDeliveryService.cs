@@ -58,6 +58,9 @@ namespace DeliveryServiceLibrary
 
         [OperationContract]
         int TakePackage(double barcode, int courierId);
+
+        [OperationContract]
+        int ChangeStatus(double barcode);
     }
 
 

@@ -1,0 +1,80 @@
+﻿@model IEnumerable<WebClientMVC.Models.PackageModel>
+
+@{
+    ViewBag.Title = "Delivered Packages";
+}
+
+<h2>Your packages</h2>
+
+<p>
+    @Html.ActionLink("Take more", "Deliveries")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <label>Barcode</label>
+        </th>
+        <th>
+            <label>Receiver's name</label>
+        </th>
+        <th>
+            <label>Package status</label>
+        </th>
+        <th>
+            <label>Distance</label>
+        </th>
+        <th>
+            <label>Points</label>
+        </th>
+        <th>
+            <label>Change status</label>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Barcode)
+            </td>
+            <td>
+                <span>@item.ReceiverFirstName @item.ReceiverLastName</span>
+            </td>
+            <td>
+                @switch (item.StatusID)
+                {
+                    case 1:
+                        {
+                            <span>You accepted the delivery request. You have to go for the package now.</span>
+                            break;
+                        }
+                    case 2:
+                        {
+                            <span>You have picked the package up, go and deliver it!</span>
+                            break;
+                        }
+                    case 3:
+                        {
+                            <span>You have delivered the package! The points are added to your account.</span>
+                            break;
+                        }
+                    case 4:
+                        {
+                            <span>Oops, something unexpected happened, we don't know anything about the package</span>
+                            break;
+                        }
+                }
+            </td>
+            <td>
+                <span>@item.Distance km</span>
+            </td>
+            <td>
+                <span>@item.Price Points</span>
+            </td>
+            <td>
+                @Html.ActionLink("Next step", "ChangeStatus", new WebClientMVC.Models.PackagePassModel() { Barcode = item.Barcode,Username=Request.Cookies.Get("login").Values["feketePorzeczka"] })
+            </td>
+        </tr>
+    }
+
+</table>

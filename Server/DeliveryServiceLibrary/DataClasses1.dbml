@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DeliverITDatabase" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=deliverit.database.windows.net;Initial Catalog=DeliverITDatabase;Persist Security Info=True;User ID=DeliverAdmin" SettingsObjectName="DeliveryServiceLibrary.Properties.Settings" SettingsPropertyName="DeliverITDatabaseConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=deliverit.database.windows.net;Initial Catalog=DeliverITDatabase;User ID=DeliverAdmin" SettingsObjectName="DeliveryServiceLibrary.Properties.Settings" SettingsPropertyName="DeliverITDatabaseConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.AccountType" Member="AccountTypes">
     <Type Name="AccountType">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

@@ -63,7 +63,7 @@ namespace DeliveryServiceLibrary
     #endregion
 		
 		public DataClasses1DataContext() : 
-				base(global::DeliveryServiceLibrary.Properties.Settings.Default.DeliverITDatabaseConnectionString, mappingSource)
+				base(global::DeliveryServiceLibrary.Properties.Settings.Default.DeliverITDatabaseConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}

@@ -849,6 +849,12 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/TakePackage", ReplyAction="http://tempuri.org/ISenderService/TakePackageResponse")]
         System.Threading.Tasks.Task<int> TakePackageAsync(double barcode, int courierId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ChangeStatus", ReplyAction="http://tempuri.org/ISenderService/ChangeStatusResponse")]
+        int ChangeStatus(double barcode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ChangeStatus", ReplyAction="http://tempuri.org/ISenderService/ChangeStatusResponse")]
+        System.Threading.Tasks.Task<int> ChangeStatusAsync(double barcode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1004,6 +1010,14 @@ namespace WebClientMVC.SenderServiceReference1 {
         
         public System.Threading.Tasks.Task<int> TakePackageAsync(double barcode, int courierId) {
             return base.Channel.TakePackageAsync(barcode, courierId);
+        }
+        
+        public int ChangeStatus(double barcode) {
+            return base.Channel.ChangeStatus(barcode);
+        }
+        
+        public System.Threading.Tasks.Task<int> ChangeStatusAsync(double barcode) {
+            return base.Channel.ChangeStatusAsync(barcode);
         }
     }
 }

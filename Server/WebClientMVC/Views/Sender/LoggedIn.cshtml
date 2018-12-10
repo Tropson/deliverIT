@@ -9,9 +9,10 @@
         <h2 style="color:black;">@Model.FirstName @Model.LastName</h2><hr />
         <div id="options">
             <ul>
-                <li><a href="@Url.Action("SentPackages",new WebClientMVC.Models.LoginPassModel() { Username=Model.Username})">Sent packages</a></li>
-                <li id="noborder"><a href="@Url.Action("Points")">Point topup</a></li>
+                <li><i class="material-icons" style="font-size:16px; position:relative;top:3px;">local_post_office</i>&nbsp;&nbsp;<a href="@Url.Action("SentPackages",new WebClientMVC.Models.LoginPassModel() { Username=Model.Username})">Sent packages</a></li>
+                <li><i class="material-icons" style="font-size:16px; position:relative;top:3px;">money</i>&nbsp;&nbsp;<a href="@Url.Action("Points")">Point topup</a></li>
                 <li style="display:none"><a href="@Url.Action("Edit", "Sender",new { Username = Model.Username })">Edit information</a></li>
+                <li id="noborder"><i class="material-icons" style="font-size:16px; position:relative;top:3px;">logout</i>&nbsp;&nbsp;@Html.ActionLink("Log out", "Logout")</li>
             </ul>
         </div>
         
@@ -23,4 +24,3 @@
 
     </div>
 </div>
-@Html.ActionLink("Log out", "Logout")

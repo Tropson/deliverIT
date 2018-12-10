@@ -213,4 +213,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="ChangeStatus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="barcode" type="xs:double" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChangeStatusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ChangeStatusResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

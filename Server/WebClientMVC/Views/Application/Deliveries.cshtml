@@ -1,8 +1,9 @@
 ﻿@model IEnumerable<WebClientMVC.Models.PackageModel>
 
 @{
-    ViewBag.Title = "Delivery requests";
+    ViewBag.Title = "Delivery Requests";
 }
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <h2>Delivery requests</h2>
 <div class="col-md-12">
     <div class="col-md-2" id="filters">
@@ -30,6 +31,7 @@
             }
             else
             {
+
                 <div class="col-md-4 col-sm-12">
                     <div class="package">
                         <div class="package_pic">
@@ -59,10 +61,10 @@
                                     <h3>@a.Weight</h3>
                                 </div>
                             </div>
-
+                            @{var jsLine = $"setContent({a.Barcode},{a.Height},{a.Width},{a.Weight},'{a.FromAddress}','{a.ToAddress}','{a.ReceiverFirstName} {a.ReceiverLastName}',{currentUser.IDInDB})";}
                             <div class="package_confirm">
-                                <center><a href="@Url.Action("PackageDetails", "Application", new WebClientMVC.Models.PackagePassModel() { Barcode = a.Barcode })">Details</a></center><br />
-                                <center><a class="take" href="@Url.Action("TakePackage", "Application",new WebClientMVC.Models.PackagePassModel() { CourierID=currentUser.IDInDB, Barcode=a.Barcode})">Take</a></center>
+                                <center><a href="#myModal" data-toggle="modal" onclick="@jsLine">Details</a></center><br />
+                                <center><a class="take" href="@Url.Action("TakePackage", "Application", new WebClientMVC.Models.PackagePassModel() { CourierID = currentUser.IDInDB, Barcode = a.Barcode })">Take</a></center>
                             </div>
                         </div>
                     </div>
@@ -71,3 +73,23 @@
         }
     </div>
 </div>
+<script>
+    var content;
+    function setContent(barcode,height,width,weight,from,to,name,courierID)
+    {
+        content = "<ul>" +
+            "<li><img style='height:24px;' src='/Resources/barcode.png'>&emsp;<b>Barcode:</b> " + barcode + "</li><br />" +
+            "<li><img style='height:24px;' src='/Resources/height.png' />&emsp;<b>Height:</b> " + height + "</li><br />" +
+            "<li><img style='height:24px;' src='/Resources/width.png' />&emsp;<b>Width:</b> " + width + "</li><br />" +
+            "<li><img style='height:24px;' src='/Resources/weight.png' />&emsp;<b>Weight:</b> " + weight + "</li><br />" +
+            "<li><img style='height:24px;' src='/Resources/location.png' />&emsp;<b>From:</b> " + from + "</li><br />" +
+            "<li><img style='height:24px;' src='/Resources/location.png' />&emsp;<b>To:</b> " + to + "</li><br />" +
+            "<li><img style='height:24px;' src='/Resources/profile.png' />&emsp;<b>Receiver's name:</b> " + name + "</li>" +
+            "</ul>";
+        setTimeout(function () {
+            $('#myModalBody').html(content)
+            $('#modalTake').attr("href", "TakePackage?Barcode=" + barcode + "&CourierID=" + courierID)
+            $('#myInput').trigger('focus') },0)
+         
+    }       
+</script>

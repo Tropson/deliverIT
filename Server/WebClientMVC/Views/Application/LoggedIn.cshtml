@@ -3,5 +3,24 @@
     ViewBag.Title = "Logged in";
 }
 
-<p>Welcome @Model.FirstName @Model.LastName</p>
-@Html.ActionLink("Log out", "Logout")
+<div class="col-md-12">
+    <div class="col-md-3">
+        <img style="border:2px solid #888888;border-radius:50%;height:40%;width:40%;background-color:white;" src="~/Resources/profile.png" />
+        <h2 style="color:black;">@Model.FirstName @Model.LastName</h2><hr />
+        <div id="options">
+            <ul>
+                <li><i class="material-icons" style="font-size:16px; position:relative;top:3px;">local_post_office</i>&nbsp;&nbsp;<a href="@Url.Action("DeliveredPackages",new WebClientMVC.Models.LoginPassModel() { Username=Model.Username})">Delivered packages</a></li>
+                <li><i class="material-icons" style="font-size:16px; position:relative;top:3px;">money</i>&nbsp;&nbsp;<a href="@Url.Action("Points")">Point topup</a></li>
+                <li style="display:none"><a href="@Url.Action("Edit", "Sender",new { Username = Model.Username })">Edit information</a></li>
+                <li id="noborder"><i class="material-icons" style="font-size:16px; position:relative;top:3px;">logout</i>&nbsp;&nbsp;@Html.ActionLink("Log out", "Logout")</li>
+            </ul>
+        </div>
+
+        <br />
+        <br />
+        <br />
+    </div>
+    <div class="col-md-9">
+
+    </div>
+</div>

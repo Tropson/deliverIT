@@ -73,6 +73,26 @@ namespace WebClientMVC.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
         }
+        public ActionResult DeliveredPackages(LoginPassModel user)
+        {
+            var userFromDB = _proxy.GetAllUsers().SingleOrDefault(x => x.Username == user.Username);
+            var packages = _proxy.GetAllPackages().Where(x => x.CourierID == userFromDB.IDInDB).Select(x => new WebClientMVC.Models.PackageModel
+            {
+                Barcode = x.barcode,
+                Distance = _proxy.GetDeliveryByPackageBarcode(x.barcode).Distance.ToString(),
+                Price = _proxy.GetDeliveryByPackageBarcode(x.barcode).Price.ToString(),
+                ReceiverFirstName = x.ReceiverFirstName,
+                ReceiverLastName = x.ReceiverLastName,
+                StatusID = x.StatusID
+            });
+            return View(packages);
+        }
+        
+        public ActionResult ChangeStatus(PackagePassModel package)
+        {
+            _proxy.ChangeStatus(package.Barcode);
+            return RedirectToAction("DeliveredPackages",new LoginPassModel() { Username = package.Username });
+        }
         // GET: Application/Details/5
         public ActionResult Details(int id)
         {
@@ -175,7 +195,7 @@ namespace WebClientMVC.Controllers
         }
         public ActionResult Deliveries()
         {
-            var packages = _proxy.GetAllPackages().Select(x=>new Models.PackageModel { FromAddress=x.FromAddress,ToAddress=x.ToAddress,Height=x.Height,Weight=x.Weight,Width=x.Width,Price=_proxy.GetDeliveryByPackageBarcode(x.barcode).Price+"",Distance=_proxy.GetDeliveryByPackageBarcode(x.barcode).Distance + "",Barcode=x.barcode,SenderID=x.SenderID,CourierID=(x.CourierID==null)?0:(int)x.CourierID }).ToList();
+            var packages = _proxy.GetAllPackages().Select(x=>new Models.PackageModel { FromAddress=x.FromAddress,ToAddress=x.ToAddress,Height=x.Height,Weight=x.Weight,Width=x.Width,Price=_proxy.GetDeliveryByPackageBarcode(x.barcode).Price+"",Distance=_proxy.GetDeliveryByPackageBarcode(x.barcode).Distance + "",Barcode=x.barcode,SenderID=x.SenderID,CourierID=(x.CourierID==null)?0:(int)x.CourierID,ReceiverFirstName=x.ReceiverFirstName,ReceiverLastName=x.ReceiverLastName}).ToList();
             return View(packages);
         }
 

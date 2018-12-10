@@ -39,14 +39,19 @@
         <td>
             @switch (item.StatusID)
             {
+                case 0:
+                    {
+                        <span>You have created the request to deliver this package</span>
+                        break;
+                    }
                 case 1:
                     {
-                        <span>You created the request to deliver this package</span>
+                        <span>A courier has accepted your delivery request. Prepare the package for pickup</span>
                         break;
                     }
                 case 2:
                     {
-                        <span>A courier has picked your package up and it is on it's way</span>
+                        <span>The courier has picked your package up and it is on it's way</span>
                         break;
                     }
                 case 3:

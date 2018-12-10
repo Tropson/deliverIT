@@ -7,6 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://fonts.googleapis.com/css?family=Hind+Madurai" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="~/Scripts/customScripts.js"></script>
 </head>
 <body onScroll="navScroll()" onload="loading()">
@@ -71,6 +72,28 @@
                 </ul>
             </div>
         </div>
+        @if (ViewBag.Title == "Delivery Requests")
+        {
+            <div class="modal" id="myModal" role="dialog" tabindex="-1" style="z-index:6000">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Package description</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="myModalBody">
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-success" id="modalTake">Take</a>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
         <div id="content">
             <div @(ViewBag.Title == "Home Page" ? "id=bigTopCont class=bigEmptyBox" : "id=topCont class=emptyBox")>
                 <div @(ViewBag.Title == "Home Page" ? "id=bigEmptyText" : "id=emptyText")>

@@ -9,5 +9,6 @@ namespace WebClientMVC.Models
     {
         public double Barcode { get; set; }
         public int CourierID { get; set; }
+        public string Username { get; set; }
     }
 }
