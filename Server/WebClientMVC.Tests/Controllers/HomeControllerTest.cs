@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebClientMVC;
 using WebClientMVC.Controllers;
+using WebClientMVC.SenderServiceReference1;
+using Moq;
 
 namespace WebClientMVC.Tests.Controllers
 {
@@ -16,7 +18,8 @@ namespace WebClientMVC.Tests.Controllers
         public void Index()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var serviceMock = new Mock<ISenderService>();
+            HomeController controller = new HomeController(serviceMock.Object);
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -29,7 +32,8 @@ namespace WebClientMVC.Tests.Controllers
         public void About()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var serviceMock = new Mock<ISenderService>();
+            HomeController controller = new HomeController(serviceMock.Object);
 
             // Act
             ViewResult result = controller.About() as ViewResult;
@@ -42,7 +46,8 @@ namespace WebClientMVC.Tests.Controllers
         public void Contact()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            var serviceMock = new Mock<ISenderService>();
+            HomeController controller = new HomeController(serviceMock.Object);
 
             // Act
             ViewResult result = controller.Contact() as ViewResult;

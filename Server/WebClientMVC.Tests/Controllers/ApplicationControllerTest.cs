@@ -23,7 +23,7 @@ namespace WebClientMVC.Tests.Controllers
                 
 
                 //senderServiceMock.Setup(x => x.AddSender(senderToService)).Returns(1);
-                courierServiceMock.Setup(x => x.AddApplication(It.IsAny<DeliveryService.ApplicationModel>())).Returns(1);
+                courierServiceMock.Setup(x => x.AddApplication(It.IsAny<SenderServiceReference1.ApplicationResource>())).Returns(1);
 
                 var sut = new ApplicationController(courierServiceMock.Object);
 

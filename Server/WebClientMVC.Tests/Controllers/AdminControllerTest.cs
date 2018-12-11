@@ -20,7 +20,7 @@ namespace WebClientMVC.Tests.Controllers
         {
             //Setup
             var serviceStub = new Mock<ISenderService>();
-            serviceStub.Setup(x => x.GetAllApplications()).Returns(new DeliveryService.ApplicationModel[] { new DeliveryService.ApplicationModel { Cpr = "123" } });
+            serviceStub.Setup(x => x.GetAllApplications()).Returns(new ApplicationResource[] { new ApplicationResource { Cpr = "123" } });
             var sut = new AdminController(serviceStub.Object);
 
             //Act
@@ -43,7 +43,7 @@ namespace WebClientMVC.Tests.Controllers
             
             
 
-            senderServiceMock.Setup(x => x.AddSender(It.IsAny<DeliveryService.UserModel>())).Returns(1);
+            senderServiceMock.Setup(x => x.AddSender(It.IsAny<SenderServiceReference1.SenderResource>())).Returns(1);
 
             var sut = new AdminController(senderServiceMock.Object);
 

@@ -8,48 +8,48 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebClientMVC.Tests.SenderServiceReference {
+namespace WebClientMVC.Tests.ServiceReference1 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SenderServiceReference.ISenderService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ISenderService")]
     public interface ISenderService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        int AddSender(DeliveryService.UserModel sender);
+        int AddSender(WebClientMVC.SenderServiceReference1.SenderResource sender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddSender", ReplyAction="http://tempuri.org/ISenderService/AddSenderResponse")]
-        System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.UserModel sender);
+        System.Threading.Tasks.Task<int> AddSenderAsync(WebClientMVC.SenderServiceReference1.SenderResource sender);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsersResponse")]
-        DeliveryService.UserModel[] GetAllUsers();
+        WebClientMVC.SenderServiceReference1.SenderResource[] GetAllUsers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsersResponse")]
-        System.Threading.Tasks.Task<DeliveryService.UserModel[]> GetAllUsersAsync();
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.SenderResource[]> GetAllUsersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddApplication", ReplyAction="http://tempuri.org/ISenderService/AddApplicationResponse")]
-        int AddApplication(DeliveryService.ApplicationModel application);
+        int AddApplication(WebClientMVC.SenderServiceReference1.ApplicationResource application);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddApplication", ReplyAction="http://tempuri.org/ISenderService/AddApplicationResponse")]
-        System.Threading.Tasks.Task<int> AddApplicationAsync(DeliveryService.ApplicationModel application);
+        System.Threading.Tasks.Task<int> AddApplicationAsync(WebClientMVC.SenderServiceReference1.ApplicationResource application);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllApplications", ReplyAction="http://tempuri.org/ISenderService/GetAllApplicationsResponse")]
-        DeliveryService.ApplicationModel[] GetAllApplications();
+        WebClientMVC.SenderServiceReference1.ApplicationResource[] GetAllApplications();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllApplications", ReplyAction="http://tempuri.org/ISenderService/GetAllApplicationsResponse")]
-        System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetAllApplicationsAsync();
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.ApplicationResource[]> GetAllApplicationsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddCourier", ReplyAction="http://tempuri.org/ISenderService/AddCourierResponse")]
-        int AddCourier(DeliveryService.UserModel courier);
+        int AddCourier(WebClientMVC.SenderServiceReference1.SenderResource courier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddCourier", ReplyAction="http://tempuri.org/ISenderService/AddCourierResponse")]
-        System.Threading.Tasks.Task<int> AddCourierAsync(DeliveryService.UserModel courier);
+        System.Threading.Tasks.Task<int> AddCourierAsync(WebClientMVC.SenderServiceReference1.SenderResource courier);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/DeleteApplication", ReplyAction="http://tempuri.org/ISenderService/DeleteApplicationResponse")]
-        int DeleteApplication(DeliveryService.ApplicationModel application, bool deletePerson);
+        int DeleteApplication(WebClientMVC.SenderServiceReference1.ApplicationResource application, bool deletePerson);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/DeleteApplication", ReplyAction="http://tempuri.org/ISenderService/DeleteApplicationResponse")]
-        System.Threading.Tasks.Task<int> DeleteApplicationAsync(DeliveryService.ApplicationModel application, bool deletePerson);
+        System.Threading.Tasks.Task<int> DeleteApplicationAsync(WebClientMVC.SenderServiceReference1.ApplicationResource application, bool deletePerson);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ClearDB", ReplyAction="http://tempuri.org/ISenderService/ClearDBResponse")]
         void ClearDB();
@@ -76,25 +76,55 @@ namespace WebClientMVC.Tests.SenderServiceReference {
         System.Threading.Tasks.Task UseVoucherAsync(string username, string code);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllVouchersResponse")]
-        DeliveryService.VoucherModel[] GetAllVouchers();
+        WebClientMVC.SenderServiceReference1.VoucherResource[] GetAllVouchers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllVouchersResponse")]
-        System.Threading.Tasks.Task<DeliveryService.VoucherModel[]> GetAllVouchersAsync();
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.VoucherResource[]> GetAllVouchersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsedVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsedVouchersResponse")]
-        DeliveryService.VouchersUsedModel[] GetAllUsedVouchers();
+        WebClientMVC.SenderServiceReference1.VouchersUsedResource[] GetAllUsedVouchers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllUsedVouchers", ReplyAction="http://tempuri.org/ISenderService/GetAllUsedVouchersResponse")]
-        System.Threading.Tasks.Task<DeliveryService.VouchersUsedModel[]> GetAllUsedVouchersAsync();
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.VouchersUsedResource[]> GetAllUsedVouchersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllPackages", ReplyAction="http://tempuri.org/ISenderService/GetAllPackagesResponse")]
+        WebClientMVC.SenderServiceReference1.PackageModel[] GetAllPackages();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetAllPackages", ReplyAction="http://tempuri.org/ISenderService/GetAllPackagesResponse")]
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.PackageModel[]> GetAllPackagesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcode", ReplyAction="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcodeResponse")]
+        WebClientMVC.SenderServiceReference1.DeliveryModel GetDeliveryByPackageBarcode(double barcode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcode", ReplyAction="http://tempuri.org/ISenderService/GetDeliveryByPackageBarcodeResponse")]
+        System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.DeliveryModel> GetDeliveryByPackageBarcodeAsync(double barcode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddPackage", ReplyAction="http://tempuri.org/ISenderService/AddPackageResponse")]
+        int AddPackage(WebClientMVC.SenderServiceReference1.PackageModel model, string Username, WebClientMVC.SenderServiceReference1.DeliveryModel delivery);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/AddPackage", ReplyAction="http://tempuri.org/ISenderService/AddPackageResponse")]
+        System.Threading.Tasks.Task<int> AddPackageAsync(WebClientMVC.SenderServiceReference1.PackageModel model, string Username, WebClientMVC.SenderServiceReference1.DeliveryModel delivery);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/TakePackage", ReplyAction="http://tempuri.org/ISenderService/TakePackageResponse")]
+        int TakePackage(double barcode, int courierId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/TakePackage", ReplyAction="http://tempuri.org/ISenderService/TakePackageResponse")]
+        System.Threading.Tasks.Task<int> TakePackageAsync(double barcode, int courierId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ChangeStatus", ReplyAction="http://tempuri.org/ISenderService/ChangeStatusResponse")]
+        int ChangeStatus(double barcode);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISenderService/ChangeStatus", ReplyAction="http://tempuri.org/ISenderService/ChangeStatusResponse")]
+        System.Threading.Tasks.Task<int> ChangeStatusAsync(double barcode);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISenderServiceChannel : WebClientMVC.Tests.SenderServiceReference.ISenderService, System.ServiceModel.IClientChannel {
+    public interface ISenderServiceChannel : WebClientMVC.Tests.ServiceReference1.ISenderService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SenderServiceClient : System.ServiceModel.ClientBase<WebClientMVC.Tests.SenderServiceReference.ISenderService>, WebClientMVC.Tests.SenderServiceReference.ISenderService {
+    public partial class SenderServiceClient : System.ServiceModel.ClientBase<WebClientMVC.Tests.ServiceReference1.ISenderService>, WebClientMVC.Tests.ServiceReference1.ISenderService {
         
         public SenderServiceClient() {
         }
@@ -115,51 +145,51 @@ namespace WebClientMVC.Tests.SenderServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public int AddSender(DeliveryService.UserModel sender) {
+        public int AddSender(WebClientMVC.SenderServiceReference1.SenderResource sender) {
             return base.Channel.AddSender(sender);
         }
         
-        public System.Threading.Tasks.Task<int> AddSenderAsync(DeliveryService.UserModel sender) {
+        public System.Threading.Tasks.Task<int> AddSenderAsync(WebClientMVC.SenderServiceReference1.SenderResource sender) {
             return base.Channel.AddSenderAsync(sender);
         }
         
-        public DeliveryService.UserModel[] GetAllUsers() {
+        public WebClientMVC.SenderServiceReference1.SenderResource[] GetAllUsers() {
             return base.Channel.GetAllUsers();
         }
         
-        public System.Threading.Tasks.Task<DeliveryService.UserModel[]> GetAllUsersAsync() {
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.SenderResource[]> GetAllUsersAsync() {
             return base.Channel.GetAllUsersAsync();
         }
         
-        public int AddApplication(DeliveryService.ApplicationModel application) {
+        public int AddApplication(WebClientMVC.SenderServiceReference1.ApplicationResource application) {
             return base.Channel.AddApplication(application);
         }
         
-        public System.Threading.Tasks.Task<int> AddApplicationAsync(DeliveryService.ApplicationModel application) {
+        public System.Threading.Tasks.Task<int> AddApplicationAsync(WebClientMVC.SenderServiceReference1.ApplicationResource application) {
             return base.Channel.AddApplicationAsync(application);
         }
         
-        public DeliveryService.ApplicationModel[] GetAllApplications() {
+        public WebClientMVC.SenderServiceReference1.ApplicationResource[] GetAllApplications() {
             return base.Channel.GetAllApplications();
         }
         
-        public System.Threading.Tasks.Task<DeliveryService.ApplicationModel[]> GetAllApplicationsAsync() {
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.ApplicationResource[]> GetAllApplicationsAsync() {
             return base.Channel.GetAllApplicationsAsync();
         }
         
-        public int AddCourier(DeliveryService.UserModel courier) {
+        public int AddCourier(WebClientMVC.SenderServiceReference1.SenderResource courier) {
             return base.Channel.AddCourier(courier);
         }
         
-        public System.Threading.Tasks.Task<int> AddCourierAsync(DeliveryService.UserModel courier) {
+        public System.Threading.Tasks.Task<int> AddCourierAsync(WebClientMVC.SenderServiceReference1.SenderResource courier) {
             return base.Channel.AddCourierAsync(courier);
         }
         
-        public int DeleteApplication(DeliveryService.ApplicationModel application, bool deletePerson) {
+        public int DeleteApplication(WebClientMVC.SenderServiceReference1.ApplicationResource application, bool deletePerson) {
             return base.Channel.DeleteApplication(application, deletePerson);
         }
         
-        public System.Threading.Tasks.Task<int> DeleteApplicationAsync(DeliveryService.ApplicationModel application, bool deletePerson) {
+        public System.Threading.Tasks.Task<int> DeleteApplicationAsync(WebClientMVC.SenderServiceReference1.ApplicationResource application, bool deletePerson) {
             return base.Channel.DeleteApplicationAsync(application, deletePerson);
         }
         
@@ -195,20 +225,60 @@ namespace WebClientMVC.Tests.SenderServiceReference {
             return base.Channel.UseVoucherAsync(username, code);
         }
         
-        public DeliveryService.VoucherModel[] GetAllVouchers() {
+        public WebClientMVC.SenderServiceReference1.VoucherResource[] GetAllVouchers() {
             return base.Channel.GetAllVouchers();
         }
         
-        public System.Threading.Tasks.Task<DeliveryService.VoucherModel[]> GetAllVouchersAsync() {
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.VoucherResource[]> GetAllVouchersAsync() {
             return base.Channel.GetAllVouchersAsync();
         }
         
-        public DeliveryService.VouchersUsedModel[] GetAllUsedVouchers() {
+        public WebClientMVC.SenderServiceReference1.VouchersUsedResource[] GetAllUsedVouchers() {
             return base.Channel.GetAllUsedVouchers();
         }
         
-        public System.Threading.Tasks.Task<DeliveryService.VouchersUsedModel[]> GetAllUsedVouchersAsync() {
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.VouchersUsedResource[]> GetAllUsedVouchersAsync() {
             return base.Channel.GetAllUsedVouchersAsync();
+        }
+        
+        public WebClientMVC.SenderServiceReference1.PackageModel[] GetAllPackages() {
+            return base.Channel.GetAllPackages();
+        }
+        
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.PackageModel[]> GetAllPackagesAsync() {
+            return base.Channel.GetAllPackagesAsync();
+        }
+        
+        public WebClientMVC.SenderServiceReference1.DeliveryModel GetDeliveryByPackageBarcode(double barcode) {
+            return base.Channel.GetDeliveryByPackageBarcode(barcode);
+        }
+        
+        public System.Threading.Tasks.Task<WebClientMVC.SenderServiceReference1.DeliveryModel> GetDeliveryByPackageBarcodeAsync(double barcode) {
+            return base.Channel.GetDeliveryByPackageBarcodeAsync(barcode);
+        }
+        
+        public int AddPackage(WebClientMVC.SenderServiceReference1.PackageModel model, string Username, WebClientMVC.SenderServiceReference1.DeliveryModel delivery) {
+            return base.Channel.AddPackage(model, Username, delivery);
+        }
+        
+        public System.Threading.Tasks.Task<int> AddPackageAsync(WebClientMVC.SenderServiceReference1.PackageModel model, string Username, WebClientMVC.SenderServiceReference1.DeliveryModel delivery) {
+            return base.Channel.AddPackageAsync(model, Username, delivery);
+        }
+        
+        public int TakePackage(double barcode, int courierId) {
+            return base.Channel.TakePackage(barcode, courierId);
+        }
+        
+        public System.Threading.Tasks.Task<int> TakePackageAsync(double barcode, int courierId) {
+            return base.Channel.TakePackageAsync(barcode, courierId);
+        }
+        
+        public int ChangeStatus(double barcode) {
+            return base.Channel.ChangeStatus(barcode);
+        }
+        
+        public System.Threading.Tasks.Task<int> ChangeStatusAsync(double barcode) {
+            return base.Channel.ChangeStatusAsync(barcode);
         }
     }
 }

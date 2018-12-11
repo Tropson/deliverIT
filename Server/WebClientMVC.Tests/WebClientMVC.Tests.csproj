@@ -103,7 +103,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\SenderServiceReference\Reference.cs">
+    <Compile Include="Connected Services\ServiceReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -117,27 +117,34 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
-    <None Include="Connected Services\SenderServiceReference\DeliveryService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Connected Services\SenderServiceReference\Reference.svcmap">
+    <None Include="Connected Services\ServiceReference1\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\SenderServiceReference\configuration.svcinfo" />
-    <None Include="Connected Services\SenderServiceReference\configuration91.svcinfo" />
-    <None Include="Connected Services\SenderServiceReference\DeliveryService.disco" />
-    <None Include="Connected Services\SenderServiceReference\DeliveryService.xsd">
+    <None Include="Connected Services\ServiceReference1\configuration.svcinfo" />
+    <None Include="Connected Services\ServiceReference1\configuration91.svcinfo" />
+    <None Include="Connected Services\ServiceReference1\DeliveryServiceLibrary.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SenderServiceReference\DeliveryService1.xsd">
+    <None Include="Connected Services\ServiceReference1\service.wsdl" />
+    <None Include="Connected Services\ServiceReference1\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Connected Services\SenderServiceReference\SenderService.wsdl" />
+    <None Include="Connected Services\ServiceReference1\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\DeliveryService.ApplicationModel.datasource" />
+    <None Include="Properties\DataSources\DeliveryService.DeliveryModel.datasource" />
+    <None Include="Properties\DataSources\DeliveryService.PackageModel.datasource" />
     <None Include="Properties\DataSources\DeliveryService.UserModel.datasource" />
     <None Include="Properties\DataSources\DeliveryService.VoucherModel.datasource" />
     <None Include="Properties\DataSources\DeliveryService.VouchersUsedModel.datasource" />
+    <None Include="Properties\DataSources\WebClientMVC.SenderServiceReference1.ApplicationResource.datasource" />
+    <None Include="Properties\DataSources\WebClientMVC.SenderServiceReference1.DeliveryModel.datasource" />
+    <None Include="Properties\DataSources\WebClientMVC.SenderServiceReference1.PackageModel.datasource" />
+    <None Include="Properties\DataSources\WebClientMVC.SenderServiceReference1.SenderResource.datasource" />
+    <None Include="Properties\DataSources\WebClientMVC.SenderServiceReference1.VoucherResource.datasource" />
+    <None Include="Properties\DataSources\WebClientMVC.SenderServiceReference1.VouchersUsedResource.datasource" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -156,7 +163,7 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\SenderServiceReference\" />
+    <WCFMetadataStorage Include="Connected Services\ServiceReference1\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

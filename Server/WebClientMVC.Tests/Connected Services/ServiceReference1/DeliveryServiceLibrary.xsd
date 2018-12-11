@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DeliveryService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DeliveryService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/DeliveryServiceLibrary" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/DeliveryServiceLibrary" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:complexType name="SenderResource">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:PersonResource">
         <xs:sequence>
           <xs:element minOccurs="0" name="AccountType" type="xs:int" />
+          <xs:element minOccurs="0" name="IDInDB" type="xs:int" />
+          <xs:element minOccurs="0" name="PassSalt" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Points" type="xs:int" />
           <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
@@ -78,4 +80,34 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="VouchersUsedResource" nillable="true" type="tns:VouchersUsedResource" />
+  <xs:complexType name="ArrayOfPackageModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PackageModel" nillable="true" type="tns:PackageModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPackageModel" nillable="true" type="tns:ArrayOfPackageModel" />
+  <xs:complexType name="PackageModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CourierID" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="FromAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Height" type="xs:double" />
+      <xs:element minOccurs="0" name="ReceiverFirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReceiverLastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReceiverPhoneNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SenderID" type="xs:int" />
+      <xs:element minOccurs="0" name="StatusID" type="xs:int" />
+      <xs:element minOccurs="0" name="ToAddress" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Weight" type="xs:double" />
+      <xs:element minOccurs="0" name="Width" type="xs:double" />
+      <xs:element minOccurs="0" name="barcode" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PackageModel" nillable="true" type="tns:PackageModel" />
+  <xs:complexType name="DeliveryModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Distance" type="xs:double" />
+      <xs:element minOccurs="0" name="Price" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DeliveryModel" nillable="true" type="tns:DeliveryModel" />
 </xs:schema>

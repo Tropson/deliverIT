@@ -14,17 +14,7 @@ namespace WebClientMVC.Tests.Controllers
     [TestClass]
     public class SenderControllerTest
     {
-        [TestMethod]
-        public void ServiceConnectionTest()
-        {
-            //setup
-            var proxy = new SenderServiceReference.SenderServiceClient();
-
-            //assert
-            
-            Assert.IsNotNull(proxy);
-            proxy.Close();
-        }
+       
         [DataRow("2611982375", "David", "Szoke", "91933260", "tropson90@gmail.com", "Fredensgade 7, 2st", "9000", "Aalborg", "Tropson", "Password")]
         [TestMethod]
         public void AddSenderTest(string cpr, string firstName, string lastName, string phone, string email, string address, string zipCode, string city, string username, string password)
@@ -36,7 +26,7 @@ namespace WebClientMVC.Tests.Controllers
             //DeliveryService.SenderModel senderToService = new DeliveryService.SenderModel { AccountType = sender.AccountType, Address = sender.Address, City = sender.City, Cpr = sender.Cpr, Email = sender.Email, FirstName = sender.FirstName, LastName = sender.LastName, Password = sender.Password, PhoneNumber = sender.PhoneNumber, Points = sender.Points, Username = sender.Username, ZipCode = sender.ZipCode });
 
             //senderServiceMock.Setup(x => x.AddSender(senderToService)).Returns(1);
-            senderServiceMock.Setup(x => x.AddSender(It.IsAny<DeliveryService.UserModel>())).Returns(1);
+            senderServiceMock.Setup(x => x.AddSender(It.IsAny<SenderResource>())).Returns(1);
 
             var sut = new SenderController(senderServiceMock.Object);
 
