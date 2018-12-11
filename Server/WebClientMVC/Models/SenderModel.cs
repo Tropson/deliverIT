@@ -19,5 +19,7 @@ namespace WebClientMVC.Models
         public virtual int Points { get; set; }
         
         public virtual int AccountType { get; set; }
+
+        public virtual string PassSalt { get; set; }
     }
 }

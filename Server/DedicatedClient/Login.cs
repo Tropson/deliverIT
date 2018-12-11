@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DedicatedClient.ServiceReference1;
 using System.Threading;
+using System.Security.Cryptography;
 
 namespace DedicatedClient
 {
@@ -28,7 +29,7 @@ namespace DedicatedClient
             {
 
             }
-            else if (user.Password == textBox2.Text && user.AccountType==3)
+            else if (user.Password == getHash(textBox2.Text,Encoding.ASCII.GetBytes(user.PassSalt)) && user.AccountType==3)
             {
                 Close();
                 th = new Thread(openLoggedIn);
@@ -45,5 +46,21 @@ namespace DedicatedClient
         {
 
         }
+        private string ByteArrayToString(byte[] ba)
+        {
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            foreach (byte b in ba)
+                hex.AppendFormat("{0:x2}", b);
+            return hex.ToString();
+        }
+        private string getHash(string password, byte[] salt)
+        {
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt);
+            pbkdf2.IterationCount = 1000;
+            var hashed = pbkdf2.GetBytes(32);
+            Console.WriteLine(ByteArrayToString(hashed));
+            return ByteArrayToString(hashed);
+        }
+
     }
 }

@@ -16,6 +16,7 @@ using DedicatedClient.Models;
 using System.Web.Security;
 using System.Threading;
 using PubSub.Extension;
+using System.Security.Cryptography;
 
 namespace DedicatedClient
 {
@@ -130,8 +131,9 @@ namespace DedicatedClient
                 {
                     var app = proxy.GetAllApplications().SingleOrDefault(x => x.Cpr == cpr);
                     string generPassword = Membership.GeneratePassword(10, 0);
+                    var salt = Encoding.ASCII.GetString(Guid.NewGuid().ToByteArray());
                     SenderModel courier = new SenderModel(app.Cpr, app.FirstName, app.LastName, app.PhoneNumber, app.Email, app.Address, app.ZipCode, app.City) { AccountType = 2, Points = 0 };
-                    proxy.AddCourier(new SenderResource { AccountType = courier.AccountType, Address = courier.Address, City = courier.City, ZipCode = courier.ZipCode, Cpr = courier.Cpr, Email = courier.Email, FirstName = courier.FirstName, LastName = courier.LastName, PhoneNumber = courier.PhoneNumber, Points = courier.Points, Username = courier.Email, Password = generPassword });
+                    proxy.AddCourier(new SenderResource { AccountType = courier.AccountType, Address = courier.Address, City = courier.City, ZipCode = courier.ZipCode, Cpr = courier.Cpr, Email = courier.Email, FirstName = courier.FirstName, LastName = courier.LastName, PhoneNumber = courier.PhoneNumber, Points = courier.Points, Username = courier.Email, Password = generPassword, PassSalt=salt});
                     ApplicationResource appToDelete = new ApplicationResource { Cpr = app.Cpr };
                     proxy.DeleteApplication(appToDelete, false);
                 }
@@ -185,11 +187,22 @@ namespace DedicatedClient
             var users = proxy.GetAllUsers();
             foreach (var i in users)
             {
-                
                 table.Rows.Add(i.Username, i.Points, i.FirstName + " " + i.LastName, i.Cpr, i.Email);
             }
             dataGridView1.DataSource = table;
             this.done();
+        }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            accepts.Clear();
+            InitializeTable();
+            Bind_DataGridView_Using_DataTable_Load(sender, e);
         }
     }
 }

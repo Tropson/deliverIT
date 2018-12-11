@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace DeliveryService
+{
+	 [ServiceBehavior(
+        Name = "AdminService",
+        InstanceContextMode = InstanceContextMode.Single)]
+    class AdminService : IAdminService
+    {
+        public int AddCourier(UserModel courier)
+        {
+            return new SenderService().AddCourier(courier);
+        }
+
+        public int DeleteApplication(ApplicationModel application, bool deletePerson)
+        {
+            return new SenderService().DeleteApplication(application, deletePerson);
+        }
+
+        public ApplicationModel[] GetAllApplications()
+        {
+            return new SenderService().GetAllApplications();
+        }
+
+        public UserModel[] GetAllUsers()
+        {
+            return new SenderService().GetAllUsers();
+        }
+    }
+}

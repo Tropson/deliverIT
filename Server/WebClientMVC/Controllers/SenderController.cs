@@ -45,11 +45,12 @@ namespace WebClientMVC.Controllers
                 Username = userFromDB.Username,
                 Password = userFromDB.Password,
                 Points = userFromDB.Points,
+                PassSalt=userFromDB.PassSalt,
                 AccountType = userFromDB.AccountType
             };
             if (Request.Cookies.Get("login") != null)
             {
-                if (HashString(userToPass.Password) == Request.Cookies.Get("login").Values["pirosPorzeczka"])
+                if (userToPass.Password == Request.Cookies.Get("login").Values["pirosPorzeczka"])
                 {
                     return View("LoggedIn", userToPass);
                 }
@@ -79,7 +80,8 @@ namespace WebClientMVC.Controllers
                 if (!ModelState.IsValid)
                     return View("Create", reg);
                 SenderModel sender = new SenderModel(reg.Cpr, reg.FirstName, reg.LastName, reg.PhoneNumber, reg.Email, reg.Address + ", " + reg.Number, reg.ZipCode, reg.City) { AccountType = (int)AccountTypeEnum.SENDER, Password = reg.Password, Username = reg.Username, Points = 0 };
-                int ret = _proxy.AddSender(new SenderResource { AccountType = sender.AccountType, Address = sender.Address, City = sender.City, Cpr = sender.Cpr, Email = sender.Email, FirstName = sender.FirstName, LastName = sender.LastName, Password = sender.Password, PhoneNumber = sender.PhoneNumber, Points = sender.Points, Username = sender.Username, ZipCode = sender.ZipCode });
+                var salt = Guid.NewGuid().ToString();
+                int ret = _proxy.AddSender(new SenderResource { AccountType = sender.AccountType, Address = sender.Address, City = sender.City, Cpr = sender.Cpr, Email = sender.Email, FirstName = sender.FirstName, LastName = sender.LastName, Password = sender.Password, PassSalt = salt, PhoneNumber = sender.PhoneNumber, Points = sender.Points, Username = sender.Username, ZipCode = sender.ZipCode });
                 switch (ret)
                 {
                     case 1: return RedirectToAction("Index");
@@ -206,29 +208,6 @@ namespace WebClientMVC.Controllers
         public ActionResult Delete(int id)
         {
             return View();
-        }
-
-        public string HashString(string input)
-        {
-            MD5 md5 = System.Security.Cryptography.MD5.Create();
-
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-
-            byte[] hash = md5.ComputeHash(inputBytes);
-
-            // step 2, convert byte array to hex string
-
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 0; i < hash.Length; i++)
-
-            {
-
-                sb.Append(hash[i].ToString("x2"));
-
-            }
-
-            return sb.ToString();
         }
 
         // POST: Sender/Delete/5

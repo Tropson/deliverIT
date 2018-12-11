@@ -9,5 +9,6 @@ namespace WebClientMVC.Models
     {
         public virtual string Username { get; set; }
         public virtual string Password { get; set; }
+        public virtual string PassSalt { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Runtime.Serialization;
+using System.Security.Cryptography;
 using System.ServiceModel;
 using System.Text;
 using System.Transactions;
@@ -62,7 +63,8 @@ namespace DeliveryServiceLibrary
             User user = new User
             {
                 Username = sender.Username,
-                Password = sender.Password,
+                PassSalt = sender.PassSalt,
+                Password = getHash(sender.Password,Encoding.ASCII.GetBytes(sender.PassSalt)),
                 Points = sender.Points,
                 AccountTypeID = sender.AccountType,
                 PersonID = nextPersonId
@@ -104,6 +106,7 @@ namespace DeliveryServiceLibrary
                 FirstName = x.Person.FirstName,
                 LastName = x.Person.LastName,
                 Password = x.Password,
+                PassSalt = x.PassSalt,
                 PhoneNumber = x.Person.PhoneNumber,
                 Points = (int)x.Points,
                 Username = x.Username,
@@ -211,7 +214,8 @@ namespace DeliveryServiceLibrary
             User user = new User
             {
                 Username = courierObj.Username,
-                Password = courierObj.Password,
+                Password = getHash(courierObj.Password, Encoding.ASCII.GetBytes(courierObj.PassSalt)),
+                PassSalt = courierObj.PassSalt,
                 Points = courierObj.Points,
                 AccountTypeID = courierObj.AccountType,
                 PersonID = PersonId
@@ -379,6 +383,7 @@ namespace DeliveryServiceLibrary
                 ZipCode = person.ZipCode,
                 AccountType = (int)sender.AccountTypeID,
                 Password = sender.Password,
+                PassSalt = sender.PassSalt,
                 Username = sender.Username,
                 Points = (int)sender.Points,
             };
@@ -564,6 +569,21 @@ namespace DeliveryServiceLibrary
 
 
             return 1;
+        }
+        private string ByteArrayToString(byte[] ba)
+        {
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            foreach (byte b in ba)
+                hex.AppendFormat("{0:x2}", b);
+            return hex.ToString();
+        }
+        private string getHash(string password, byte[] salt)
+        {
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt);
+            pbkdf2.IterationCount = 1000;
+            var hashed = pbkdf2.GetBytes(32);
+            Console.WriteLine(ByteArrayToString(hashed));
+            return ByteArrayToString(hashed);
         }
     }
 }

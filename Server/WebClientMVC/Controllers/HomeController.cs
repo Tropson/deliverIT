@@ -73,8 +73,8 @@ namespace WebClientMVC.Controllers
             {
                 return View(user);
             }
-            string hash = HashString(user.Password);
-            if (userFromDB.Password == user.Password)
+            string hash = getHash(user.Password,Encoding.ASCII.GetBytes(userFromDB.PassSalt));
+            if (userFromDB.Password == hash)
             {
                 LoginPassModel userToPass = new LoginPassModel { Username = userFromDB.Username };
                 if (userFromDB != null)
@@ -110,27 +110,21 @@ namespace WebClientMVC.Controllers
         {
             return View();
         }
-        public string HashString(string input)
+
+        private string ByteArrayToString(byte[] ba)
         {
-            MD5 md5 = System.Security.Cryptography.MD5.Create();
-
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-
-            byte[] hash = md5.ComputeHash(inputBytes);
-
-            // step 2, convert byte array to hex string
-
-            StringBuilder sb = new StringBuilder();
-
-            for (int i = 0; i < hash.Length; i++)
-
-            {
-
-                sb.Append(hash[i].ToString("x2"));
-
-            }
-
-            return sb.ToString();
+            StringBuilder hex = new StringBuilder(ba.Length * 2);
+            foreach (byte b in ba)
+                hex.AppendFormat("{0:x2}", b);
+            return hex.ToString();
+        }
+        private string getHash(string password, byte[] salt)
+        {
+            var pbkdf2 = new Rfc2898DeriveBytes(password, salt);
+            pbkdf2.IterationCount = 1000;
+            var hashed = pbkdf2.GetBytes(32);
+            Console.WriteLine(ByteArrayToString(hashed));
+            return ByteArrayToString(hashed);
         }
 
     }

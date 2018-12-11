@@ -172,6 +172,8 @@ namespace DeliveryServiceLibrary
         public int AccountType { get; set; }
         [DataMember]
         public int IDInDB { get; set; }
+        [DataMember]
+        public string PassSalt { get; set; }
     }
 
     [DataContract(Name = "AccountTypeResource")]

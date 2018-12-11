@@ -272,6 +272,9 @@ namespace WebClientMVC.SenderServiceReference1 {
         private int IDInDBField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PassSaltField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -302,6 +305,19 @@ namespace WebClientMVC.SenderServiceReference1 {
                 if ((this.IDInDBField.Equals(value) != true)) {
                     this.IDInDBField = value;
                     this.RaisePropertyChanged("IDInDB");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PassSalt {
+            get {
+                return this.PassSaltField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PassSaltField, value) != true)) {
+                    this.PassSaltField = value;
+                    this.RaisePropertyChanged("PassSalt");
                 }
             }
         }

@@ -12,6 +12,7 @@
         <xs:sequence>
           <xs:element minOccurs="0" name="AccountType" type="xs:int" />
           <xs:element minOccurs="0" name="IDInDB" type="xs:int" />
+          <xs:element minOccurs="0" name="PassSalt" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Points" type="xs:int" />
           <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
