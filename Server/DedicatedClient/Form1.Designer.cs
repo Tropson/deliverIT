@@ -34,6 +34,7 @@
             this.logOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showApplicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
@@ -43,7 +44,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.showApplicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.applicationResourceBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.applicationResourceBindingSource1)).BeginInit();
@@ -93,9 +93,16 @@
             // showUsersToolStripMenuItem
             // 
             this.showUsersToolStripMenuItem.Name = "showUsersToolStripMenuItem";
-            this.showUsersToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showUsersToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.showUsersToolStripMenuItem.Text = "Show Users";
             this.showUsersToolStripMenuItem.Click += new System.EventHandler(this.showUsersToolStripMenuItem_Click);
+            // 
+            // showApplicationsToolStripMenuItem
+            // 
+            this.showApplicationsToolStripMenuItem.Name = "showApplicationsToolStripMenuItem";
+            this.showApplicationsToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.showApplicationsToolStripMenuItem.Text = "Show Applications";
+            this.showApplicationsToolStripMenuItem.Click += new System.EventHandler(this.showApplicationsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -146,6 +153,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(963, 359);
             this.dataGridView1.TabIndex = 3;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentDoubleClick);
             // 
             // button2
             // 
@@ -190,13 +198,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(969, 365);
             this.tableLayoutPanel2.TabIndex = 6;
-            // 
-            // showApplicationsToolStripMenuItem
-            // 
-            this.showApplicationsToolStripMenuItem.Name = "showApplicationsToolStripMenuItem";
-            this.showApplicationsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.showApplicationsToolStripMenuItem.Text = "Show Applications";
-            this.showApplicationsToolStripMenuItem.Click += new System.EventHandler(this.showApplicationsToolStripMenuItem_Click);
             // 
             // Form1
             // 

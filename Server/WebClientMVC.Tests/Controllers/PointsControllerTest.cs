@@ -11,13 +11,13 @@ namespace WebClientMVC.Tests.Controllers
     [TestClass]
     public class PointsControllerTest
     {
-        [DataRow("tropson")]
+        [DataRow("radu123")]
         [TestMethod]
         public void GetBalanceTest(string username)
         {
             LoginPassModel log = new LoginPassModel { Username =username };
             var serviceStub = new Mock<ISenderService>();
-            serviceStub.Setup(x => x.GetAllUsers()).Returns(new SenderResource[] { new SenderResource {Username=username, Password = "password", Points=100, PassSalt="passSalt", AccountType=2} });
+            serviceStub.Setup(x => x.GetAllUsers()).Returns(new SenderResource[] { new SenderResource {Username=username, Password = "Password123", Points=100, PassSalt="fd5095a4-ae9c-43c6-8f18-544684d83275", AccountType=2} });
             var sut = new SenderController(serviceStub.Object);
 
 

@@ -119,23 +119,20 @@ namespace WebClientMVC.Controllers
                 string idpic = app.files[1].FileName;
                 string yellow = app.files[2].FileName;
                 var guid = Guid.NewGuid().ToString();
-                //FtpClient client = new FtpClient("files.000webhost.com");
-                //client.Credentials = new NetworkCredential("tropson", "GTAvcsa345");
-                //client.Connect();
-                string path = Server.MapPath("~/Download");
-                Directory.CreateDirectory(path + $"/{guid}");
-                //client.CreateDirectory($"public_html/Files/{guid}");
-                foreach (var a in app.files)
+                FtpClient client = new FtpClient("deliverit.westeurope.cloudapp.azure.com");
+                client.Connect();
+                client.CreateDirectory($"public_html/Files/{guid}");
+                /*foreach (var a in app.files)
                 {
                     FileStream fs = System.IO.File.Create(path + $"/{guid}/{a.FileName}");
                     a.InputStream.CopyTo(fs);
                     fs.Close();
-                }
-                //client.Upload(app.files[0].InputStream, $"public_html/Files/{guid}/{cv}");
-                //client.Upload(app.files[1].InputStream, $"public_html/Files/{guid}/{idpic}");
-                //client.Upload(app.files[2].InputStream, $"public_html/Files/{guid}/{yellow}");
+                }*/
+                client.Upload(app.files[0].InputStream, $"public_html/Files/{guid}/{cv}");
+                client.Upload(app.files[1].InputStream, $"public_html/Files/{guid}/{idpic}");
+                client.Upload(app.files[2].InputStream, $"public_html/Files/{guid}/{yellow}");
                 var result = _proxy.AddApplication(new ApplicationResource { Address = app.Address, City = app.City, Cpr = app.Cpr, Email = app.Email, FirstName = app.FirstName, LastName = app.LastName, PhoneNumber = app.PhoneNumber, ZipCode = app.ZipCode, CVPath = cv, IDPicturePath = idpic, YellowCardPath = yellow, GuidLine = guid });
-                //client.Disconnect();
+                client.Disconnect();
                 if (result == 1)
                 {
                     return RedirectToAction("Index");

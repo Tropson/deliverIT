@@ -17,6 +17,8 @@ using System.Web.Security;
 using System.Threading;
 using PubSub.Extension;
 using System.Security.Cryptography;
+using FluentFTP;
+using System.Web.UI.WebControls;
 
 namespace DedicatedClient
 {
@@ -28,6 +30,7 @@ namespace DedicatedClient
         NotificationServiceClient notifyProxy = null;
         DataTable table;
         Thread th;
+        FtpClient client;
         public Form1()
         {
             InstanceContext context = new InstanceContext(new Notify());
@@ -36,18 +39,21 @@ namespace DedicatedClient
             this.Subscribe<NotificationModel>(x => { if (x.A == 1){ button1.PerformClick(); } } );
             InitializeComponent();
             InitializeTable();
+            client = new FtpClient("deliverit.westeurope.cloudapp.azure.com");
+            client.Connect();
+           
         }
         private void InitializeTable()
         {
             table = new DataTable();
-            table.Columns.Add("CPR", typeof(string));
-            table.Columns.Add("Name", typeof(string));
-            table.Columns.Add("Phone", typeof(string));
-            table.Columns.Add("Email", typeof(string));
-            table.Columns.Add("Address", typeof(string));
-            table.Columns.Add("CV", typeof(string));
-            table.Columns.Add("ID picture", typeof(string));
-            table.Columns.Add("Yellow card picture", typeof(string));
+            table.Columns.Add("CPR", typeof(string)).ReadOnly=true;
+            table.Columns.Add("Name", typeof(string)).ReadOnly = true;
+            table.Columns.Add("Phone", typeof(string)).ReadOnly = true;
+            table.Columns.Add("Email", typeof(string)).ReadOnly = true;
+            table.Columns.Add("Address", typeof(string)).ReadOnly = true;
+            table.Columns.Add("CV", typeof(string)).ReadOnly = true;
+            table.Columns.Add("ID picture", typeof(string)).ReadOnly = true;
+            table.Columns.Add("Yellow card picture", typeof(string)).ReadOnly = true;
             table.Columns.Add("Accept", typeof(bool));
             table.Columns.Add("Decline", typeof(bool));
         }
@@ -90,8 +96,9 @@ namespace DedicatedClient
             for (int i = dataGridView1.Rows.Count; i < newFetch.Length; i++)
             {
                 var x = newFetch[i];
-                table.Rows.Add(x.Cpr,x.FirstName+" "+x.LastName,x.PhoneNumber,x.Email, x.Address + ", " + x.City + ", " + x.ZipCode,x.CVPath,x.IDPicturePath,x.YellowCardPath,false);
+                table.Rows.Add(x.Cpr,x.FirstName+" "+x.LastName,x.PhoneNumber,x.Email, x.Address + ", " + x.City + ", " + x.ZipCode,x.CVPath,x.IDPicturePath,x.YellowCardPath,false,false);
             }
+            dataGridView1.Columns[11].Visible = false;
         }
         private void Bind_DataGridView_Using_DataTable_Load(object sender, EventArgs e)
         {
@@ -99,8 +106,7 @@ namespace DedicatedClient
             var applications = proxy.GetAllApplications();
             foreach (var i in applications)
             {
-                bool accept = false;
-                table.Rows.Add(i.Cpr, i.FirstName + " " + i.LastName, i.PhoneNumber, i.Email, i.Address + ", " + i.City + ", " + i.ZipCode, i.CVPath, i.IDPicturePath, i.YellowCardPath, accept);
+                table.Rows.Add(i.Cpr, i.FirstName + " " + i.LastName, i.PhoneNumber, i.Email, i.Address + ", " + i.City + ", " + i.ZipCode, i.CVPath, i.IDPicturePath, i.YellowCardPath, false,false);
             }
             dataGridView1.DataSource = table;
             this.done();
@@ -161,19 +167,26 @@ namespace DedicatedClient
             if (dataGridView1.Columns[e.ColumnIndex].Name == "Accept")
             {
                 var otherCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex + 1];
-                if (otherCell.Value.GetType()!=typeof(System.DBNull))
+                if (otherCell.Value.GetType() != typeof(System.DBNull))
                 {
                     if (Convert.ToBoolean(otherCell.Value) == true) otherCell.Value = false;
                 }
             }
-            if (dataGridView1.Columns[e.ColumnIndex].Name == "Decline")
+            else if (dataGridView1.Columns[e.ColumnIndex].Name == "Decline")
             {
                 var otherCell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1];
                 if (otherCell.Value.GetType() != typeof(System.DBNull))
                 {
-                    if(Convert.ToBoolean(otherCell.Value) == true) otherCell.Value = false;
+                    if (Convert.ToBoolean(otherCell.Value) == true) otherCell.Value = false;
                 }
             }
+        }
+        private void DownloadFile(string filename, string guid)
+        {
+            string serverPath = $"public_html/Files/{guid}/{filename}";
+            var localPath =Path.GetTempPath() + "/" + filename;
+            client.DownloadFile(localPath, serverPath);
+            Process.Start(localPath);
         }
         private void ShowLogin()
         {
@@ -203,6 +216,17 @@ namespace DedicatedClient
             accepts.Clear();
             InitializeTable();
             Bind_DataGridView_Using_DataTable_Load(sender, e);
+        }
+
+        private void dataGridView1_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            if (dataGridView1.Columns[e.ColumnIndex].Name.Contains("CV") || dataGridView1.Columns[e.ColumnIndex].Name.Contains("Yellow") || dataGridView1.Columns[e.ColumnIndex].Name.Contains("ID"))
+            {
+                var filename = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                var guid = proxy.GetAllApplications().SingleOrDefault(x => x.Email == dataGridView1.Rows[e.RowIndex].Cells["Email"].Value.ToString()).GuidLine;
+                DownloadFile(filename, guid);
+            }
         }
     }
 }
