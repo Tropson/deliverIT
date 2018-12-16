@@ -98,7 +98,6 @@ namespace DedicatedClient
                 var x = newFetch[i];
                 table.Rows.Add(x.Cpr,x.FirstName+" "+x.LastName,x.PhoneNumber,x.Email, x.Address + ", " + x.City + ", " + x.ZipCode,x.CVPath,x.IDPicturePath,x.YellowCardPath,false,false);
             }
-            dataGridView1.Columns[11].Visible = false;
         }
         private void Bind_DataGridView_Using_DataTable_Load(object sender, EventArgs e)
         {

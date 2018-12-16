@@ -172,13 +172,13 @@ namespace DeliveryServiceLibrary
                 db.Connection.Close();
             }
 
-            MailMessage mail = new MailMessage("noreply@deliverit.dk", application.Email);
+            MailMessage mail = new MailMessage("deliveritassociation@gmail.com", application.Email);
             SmtpClient client = new SmtpClient();
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("azure_9b9152f4374f3afe527d63630de50845@azure.com", "antraxxx1234");
-            client.Host = "smtp.sendgrid.net";
+            client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
+            client.Host = "smtp.gmail.com";
             client.EnableSsl = true;
             mail.Subject = $"We got your application {person.FirstName}!";
             mail.Body = "We got your application. If your personal data is valid our admin will accept you in the near future!";
@@ -244,13 +244,13 @@ namespace DeliveryServiceLibrary
             }
 
 
-            MailMessage mail = new MailMessage("noreply@deliverit.dk", courierObj.Email);
+            MailMessage mail = new MailMessage("deliveritassociation@gmail.com", courierObj.Email);
             SmtpClient client = new SmtpClient();
             client.Port = 587;
             client.DeliveryMethod = SmtpDeliveryMethod.Network;
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("azure_9b9152f4374f3afe527d63630de50845@azure.com", "antraxxx1234");
-            client.Host = "smtp.sendgrid.net";
+            client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
+            client.Host = "smtp.gmail.com";
             client.EnableSsl = true;
             mail.Subject = $"{courierObj.FirstName} You are accepted as a courier!";
             mail.Body = "Our admin accepted you. You can log in and start deliver like maniac!" + Environment.NewLine +
@@ -327,13 +327,13 @@ namespace DeliveryServiceLibrary
                         package.CourierID = courierId;
                         package.StatusID = 1;
                         db.SubmitChanges();
-                        MailMessage mail = new MailMessage("noreply@deliverit.dk",sender.Person.Email);
+                        MailMessage mail = new MailMessage("deliveritassociation@gmail.com",sender.Person.Email);
                         SmtpClient client = new SmtpClient();
                         client.Port = 587;
                         client.DeliveryMethod = SmtpDeliveryMethod.Network;
                         client.UseDefaultCredentials = false;
-                        client.Credentials = new NetworkCredential("azure_9b9152f4374f3afe527d63630de50845@azure.com", "antraxxx1234");
-                        client.Host = "smtp.sendgrid.net";
+                        client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
+                        client.Host = "smtp.gmail.com";
                         client.EnableSsl = true;
                         mail.Subject = $"{sender.Person.FirstName}! Your package request ({package.Barcode}) has been accepted by one of our couriers.";
                         mail.IsBodyHtml = true;
@@ -537,13 +537,13 @@ namespace DeliveryServiceLibrary
                         {
                             AddToBalance(courier.Username, (int)delivery.Price);
                         }
-                        MailMessage mail = new MailMessage("noreply@deliverit.dk", sender.Person.Email);
+                        MailMessage mail = new MailMessage("deliveritassociation@gmail.com", sender.Person.Email);
                         SmtpClient client = new SmtpClient();
                         client.Port = 587;
                         client.DeliveryMethod = SmtpDeliveryMethod.Network;
                         client.UseDefaultCredentials = false;
-                        client.Credentials = new NetworkCredential("azure_9b9152f4374f3afe527d63630de50845@azure.com", "antraxxx1234");
-                        client.Host = "smtp.sendgrid.net";
+                        client.Credentials = new NetworkCredential("deliveritassociation@gmail.com", "deliverit123");
+                        client.Host = "smtp.gmail.com";
                         client.EnableSsl = true;
                         mail.Subject = $"{sender.Person.FirstName}! Your package request ({package.Barcode}) got a new status.";
                         mail.IsBodyHtml = true;
